@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/groupUserDetails"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/navigationHome"
+            android:checked="true"
+            android:icon="@drawable/home1"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/navigationYourDetails"
+            android:checked="false"
+            android:icon="@drawable/person"
+            android:title="Your Details" />
+
+        <item
+            android:id="@+id/navigationEditDetails"
+            android:checked="false"
+            android:icon="@drawable/dateto"
+            android:title="Edit Details" />
+
+    </group>
+
+    <group
+        android:id="@+id/groupFoodDetails"
+        android:checkableBehavior="single">
+        <item
+            android:title="Food Details" >
+
+        <item
+            android:id="@+id/navigationOrderDetails"
+            android:checked="false"
+            android:icon="@drawable/dateto"
+            android:title="Order Details" />
+
+        <item
+            android:id="@+id/navigationFoodList"
+            android:checked="false"
+            android:icon="@drawable/email1"
+            android:title="Food List" />
+        </item>
+    </group>
+    <group
+        android:id="@+id/groupSettings"
+        android:checkableBehavior="single">
+
+
+        <item
+            android:id="@+id/navigationSettings"
+            android:checked="false"
+            android:icon="@drawable/settings_blue1"
+            android:title="Settings" />
+        <item
+            android:id="@+id/navigationLogout"
+            android:checked="false"
+            android:icon="@drawable/logout1"
+            android:title="Logout" />
+
+    </group>
+    <group
+        android:id="@+id/groupOthers"
+        android:checkableBehavior="single">
+
+            <item
+                android:id="@+id/nav_feedback"
+                android:title="Send Feedback" />
+            <item
+                android:id="@+id/nav_safety_emergency"
+                android:title="Report a Safety Emergency" />
+            <item
+                android:id="@+id/nav_rateon_playstore"
+                android:title="Rate us on Play Store" />
+
+            <item
+                android:id="@+id/nav_privacy_policy"
+                android:title="Privacy Policy" />
+            <item
+                android:id="@+id/nav_about_us"
+                android:title="About Us" />
+    </group>
+
+</menu>

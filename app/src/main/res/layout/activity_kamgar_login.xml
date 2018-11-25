@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background">
+
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true">
+
+                <ImageView
+                    android:id="@+id/imageViewBack"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center_vertical"
+                    android:padding="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/back_arrow"
+                    />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/foxLogo"
+                android:layout_width="250dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/logo_kamgar" />
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Kamgar Login"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:textSize="18sp" />
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayoutKamgarMobilenumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+                    <EditText
+                        android:id="@+id/editTextKamgarMobNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/edittext_rectangular_oval"
+                        android:hint="Mobile Number"
+                        android:paddingLeft="60dp"
+                        android:imeOptions="actionNext"
+                        android:inputType="number|phone"
+                        android:textColor="@color/dark_blue"
+                        android:textColorHint="@color/grey"
+                        android:textSize="17sp" />
+                    <ImageView
+                        android:id="@+id/imageviewmobile"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/mobile_icon"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/relativeLayoutKamgarPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+                    <EditText
+                        android:id="@+id/editTextKamgarPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/edittext_rectangular_oval"
+                        android:hint="Password"
+                        android:paddingLeft="60dp"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:textColor="@color/dark_blue"
+                        android:textColorHint="@color/grey"
+                        android:textSize="17sp" />
+                    <ImageView
+                        android:id="@+id/imageViewKamgarPassword"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/lock"/>
+                </RelativeLayout>
+
+
+
+                <Button
+                    android:id="@+id/buttonKamgarLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_css"
+                    android:text="Login"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/linearLayoutForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Forgot Password ?"
+                    android:textColor="@color/mid_blue"
+                    android:textSize="15sp" />
+
+              <!--  <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.45dp"
+                    android:background="@color/blue"
+                    />-->
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearLayoutGotoRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="20dp"
+                >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Don't have an account? "
+                    android:textColor="@color/grey"
+                    android:textSize="15sp" />
+                <LinearLayout
+                    android:id="@+id/linearLayoutSignUpNow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/textViewGotoKamgarRegistration"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Create an account"
+                        android:textColor="@color/mid_blue"
+                        android:textSize="15sp" />
+
+                   <!-- <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.45dp"
+                        android:background="@color/blue"
+                        />-->
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>
+
+
