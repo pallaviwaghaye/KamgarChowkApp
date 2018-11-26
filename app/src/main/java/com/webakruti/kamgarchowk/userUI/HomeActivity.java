@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.userUI.fragments.HomeFragment;
 
 public class HomeActivity extends AppCompatActivity {
 //    private ImageView imageViewBack;
@@ -48,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
 
         MenuItem navigationLogout = menu.findItem(R.id.navigationLogout);
 
-        /*navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 menuItem.setChecked(true);
@@ -56,7 +57,7 @@ public class HomeActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
 
                     case R.id.navigationHome:
-                        toolbarUserDetailsHomeTitle.setText("Home");
+                        toolbarUserDetailsHomeTitle.setText("Kamgar Chowk");
                         // toolbarStudentDetailsHomeTitle.setText("My details");
                         // SwachhataKendraFragment fragment = new SwachhataKendraFragment();
                         fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
@@ -101,8 +102,8 @@ public class HomeActivity extends AppCompatActivity {
                         // Setting Positive "Yes" Button
                         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                SharedPreferenceManager.clearPreferences();
-                                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                               // SharedPreferenceManager.clearPreferences();
+                                Intent intent = new Intent(HomeActivity.this, UserLoginActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();
@@ -122,7 +123,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 return true;
             }
-        });*/
+        });
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer) {
             @Override
@@ -139,8 +140,8 @@ public class HomeActivity extends AppCompatActivity {
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        /*fragManager = getSupportFragmentManager();
-        fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();*/
+        fragManager = getSupportFragmentManager();
+        fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
 
     }
 
