@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:background="@color/faintPink1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:weightSum="100"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="60"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/textViewText1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="You need help !!!"
+                        android:textSize="16dp"
+                        android:textColor="@color/pink_red" />
+                    <TextView
+                        android:id="@+id/textViewText2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="Please tell Us how can we help you."
+                        android:textSize="14dp"
+                        android:textColor="@color/dark_blue" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearLayoutSubcategoryArrow"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="40"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    >
+                    <ImageView
+                        android:id="@+id/imageViewSubcategoryArrow"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/support"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:padding="20dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/textViewTextHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please enter your query our customer support will connect you soon"
+            android:textSize="13dp"
+            android:textColor="@color/black" />
+        <EditText
+            android:id="@+id/editTextSubject"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/edittext_rectangular_oval"
+            android:hint="Subject"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="10dp"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:textColor="@color/dark_blue"
+            android:textColorHint="@color/grey"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/editTextProblemDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_rectangular_oval"
+            android:hint="Problem Detail"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:gravity="left|top|start"
+            android:imeOptions="actionNext"
+            android:inputType="textMultiLine"
+            android:lines="7"
+            android:textColor="@color/dark_blue"
+            android:textColorHint="@color/grey"
+            android:textSize="17sp" />
+
+        <Button
+            android:id="@+id/buttonUserSupportSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button_css"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -112,7 +112,7 @@ public class HomeFragment extends Fragment {
         recyclerViewAvailableAllServices = (RecyclerView)rootView.findViewById(R.id.recyclerViewAvailableAllServices);
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false);
         recyclerViewAvailableAllServices.setLayoutManager(layoutManager1);
-        recyclerViewAvailableAllServices.setAdapter(new HomeAvailAllServicesAdapter(getContext(), 4));
+        recyclerViewAvailableAllServices.setAdapter(new HomeAvailAllServicesAdapter(getContext(), 15));
 
 
     }

@@ -86,13 +86,6 @@
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayoutFilters"
-        android:layout_marginBottom="46dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 <LinearLayout
     android:id="@+id/linearLayoutFilters"
@@ -100,7 +93,6 @@
     android:layout_height="wrap_content"
     android:layout_below="@+id/appBarLayout">
     <LinearLayout
-        android:id="@+id/linearLayoutCheckout"
         android:layout_width="fill_parent"
         android:layout_height="45dp"
         android:layout_alignParentTop="true"
@@ -170,6 +162,18 @@
 
     </LinearLayout>
 </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayoutFilters"
+        android:layout_marginBottom="20dp">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+             />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textViewNoData"

@@ -1,6 +1,9 @@
 package com.webakruti.kamgarchowk.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,13 +32,24 @@ public class KamgarListAdapter extends RecyclerView.Adapter<KamgarListAdapter.Vi
     @NonNull
     @Override
     public KamgarListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_home_avail_all_services_adapter, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_kamgar_list_adapter, viewGroup, false);
         KamgarListAdapter.ViewHolder viewHolder = new KamgarListAdapter.ViewHolder(view);
         return viewHolder;
     }
 
+
+
     @Override
-    public void onBindViewHolder(@NonNull KamgarListAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(@NonNull final KamgarListAdapter.ViewHolder viewHolder, final int position) {
+
+
+        viewHolder.textViewEnquiry.setText("Enquiry");
+        viewHolder.textViewEnquiry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewHolder.myDialog = new Dialog(context);
+            }
+        });
 
 
         /*//final Student.Studentbatch studentbatch = list.get(position);
@@ -68,6 +83,8 @@ public class KamgarListAdapter extends RecyclerView.Adapter<KamgarListAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        Dialog myDialog;
+
         private ImageView imageViewKamgarImage;
         private TextView textViewKamgarName;
         private TextView textViewAddress;
@@ -84,6 +101,22 @@ public class KamgarListAdapter extends RecyclerView.Adapter<KamgarListAdapter.Vi
 
         private CardView cardView;
 
+        public void ShowPopup(View v) {
+            TextView txtclose;
+            Button btnFollow;
+            myDialog.setContentView(R.layout.custom_popup);
+            txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+            txtclose.setText("X");
+            btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
+            txtclose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    myDialog.dismiss();
+                }
+            });
+            myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            myDialog.show();
+        }
 
         public ViewHolder(View itemView) {
             super(itemView);

@@ -17,7 +17,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.userUI.fragments.CategoryFragment;
 import com.webakruti.kamgarchowk.userUI.fragments.HomeFragment;
+import com.webakruti.kamgarchowk.userUI.fragments.SupportFragment;
 
 public class HomeActivity extends AppCompatActivity {
 //    private ImageView imageViewBack;
@@ -64,15 +66,20 @@ public class HomeActivity extends AppCompatActivity {
                         break;
 
 
-                    case R.id.navigationFoodList:
-                        toolbarUserDetailsHomeTitle.setText("Food List");
+                    case R.id.navigationCategory:
+                        toolbarUserDetailsHomeTitle.setText("Kamgar Category");
+                        fragManager.beginTransaction().replace(R.id.home_container, new CategoryFragment()).commit();
+                        break;
+
+                    case R.id.navigationMyProfile:
+                        toolbarUserDetailsHomeTitle.setText("My Profile");
+                        // toolbarStudentDetailsHomeTitle.setText("My details");
+                        // SwachhataKendraFragment fragment = new SwachhataKendraFragment();
                         fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
                         break;
 
-                    case R.id.navigationYourDetails:
-                        toolbarUserDetailsHomeTitle.setText("Your Details");
-                        // toolbarStudentDetailsHomeTitle.setText("My details");
-                        // SwachhataKendraFragment fragment = new SwachhataKendraFragment();
+                    case R.id.navigationDocuments:
+                        toolbarUserDetailsHomeTitle.setText("Documents");
                         fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
                         break;
 
@@ -81,13 +88,21 @@ public class HomeActivity extends AppCompatActivity {
                         fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
                         break;
 
-                    case R.id.navigationEditDetails:
-                        toolbarUserDetailsHomeTitle.setText("Edit Details");
+                    case R.id.navigationSubcsriptionPlans:
+                        toolbarUserDetailsHomeTitle.setText("Subcsription Plans");
                         fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
                         break;
 
-                    case R.id.navigationSettings:
-                        toolbarUserDetailsHomeTitle.setText("Settings");
+                    case R.id.navSupport:
+                        toolbarUserDetailsHomeTitle.setText("Support");
+                        fragManager.beginTransaction().replace(R.id.home_container, new SupportFragment()).commit();
+                        break;
+                    case R.id.navPrivacyPolicy:
+                        toolbarUserDetailsHomeTitle.setText("Privacy Policy");
+                        fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
+                        break;
+                    case R.id.navAboutUs:
+                        toolbarUserDetailsHomeTitle.setText("About Us");
                         fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
                         break;
 

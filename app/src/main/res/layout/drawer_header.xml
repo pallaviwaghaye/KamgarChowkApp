@@ -64,7 +64,7 @@
                     android:layout_marginLeft="10dp"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="abc@gmail.com"
+                    android:text="9876543210"
                     android:inputType="number|phone"
                     android:textColor="@color/pink_red"
                     android:textSize="12sp" />

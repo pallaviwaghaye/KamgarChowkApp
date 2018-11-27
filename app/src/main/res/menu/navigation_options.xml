@@ -11,48 +11,48 @@
             android:title="Home" />
 
         <item
-            android:id="@+id/navigationYourDetails"
-            android:checked="false"
-            android:icon="@drawable/person"
-            android:title="Your Details" />
-
-        <item
-            android:id="@+id/navigationEditDetails"
+            android:id="@+id/navigationCategory"
             android:checked="false"
             android:icon="@drawable/dateto"
-            android:title="Edit Details" />
+            android:title="Category" />
+
+        <item
+            android:id="@+id/navigationMyProfile"
+            android:checked="false"
+            android:icon="@drawable/person"
+            android:title="My Profile" />
 
     </group>
 
     <group
-        android:id="@+id/groupFoodDetails"
+        android:id="@+id/groupDetails"
         android:checkableBehavior="single">
         <item
-            android:title="Food Details" >
+            android:title="Details" >
+            <item
+                android:id="@+id/navigationDocuments"
+                android:checked="false"
+                android:icon="@drawable/complaint_details"
+                android:title="Documents" />
+            </item>
 
-        <item
-            android:id="@+id/navigationOrderDetails"
-            android:checked="false"
-            android:icon="@drawable/dateto"
-            android:title="Order Details" />
+            <item
+                android:id="@+id/navigationOrderDetails"
+                android:checked="false"
+                android:icon="@drawable/dateto"
+                android:title="Order Details" />
 
-        <item
-            android:id="@+id/navigationFoodList"
-            android:checked="false"
-            android:icon="@drawable/email1"
-            android:title="Food List" />
-        </item>
+
     </group>
     <group
         android:id="@+id/groupSettings"
         android:checkableBehavior="single">
 
-
         <item
-            android:id="@+id/navigationSettings"
+            android:id="@+id/navigationSubcsriptionPlans"
             android:checked="false"
-            android:icon="@drawable/settings_blue1"
-            android:title="Settings" />
+            android:icon="@drawable/dateto"
+            android:title="Subscription Plans" />
         <item
             android:id="@+id/navigationLogout"
             android:checked="false"
@@ -65,20 +65,13 @@
         android:checkableBehavior="single">
 
             <item
-                android:id="@+id/nav_feedback"
-                android:title="Send Feedback" />
+                android:id="@+id/navSupport"
+                android:title="Support" />
             <item
-                android:id="@+id/nav_safety_emergency"
-                android:title="Report a Safety Emergency" />
-            <item
-                android:id="@+id/nav_rateon_playstore"
-                android:title="Rate us on Play Store" />
-
-            <item
-                android:id="@+id/nav_privacy_policy"
+                android:id="@+id/navPrivacyPolicy"
                 android:title="Privacy Policy" />
             <item
-                android:id="@+id/nav_about_us"
+                android:id="@+id/navAboutUs"
                 android:title="About Us" />
     </group>
 
