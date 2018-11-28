@@ -4,34 +4,33 @@
         android:id="@+id/groupUserDetails"
         android:checkableBehavior="single">
 
-        <item
+        <!--<item
             android:id="@+id/navigationHome"
             android:checked="true"
             android:icon="@drawable/home1"
             android:title="Home" />
 
         <item
-            android:id="@+id/navigationMyProfile"
+            android:id="@+id/navigationCategory"
+            android:checked="false"
+            android:icon="@drawable/dateto"
+            android:title="Category" />-->
+
+        <item
+            android:id="@+id/navigationHomeOrProfile"
             android:checked="false"
             android:icon="@drawable/person"
             android:title="My Profile" />
 
         <item
-            android:id="@+id/navigationCategory"
+            android:id="@+id/navigationMyOrders"
             android:checked="false"
             android:icon="@drawable/dateto"
-            android:title="Category" />
-
-
-        <item
-            android:id="@+id/navigationMyEnquiry"
-            android:checked="false"
-            android:icon="@drawable/dateto"
-            android:title="My Enquiry" />
+            android:title="My Orders" />
 
     </group>
 
-   <!-- <group
+    <group
         android:id="@+id/groupDetails"
         android:checkableBehavior="single">
         <item
@@ -41,9 +40,16 @@
                 android:checked="false"
                 android:icon="@drawable/complaint_details"
                 android:title="Documents" />
-            </item>
+        </item>
 
-    </group>-->
+        <item
+            android:id="@+id/navigationSubcsriptionPlans"
+            android:checked="false"
+            android:icon="@drawable/dateto"
+            android:title="Subscription Plans" />
+
+
+    </group>
     <group
         android:id="@+id/groupOthers"
         android:checkableBehavior="single">
@@ -60,4 +66,5 @@
             android:title="Logout" />
 
     </group>
+
 </menu>

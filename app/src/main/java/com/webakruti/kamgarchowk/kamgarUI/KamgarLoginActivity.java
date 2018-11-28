@@ -46,7 +46,7 @@ public class KamgarLoginActivity extends AppCompatActivity {
         buttonKamgarLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(KamgarLoginActivity.this, HomeActivity.class);
+                Intent intent = new Intent(KamgarLoginActivity.this, HomeOrProfileActivity.class);
                 startActivity(intent);
                 finish();
             }

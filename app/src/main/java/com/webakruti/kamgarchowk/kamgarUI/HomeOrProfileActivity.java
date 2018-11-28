@@ -1,4 +1,4 @@
-package com.webakruti.kamgarchowk.userUI;
+package com.webakruti.kamgarchowk.kamgarUI;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,75 +17,71 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.webakruti.kamgarchowk.R;
-import com.webakruti.kamgarchowk.userUI.fragments.CategoryFragment;
-import com.webakruti.kamgarchowk.userUI.fragments.HomeFragment;
+import com.webakruti.kamgarchowk.kamgarUI.fragments.DocumentsFragment;
+import com.webakruti.kamgarchowk.kamgarUI.fragments.HomeOrProfileFragment;
 import com.webakruti.kamgarchowk.userUI.fragments.SupportFragment;
 
-public class HomeActivity extends AppCompatActivity {
-//    private ImageView imageViewBack;
-
-    private Toolbar toolbar;
+public class HomeOrProfileActivity extends AppCompatActivity {
+    private Toolbar toolbarKamgar;
     private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
+    private NavigationView navigationViewKamgar;
     private FragmentManager fragManager;
-    private TextView toolbarUserDetailsHomeTitle;
-
+    private TextView toolbarKamgarDetailsHomeTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_home_or_profile);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        toolbarKamgar = (Toolbar) findViewById(R.id.toolbarKamgar);
+        setSupportActionBar(toolbarKamgar);
 
-        toolbarUserDetailsHomeTitle = (TextView) findViewById(R.id.toolbarUserDetailsHomeTitle);
+        toolbarKamgarDetailsHomeTitle = (TextView) findViewById(R.id.toolbarKamgarDetailsHomeTitle);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.navigationView);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_kamgar);
+        navigationViewKamgar = (NavigationView) findViewById(R.id.navigationViewKamgar);
 
-        View headerLayout = navigationView.getHeaderView(0);
+        View headerLayout = navigationViewKamgar.getHeaderView(0);
 
-        Menu menu = navigationView.getMenu();
+        Menu menu = navigationViewKamgar.getMenu();
 
         MenuItem navigationLogout = menu.findItem(R.id.navigationLogout);
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        navigationViewKamgar.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 menuItem.setChecked(true);
                 drawerLayout.closeDrawers();
                 switch (menuItem.getItemId()) {
 
-                    case R.id.navigationHome:
-                        toolbarUserDetailsHomeTitle.setText("Kamgar Chowk");
+                    case R.id.navigationHomeOrProfile:
+                        toolbarKamgarDetailsHomeTitle.setText("Kamgar Chowk");
                         // toolbarStudentDetailsHomeTitle.setText("My details");
                         // SwachhataKendraFragment fragment = new SwachhataKendraFragment();
-                        fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
+                        fragManager.beginTransaction().replace(R.id.home_container_kamgar, new HomeOrProfileFragment()).commit();
                         break;
 
 
-                    case R.id.navigationCategory:
-                        toolbarUserDetailsHomeTitle.setText("Kamgar Category");
-                        fragManager.beginTransaction().replace(R.id.home_container, new CategoryFragment()).commit();
-                        break;
+                   /* case R.id.navigationCategory:
+                        toolbarKamgarDetailsHomeTitle.setText("Kamgar Category");
+                        fragManager.beginTransaction().replace(R.id.home_container_kamgar, new CategoryFragment()).commit();
+                        break;*/
 
                     case R.id.navigationMyProfile:
-                        toolbarUserDetailsHomeTitle.setText("My Profile");
+                        toolbarKamgarDetailsHomeTitle.setText("My Profile");
                         // toolbarStudentDetailsHomeTitle.setText("My details");
                         // SwachhataKendraFragment fragment = new SwachhataKendraFragment();
-                        fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
+                        fragManager.beginTransaction().replace(R.id.home_container_kamgar, new HomeOrProfileFragment()).commit();
                         break;
 
-                    /*case R.id.navigationDocuments:
-                        toolbarUserDetailsHomeTitle.setText("Documents");
-                        fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
+                    case R.id.navigationDocuments:
+                        toolbarKamgarDetailsHomeTitle.setText("Documents");
+                        fragManager.beginTransaction().replace(R.id.home_container_kamgar, new DocumentsFragment()).commit();
                         break;
-*/
-                    case R.id.navigationMyEnquiry:
-                        toolbarUserDetailsHomeTitle.setText("My Enquiry");
-                        fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
+                    case R.id.navigationMyOrders:
+                        toolbarKamgarDetailsHomeTitle.setText("My Orders");
+                        fragManager.beginTransaction().replace(R.id.home_container_kamgar, new HomeOrProfileFragment()).commit();
                         break;
 
                     /*case R.id.navigationSubcsriptionPlans:
@@ -94,14 +90,14 @@ public class HomeActivity extends AppCompatActivity {
                         break;*/
 
                     case R.id.navSupport:
-                        toolbarUserDetailsHomeTitle.setText("Support");
-                        fragManager.beginTransaction().replace(R.id.home_container, new SupportFragment()).commit();
+                        toolbarKamgarDetailsHomeTitle.setText("Support");
+                        fragManager.beginTransaction().replace(R.id.home_container_kamgar, new SupportFragment()).commit();
                         break;
 
 
 
                     case R.id.navigationLogout:
-                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(HomeActivity.this);
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(HomeOrProfileActivity.this);
                         // Setting Dialog Title
                         alertDialog.setTitle("Logout");
                         // Setting Dialog Message
@@ -110,8 +106,8 @@ public class HomeActivity extends AppCompatActivity {
                         // Setting Positive "Yes" Button
                         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                               // SharedPreferenceManager.clearPreferences();
-                                Intent intent = new Intent(HomeActivity.this, UserLoginActivity.class);
+                                // SharedPreferenceManager.clearPreferences();
+                                Intent intent = new Intent(HomeOrProfileActivity.this, KamgarLoginActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();
@@ -133,7 +129,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer) {
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbarKamgar, R.string.openDrawer, R.string.closeDrawer) {
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
@@ -149,7 +145,7 @@ public class HomeActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
 
         fragManager = getSupportFragmentManager();
-        fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
+        fragManager.beginTransaction().replace(R.id.home_container_kamgar, new HomeOrProfileFragment()).commit();
 
     }
 

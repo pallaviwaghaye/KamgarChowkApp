@@ -2,6 +2,7 @@ package com.webakruti.kamgarchowk.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.userUI.HireKamgarActivity;
 
 public class KamgarListAdapter extends RecyclerView.Adapter<KamgarListAdapter.ViewHolder> {
 
@@ -47,7 +49,9 @@ public class KamgarListAdapter extends RecyclerView.Adapter<KamgarListAdapter.Vi
         viewHolder.textViewEnquiry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewHolder.myDialog = new Dialog(context);
+                //viewHolder.myDialog = new Dialog(context);
+                Intent intent = new Intent(context, HireKamgarActivity.class);
+                context.startActivity(intent);
             }
         });
 
@@ -83,7 +87,7 @@ public class KamgarListAdapter extends RecyclerView.Adapter<KamgarListAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        Dialog myDialog;
+        //Dialog myDialog;
 
         private ImageView imageViewKamgarImage;
         private TextView textViewKamgarName;
@@ -101,7 +105,7 @@ public class KamgarListAdapter extends RecyclerView.Adapter<KamgarListAdapter.Vi
 
         private CardView cardView;
 
-        public void ShowPopup(View v) {
+       /* public void ShowPopup(View v) {
             TextView txtclose;
             Button btnFollow;
             myDialog.setContentView(R.layout.custom_popup);
@@ -117,7 +121,7 @@ public class KamgarListAdapter extends RecyclerView.Adapter<KamgarListAdapter.Vi
             myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             myDialog.show();
         }
-
+*/
         public ViewHolder(View itemView) {
             super(itemView);
 

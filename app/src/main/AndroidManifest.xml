@@ -39,7 +39,9 @@
         <activity android:name=".adapter.HomePopularKamgarAdapter" />
         <activity android:name=".adapter.HomeAvailAllServicesAdapter" />
         <activity android:name=".userUI.KamgarListActivity" />
-        <activity android:name=".adapter.KamgarListAdapter"></activity>
+        <activity android:name=".adapter.KamgarListAdapter" />
+        <activity android:name=".kamgarUI.HomeOrProfileActivity" />
+        <activity android:name=".userUI.HireKamgarActivity"></activity>
     </application>
 
 </manifest>

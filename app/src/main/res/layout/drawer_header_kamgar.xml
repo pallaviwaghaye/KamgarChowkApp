@@ -13,20 +13,20 @@
         android:weightSum="100"
         >
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:layout_weight="40"
-        >
-        <ImageView
-            android:id="@+id/imageViewNavUser"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/user_image" />
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_weight="40"
+            >
+            <ImageView
+                android:id="@+id/imageViewNavKamgar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/kamgar" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -35,19 +35,19 @@
             android:layout_weight="70">
 
             <TextView
-                android:id="@+id/textViewName"
+                android:id="@+id/textViewKamgarName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:singleLine="true"
-                android:text="Adfj Sddff"
+                android:text="Ddfj Kddff"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textViewMobileNo"
+                android:id="@+id/textViewKamgarMobileNo"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
