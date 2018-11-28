@@ -1,6 +1,8 @@
 package com.webakruti.kamgarchowk.retrofit.service;
 
 
+import com.webakruti.kamgarchowk.model.UserLogin;
+import com.webakruti.kamgarchowk.model.UserRegistration;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 
 import okhttp3.MultipartBody;
@@ -14,23 +16,22 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-   /* // --------------------User APIS-------------------------
+    // --------------------User APIS-------------------------
     // Registration API
-    // http://nirmalrail.webakruti.in/api/registration?name=pallavi&mobile=9561665846&password=9561665846
+    //192.168.29.107/kamgar-chowk/api/user-registration?first_name=Pallavi&last_name=Waghaye&mobile_no=7975972248
     @POST(ApiConstants.REG_API)
-    Call<RegistrationResponse> registration(@Query("name") String name,
-                                            @Query("mobile") String mobileNo,
-                                            @Query("password") String password);
+    Call<UserRegistration> registration(@Query("first_name") String firstName,
+                                        @Query("last_name") String lastName,
+                                        @Query("mobile_no") String mobileNo);
 
     // Login API
-    //http://nirmalrail.webakruti.in/api/login?mobile=9561665846&password=9561665846&otp=123456
+    //192.168.29.107/kamgar-chowk/api/user-login?mobile_no=7975972248&password=rx00k31a
     @POST(ApiConstants.LOGIN_API)
-    Call<UserResponse> login(@Query("mobile") String mobileNo,
-                             @Query("password") String password,
-                             @Query("otp") String otp);
+    Call<UserLogin> login(@Query("mobile_no") String mobileNo,
+                          @Query("password") String password);
 
 
-    // OTP API
+    /*// OTP API
     //http://nirmalrail.webakruti.in/api/login?mobile=9561665846&password=9561665846&otp=123456
     @POST(ApiConstants.OTP_VERIFICATION)
     Call<OTPResponse> otpVerification(@Query("mobile") String mobileNo);
@@ -65,6 +66,5 @@ public interface ApiService {
             @Part("status") RequestBody status,
             @Part("comment") RequestBody comment,
             @Part MultipartBody.Part baseImage);
-
 */
 }

@@ -2,12 +2,13 @@ package com.webakruti.kamgarchowk.retrofit;
 
 
 public class ApiConstants {
+    //192.168.29.107/kamgar-chowk/api/user-registration
 
-    public static final String BASE_URL = "http://nirmalrail.webakruti.in/api/";
-    public static final String REG_API = "registration";
+    public static final String BASE_URL = "192.168.29.107/kamgar-chowk/api/";
+    public static final String REG_API = "user-registration";
 
-    public static final String LOGIN_API = "login";
-    public static final String OTP_VERIFICATION = "verifymobile";
+    public static final String LOGIN_API = "user-login";
+    /*public static final String OTP_VERIFICATION = "verifymobile";
     public static final String GET_RAILWAY_CATEGORY = "getservices";
 
     public static final String SAVE_COMPLAINT = "savecomplaint";
@@ -30,6 +31,6 @@ public class ApiConstants {
     public static final String GET_ADMIN_REQUEST_STATUS = "admingetcomplaint";
     public static final String ADMIN_GET_COMPLAINT_BY_ID = "admingetcomplaintbyid";
     public static final String ADMIN_UPDATE_COMPLAINT_UPLOAD_IMAGE= "adminupdatecomplaint";
-
+*/
 
 }
