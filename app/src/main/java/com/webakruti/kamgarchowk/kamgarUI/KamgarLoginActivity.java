@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.webakruti.kamgarchowk.LandingActivity;
@@ -16,6 +17,7 @@ public class KamgarLoginActivity extends AppCompatActivity {
     private TextView textViewGotoKamgarRegistration;
     private Button buttonKamgarLogin;
     private ImageView imageViewBack;
+    private LinearLayout linearLayoutKamgarForgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,16 @@ public class KamgarLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(KamgarLoginActivity.this, HomeOrProfileActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        linearLayoutKamgarForgotPassword = (LinearLayout)findViewById(R.id.linearLayoutKamgarForgotPassword);
+        linearLayoutKamgarForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(KamgarLoginActivity.this, ForgotPassKamgarActivity.class);
                 startActivity(intent);
                 finish();
             }

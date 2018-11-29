@@ -16,11 +16,11 @@
             android:icon="@drawable/person"
             android:title="My Profile" />
 
-        <item
+       <!-- <item
             android:id="@+id/navigationCategory"
             android:checked="false"
             android:icon="@drawable/dateto"
-            android:title="Category" />
+            android:title="Category" />-->
 
 
         <item

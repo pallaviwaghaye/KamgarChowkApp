@@ -41,7 +41,9 @@
         <activity android:name=".userUI.KamgarListActivity" />
         <activity android:name=".adapter.KamgarListAdapter" />
         <activity android:name=".kamgarUI.HomeOrProfileActivity" />
-        <activity android:name=".userUI.HireKamgarActivity"></activity>
+        <activity android:name=".userUI.HireKamgarActivity" />
+        <activity android:name=".userUI.ForgotPasswordUserActivity" />
+        <activity android:name=".kamgarUI.ForgotPassKamgarActivity"></activity>
     </application>
 
 </manifest>

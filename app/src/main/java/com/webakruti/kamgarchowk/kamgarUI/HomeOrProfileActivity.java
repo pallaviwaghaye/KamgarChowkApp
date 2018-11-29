@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.kamgarUI.fragments.DocumentsFragment;
 import com.webakruti.kamgarchowk.kamgarUI.fragments.HomeOrProfileFragment;
+import com.webakruti.kamgarchowk.kamgarUI.fragments.CategoryFragment;
 import com.webakruti.kamgarchowk.userUI.fragments.SupportFragment;
 
 public class HomeOrProfileActivity extends AppCompatActivity {
@@ -63,10 +64,10 @@ public class HomeOrProfileActivity extends AppCompatActivity {
                         break;
 
 
-                   /* case R.id.navigationCategory:
+                    case R.id.navigationCategory:
                         toolbarKamgarDetailsHomeTitle.setText("Kamgar Category");
                         fragManager.beginTransaction().replace(R.id.home_container_kamgar, new CategoryFragment()).commit();
-                        break;*/
+                        break;
 
                     case R.id.navigationMyProfile:
                         toolbarKamgarDetailsHomeTitle.setText("My Profile");

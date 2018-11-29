@@ -7,10 +7,9 @@ import com.google.gson.annotations.SerializedName;
  * Created by DELL on 11/28/2018.
  */
 
-public class UserRegistration {
+public class UserRegistrationResponse {
 
     @SerializedName("success")
-
     private Success success;
 
     public Success getSuccess() {
@@ -21,9 +20,7 @@ public class UserRegistration {
         this.success = success;
     }
 
-
     @SerializedName("error")
-
     private String error;
 
     public String getError() {
@@ -34,18 +31,16 @@ public class UserRegistration {
         this.error = error;
     }
 
-
     public class Data {
 
         @SerializedName("first_name")
-
         private String firstName;
         @SerializedName("last_name")
-
         private String lastName;
         @SerializedName("mobile_no")
-
         private String mobileNo;
+        @SerializedName("email")
+        private String email;
 
         public String getFirstName() {
             return firstName;
@@ -71,18 +66,23 @@ public class UserRegistration {
             this.mobileNo = mobileNo;
         }
 
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
     }
 
     public class Success {
 
         @SerializedName("status")
-
         private Boolean status;
         @SerializedName("msg")
-
         private String msg;
         @SerializedName("data")
-
         private Data data;
 
         public Boolean getStatus() {
@@ -110,6 +110,5 @@ public class UserRegistration {
         }
 
     }
-
 
 }

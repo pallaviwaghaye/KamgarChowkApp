@@ -4,10 +4,10 @@ package com.webakruti.kamgarchowk.retrofit;
 public class ApiConstants {
     //192.168.29.107/kamgar-chowk/api/user-registration
 
-    public static final String BASE_URL = "192.168.29.107/kamgar-chowk/api/";
-    public static final String REG_API = "user-registration";
+    public static final String BASE_URL = "http://192.168.29.107/kamgarchowk/api/";
+    public static final String REG_API = "userregistration";
 
-    public static final String LOGIN_API = "user-login";
+    public static final String LOGIN_API = "userlogin";
     /*public static final String OTP_VERIFICATION = "verifymobile";
     public static final String GET_RAILWAY_CATEGORY = "getservices";
 

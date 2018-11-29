@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
+import com.webakruti.kamgarchowk.model.UserLoginResponse;
 
 
 /**
@@ -29,9 +30,8 @@ public class SharedPreferenceManager {
     }
 
 
-/*
 
-    public static void storeUserResponseObjectInSharedPreference(UserResponse user) {
+    public static void storeUserResponseObjectInSharedPreference(UserLoginResponse user) {
         SharedPreferences.Editor prefsEditor = kamgarPreferences.edit();
         //  prefsEditor.clear();
         Gson gson = new Gson();
@@ -40,16 +40,16 @@ public class SharedPreferenceManager {
         prefsEditor.commit();
     }
 
-    public static UserResponse getUserObjectFromSharedPreference() {
+    public static UserLoginResponse getUserObjectFromSharedPreference() {
         Gson gson1 = new Gson();
         String json1 = kamgarPreferences.getString("UserResponseObject", "");
-        UserResponse obj = gson1.fromJson(json1, UserResponse.class);
+        UserLoginResponse obj = gson1.fromJson(json1, UserLoginResponse.class);
 //		Log.e("RetrivedName:", obj.getFirstName());
         return obj;
     }
 
 
-    public static void storeAdminResponseObjectInSharedPreference(AdminLoginSuccess adminLoginSuccess) {
+   /* public static void storeAdminResponseObjectInSharedPreference(AdminLoginSuccess adminLoginSuccess) {
         SharedPreferences.Editor prefsEditor = kamgarPreferences.edit();
         //  prefsEditor.clear();
         Gson gson = new Gson();
@@ -66,5 +66,4 @@ public class SharedPreferenceManager {
         return obj;
     }
 */
-
 }

@@ -4,23 +4,23 @@
         android:id="@+id/groupUserDetails"
         android:checkableBehavior="single">
 
-        <!--<item
+      <!--  <item
             android:id="@+id/navigationHome"
             android:checked="true"
             android:icon="@drawable/home1"
-            android:title="Home" />
-
-        <item
-            android:id="@+id/navigationCategory"
-            android:checked="false"
-            android:icon="@drawable/dateto"
-            android:title="Category" />-->
+            android:title="Home" />-->
 
         <item
             android:id="@+id/navigationHomeOrProfile"
             android:checked="false"
             android:icon="@drawable/person"
             android:title="My Profile" />
+
+        <item
+            android:id="@+id/navigationCategory"
+            android:checked="false"
+            android:icon="@drawable/dateto"
+            android:title="Category" />
 
         <item
             android:id="@+id/navigationMyOrders"

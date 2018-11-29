@@ -30,7 +30,7 @@
                     android:padding="5dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/back_arrow"
+                    android:src="@drawable/action_back_black"
                     />
             </LinearLayout>
 
@@ -130,7 +130,7 @@
 
 
             <LinearLayout
-                android:id="@+id/linearLayoutForgotPassword"
+                android:id="@+id/linearLayoutKamgarForgotPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"

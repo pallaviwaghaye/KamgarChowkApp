@@ -1,17 +1,12 @@
 package com.webakruti.kamgarchowk.retrofit.service;
 
 
-import com.webakruti.kamgarchowk.model.UserLogin;
-import com.webakruti.kamgarchowk.model.UserRegistration;
+import com.webakruti.kamgarchowk.model.UserLoginResponse;
+import com.webakruti.kamgarchowk.model.UserRegistrationResponse;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.http.Header;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -20,15 +15,16 @@ public interface ApiService {
     // Registration API
     //192.168.29.107/kamgar-chowk/api/user-registration?first_name=Pallavi&last_name=Waghaye&mobile_no=7975972248
     @POST(ApiConstants.REG_API)
-    Call<UserRegistration> registration(@Query("first_name") String firstName,
-                                        @Query("last_name") String lastName,
-                                        @Query("mobile_no") String mobileNo);
+    Call<UserRegistrationResponse> registration(@Query("first_name") String firstName,
+                                                @Query("last_name") String lastName,
+                                                @Query("mobile_no") String mobileNo,
+                                                @Query("email") String email);
 
     // Login API
     //192.168.29.107/kamgar-chowk/api/user-login?mobile_no=7975972248&password=rx00k31a
     @POST(ApiConstants.LOGIN_API)
-    Call<UserLogin> login(@Query("mobile_no") String mobileNo,
-                          @Query("password") String password);
+    Call<UserLoginResponse> login(@Query("mobile_no") String mobileNo,
+                                  @Query("password") String password);
 
 
     /*// OTP API

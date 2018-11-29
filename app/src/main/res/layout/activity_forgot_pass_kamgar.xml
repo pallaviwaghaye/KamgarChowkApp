@@ -16,9 +16,8 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+
             android:orientation="vertical">
-
-
 
 
 
@@ -29,6 +28,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:src="@drawable/logo_kamgar" />
+
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -42,69 +42,20 @@
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="User Registration"
+                    android:text="Forgot Your Password ?"
                     android:textColor="@color/black"
                     android:gravity="center"
                     android:textSize="18sp" />
 
-                <RelativeLayout
-                    android:id="@+id/relativeLayoutUserFirstName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="@color/white">
-                    <EditText
-                        android:id="@+id/editTextUserFirstName"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/edittext_rectangular_oval"
-                        android:hint="First Name"
-                        android:paddingLeft="60dp"
-                        android:imeOptions="actionNext"
-                        android:textColor="@color/dark_blue"
-                        android:textColorHint="@color/grey"
-                        android:textSize="17sp" />
-                    <ImageView
-                        android:id="@+id/imageviewfname"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="15dp"
-                        android:src="@drawable/person"/>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:id="@+id/relativeLayoutUserLastName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp">
-                    <EditText
-                        android:id="@+id/editTextUserLastName"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/edittext_rectangular_oval"
-                        android:hint="Last Name"
-                        android:paddingLeft="60dp"
-                        android:imeOptions="actionNext"
-                        android:textColor="@color/dark_blue"
-                        android:textColorHint="@color/grey"
-                        android:textSize="17sp" />
-                    <ImageView
-                        android:id="@+id/imageViewlname"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="15dp"
-                        android:src="@drawable/person"/>
-                </RelativeLayout>
 
 
                 <RelativeLayout
-                    android:id="@+id/relativeLayoutUserMobileNumber"
+                    android:id="@+id/relativeLayoutKamgarMobileNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="30dp">
                     <EditText
-                        android:id="@+id/editTextUserMobileNumber"
+                        android:id="@+id/editTextKamgarForgotMobno"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/edittext_rectangular_oval"
@@ -122,21 +73,33 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="15dp"
                         android:src="@drawable/mobile_icon"/>
+                    <Button
+                        android:id="@+id/buttonKamgarForgotSendOtp"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="Send OTP"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:textAllCaps="false"
+                        android:background="@drawable/button_css"/>
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/relativeLayoutUserEmail"
+                    android:id="@+id/relativeLayoutKamgarotp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp">
                     <EditText
-                        android:id="@+id/editTextUserEmail"
+                        android:id="@+id/editTextKamgarForgotOtp"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/edittext_rectangular_oval"
-                        android:hint="Email"
+                        android:hint="OTP"
                         android:paddingLeft="60dp"
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
                         android:textColor="@color/dark_blue"
                         android:textColorHint="@color/grey"
@@ -147,17 +110,17 @@
                         android:layout_height="30dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="15dp"
-                        android:src="@drawable/email1"/>
+                        android:src="@drawable/otp"/>
                 </RelativeLayout>
                 <Button
-                    android:id="@+id/buttonSignUp"
+                    android:id="@+id/buttonSubmitKamgarForgot"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="40dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/button_css"
-                    android:text="Sign Up"
+                    android:text="Submit"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
@@ -169,26 +132,19 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="70dp"
                 android:layout_marginBottom="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 >
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Have an account? "
+                    android:layout_gravity="center"
+                    android:text="New Password will be sent to your registered Mobile Number through SMS"
                     android:textColor="@color/grey"
                     android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/textViewGoToLogin"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Login"
-                        android:textColor="@color/mid_blue"
-                        android:textSize="15sp" />
-
-
             </LinearLayout>
 
         </LinearLayout>
