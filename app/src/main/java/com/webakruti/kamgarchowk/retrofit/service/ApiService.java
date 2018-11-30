@@ -26,6 +26,13 @@ public interface ApiService {
     Call<UserLoginResponse> login(@Query("mobile_no") String mobileNo,
                                   @Query("password") String password);
 
+    @POST(ApiConstants.FORGOT_OTP_API)
+    Call<UserLoginResponse> forgototp(@Query("mobile_no") String mobileNo);
+
+    @POST(ApiConstants.FORGOT_API)
+    Call<UserLoginResponse> forgot(@Query("mobile_no") String mobileNo,
+                                  @Query("otp_code") String otp);
+
 
     /*// OTP API
     //http://nirmalrail.webakruti.in/api/login?mobile=9561665846&password=9561665846&otp=123456

@@ -12,7 +12,7 @@
 
         <item
             android:id="@+id/navigationHomeOrProfile"
-            android:checked="false"
+            android:checked="true"
             android:icon="@drawable/person"
             android:title="My Profile" />
 

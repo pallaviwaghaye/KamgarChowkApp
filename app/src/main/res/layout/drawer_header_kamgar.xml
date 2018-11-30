@@ -42,6 +42,7 @@
                 android:gravity="center"
                 android:singleLine="true"
                 android:text="Ddfj Kddff"
+                android:layout_marginLeft="30dp"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -53,6 +54,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:layout_marginTop="5dp"
+                android:layout_marginLeft="30dp"
                 android:text="9876543210"
                 android:inputType="number|phone"
                 android:textColor="@color/white"

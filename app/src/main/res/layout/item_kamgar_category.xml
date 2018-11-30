@@ -1,47 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    >
+    android:orientation="vertical">
+
+
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
         app:cardBackgroundColor="@color/white"
         app:cardElevation="3dp">
-
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
             android:gravity="center"
-            android:layout_centerInParent="true"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_margin="10dp"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageViewCategory"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/plumber_icon"
-                />
-            <TextView
-                android:id="@+id/textViewCategoryName"
-                android:gravity="center"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginTop="5dp"
-                android:text="Category"
-                android:textColor="@color/black" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:weightSum="100"
+                android:orientation="horizontal">
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="85"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/textViewKamgarcategoryName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="Carpenter"
+                        android:textSize="16dp"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearLayoutKamgarcategoryArrow"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="15"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    >
+                    <ImageView
+                        android:id="@+id/imageViewKamgarcategoryArrow"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/arrow_right"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-
     </android.support.v7.widget.CardView>
-
-</RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        >
+    </View>
+</LinearLayout>

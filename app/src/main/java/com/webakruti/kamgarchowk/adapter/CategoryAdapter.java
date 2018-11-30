@@ -1,6 +1,5 @@
 package com.webakruti.kamgarchowk.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -10,23 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.kamgarUI.KamgarSubcategoryActivity;
 import com.webakruti.kamgarchowk.userUI.SubcategoryActivity;
 
-import java.io.Serializable;
-import java.util.List;
 
-
-public class CategoryKamgarAdapter extends RecyclerView.Adapter<CategoryKamgarAdapter.ViewHolder> {
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     private Context context;
     private int size;
 
-    public CategoryKamgarAdapter(Context context, int size) {
+    public CategoryAdapter(Context context, int size) {
         this.context = context;
         this.size = size;
 
@@ -34,14 +29,14 @@ public class CategoryKamgarAdapter extends RecyclerView.Adapter<CategoryKamgarAd
 
     @NonNull
     @Override
-    public CategoryKamgarAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_kamgar_category, viewGroup, false);
-        CategoryKamgarAdapter.ViewHolder viewHolder = new CategoryKamgarAdapter.ViewHolder(view);
+    public CategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_category, viewGroup, false);
+        CategoryAdapter.ViewHolder viewHolder = new CategoryAdapter.ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryKamgarAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder viewHolder, final int position) {
 
 
         /*//final Student.Studentbatch studentbatch = list.get(position);
@@ -61,7 +56,7 @@ public class CategoryKamgarAdapter extends RecyclerView.Adapter<CategoryKamgarAd
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, SubcategoryActivity.class);
+                Intent intent = new Intent(context, KamgarSubcategoryActivity.class);
                 context.startActivity(intent);
 
             }

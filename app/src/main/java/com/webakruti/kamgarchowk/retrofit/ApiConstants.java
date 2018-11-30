@@ -8,6 +8,9 @@ public class ApiConstants {
     public static final String REG_API = "userregistration";
 
     public static final String LOGIN_API = "userlogin";
+
+    public static final String FORGOT_OTP_API = "userforgetpasssendotp";
+    public static final String FORGOT_API = "userforgetpasssubmitbtn";
     /*public static final String OTP_VERIFICATION = "verifymobile";
     public static final String GET_RAILWAY_CATEGORY = "getservices";
 

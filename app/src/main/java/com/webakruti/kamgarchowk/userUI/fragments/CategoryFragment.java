@@ -1,8 +1,5 @@
-package com.webakruti.kamgarchowk.kamgarUI.fragments;
+package com.webakruti.kamgarchowk.userUI.fragments;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,8 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.webakruti.kamgarchowk.R;
-import com.webakruti.kamgarchowk.adapter.CategoryKamgarAdapter;
-import com.webakruti.kamgarchowk.adapter.HomePopularKamgarAdapter;
+import com.webakruti.kamgarchowk.adapter.CategoryAdapter;
 import com.webakruti.kamgarchowk.utils.GridSpacingItemDecoration;
 import com.webakruti.kamgarchowk.utils.Utils;
 
@@ -22,7 +18,7 @@ public class CategoryFragment extends Fragment {
 
     private View rootView;
     private RecyclerView recyclerView;
-    private CategoryKamgarAdapter categoryKamgarAdapter;
+    private CategoryAdapter categoryAdapter;
     //private ProgressDialog progressDialogForAPI;
 
 
@@ -51,7 +47,7 @@ public class CategoryFragment extends Fragment {
         recyclerView.setNestedScrollingEnabled(false);
 
 
-            recyclerView.setAdapter(new CategoryKamgarAdapter(getContext(), 11));
+            recyclerView.setAdapter(new CategoryAdapter(getContext(), 11));
 
 
        /* List<Category> listOfCategories = new ArrayList<Category>();

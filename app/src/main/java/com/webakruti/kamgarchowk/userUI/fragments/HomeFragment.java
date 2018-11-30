@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
         listOfCategories.add(new HomeGridCategory("Plasterer",getResources().getDrawable(R.drawable.plasterer_icon)));
         listOfCategories.add(new HomeGridCategory("Masonry",getResources().getDrawable(R.drawable.masonry_icon)));
         listOfCategories.add(new HomeGridCategory("Electricians",getResources().getDrawable(R.drawable.electrician)));
-        listOfCategories.add(new HomeGridCategory("Glazier",getResources().getDrawable(R.drawable.glazier_icon)));
+        listOfCategories.add(new HomeGridCategory("More",getResources().getDrawable(R.drawable.glazier_icon)));
 
 
 

@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.userUI.fragments.CategoryFragment;
 import com.webakruti.kamgarchowk.userUI.fragments.HomeFragment;
 import com.webakruti.kamgarchowk.userUI.fragments.SupportFragment;
 
@@ -65,10 +66,10 @@ public class HomeActivity extends AppCompatActivity {
                         break;
 
 
-                    /*case R.id.navigationCategory:
+                    case R.id.navigationCategory:
                         toolbarUserDetailsHomeTitle.setText("Kamgar Category");
                         fragManager.beginTransaction().replace(R.id.home_container, new CategoryFragment()).commit();
-                        break;*/
+                        break;
 
                     case R.id.navigationMyProfile:
                         toolbarUserDetailsHomeTitle.setText("My Profile");

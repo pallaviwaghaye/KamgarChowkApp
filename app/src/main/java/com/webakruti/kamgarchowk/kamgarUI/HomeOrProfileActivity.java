@@ -17,9 +17,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.kamgarUI.fragments.CategoryKamgarFragment;
 import com.webakruti.kamgarchowk.kamgarUI.fragments.DocumentsFragment;
 import com.webakruti.kamgarchowk.kamgarUI.fragments.HomeOrProfileFragment;
-import com.webakruti.kamgarchowk.kamgarUI.fragments.CategoryFragment;
+import com.webakruti.kamgarchowk.kamgarUI.fragments.SubscriptionPlansFragment;
+import com.webakruti.kamgarchowk.userUI.fragments.CategoryFragment;
 import com.webakruti.kamgarchowk.userUI.fragments.SupportFragment;
 
 public class HomeOrProfileActivity extends AppCompatActivity {
@@ -66,29 +68,31 @@ public class HomeOrProfileActivity extends AppCompatActivity {
 
                     case R.id.navigationCategory:
                         toolbarKamgarDetailsHomeTitle.setText("Kamgar Category");
-                        fragManager.beginTransaction().replace(R.id.home_container_kamgar, new CategoryFragment()).commit();
+                        fragManager.beginTransaction().replace(R.id.home_container_kamgar, new CategoryKamgarFragment()).commit();
                         break;
 
-                    case R.id.navigationMyProfile:
-                        toolbarKamgarDetailsHomeTitle.setText("My Profile");
-                        // toolbarStudentDetailsHomeTitle.setText("My details");
-                        // SwachhataKendraFragment fragment = new SwachhataKendraFragment();
-                        fragManager.beginTransaction().replace(R.id.home_container_kamgar, new HomeOrProfileFragment()).commit();
-                        break;
-
-                    case R.id.navigationDocuments:
-                        toolbarKamgarDetailsHomeTitle.setText("Documents");
-                        fragManager.beginTransaction().replace(R.id.home_container_kamgar, new DocumentsFragment()).commit();
-                        break;
                     case R.id.navigationMyOrders:
                         toolbarKamgarDetailsHomeTitle.setText("My Orders");
                         fragManager.beginTransaction().replace(R.id.home_container_kamgar, new HomeOrProfileFragment()).commit();
                         break;
 
-                    /*case R.id.navigationSubcsriptionPlans:
-                        toolbarUserDetailsHomeTitle.setText("Subcsription Plans");
-                        fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
+                   /* case R.id.navigationMyProfile:
+                        toolbarKamgarDetailsHomeTitle.setText("My Profile");
+                        // toolbarStudentDetailsHomeTitle.setText("My details");
+                        // SwachhataKendraFragment fragment = new SwachhataKendraFragment();
+                        fragManager.beginTransaction().replace(R.id.home_container_kamgar, new HomeOrProfileFragment()).commit();
                         break;*/
+
+                    case R.id.navigationDocuments:
+                        toolbarKamgarDetailsHomeTitle.setText("Documents");
+                        fragManager.beginTransaction().replace(R.id.home_container_kamgar, new DocumentsFragment()).commit();
+                        break;
+
+
+                    case R.id.navigationSubcsriptionPlans:
+                        toolbarKamgarDetailsHomeTitle.setText("Subcsription Plans");
+                        fragManager.beginTransaction().replace(R.id.home_container_kamgar, new SubscriptionPlansFragment()).commit();
+                        break;
 
                     case R.id.navSupport:
                         toolbarKamgarDetailsHomeTitle.setText("Support");

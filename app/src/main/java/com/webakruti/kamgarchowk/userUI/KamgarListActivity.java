@@ -50,7 +50,7 @@ public class KamgarListActivity extends AppCompatActivity {
         linearLayoutShowListView = (LinearLayout)findViewById(R.id.linearLayoutShowListView);
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager1 = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(KamgarListActivity.this,LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager1);
         recyclerView.setAdapter(new KamgarListAdapter(getApplicationContext(), 15));
     }
