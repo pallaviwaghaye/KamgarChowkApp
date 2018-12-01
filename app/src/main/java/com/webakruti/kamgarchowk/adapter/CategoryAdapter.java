@@ -56,7 +56,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, KamgarSubcategoryActivity.class);
+                Intent intent = new Intent(context, SubcategoryActivity.class);
                 context.startActivity(intent);
 
             }

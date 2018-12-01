@@ -169,5 +169,14 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
         return m.matches();
     }
 
+    @Override
+    public void onBackPressed() {
+
+        Intent new_intent = new Intent(UserRegistrationActivity.this, UserLoginActivity.class);
+
+        this.startActivity(new_intent);
+
+    }
+
 
 }

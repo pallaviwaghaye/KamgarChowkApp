@@ -44,7 +44,8 @@
         <activity android:name=".userUI.HireKamgarActivity" />
         <activity android:name=".userUI.ForgotPasswordUserActivity" />
         <activity android:name=".kamgarUI.KamgarSubcategoryActivity" />
-        <activity android:name=".kamgarUI.ForgotPassKamgarActivity"></activity>
+        <activity android:name=".kamgarUI.ForgotPassKamgarActivity" />
+        <activity android:name=".userUI.CategoryActivity"></activity>
     </application>
 
 </manifest>

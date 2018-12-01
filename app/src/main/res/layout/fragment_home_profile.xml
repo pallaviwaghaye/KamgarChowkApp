@@ -61,7 +61,7 @@
                         android:layout_height="100dp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="15dp"
-                        android:src="@drawable/support"
+                        android:src="@drawable/support_image"
                         />
                 </LinearLayout>
 

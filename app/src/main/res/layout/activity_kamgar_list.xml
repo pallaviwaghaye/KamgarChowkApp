@@ -76,7 +76,7 @@
                                 android:id="@+id/imageViewSubcategorySearch"
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-                                android:src="@drawable/search2" />
+                                android:src="@drawable/search_icon" />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -107,16 +107,16 @@
             android:layout_weight="35"
             android:gravity="center">
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/sort"/>
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/sort_icon"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sort"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="7dp"
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="16dp" />
         </LinearLayout>
         <View
             android:layout_width="1dp"
@@ -131,16 +131,16 @@
             android:layout_weight="35"
             android:gravity="center">
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/filter"/>
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/filter_icon"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Filter"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="7dp"
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="16dp" />
         </LinearLayout>
         <View
             android:layout_width="1dp"
@@ -157,7 +157,7 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/list"/>
+                android:src="@drawable/list_black_icon"/>
         </LinearLayout>
 
     </LinearLayout>

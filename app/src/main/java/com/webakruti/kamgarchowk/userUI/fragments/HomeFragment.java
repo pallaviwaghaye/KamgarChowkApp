@@ -5,21 +5,25 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.adapter.HomeAvailAllServicesAdapter;
 import com.webakruti.kamgarchowk.adapter.HomeCategoryGridAdapter;
 import com.webakruti.kamgarchowk.adapter.HomePopularKamgarAdapter;
 import com.webakruti.kamgarchowk.model.HomeGridCategory;
+import com.webakruti.kamgarchowk.userUI.CategoryActivity;
 import com.webakruti.kamgarchowk.userUI.KamgarListActivity;
 import com.webakruti.kamgarchowk.userUI.SubcategoryActivity;
 
@@ -48,6 +52,21 @@ public class HomeFragment extends Fragment {
 
         editTextSearch = (EditText)rootView.findViewById(R.id.editTextSearch);
 
+        //click on keyboard search icon
+        editTextSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    //performSearch();
+                    Intent i = new Intent(getActivity(),KamgarListActivity.class);
+                    startActivity(i);
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
         imageViewHomeImage = (ImageView)rootView.findViewById(R.id.imageViewHomeImage);
 
         imageViewSearch = (ImageView)rootView.findViewById(R.id.imageViewSearch);
@@ -61,6 +80,8 @@ public class HomeFragment extends Fragment {
 
         spinnerLocation = (Spinner) rootView.findViewById(R.id.spinnerLocation);
         //spinnerLocation.setOnClickListener(this);
+
+        //list of cities for search
         String[] list = getResources().getStringArray(R.array.serachlocation);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_dropdown_item,list);
         spinnerLocation.setAdapter(adapter);
@@ -69,6 +90,7 @@ public class HomeFragment extends Fragment {
 
         gridview = (GridView)rootView.findViewById(R.id.gridview);
 
+        //list of featured kamgar categories with more option
         List<HomeGridCategory> listOfCategories = new ArrayList<HomeGridCategory>();
         listOfCategories.add(new HomeGridCategory("Plumbers",getResources().getDrawable(R.drawable.plumber_icon)));
         listOfCategories.add(new HomeGridCategory("Painter",getResources().getDrawable(R.drawable.painter_icon)));
@@ -80,7 +102,7 @@ public class HomeFragment extends Fragment {
         listOfCategories.add(new HomeGridCategory("Plasterer",getResources().getDrawable(R.drawable.plasterer_icon)));
         listOfCategories.add(new HomeGridCategory("Masonry",getResources().getDrawable(R.drawable.masonry_icon)));
         listOfCategories.add(new HomeGridCategory("Electricians",getResources().getDrawable(R.drawable.electrician)));
-        listOfCategories.add(new HomeGridCategory("More",getResources().getDrawable(R.drawable.glazier_icon)));
+        listOfCategories.add(new HomeGridCategory("More",getResources().getDrawable(R.drawable.more2)));
 
 
 
@@ -99,16 +121,26 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("CategoryName", category.getCategoryName());
                 startActivity(intent);
 
+                if(i == adapterView.getLastVisiblePosition())
+                {
+                    Intent intent1 = new Intent(getActivity(), CategoryActivity.class);
+
+                    //intent.putExtra("CategoryName", category.getCategoryName());
+                    startActivity(intent1);
+                }
+
 
             }
         });
 
 
+        //list of popular images
         recyclerViewPopular = (RecyclerView)rootView.findViewById(R.id.recyclerViewPopular);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewPopular.setLayoutManager(layoutManager);
         recyclerViewPopular.setAdapter(new HomePopularKamgarAdapter(getContext(), 4));
 
+        //list of kamgar available for all services
         recyclerViewAvailableAllServices = (RecyclerView)rootView.findViewById(R.id.recyclerViewAvailableAllServices);
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false);
         recyclerViewAvailableAllServices.setLayoutManager(layoutManager1);

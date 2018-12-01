@@ -166,7 +166,15 @@ public class UserLoginActivity extends AppCompatActivity implements View.OnClick
 
             }
         });
+    }
 
+
+    @Override
+    public void onBackPressed() {
+
+        Intent new_intent = new Intent(UserLoginActivity.this, LandingActivity.class);
+
+        this.startActivity(new_intent);
 
     }
 

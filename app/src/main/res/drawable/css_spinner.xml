@@ -9,10 +9,11 @@
             <solid android:color="@color/white"/>
 
         </shape></item>
-        <item android:drawable="@drawable/down_arrow1"
+        <item android:drawable="@drawable/down_arrow"
             android:height="15dp"
             android:width="15dp"
             android:right="3dp"
+            android:left="2dp"
             android:gravity="center|right">
 
         </item>

@@ -80,7 +80,7 @@
                                 android:layout_height="13dp"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="10dp"
-                                android:src="@drawable/map" />
+                                android:src="@drawable/pin_black_icon" />
 
                             <TextView
                                 android:id="@+id/textViewAddress"
@@ -103,7 +103,7 @@
                                 android:layout_height="13dp"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="10dp"
-                                android:src="@drawable/search1" />
+                                android:src="@drawable/trophy_icon" />
 
 
                             <TextView
