@@ -3,6 +3,8 @@ package com.webakruti.kamgarchowk.retrofit;
 
 public class ApiConstants {
     //192.168.29.107/kamgar-chowk/api/user-registration
+    //http://192.168.29.107/kamgarchowk/api/autofill/
+    //http://192.168.29.107/kamgarchowk/api/locationlist
 
     public static final String BASE_URL = "http://192.168.29.107/kamgarchowk/api/";
     public static final String REG_API = "userregistration";
@@ -11,6 +13,9 @@ public class ApiConstants {
 
     public static final String FORGOT_OTP_API = "userforgetpasssendotp";
     public static final String FORGOT_API = "userforgetpasssubmitbtn";
+
+    public static final String search_location_API = "locationlist";
+    public static final String search_autofill_API = "autofill/";
     /*public static final String OTP_VERIFICATION = "verifymobile";
     public static final String GET_RAILWAY_CATEGORY = "getservices";
 

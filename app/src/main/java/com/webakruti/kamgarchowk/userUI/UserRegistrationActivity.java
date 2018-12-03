@@ -70,11 +70,11 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
                                 if (isValidEmailAddress(editTextUserEmail.getText().toString().trim())) {
 
                                     if (NetworkUtil.hasConnectivity(UserRegistrationActivity.this)) {
-                                        //callRegistartionAPI();
-                                        Intent intent = new Intent(UserRegistrationActivity.this, UserLoginActivity.class);
+                                        callRegistartionAPI();
+                                        /*Intent intent = new Intent(UserRegistrationActivity.this, UserLoginActivity.class);
                                         //intent.putExtra("MOBILE_NO", editTextUserMobileNumber.getText().toString());
                                         startActivity(intent);
-                                        finish();
+                                        finish();*/
                                     } else {
                                         Toast.makeText(UserRegistrationActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
                                     }

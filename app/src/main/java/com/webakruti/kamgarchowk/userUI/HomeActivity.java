@@ -20,6 +20,7 @@ import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.userUI.fragments.CategoryFragment;
 import com.webakruti.kamgarchowk.userUI.fragments.HomeFragment;
 import com.webakruti.kamgarchowk.userUI.fragments.SupportFragment;
+import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
 
 public class HomeActivity extends AppCompatActivity {
 //    private ImageView imageViewBack;
@@ -44,6 +45,8 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigationView);
+
+        SharedPreferenceManager.setApplicationContext(HomeActivity.this);
 
         View headerLayout = navigationView.getHeaderView(0);
 
@@ -110,7 +113,7 @@ public class HomeActivity extends AppCompatActivity {
                         // Setting Positive "Yes" Button
                         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                               // SharedPreferenceManager.clearPreferences();
+                                SharedPreferenceManager.clearPreferences();
                                 Intent intent = new Intent(HomeActivity.this, UserLoginActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);

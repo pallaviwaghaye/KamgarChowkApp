@@ -1,11 +1,19 @@
 package com.webakruti.kamgarchowk.retrofit.service;
 
 
+import com.webakruti.kamgarchowk.model.SearchAutofill;
+import com.webakruti.kamgarchowk.model.SearchLocationList;
+import com.webakruti.kamgarchowk.model.UserForgotPassword;
+import com.webakruti.kamgarchowk.model.UserForgtPassSndOtpResponse;
 import com.webakruti.kamgarchowk.model.UserLoginResponse;
 import com.webakruti.kamgarchowk.model.UserRegistrationResponse;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 
+import java.util.List;
+
 import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -27,11 +35,18 @@ public interface ApiService {
                                   @Query("password") String password);
 
     @POST(ApiConstants.FORGOT_OTP_API)
-    Call<UserLoginResponse> forgototp(@Query("mobile_no") String mobileNo);
+    Call<UserForgtPassSndOtpResponse> forgototp(@Query("mobile_no") String mobileNo);
 
     @POST(ApiConstants.FORGOT_API)
-    Call<UserLoginResponse> forgot(@Query("mobile_no") String mobileNo,
-                                  @Query("otp_code") String otp);
+    Call<UserForgotPassword> forgot(@Query("mobile_no") String mobileNo,
+                                    @Query("otp_code") String otp);
+
+    @GET(ApiConstants.search_location_API)
+    Call<List<SearchLocationList>> search_location(@Header("Authorization") String header);
+
+
+    @POST(ApiConstants.search_autofill_API)
+    Call<SearchAutofill> search_autofill(@Header("Authorization") String header);
 
 
     /*// OTP API

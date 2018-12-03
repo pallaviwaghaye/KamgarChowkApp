@@ -44,6 +44,8 @@ public class UserLoginActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_login);
 
+        SharedPreferenceManager.setApplicationContext(UserLoginActivity.this);
+
         linearLayoutSignUpNow = (LinearLayout)findViewById(R.id.linearLayoutSignUpNow);
         linearLayoutForgotPassword = (LinearLayout)findViewById(R.id.linearLayoutForgotPassword);
         relativeLayoutUserPassword = (RelativeLayout)findViewById(R.id.relativeLayoutUserPassword);
@@ -81,11 +83,11 @@ public class UserLoginActivity extends AppCompatActivity implements View.OnClick
                         if(editTextUserPassword.getText().toString().length() >= 6) {
 
                             if (NetworkUtil.hasConnectivity(UserLoginActivity.this)) {
-                                //callLoginAPI();
+                                callLoginAPI();
 
-                                Intent intent = new Intent(UserLoginActivity.this, HomeActivity.class);
+                                /*Intent intent = new Intent(UserLoginActivity.this, HomeActivity.class);
                                 startActivity(intent);
-                                finish();
+                                finish();*/
                             } else {
                                 Toast.makeText(UserLoginActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
                             }
@@ -136,7 +138,7 @@ public class UserLoginActivity extends AppCompatActivity implements View.OnClick
                     if (result.getSuccess().getStatus()) {
 
                         // Save UserResponse to SharedPref
-                        //SharedPreferenceManager.storeUserResponseObjectInSharedPreference(result);
+                        SharedPreferenceManager.storeUserResponseObjectInSharedPreference(result);
                         Intent intent = new Intent(UserLoginActivity.this, HomeActivity.class);
                         startActivity(intent);
                         finish();

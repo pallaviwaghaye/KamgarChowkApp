@@ -2,6 +2,7 @@ package com.webakruti.kamgarchowk.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.webakruti.kamgarchowk.model.UserLoginResponse;
@@ -12,27 +13,27 @@ import com.webakruti.kamgarchowk.model.UserLoginResponse;
  */
 public class SharedPreferenceManager {
     private static Context applicationContext;
-    private static SharedPreferences kamgarPreferences;
+    private static SharedPreferences tuitionPlusPreferences;
     public static void setApplicationContext(Context context) {
         applicationContext = context;
         setPreferences();
     }
 
     private static void setPreferences() {
-        if (kamgarPreferences == null) {
-            kamgarPreferences = applicationContext.getSharedPreferences("kamgarchowk",
+        if (tuitionPlusPreferences == null) {
+            tuitionPlusPreferences = applicationContext.getSharedPreferences("niramlrail",
                     Context.MODE_PRIVATE);
         }
     }
 
     public static void clearPreferences() {
-        kamgarPreferences.edit().clear().commit();
+        tuitionPlusPreferences.edit().clear().commit();
     }
 
 
 
     public static void storeUserResponseObjectInSharedPreference(UserLoginResponse user) {
-        SharedPreferences.Editor prefsEditor = kamgarPreferences.edit();
+        SharedPreferences.Editor prefsEditor = tuitionPlusPreferences.edit();
         //  prefsEditor.clear();
         Gson gson = new Gson();
         String json = gson.toJson(user);
@@ -42,7 +43,7 @@ public class SharedPreferenceManager {
 
     public static UserLoginResponse getUserObjectFromSharedPreference() {
         Gson gson1 = new Gson();
-        String json1 = kamgarPreferences.getString("UserResponseObject", "");
+        String json1 = tuitionPlusPreferences.getString("UserResponseObject", "");
         UserLoginResponse obj = gson1.fromJson(json1, UserLoginResponse.class);
 //		Log.e("RetrivedName:", obj.getFirstName());
         return obj;
@@ -50,7 +51,7 @@ public class SharedPreferenceManager {
 
 
    /* public static void storeAdminResponseObjectInSharedPreference(AdminLoginSuccess adminLoginSuccess) {
-        SharedPreferences.Editor prefsEditor = kamgarPreferences.edit();
+        SharedPreferences.Editor prefsEditor = tuitionPlusPreferences.edit();
         //  prefsEditor.clear();
         Gson gson = new Gson();
         String json = gson.toJson(adminLoginSuccess);
@@ -60,10 +61,10 @@ public class SharedPreferenceManager {
 
     public static AdminLoginSuccess getAdminObjectFromSharedPreference() {
         Gson gson1 = new Gson();
-        String json1 = kamgarPreferences.getString("AdminResponseObject", "");
+        String json1 = tuitionPlusPreferences.getString("AdminResponseObject", "");
         AdminLoginSuccess obj = gson1.fromJson(json1, AdminLoginSuccess.class);
 //		Log.e("RetrivedName:", obj.getFirstName());
         return obj;
-    }
-*/
+    }*/
+
 }
