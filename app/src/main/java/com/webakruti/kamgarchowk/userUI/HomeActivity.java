@@ -19,6 +19,8 @@ import android.widget.TextView;
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.userUI.fragments.CategoryFragment;
 import com.webakruti.kamgarchowk.userUI.fragments.HomeFragment;
+import com.webakruti.kamgarchowk.userUI.fragments.MyEnquiryFragment;
+import com.webakruti.kamgarchowk.userUI.fragments.MyProfileFragment;
 import com.webakruti.kamgarchowk.userUI.fragments.SupportFragment;
 import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
 
@@ -78,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
                         toolbarUserDetailsHomeTitle.setText("My Profile");
                         // toolbarStudentDetailsHomeTitle.setText("My details");
                         // SwachhataKendraFragment fragment = new SwachhataKendraFragment();
-                        fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
+                        fragManager.beginTransaction().replace(R.id.home_container, new MyProfileFragment()).commit();
                         break;
 
                     /*case R.id.navigationDocuments:
@@ -88,7 +90,7 @@ public class HomeActivity extends AppCompatActivity {
 */
                     case R.id.navigationMyEnquiry:
                         toolbarUserDetailsHomeTitle.setText("My Enquiry");
-                        fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
+                        fragManager.beginTransaction().replace(R.id.home_container, new MyEnquiryFragment()).commit();
                         break;
 
                     /*case R.id.navigationSubcsriptionPlans:

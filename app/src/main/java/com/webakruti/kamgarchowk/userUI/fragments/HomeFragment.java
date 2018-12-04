@@ -230,9 +230,9 @@ public class HomeFragment extends Fragment {
         List<SearchLocationList> finalList = new ArrayList<>();
 
         SearchLocationList locationList1 = new SearchLocationList();
-        locationList1.setId(-1);
+        locationList1.setId(1);
         locationList1.setName(selectedLocations);
-        locationList.get(0).getName();
+        //locationList.get(0).getName();
 
         finalList.add(locationList1);
         finalList.addAll(locationList);

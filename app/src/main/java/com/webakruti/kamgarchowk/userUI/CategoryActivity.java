@@ -1,23 +1,38 @@
 package com.webakruti.kamgarchowk.userUI;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.adapter.CategoryAdapter;
+import com.webakruti.kamgarchowk.model.CategoryList;
+import com.webakruti.kamgarchowk.retrofit.ApiConstants;
+import com.webakruti.kamgarchowk.retrofit.service.RestClient;
 import com.webakruti.kamgarchowk.utils.GridSpacingItemDecoration;
+import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
 import com.webakruti.kamgarchowk.utils.Utils;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CategoryActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CategoryAdapter categoryAdapter;
+
+    private ProgressDialog progressDialogForAPI;
 
     private ImageView imageViewBack;
     private TextView textViewHeading;
@@ -27,6 +42,65 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category);
 
         initViews();
+
+        callGetKamgarCategoryAPI();
+    }
+
+    private void callGetKamgarCategoryAPI() {
+
+
+        progressDialogForAPI = new ProgressDialog(this);
+        progressDialogForAPI.setCancelable(false);
+        progressDialogForAPI.setIndeterminate(true);
+        progressDialogForAPI.setMessage("Please wait...");
+        progressDialogForAPI.show();
+
+        SharedPreferenceManager.setApplicationContext(CategoryActivity.this);
+        String token = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getToken();
+
+        //String API = "http://nirmalrail.webakruti.in/api/";
+        String headers = "Bearer " + token;
+            Call<CategoryList> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).getcategorylist(headers);
+            requestCallback.enqueue(new Callback<CategoryList>() {
+            @Override
+            public void onResponse(Call<CategoryList> call, Response<CategoryList> response) {
+                if (response.isSuccessful() && response.body() != null && response.code() == 200) {
+
+                    CategoryList details = response.body();
+                    //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
+                    if (details != null) {
+
+                        List<CategoryList> list = (List<CategoryList>) details;
+                        Toast.makeText(CategoryActivity.this, list.size(),Toast.LENGTH_LONG).show();
+                        categoryAdapter = new CategoryAdapter(getApplicationContext(), list);
+                        recyclerView.setAdapter(categoryAdapter);
+                    }
+
+                } else {
+                    // Response code is 401
+                }
+
+                if (progressDialogForAPI != null) {
+                    progressDialogForAPI.cancel();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CategoryList> call, Throwable t) {
+
+                if (t != null) {
+
+                    if (progressDialogForAPI != null) {
+                        progressDialogForAPI.cancel();
+                    }
+                    if (t.getMessage() != null)
+                        Log.e("error", t.getMessage());
+                }
+
+            }
+        });
+
+
     }
 
     private void initViews() {
@@ -54,7 +128,7 @@ public class CategoryActivity extends AppCompatActivity {
         recyclerView.setNestedScrollingEnabled(false);
 
 
-        recyclerView.setAdapter(new CategoryAdapter(getApplicationContext(), 11));
+        //recyclerView.setAdapter(new CategoryAdapter(getApplicationContext(), 11));
 
 
        /* List<Category> listOfCategories = new ArrayList<Category>();

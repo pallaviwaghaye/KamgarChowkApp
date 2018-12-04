@@ -13,16 +13,21 @@ import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.adapter.HomeAvailAllServicesAdapter;
 import com.webakruti.kamgarchowk.adapter.KamgarListAdapter;
 import com.webakruti.kamgarchowk.adapter.SubcategoryAdapter;
+import com.webakruti.kamgarchowk.model.CategoryList;
 
 public class SubcategoryActivity extends AppCompatActivity {
     private ImageView imageViewBack;
     private TextView textViewSubcategoryHeading;
     private RecyclerView recyclerView;
     private TextView textViewNoData;
+
+    private CategoryList kamgarCategory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subcategory);
+
+        kamgarCategory = (CategoryList) getIntent().getSerializableExtra("KamgarCategory");
 
         textViewSubcategoryHeading = (TextView)findViewById(R.id.textViewSubcategoryHeading);
         textViewNoData = (TextView)findViewById(R.id.textViewNoData);

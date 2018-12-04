@@ -38,7 +38,7 @@ public class CategoryFragment extends Fragment {
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
+       /* GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);
         int spacing = (int) Utils.DpToPixel(getActivity(), 11); // 40px
 
@@ -48,7 +48,7 @@ public class CategoryFragment extends Fragment {
 
 
             recyclerView.setAdapter(new CategoryAdapter(getContext(), 11));
-
+*/
 
        /* List<Category> listOfCategories = new ArrayList<Category>();
         listOfCategories.add(new Category("Waiting Hall", getResources().getDrawable(R.drawable.icons_01)));

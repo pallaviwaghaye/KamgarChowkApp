@@ -2,11 +2,13 @@ package com.webakruti.kamgarchowk.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by DELL on 12/1/2018.
  */
 
-public class CategoryList {
+public class CategoryList implements Serializable{
 
         @SerializedName("id")
 

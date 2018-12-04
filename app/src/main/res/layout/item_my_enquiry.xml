@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
     android:orientation="vertical">
 
 
@@ -12,8 +11,8 @@
         android:id="@+id/cardView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         app:cardBackgroundColor="@color/white"
+        android:layout_margin="5dp"
         app:cardCornerRadius="4dp"
         app:cardElevation="3dp"
         >
@@ -51,32 +50,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="2dp"
                 android:layout_marginTop="5dp"
+                android:gravity="top|center"
                 android:orientation="horizontal">
             <TextView
                 android:id="@+id/textViewKamgarDesignation"
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
+                android:layout_height="match_parent"
                 android:text="Plumber"
                 android:textSize="15dp"
-                android:layout_marginTop="10dp"
-                android:gravity="left"
+                android:layout_marginRight="5dp"
                 android:textAllCaps="false"
-                android:textColor="@color/black" />
+                android:textColor="@color/pink_red" />
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey"
+                    />
 
                 <TextView
                     android:id="@+id/textViewKamgarDate"
                     android:layout_width="wrap_content"
-                    android:layout_height="25dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:text="26 Oct 2018"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
                     android:textSize="15dp"
-                    android:layout_marginTop="10dp"
                     android:textAllCaps="false"
                     android:textColor="@color/black" />
             </LinearLayout>
         </LinearLayout>
+
+
 
                     <LinearLayout
                         android:id="@+id/linearLayoutSubcategoryArrow"
@@ -89,7 +92,7 @@
                         >
 
                         <TextView
-                            android:id="@+id/textViewSubPlanType"
+                            android:id="@+id/textViewRatingType"
                             android:layout_width="wrap_content"
                             android:layout_height="25dp"
                             android:text="Satisfactory"
@@ -148,72 +151,136 @@
                     </LinearLayout>
 
                 </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearLayoutEnquiryShowHide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="Address"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/grey" />
+                <TextView
+                    android:id="@+id/textViewKamgarAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="Abcddds Efghsf, jscsnbcjds."
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="15dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="Contact No."
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/grey" />
+                <TextView
+                    android:id="@+id/textViewKamgarContactNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="9876543210"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="15dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:textAllCaps="false"
+                    android:inputType="number|phone"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/grey"
+                android:layout_marginTop="10dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="10dp">
+                android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                android:weightSum="100">
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/right"/>
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_weight="50">
                     <TextView
-                        android:id="@+id/textView1stText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Status"
+                        android:textSize="15dp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/grey" />
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/dot"
+                        android:layout_marginLeft="15dp"/>
+
+                    <TextView
+                        android:id="@+id/textViewKamgarStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:text="Completed"
+                        android:paddingRight="10dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_gravity="center"
-                        android:text="Get 3 Months Subscription with all features of listing."
-                        android:textSize="12dp"
-                        android:textColor="@color/black"/>
+                        android:textSize="15dp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/green" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_gravity="top|center"
-                        android:src="@drawable/right"/>
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="50">
+
                     <TextView
-                        android:id="@+id/textView2ndText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:id="@+id/textViewKamgarShowHideDetais"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:text="Less Details"
+                        android:paddingRight="10dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_gravity="center"
-                        android:text="Email and Support for You from kamgarchowk support team."
-                        android:textSize="12dp"
-                        android:textColor="@color/black"/>
+                        android:textSize="15dp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/pink_red" />
+
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/right"/>
-                    <TextView
-                        android:id="@+id/textView3rdText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_gravity="center"
-                        android:text="Top 10 Position on kamgarchowk listing."
-                        android:textSize="12dp"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
+            </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>

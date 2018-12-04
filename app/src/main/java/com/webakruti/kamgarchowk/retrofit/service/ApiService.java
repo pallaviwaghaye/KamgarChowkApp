@@ -1,6 +1,7 @@
 package com.webakruti.kamgarchowk.retrofit.service;
 
 
+import com.webakruti.kamgarchowk.model.CategoryList;
 import com.webakruti.kamgarchowk.model.SearchAutofill;
 import com.webakruti.kamgarchowk.model.SearchLocationList;
 import com.webakruti.kamgarchowk.model.UserForgotPassword;
@@ -47,6 +48,9 @@ public interface ApiService {
 
     @POST(ApiConstants.search_autofill_API)
     Call<SearchAutofill> search_autofill(@Header("Authorization") String header);
+
+    @POST(ApiConstants.category_API)
+    Call<CategoryList> getcategorylist(@Header("Authorization") String header);
 
 
     /*// OTP API

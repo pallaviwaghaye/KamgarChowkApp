@@ -2,11 +2,13 @@ package com.webakruti.kamgarchowk.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by DELL on 12/3/2018.
  */
 
-public class SearchLocationList {
+public class SearchLocationList{
 
         @SerializedName("id")
         private Integer id;
