@@ -14,6 +14,10 @@ import com.webakruti.kamgarchowk.userUI.UserRegistrationActivity;
 public class LandingActivity extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout linearLayoutKamgar;
     private LinearLayout linearLayoutUser;
+
+    private LinearLayout linearLayoutAdvertise;
+    private LinearLayout linearLayoutFreeListing;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +29,13 @@ public class LandingActivity extends AppCompatActivity implements View.OnClickLi
         linearLayoutUser.setOnClickListener(this);
 
         linearLayoutKamgar.setOnClickListener(this);
+
+        linearLayoutAdvertise = (LinearLayout)findViewById(R.id.linearLayoutAdvertise);
+        linearLayoutFreeListing = (LinearLayout)findViewById(R.id.linearLayoutFreeListing);
+
+        linearLayoutAdvertise.setOnClickListener(this);
+
+        linearLayoutFreeListing.setOnClickListener(this);
     }
 
     @Override
@@ -40,6 +51,17 @@ public class LandingActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.linearLayoutKamgar:
                 Intent intent1 = new Intent(LandingActivity.this, KamgarLoginActivity.class);
                 startActivity(intent1);
+                finish();
+                break;
+
+            case R.id.linearLayoutAdvertise:
+                Intent intent2 = new Intent(LandingActivity.this, AdvertiseActivity.class);
+                startActivity(intent2);
+                finish();
+                break;
+            case R.id.linearLayoutFreeListing:
+                Intent intent3 = new Intent(LandingActivity.this, FreeListingActivity.class);
+                startActivity(intent3);
                 finish();
                 break;
 

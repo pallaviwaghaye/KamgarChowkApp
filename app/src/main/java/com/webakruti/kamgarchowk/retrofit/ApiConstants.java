@@ -18,7 +18,15 @@ public class ApiConstants {
     public static final String search_location_API = "locationlist";
     public static final String search_autofill_API = "autofill/";
 
+    public static final String search_API = "searchbar";
+
+    public static final String home_API = "featureandpopular";
+
     public static final String category_API = "categorylist";
+
+    public static final String subcategory_API = "subcategorylist";
+
+    public static final String support_API = "support";
 
     /*public static final String OTP_VERIFICATION = "verifymobile";
     public static final String GET_RAILWAY_CATEGORY = "getservices";

@@ -39,6 +39,19 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
     @Override
     public void onBindViewHolder(@NonNull final UserMyEnquiryAdapter.ViewHolder viewHolder, final int position) {
 
+       /* viewHolder.textViewKamgarShowHideDetais.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {*/
+                if (viewHolder.linearLayoutEnquiryShowHide.getVisibility() == View.GONE)
+                {
+                    viewHolder.linearLayoutEnquiryShowHide.setVisibility(View.VISIBLE);
+                    viewHolder.textViewKamgarShowHideDetais.setText("Less Details");
+                } else{
+                    viewHolder.linearLayoutEnquiryShowHide.setVisibility(View.GONE);
+                    viewHolder.textViewKamgarShowHideDetais.setText("More Details");
+                }
+           /* }
+        });*/
 
 
         /*//final Student.Studentbatch studentbatch = list.get(position);

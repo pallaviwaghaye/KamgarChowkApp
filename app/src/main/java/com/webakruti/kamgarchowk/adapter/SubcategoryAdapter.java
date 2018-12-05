@@ -12,50 +12,51 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.model.CategoryList;
+import com.webakruti.kamgarchowk.model.SubcategoryListResponse;
 import com.webakruti.kamgarchowk.userUI.KamgarListActivity;
+import com.webakruti.kamgarchowk.userUI.SubcategoryActivity;
+
+import java.io.Serializable;
+import java.util.List;
 
 public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.ViewHolder> {
 
     private Context context;
     private int size;
+    List<SubcategoryListResponse> list;
 
-    public SubcategoryAdapter(Context context, int size) {
+    public SubcategoryAdapter(Context context, List<SubcategoryListResponse> list) {
         this.context = context;
         this.size = size;
+        this.list = list;
 
     }
 
     @NonNull
     @Override
-    public SubcategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public SubcategoryAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_subcategory, viewGroup, false);
         SubcategoryAdapter.ViewHolder viewHolder = new SubcategoryAdapter.ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SubcategoryAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final SubcategoryAdapter.ViewHolder viewHolder, final int position) {
 
 
-        /*//final Student.Studentbatch studentbatch = list.get(position);
+        final SubcategoryListResponse subcategoryListResponse = list.get(position);
+        //viewHolder.textViewCategory.setText("Category " + position);
+        viewHolder.textViewSubcategoryName.setText(subcategoryListResponse.getName());
 
-        viewHolder.textViewBatchCourseName.setText(size[position]);
-        viewHolder.textViewBatchTime.setText(studentbatch.getBatch().getStartTime());
-        viewHolder.textViewCourseTeacher.setText(studentbatch.getWhoAssinged());
-
-        viewHolder.textViewBatchCourseDuration.setText(studentbatch.getBatch().getCourse().getDuration());
-        viewHolder.textViewBatchStartDate.setText(studentbatch.getBatch().getStartDate());
-        viewHolder.textViewBatchEndDate.setText(studentbatch.getBatch().getEndDate());*/
-
-       /* Picasso.with(context)
-                .load(R.drawable.navab_thali)
-                .into(viewHolder.imageViewVegImage);*/
 
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, KamgarListActivity.class);
+                intent.putExtra("KamgarSubCategory", (Serializable) subcategoryListResponse);
                 context.startActivity(intent);
 
             }
@@ -64,7 +65,7 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
 
     @Override
     public int getItemCount() {
-        return size;
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -58,20 +58,20 @@ public class CategoryActivity extends AppCompatActivity {
         SharedPreferenceManager.setApplicationContext(CategoryActivity.this);
         String token = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getToken();
 
-        //String API = "http://nirmalrail.webakruti.in/api/";
+        String API = "http://beta.kamgarchowk.com/api/";
         String headers = "Bearer " + token;
-            Call<CategoryList> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).getcategorylist(headers);
-            requestCallback.enqueue(new Callback<CategoryList>() {
+            Call<List<CategoryList>> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).getcategorylist(headers);
+            requestCallback.enqueue(new Callback<List<CategoryList>>() {
             @Override
-            public void onResponse(Call<CategoryList> call, Response<CategoryList> response) {
+            public void onResponse(Call<List<CategoryList>> call, Response<List<CategoryList>> response) {
                 if (response.isSuccessful() && response.body() != null && response.code() == 200) {
 
-                    CategoryList details = response.body();
+                    List<CategoryList> details = response.body();
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
                     if (details != null) {
 
-                        List<CategoryList> list = (List<CategoryList>) details;
-                        Toast.makeText(CategoryActivity.this, list.size(),Toast.LENGTH_LONG).show();
+                        List<CategoryList> list = details;
+                        //Toast.makeText(CategoryActivity.this, list.size(),Toast.LENGTH_LONG).show();
                         categoryAdapter = new CategoryAdapter(getApplicationContext(), list);
                         recyclerView.setAdapter(categoryAdapter);
                     }
@@ -86,7 +86,7 @@ public class CategoryActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<CategoryList> call, Throwable t) {
+            public void onFailure(Call<List<CategoryList>> call, Throwable t) {
 
                 if (t != null) {
 

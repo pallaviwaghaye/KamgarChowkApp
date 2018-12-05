@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.webakruti.kamgarchowk.R;
@@ -36,18 +37,21 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @NonNull
     @Override
-    public CategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_category, viewGroup, false);
-        CategoryAdapter.ViewHolder viewHolder = new CategoryAdapter.ViewHolder(view);
+    public CategoryAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_category, viewGroup, false);
+        CategoryAdapter.ViewHolder viewHolder = new CategoryAdapter.ViewHolder(v);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final CategoryAdapter.ViewHolder viewHolder, final int position) {
 
         final CategoryList category = list.get(position);
         //viewHolder.textViewCategory.setText("Category " + position);
         viewHolder.textViewCategoryName.setText(category.getName());
+
+        Toast.makeText(context,"CategoryName = "+ category.getName(),Toast.LENGTH_LONG).show();
+        Toast.makeText(context,"CategoryName : "+ category.getName(),Toast.LENGTH_LONG).show();
 
         Picasso.with(context)
                 .load(category.getCategoryicon())
@@ -58,7 +62,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, SubcategoryActivity.class);
-                intent.putExtra("KamgarCategory", (Serializable) category);
+                //intent.putExtra("KamgarCategory", (Serializable) category);
                 context.startActivity(intent);
             }
         });
@@ -75,7 +79,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return size;
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

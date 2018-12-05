@@ -16,7 +16,7 @@ import com.webakruti.kamgarchowk.adapter.UserMyEnquiryAdapter;
 import com.webakruti.kamgarchowk.userUI.KamgarListActivity;
 
 public class MyEnquiryFragment extends Fragment {
-  private View rootView;
+    private View rootView;
     private RecyclerView recyclerView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

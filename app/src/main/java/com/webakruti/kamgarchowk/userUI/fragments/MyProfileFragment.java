@@ -19,15 +19,18 @@ import android.widget.Toast;
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.adapter.UserMyEnquiryAdapter;
 import com.webakruti.kamgarchowk.userUI.ChangePasswordActivity;
+import com.webakruti.kamgarchowk.userUI.EditProfileUserActivity;
 import com.webakruti.kamgarchowk.userUI.ForgotPasswordUserActivity;
 import com.webakruti.kamgarchowk.userUI.HomeActivity;
+import com.webakruti.kamgarchowk.userUI.MyEnquiryActivity;
+import com.webakruti.kamgarchowk.userUI.SupportActivity;
 import com.webakruti.kamgarchowk.userUI.UserLoginActivity;
 import com.webakruti.kamgarchowk.userUI.UserRegistrationActivity;
 import com.webakruti.kamgarchowk.utils.NetworkUtil;
 import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
 
-public class MyProfileFragment extends Fragment implements View.OnClickListener{
-
+public class MyProfileFragment extends Fragment {
+    //public class MyProfileFragment extends Fragment implements View.OnClickListener{
     private View rootView;
 
     private FragmentManager fragManager;
@@ -64,6 +67,13 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener{
     {
         imageViewUserImage = (ImageView)rootView.findViewById(R.id.imageViewUserImage);
         imageViewUserEdit = (ImageView)rootView.findViewById(R.id.imageViewUserEdit);
+        imageViewUserEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),EditProfileUserActivity.class);
+                startActivity(intent);
+            }
+        });
 
         textViewUserName = (TextView)rootView.findViewById(R.id.textViewUserName);
         textViewUserMobileNo = (TextView)rootView.findViewById(R.id.textViewUserMobileNo);
@@ -75,32 +85,37 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener{
         textViewCountry = (TextView)rootView.findViewById(R.id.textViewCountry);
         textViewPincode = (TextView)rootView.findViewById(R.id.textViewPincode);
         linearLayoutGotoMyenquiry = (LinearLayout)rootView.findViewById(R.id.linearLayoutGotoMyenquiry);
+        linearLayoutGotoMyenquiry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),MyEnquiryActivity.class);
+                startActivity(intent);
+            }
+        });
+
         linearLayoutGotoChangePassword = (LinearLayout)rootView.findViewById(R.id.linearLayoutGotoChangePassword);
+        linearLayoutGotoChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),ChangePasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
         linearLayoutGotoSupport = (LinearLayout)rootView.findViewById(R.id.linearLayoutGotoSupport);
+        linearLayoutGotoSupport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),SupportActivity.class);
+                startActivity(intent);
+            }
+        });
+
         linearLayoutGotoLogout = (LinearLayout)rootView.findViewById(R.id.linearLayoutGotoLogout);
-
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-
-            case R.id.linearLayoutGotoMyenquiry:
-//                fragManager.beginTransaction().replace(R.id.home_container, new MyEnquiryFragment().commit();
-                break;
-
-            case R.id.linearLayoutGotoChangePassword:
-                Intent intent2 = new Intent(getActivity(), ChangePasswordActivity.class);
-                startActivity(intent2);
-
-                break;
-
-            case R.id.linearLayoutGotoSupport:
-
-                break;
-
-            case R.id.linearLayoutGotoLogout:
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        linearLayoutGotoLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
                 // Setting Dialog Title
                 alertDialog.setTitle("Logout");
                 // Setting Dialog Message
@@ -110,7 +125,62 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener{
                 alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         SharedPreferenceManager.clearPreferences();
-                        Intent intent = new Intent(getActivity(), UserLoginActivity.class);
+                        Intent intent = new Intent(getContext(), UserLoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                });
+                // Setting Negative "NO" Button
+                alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                // Showing Alert Message
+                alertDialog.show();
+            }
+        });
+
+    }
+
+    /*@Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+
+            case R.id.linearLayoutGotoMyenquiry:
+                Intent intent = new Intent(getContext(), MyEnquiryActivity.class);
+                startActivity(intent);
+
+                break;
+
+            case R.id.linearLayoutGotoChangePassword:
+                Intent intent1 = new Intent(getContext(), ChangePasswordActivity.class);
+                startActivity(intent1);
+
+                break;
+
+            case R.id.linearLayoutGotoSupport:
+                Intent intent2 = new Intent(getContext(), SupportActivity.class);
+                startActivity(intent2);
+                break;
+
+            case R.id.imageViewUserEdit:
+                Intent intent3 = new Intent(getContext(), EditProfileUserActivity.class);
+                startActivity(intent3);
+                break;
+
+            case R.id.linearLayoutGotoLogout:
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                // Setting Dialog Title
+                alertDialog.setTitle("Logout");
+                // Setting Dialog Message
+                alertDialog.setMessage("Are you sure to logout?");
+                // Setting Icon to Dialog
+                // Setting Positive "Yes" Button
+                alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        SharedPreferenceManager.clearPreferences();
+                        Intent intent = new Intent(getContext(), UserLoginActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }
@@ -126,7 +196,7 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener{
 
                 break;
         }
-    }
+    }*/
 
 
 }

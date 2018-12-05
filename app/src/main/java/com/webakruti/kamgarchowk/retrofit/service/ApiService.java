@@ -2,8 +2,12 @@ package com.webakruti.kamgarchowk.retrofit.service;
 
 
 import com.webakruti.kamgarchowk.model.CategoryList;
+import com.webakruti.kamgarchowk.model.HomeResponse;
 import com.webakruti.kamgarchowk.model.SearchAutofill;
 import com.webakruti.kamgarchowk.model.SearchLocationList;
+import com.webakruti.kamgarchowk.model.SearchResponse;
+import com.webakruti.kamgarchowk.model.SubcategoryListResponse;
+import com.webakruti.kamgarchowk.model.SupportResponse;
 import com.webakruti.kamgarchowk.model.UserForgotPassword;
 import com.webakruti.kamgarchowk.model.UserForgtPassSndOtpResponse;
 import com.webakruti.kamgarchowk.model.UserLoginResponse;
@@ -45,12 +49,31 @@ public interface ApiService {
     @GET(ApiConstants.search_location_API)
     Call<List<SearchLocationList>> search_location(@Header("Authorization") String header);
 
-
     @POST(ApiConstants.search_autofill_API)
     Call<SearchAutofill> search_autofill(@Header("Authorization") String header);
 
+    @POST(ApiConstants.search_API)
+    Call<SearchResponse> search(@Query("city_id") String cityId,
+                                         @Query("name") String queryName);
+
     @POST(ApiConstants.category_API)
-    Call<CategoryList> getcategorylist(@Header("Authorization") String header);
+    Call<List<CategoryList>> getcategorylist(@Header("Authorization") String header);
+
+    @POST(ApiConstants.subcategory_API)
+    Call<List<SubcategoryListResponse>> getsubcategorylist(@Header("Authorization") String header);
+
+    //http://beta.kamgarchowk.com/api/support?contact_no=7975972248&first_name=pallavi&last_name=waghaye&subject=abcdasnsj&problem_details=testing sbdhsdhsd
+    @POST(ApiConstants.support_API)
+    Call<SupportResponse> sendSupportRequest(@Header("Authorization") String header,
+                                             @Query("first_name") String firstName,
+                                             @Query("last_name") String lastName,
+                                             @Query("contact_no") String mobileNo,
+                                             @Query("subject") String subject,
+                                             @Query("problem_details") String problemDetails);
+
+    @GET(ApiConstants.home_API)
+    Call<HomeResponse> homeList(@Header("Authorization") String header);
+
 
 
     /*// OTP API

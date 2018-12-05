@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by DELL on 12/1/2018.
  */
 
-public class CategoryList implements Serializable{
+public class CategoryList{
 
         @SerializedName("id")
 

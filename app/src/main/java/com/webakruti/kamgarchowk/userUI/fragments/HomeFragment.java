@@ -180,7 +180,7 @@ public class HomeFragment extends Fragment {
         listOfCategories.add(new HomeGridCategory("Plasterer", getResources().getDrawable(R.drawable.plasterer_icon)));
         listOfCategories.add(new HomeGridCategory("Masonry", getResources().getDrawable(R.drawable.masonry_icon)));
         listOfCategories.add(new HomeGridCategory("Electricians", getResources().getDrawable(R.drawable.electrician)));
-        listOfCategories.add(new HomeGridCategory("More", getResources().getDrawable(R.drawable.more2)));
+        listOfCategories.add(new HomeGridCategory("More", getResources().getDrawable(R.drawable.moreicon)));
 
 
         //pass this in adapter
@@ -192,7 +192,6 @@ public class HomeFragment extends Fragment {
                 // showDlg();
 
                 HomeGridCategory category = (HomeGridCategory) adapterView.getItemAtPosition(i);
-                // navigate to Shop Books Activity
                 Intent intent = new Intent(getActivity(), SubcategoryActivity.class);
 
                 intent.putExtra("CategoryName", category.getCategoryName());
@@ -214,7 +213,7 @@ public class HomeFragment extends Fragment {
         recyclerViewPopular = (RecyclerView) rootView.findViewById(R.id.recyclerViewPopular);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewPopular.setLayoutManager(layoutManager);
-        recyclerViewPopular.setAdapter(new HomePopularKamgarAdapter(getContext(), 4));
+        //recyclerViewPopular.setAdapter(new HomePopularKamgarAdapter(getContext(), 4));
 
         //list of kamgar available for all services
         recyclerViewAvailableAllServices = (RecyclerView) rootView.findViewById(R.id.recyclerViewAvailableAllServices);

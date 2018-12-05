@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.webakruti.kamgarchowk.userUI.HomeActivity;
+import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
+
 public class SplashActivity extends AppCompatActivity {
 
     private static int SPLASH_TIME_OUT = 3000; // 5 sec
@@ -35,8 +38,8 @@ public class SplashActivity extends AppCompatActivity {
                 // Start your app main activity
                 try {
 
-                    /*if (SharedPreferenceManager.getUserObjectFromSharedPreference() != null) {
-                        Intent i = new Intent(SplashActivity.this, HomePageActivity.class);
+                   /* if (SharedPreferenceManager.getUserObjectFromSharedPreference() != null) {
+                        Intent i = new Intent(SplashActivity.this, HomeActivity.class);
                         startActivity(i);
                         finish();
                     } else {*/
@@ -44,8 +47,8 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(i);
                     finish();
 
-                     /*   }
-                    }*/
+                        //}
+
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
