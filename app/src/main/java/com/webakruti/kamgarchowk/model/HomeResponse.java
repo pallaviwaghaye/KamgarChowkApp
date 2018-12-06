@@ -2,13 +2,14 @@ package com.webakruti.kamgarchowk.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by DELL on 12/5/2018.
  */
 
-public class HomeResponse {
+public class HomeResponse implements Serializable{
 
         @SerializedName("featuredlist")
         private List<Featuredlist> featuredlist = null;
@@ -43,7 +44,7 @@ public class HomeResponse {
 
 
 
-    public class Featuredlist {
+    public static class Featuredlist implements Serializable{
 
         @SerializedName("id")
         private Integer id;
@@ -120,8 +121,8 @@ public class HomeResponse {
         private Integer id;
         @SerializedName("name")
         private String name;
-        @SerializedName("categorybanner")
-        private String categorybanner;
+        @SerializedName("categoryimage")
+        private String categoryimage;
 
         public Integer getId() {
             return id;
@@ -139,13 +140,14 @@ public class HomeResponse {
             this.name = name;
         }
 
-        public String getCategorybanner() {
-            return categorybanner;
+        public String getCategoryimage() {
+            return categoryimage;
         }
 
-        public void setCategorybanner(String categorybanner) {
-            this.categorybanner = categorybanner;
+        public void setCategoryimage(String categoryimage) {
+            this.categoryimage = categoryimage;
         }
 
     }
+
 }

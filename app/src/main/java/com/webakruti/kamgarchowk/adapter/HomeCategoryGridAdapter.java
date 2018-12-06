@@ -10,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.squareup.picasso.Picasso;
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.model.HomeGridCategory;
+import com.webakruti.kamgarchowk.model.HomeResponse;
 
 import java.util.List;
 
@@ -19,9 +21,9 @@ import java.util.List;
 public class HomeCategoryGridAdapter extends BaseAdapter {
 
     Activity context;
-    List<HomeGridCategory> list;
+    List<HomeResponse.Featuredlist> list;
 
-    public HomeCategoryGridAdapter(Activity context, List<HomeGridCategory> list) {
+    public HomeCategoryGridAdapter(Activity context, List<HomeResponse.Featuredlist> list) {
         this.context = context;
         this.list = list;
     }
@@ -52,14 +54,16 @@ public class HomeCategoryGridAdapter extends BaseAdapter {
         } else {
             myView = (View) convertView;
         }
-        HomeGridCategory category = list.get(position);
-
+        HomeResponse.Featuredlist featuredlist = list.get(position);
 
         TextView textView = (TextView) myView.findViewById(R.id.textView);
-        ImageView myImage=(ImageView) myView.findViewById(R.id.myimage);
-        textView.setText(category.getCategoryName());
-        myImage.setImageDrawable(category.getCategoryImage());
-
+        ImageView imageGrid=(ImageView) myView.findViewById(R.id.imageGrid);
+        textView.setText(featuredlist.getName());
+        //myImage.setImageDrawable(featuredlist.getCategoryicon());
+        Picasso.with(context)
+                .load(featuredlist.getCategoryicon())
+                .placeholder(R.drawable.carpenter_icon)
+                .into(imageGrid);
 
 
         return myView;

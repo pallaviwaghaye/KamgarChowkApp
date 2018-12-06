@@ -14,9 +14,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.model.UserLoginResponse;
 import com.webakruti.kamgarchowk.userUI.fragments.CategoryFragment;
 import com.webakruti.kamgarchowk.userUI.fragments.HomeFragment;
 import com.webakruti.kamgarchowk.userUI.fragments.MyEnquiryFragment;
@@ -32,6 +35,11 @@ public class HomeActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private FragmentManager fragManager;
     private TextView toolbarUserDetailsHomeTitle;
+
+    private TextView textViewFName;
+    private TextView textViewLName;
+    private TextView textViewMobileNo;
+    private ImageView imageViewNavUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +57,40 @@ public class HomeActivity extends AppCompatActivity {
         navigationView = (NavigationView) findViewById(R.id.navigationView);
 
         SharedPreferenceManager.setApplicationContext(HomeActivity.this);
+        UserLoginResponse user = SharedPreferenceManager.getUserObjectFromSharedPreference();
 
         View headerLayout = navigationView.getHeaderView(0);
+
+        textViewFName = (TextView) headerLayout.findViewById(R.id.textViewFName);
+        textViewLName = (TextView) headerLayout.findViewById(R.id.textViewLName);
+        textViewMobileNo = (TextView) headerLayout.findViewById(R.id.textViewMobileNo);
+        imageViewNavUser = (ImageView)headerLayout.findViewById(R.id.imageViewNavUser);
+
+
 
         Menu menu = navigationView.getMenu();
 
         MenuItem navigationLogout = menu.findItem(R.id.navigationLogout);
+
+        if (user != null) {
+            textViewMobileNo.setVisibility(View.VISIBLE);
+            textViewFName.setText(user.getSuccess().getAuthuser().getFirstName());
+            textViewLName.setText(user.getSuccess().getAuthuser().getLastName());
+            textViewMobileNo.setText(user.getSuccess().getAuthuser().getMobileNo());
+
+            /*Picasso.with(getApplicationContext())
+                    .placeholder(R.drawable.carpenter_icon)
+                    .into(imageViewNavUser);*/
+
+            navigationLogout.setVisible(true);
+        } else {
+            textViewMobileNo.setVisibility(View.INVISIBLE);
+
+            textViewFName.setText("Welcome,");
+            textViewLName.setText("Guest");
+            navigationLogout.setVisible(false);
+
+        }
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override

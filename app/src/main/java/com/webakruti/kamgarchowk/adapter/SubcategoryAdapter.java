@@ -26,9 +26,9 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
 
     private Context context;
     private int size;
-    List<SubcategoryListResponse> list;
+    List<SubcategoryListResponse.Subcategory> list;
 
-    public SubcategoryAdapter(Context context, List<SubcategoryListResponse> list) {
+    public SubcategoryAdapter(Context context, List<SubcategoryListResponse.Subcategory> list) {
         this.context = context;
         this.size = size;
         this.list = list;
@@ -47,7 +47,7 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
     public void onBindViewHolder(final SubcategoryAdapter.ViewHolder viewHolder, final int position) {
 
 
-        final SubcategoryListResponse subcategoryListResponse = list.get(position);
+        final SubcategoryListResponse.Subcategory subcategoryListResponse = list.get(position);
         //viewHolder.textViewCategory.setText("Category " + position);
         viewHolder.textViewSubcategoryName.setText(subcategoryListResponse.getName());
 

@@ -18,9 +18,11 @@ import com.webakruti.kamgarchowk.adapter.HomeAvailAllServicesAdapter;
 import com.webakruti.kamgarchowk.adapter.KamgarListAdapter;
 import com.webakruti.kamgarchowk.adapter.SubcategoryAdapter;
 import com.webakruti.kamgarchowk.model.CategoryList;
+import com.webakruti.kamgarchowk.model.HomeResponse;
 import com.webakruti.kamgarchowk.model.SubcategoryListResponse;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 import com.webakruti.kamgarchowk.retrofit.service.RestClient;
+import com.webakruti.kamgarchowk.utils.NetworkUtil;
 import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
 
 import java.util.List;
@@ -35,16 +37,20 @@ public class SubcategoryActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private TextView textViewNoData;
 
-    private CategoryList kamgarCategory;
+    private CategoryList.Categorylist kamgarCategory;
+    private HomeResponse.Featuredlist featuredCategory;
     private SubcategoryAdapter subcategoryAdapter;
     private ProgressDialog progressDialogForAPI;
+
+    Integer catrgoryid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subcategory);
 
-        //kamgarCategory = (CategoryList) getIntent().getStringExtra("KamgarCategory");
+        kamgarCategory = (CategoryList.Categorylist) getIntent().getSerializableExtra("KamgarCategory");
+        featuredCategory = (HomeResponse.Featuredlist) getIntent().getSerializableExtra("FeaturedCategory");
 
         textViewSubcategoryHeading = (TextView)findViewById(R.id.textViewSubcategoryHeading);
         textViewNoData = (TextView)findViewById(R.id.textViewNoData);
@@ -62,7 +68,12 @@ public class SubcategoryActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager1);
         //recyclerView.setAdapter(new SubcategoryAdapter(getApplicationContext(), 15));
 
-        callGetKamgarSubcategoryAPI();
+        if (NetworkUtil.hasConnectivity(SubcategoryActivity.this)) {
+            callGetKamgarSubcategoryAPI();
+        } else {
+            Toast.makeText(SubcategoryActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void callGetKamgarSubcategoryAPI() {
@@ -76,20 +87,25 @@ public class SubcategoryActivity extends AppCompatActivity {
 
         SharedPreferenceManager.setApplicationContext(SubcategoryActivity.this);
         String token = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getToken();
+        if(kamgarCategory != null) {
+            catrgoryid = kamgarCategory.getId();
+        }else {
+            catrgoryid = featuredCategory.getId();
+        }
 
         String API = "http://beta.kamgarchowk.com/api/";
         String headers = "Bearer " + token;
-        Call<List<SubcategoryListResponse>> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).getsubcategorylist(headers);
-        requestCallback.enqueue(new Callback<List<SubcategoryListResponse>>() {
+        Call<SubcategoryListResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).getsubcategorylist(headers,catrgoryid);
+        requestCallback.enqueue(new Callback<SubcategoryListResponse>() {
             @Override
-            public void onResponse(Call<List<SubcategoryListResponse>> call, Response<List<SubcategoryListResponse>> response) {
+            public void onResponse(Call<SubcategoryListResponse> call, Response<SubcategoryListResponse> response) {
                 if (response.isSuccessful() && response.body() != null && response.code() == 200) {
 
-                    List<SubcategoryListResponse> details = response.body();
+                    SubcategoryListResponse details = response.body();
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
                     if (details != null) {
 
-                        List<SubcategoryListResponse> list = details;
+                        List<SubcategoryListResponse.Subcategory> list = details.getSubcategory();
                         //Toast.makeText(SubcategoryActivity.this, list.size(),Toast.LENGTH_LONG).show();
                         subcategoryAdapter = new SubcategoryAdapter(getApplicationContext(), list);
                         recyclerView.setAdapter(subcategoryAdapter);
@@ -105,7 +121,7 @@ public class SubcategoryActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<SubcategoryListResponse>> call, Throwable t) {
+            public void onFailure(Call<SubcategoryListResponse> call, Throwable t) {
 
                 if (t != null) {
 

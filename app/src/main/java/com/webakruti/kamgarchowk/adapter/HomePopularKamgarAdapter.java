@@ -49,7 +49,8 @@ public class HomePopularKamgarAdapter extends RecyclerView.Adapter<HomePopularKa
         viewHolder.textViewPoprWorkrName.setText(popularlist.getName());
 
         Picasso.with(context)
-                .load(R.drawable.constrator_image)
+                .load(popularlist.getCategoryimage())
+                .placeholder(R.drawable.image_not_found)
                 .into(viewHolder.imageViewPoprWorkrImage);
 
         /*viewHolder.cardView.setOnClickListener(new View.OnClickListener() {

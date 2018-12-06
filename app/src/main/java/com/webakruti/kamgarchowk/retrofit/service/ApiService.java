@@ -57,10 +57,11 @@ public interface ApiService {
                                          @Query("name") String queryName);
 
     @POST(ApiConstants.category_API)
-    Call<List<CategoryList>> getcategorylist(@Header("Authorization") String header);
+    Call<CategoryList> getcategorylist(@Header("Authorization") String header);
 
     @POST(ApiConstants.subcategory_API)
-    Call<List<SubcategoryListResponse>> getsubcategorylist(@Header("Authorization") String header);
+    Call<SubcategoryListResponse> getsubcategorylist(@Header("Authorization") String header,
+                                                     @Query("category_id") Integer categoryId);
 
     //http://beta.kamgarchowk.com/api/support?contact_no=7975972248&first_name=pallavi&last_name=waghaye&subject=abcdasnsj&problem_details=testing sbdhsdhsd
     @POST(ApiConstants.support_API)
@@ -73,6 +74,13 @@ public interface ApiService {
 
     @GET(ApiConstants.home_API)
     Call<HomeResponse> homeList(@Header("Authorization") String header);
+
+    @POST(ApiConstants.changepwd_API)
+    Call<SupportResponse> changepwd(@Header("Authorization") String header,
+                                             @Query("id") Integer id,
+                                             @Query("old_password") String oldpassword,
+                                             @Query("password") String password,
+                                             @Query("cpassword") String cpassword);
 
 
 

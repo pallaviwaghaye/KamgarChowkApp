@@ -28,6 +28,8 @@ public class ApiConstants {
 
     public static final String support_API = "support";
 
+    public static final String changepwd_API = "userchangepass";
+
     /*public static final String OTP_VERIFICATION = "verifymobile";
     public static final String GET_RAILWAY_CATEGORY = "getservices";
 

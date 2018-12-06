@@ -13,46 +13,48 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.model.HomeResponse;
+
+import java.util.List;
 
 public class HomeAvailAllServicesAdapter extends RecyclerView.Adapter<HomeAvailAllServicesAdapter.ViewHolder> {
 
     private Context context;
-    private int size;
+    List<HomeResponse.Workavllist> list;
 
-    public HomeAvailAllServicesAdapter(Context context, int size) {
+    public HomeAvailAllServicesAdapter(Context context, List<HomeResponse.Workavllist> list) {
         this.context = context;
-        this.size = size;
+        this.list = list;
 
     }
 
     @NonNull
     @Override
-    public HomeAvailAllServicesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_home_avail_all_services_adapter, viewGroup, false);
-        HomeAvailAllServicesAdapter.ViewHolder viewHolder = new HomeAvailAllServicesAdapter.ViewHolder(view);
+    public HomeAvailAllServicesAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_home_avail_all_services_adapter, viewGroup, false);
+        HomeAvailAllServicesAdapter.ViewHolder viewHolder = new HomeAvailAllServicesAdapter.ViewHolder(v);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomeAvailAllServicesAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final HomeAvailAllServicesAdapter.ViewHolder viewHolder, final int position) {
 
 
-        /*//final Student.Studentbatch studentbatch = list.get(position);
+        final HomeResponse.Workavllist workavllist = list.get(position);
 
-        viewHolder.textViewBatchCourseName.setText(size[position]);
-        viewHolder.textViewBatchTime.setText(studentbatch.getBatch().getStartTime());
-        viewHolder.textViewCourseTeacher.setText(studentbatch.getWhoAssinged());
+        //final Student.Studentbatch studentbatch = list.get(position);
 
-        viewHolder.textViewBatchCourseDuration.setText(studentbatch.getBatch().getCourse().getDuration());
-        viewHolder.textViewBatchStartDate.setText(studentbatch.getBatch().getStartDate());
-        viewHolder.textViewBatchEndDate.setText(studentbatch.getBatch().getEndDate());*/
+        viewHolder.textViewAllServices.setText(workavllist.getName());
 
-        /*Picasso.with(context)
-                .load(R.drawable.navab_thali)
-                .into(viewHolder.imageViewVegImage);
+        Picasso.with(context)
+                .load(workavllist.getCategoryimage())
+                .placeholder(R.drawable.image_not_found)
+                .resize(500, 300)
+                .into(viewHolder.imageViewAllServicesImage);
 
-        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+        /*viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, GoOutForLunchDinnerActivity.class);
@@ -64,7 +66,7 @@ public class HomeAvailAllServicesAdapter extends RecyclerView.Adapter<HomeAvailA
 
     @Override
     public int getItemCount() {
-        return size;
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

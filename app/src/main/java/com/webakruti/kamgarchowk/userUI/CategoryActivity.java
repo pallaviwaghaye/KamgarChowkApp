@@ -19,6 +19,7 @@ import com.webakruti.kamgarchowk.model.CategoryList;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 import com.webakruti.kamgarchowk.retrofit.service.RestClient;
 import com.webakruti.kamgarchowk.utils.GridSpacingItemDecoration;
+import com.webakruti.kamgarchowk.utils.NetworkUtil;
 import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
 import com.webakruti.kamgarchowk.utils.Utils;
 
@@ -42,8 +43,13 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category);
 
         initViews();
+        if (NetworkUtil.hasConnectivity(CategoryActivity.this)) {
+            callGetKamgarCategoryAPI();
+        } else {
+            Toast.makeText(CategoryActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+        }
 
-        callGetKamgarCategoryAPI();
+
     }
 
     private void callGetKamgarCategoryAPI() {
@@ -60,17 +66,17 @@ public class CategoryActivity extends AppCompatActivity {
 
         String API = "http://beta.kamgarchowk.com/api/";
         String headers = "Bearer " + token;
-            Call<List<CategoryList>> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).getcategorylist(headers);
-            requestCallback.enqueue(new Callback<List<CategoryList>>() {
+            Call<CategoryList> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).getcategorylist(headers);
+            requestCallback.enqueue(new Callback<CategoryList>() {
             @Override
-            public void onResponse(Call<List<CategoryList>> call, Response<List<CategoryList>> response) {
+            public void onResponse(Call<CategoryList> call, Response<CategoryList> response) {
                 if (response.isSuccessful() && response.body() != null && response.code() == 200) {
 
-                    List<CategoryList> details = response.body();
+                    CategoryList details = response.body();
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
                     if (details != null) {
 
-                        List<CategoryList> list = details;
+                        List<CategoryList.Categorylist> list = details.getCategorylist();
                         //Toast.makeText(CategoryActivity.this, list.size(),Toast.LENGTH_LONG).show();
                         categoryAdapter = new CategoryAdapter(getApplicationContext(), list);
                         recyclerView.setAdapter(categoryAdapter);
@@ -86,7 +92,7 @@ public class CategoryActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<CategoryList>> call, Throwable t) {
+            public void onFailure(Call<CategoryList> call, Throwable t) {
 
                 if (t != null) {
 

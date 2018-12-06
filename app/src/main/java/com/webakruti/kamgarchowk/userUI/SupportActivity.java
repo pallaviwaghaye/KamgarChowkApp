@@ -1,6 +1,7 @@
 package com.webakruti.kamgarchowk.userUI;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -69,10 +70,10 @@ public class SupportActivity extends AppCompatActivity {
 
                         if (NetworkUtil.hasConnectivity(SupportActivity.this)) {
                             callSupportAPI();
-
-                                /*Intent intent = new Intent(UserLoginActivity.this, HomeActivity.class);
+                            //Toast.makeText(SupportActivity.this, "Request Sent To Support Team! We Will Contact You Soon!!!",Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(SupportActivity.this, HomeActivity.class);
                                 startActivity(intent);
-                                finish();*/
+                                finish();
                         } else {
                             Toast.makeText(SupportActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
                         }
@@ -112,10 +113,9 @@ public class SupportActivity extends AppCompatActivity {
 
                     SupportResponse details = response.body();
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
-                    if (details != null) {
+                    if (details.getSuccess() != null) {
 
-                        SupportResponse supportResponse = details;
-                        Toast.makeText(SupportActivity.this, supportResponse.getSuccess().getMsg(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(SupportActivity.this, details.getSuccess().getMsg(),Toast.LENGTH_LONG).show();
 
                     }
 

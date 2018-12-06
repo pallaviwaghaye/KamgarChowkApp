@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,20 +23,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.adapter.CategoryAdapter;
 import com.webakruti.kamgarchowk.adapter.HomeAvailAllServicesAdapter;
 import com.webakruti.kamgarchowk.adapter.HomeCategoryGridAdapter;
+import com.webakruti.kamgarchowk.adapter.HomeGridAdapter;
 import com.webakruti.kamgarchowk.adapter.HomePopularKamgarAdapter;
+import com.webakruti.kamgarchowk.model.CategoryList;
 import com.webakruti.kamgarchowk.model.HomeGridCategory;
+import com.webakruti.kamgarchowk.model.HomeResponse;
 import com.webakruti.kamgarchowk.model.SearchLocationList;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 import com.webakruti.kamgarchowk.retrofit.service.RestClient;
 import com.webakruti.kamgarchowk.userUI.CategoryActivity;
 import com.webakruti.kamgarchowk.userUI.KamgarListActivity;
 import com.webakruti.kamgarchowk.userUI.SubcategoryActivity;
+import com.webakruti.kamgarchowk.utils.GridSpacingItemDecoration;
 import com.webakruti.kamgarchowk.utils.NetworkUtil;
 import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
+import com.webakruti.kamgarchowk.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,24 +56,35 @@ public class HomeFragment extends Fragment {
     private EditText editTextSearch;
     private ImageView imageViewSearch;
     private ImageView imageViewHomeImage;
+    private RecyclerView recyclerViewCategory;
     private GridView gridview;
     private RecyclerView recyclerViewPopular;
     private RecyclerView recyclerViewAvailableAllServices;
 
     String selectedLocations = "Select";
     SearchLocationList selectedLocation;
+    private ProgressDialog progressDialogForAPI;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
         initViews();
+        SharedPreferenceManager.setApplicationContext(getActivity());
+
 
         if (NetworkUtil.hasConnectivity(getActivity())) {
             callGetLocationAPI();
+            callGetHomeAPI();
         } else {
             Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
         }
+
+       /* if (NetworkUtil.hasConnectivity(getActivity())) {
+            callGetHomeAPI();
+        } else {
+            Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+        }*/
 
         selectedLocation = new SearchLocationList();
         selectedLocation.setName(selectedLocations);
@@ -164,23 +183,151 @@ public class HomeFragment extends Fragment {
         /*String[] list = getResources().getStringArray(R.array.serachlocation);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_dropdown_item,list);
         spinnerLocation.setAdapter(adapter);*/
-
-
+        recyclerViewCategory = (RecyclerView) rootView.findViewById(R.id.recyclerViewCategory);
         gridview = (GridView) rootView.findViewById(R.id.gridview);
+        recyclerViewPopular = (RecyclerView) rootView.findViewById(R.id.recyclerViewPopular);
+        recyclerViewAvailableAllServices = (RecyclerView) rootView.findViewById(R.id.recyclerViewAvailableAllServices);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 4, LinearLayoutManager.VERTICAL, false);
+        recyclerViewCategory.setLayoutManager(gridLayoutManager);
+        int spacing = (int) Utils.DpToPixel(getActivity(), 11); // 40px
+
+        GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration(4, spacing, true);
+        recyclerViewCategory.addItemDecoration(itemDecoration);
+        recyclerViewCategory.setNestedScrollingEnabled(false);
+
+    }
+
+
+    private void callGetHomeAPI() {
+
+        progressDialogForAPI = new ProgressDialog(getActivity());
+        progressDialogForAPI.setCancelable(false);
+        progressDialogForAPI.setIndeterminate(true);
+        progressDialogForAPI.setMessage("Please wait...");
+        progressDialogForAPI.show();
+
+        SharedPreferenceManager.setApplicationContext(getActivity());
+        String token = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getToken();
+
+        //String API = "http://beta.kamgarchowk.com/api/";
+        String headers = "Bearer " + token;
+        Call<HomeResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).homeList(headers);
+        requestCallback.enqueue(new Callback<HomeResponse>() {
+            @Override
+            public void onResponse(Call<HomeResponse> call, Response<HomeResponse> response) {
+                if (response.isSuccessful() && response.body() != null && response.code() == 200) {
+
+                    HomeResponse details = response.body();
+                    //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
+                    if (details != null) {
+
+                        //handleStationPlatformData(details);
+
+                        final List<HomeResponse.Popularlist> popularlists = details.getPopularlist();
+                        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                        recyclerViewPopular.setLayoutManager(layoutManager);
+                        recyclerViewPopular.setAdapter(new HomePopularKamgarAdapter(getContext(), popularlists));
+
+                        final List<HomeResponse.Workavllist> workavllists = details.getWorkavllist();
+                        LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+                        recyclerViewAvailableAllServices.setLayoutManager(layoutManager1);
+                        recyclerViewAvailableAllServices.setAdapter(new HomeAvailAllServicesAdapter(getContext(), workavllists));
+
+                        final List<HomeResponse.Featuredlist> listOfCategories1 = details.getFeaturedlist();
+                       /* LinearLayoutManager layoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+                        recyclerViewCategory.setLayoutManager(layoutManager2);*/
+                        recyclerViewCategory.setAdapter(new HomeGridAdapter(getContext(), listOfCategories1));
+
+
+                        final List<HomeResponse.Featuredlist> listOfCategories = details.getFeaturedlist();
+                        final ArrayAdapter<HomeResponse.Featuredlist> HomeCategoryGridAdapter = new ArrayAdapter<HomeResponse.Featuredlist>
+                                (getContext(),android.R.layout.simple_list_item_1, listOfCategories);
+                        gridview.setAdapter(new HomeCategoryGridAdapter(getActivity(), listOfCategories));
+                        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                // showDlg();
+
+                                HomeResponse.Featuredlist featuredlist = (HomeResponse.Featuredlist) adapterView.getItemAtPosition(i);
+                                Intent intent = new Intent(getActivity(), SubcategoryActivity.class);
+
+                                intent.putExtra("CategoryName", featuredlist.getName());
+                                startActivity(intent);
+
+                                if (i == adapterView.getLastVisiblePosition()) {
+                                    Intent intent1 = new Intent(getActivity(), CategoryActivity.class);
+
+                                    //intent.putExtra("CategoryName", category.getCategoryName());
+                                    startActivity(intent1);
+                                }
+
+
+                            }
+                        });
+
+
+                    }
+
+                } else {
+                    // Response code is 401
+                }
+
+                if (progressDialogForAPI != null) {
+                    progressDialogForAPI.cancel();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HomeResponse> call, Throwable t) {
+
+                if (t != null) {
+
+                    if (progressDialogForAPI != null) {
+                        progressDialogForAPI.cancel();
+                    }
+                    if (t.getMessage() != null)
+                        Log.e("error", t.getMessage());
+                }
+
+            }
+        });
+
+
+    }
+
+
+
+    /*    // Populate a List from Array elements
+        final List<HomeResponse.Featuredlist> listOfCategories = new ArrayList<HomeResponse.Featuredlist>();
+
+
+       *//* listOfCategories.add(listOfCategories.size(),"More",getResources().getDrawable(R.drawable.moreicon));
+
+
+        HomeResponse.Featuredlist addedItemText = listOfCategories.get(listOfCategories.size()-1);*//*
+
+        // Create a new ArrayAdapter
+        final ArrayAdapter<HomeResponse.Featuredlist> HomeCategoryGridAdapter = new ArrayAdapter<HomeResponse.Featuredlist>
+                (getContext(),android.R.layout.simple_list_item_1, listOfCategories);
+        //HomeCategoryGridAdapter.notifyDataSetChanged();
+        // Data bind GridView with ArrayAdapter (String Array elements)
+        //gridview.setAdapter(gridViewArrayAdapter);
 
         //list of featured kamgar categories with more option
-        List<HomeGridCategory> listOfCategories = new ArrayList<HomeGridCategory>();
-        listOfCategories.add(new HomeGridCategory("Plumbers", getResources().getDrawable(R.drawable.plumber_icon)));
-        listOfCategories.add(new HomeGridCategory("Painter", getResources().getDrawable(R.drawable.painter_icon)));
+       // List<HomeResponse.Featuredlist> listOfCategories = new ArrayList<HomeResponse.Featuredlist>();
+        //listOfCategories.add(new HomeResponse().getFeaturedlist("plumbers",));
+        *//*listOfCategories.add(new HomeResponse.Featuredlist(1,"Plumbers", getResources().getDrawable(R.drawable.plumber_icon)));
+        listOfCategories.add(new HomeResponse.Featuredlist("Painter", getResources().getDrawable(R.drawable.painter_icon)));
 
-        listOfCategories.add(new HomeGridCategory("Carpenter", getResources().getDrawable(R.drawable.carpenter_icon)));
+        listOfCategories.add(new HomeResponse.Featuredlist("Carpenter", getResources().getDrawable(R.drawable.carpenter_icon)));
 
-        listOfCategories.add(new HomeGridCategory("Welder", getResources().getDrawable(R.drawable.welder_icon)));
+        listOfCategories.add(new HomeResponse.Featuredlist("Welder", getResources().getDrawable(R.drawable.welder_icon)));
 
-        listOfCategories.add(new HomeGridCategory("Plasterer", getResources().getDrawable(R.drawable.plasterer_icon)));
-        listOfCategories.add(new HomeGridCategory("Masonry", getResources().getDrawable(R.drawable.masonry_icon)));
-        listOfCategories.add(new HomeGridCategory("Electricians", getResources().getDrawable(R.drawable.electrician)));
-        listOfCategories.add(new HomeGridCategory("More", getResources().getDrawable(R.drawable.moreicon)));
+        listOfCategories.add(new HomeResponse.Featuredlist("Plasterer", getResources().getDrawable(R.drawable.plasterer_icon)));
+        listOfCategories.add(new HomeResponse.Featuredlist("Masonry", getResources().getDrawable(R.drawable.masonry_icon)));
+        listOfCategories.add(new HomeResponse.Featuredlist("Electricians", getResources().getDrawable(R.drawable.electrician)));*//*
+        //listOfCategories.add(new HomeResponse.Featuredlist("More", getResources().getDrawable(R.drawable.moreicon)));
 
 
         //pass this in adapter
@@ -191,13 +338,13 @@ public class HomeFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // showDlg();
 
-                HomeGridCategory category = (HomeGridCategory) adapterView.getItemAtPosition(i);
+                HomeResponse.Featuredlist featuredlist = (HomeResponse.Featuredlist) adapterView.getItemAtPosition(i);
                 Intent intent = new Intent(getActivity(), SubcategoryActivity.class);
 
-                intent.putExtra("CategoryName", category.getCategoryName());
+                intent.putExtra("CategoryName", featuredlist.getName());
                 startActivity(intent);
 
-                if (i == adapterView.getLastVisiblePosition()) {
+                if (i+1 == adapterView.getLastVisiblePosition()) {
                     Intent intent1 = new Intent(getActivity(), CategoryActivity.class);
 
                     //intent.putExtra("CategoryName", category.getCategoryName());
@@ -210,18 +357,17 @@ public class HomeFragment extends Fragment {
 
 
         //list of popular images
-        recyclerViewPopular = (RecyclerView) rootView.findViewById(R.id.recyclerViewPopular);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewPopular.setLayoutManager(layoutManager);
         //recyclerViewPopular.setAdapter(new HomePopularKamgarAdapter(getContext(), 4));
 
         //list of kamgar available for all services
-        recyclerViewAvailableAllServices = (RecyclerView) rootView.findViewById(R.id.recyclerViewAvailableAllServices);
+
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerViewAvailableAllServices.setLayoutManager(layoutManager1);
         recyclerViewAvailableAllServices.setAdapter(new HomeAvailAllServicesAdapter(getContext(), 15));
-
-    }
+*/
 
 
     private void setSearchLocation(List<SearchLocationList> locationList) {
@@ -229,7 +375,7 @@ public class HomeFragment extends Fragment {
         List<SearchLocationList> finalList = new ArrayList<>();
 
         SearchLocationList locationList1 = new SearchLocationList();
-        locationList1.setId(1);
+        locationList1.setId(-1);
         locationList1.setName(selectedLocations);
         //locationList.get(0).getName();
 

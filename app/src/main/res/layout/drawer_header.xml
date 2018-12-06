@@ -32,20 +32,37 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
-            android:layout_weight="70">
-
+            android:layout_weight="60">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
             <TextView
-                android:id="@+id/textViewName"
+                android:id="@+id/textViewFName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:singleLine="true"
                 android:layout_marginLeft="30dp"
-                android:text="Adfj Sddff"
+                android:text="Adfj"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/textViewLName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:layout_marginLeft="5dp"
+                    android:text="Sddff"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/textViewMobileNo"

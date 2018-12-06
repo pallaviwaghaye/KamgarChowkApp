@@ -105,7 +105,12 @@
                 android:orientation="vertical"
                 android:layout_gravity="center">
 
-
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerViewCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    />
                 <GridView
                     android:id="@+id/gridview"
                     android:layout_width="match_parent"
@@ -117,6 +122,7 @@
                     android:background="@color/white"
                     android:scrollbars="none"
                     android:verticalSpacing="0dp"
+                    android:visibility="gone"
                     />
                 <!--<LinearLayout
                     android:layout_width="fill_parent"

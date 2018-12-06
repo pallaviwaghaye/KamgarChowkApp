@@ -25,10 +25,10 @@ import java.util.List;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     private Context context;
-    List<CategoryList> list;
+    List<CategoryList.Categorylist> list;
     int size;
 
-    public CategoryAdapter(Context context, List<CategoryList> list) {
+    public CategoryAdapter(Context context, List<CategoryList.Categorylist> list) {
         this.context = context;
         this.size = size;
         this.list = list;
@@ -46,7 +46,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(final CategoryAdapter.ViewHolder viewHolder, final int position) {
 
-        final CategoryList category = list.get(position);
+        final CategoryList.Categorylist category = list.get(position);
         //viewHolder.textViewCategory.setText("Category " + position);
         viewHolder.textViewCategoryName.setText(category.getName());
 
@@ -62,7 +62,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, SubcategoryActivity.class);
-                //intent.putExtra("KamgarCategory", (Serializable) category);
+                intent.putExtra("KamgarCategory", (Serializable) category);
                 context.startActivity(intent);
             }
         });
