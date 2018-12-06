@@ -44,7 +44,7 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
     public void onBindViewHolder(final HomeGridAdapter.ViewHolder viewHolder, final int position) {
 
 
-        if (position == listSize) {
+        if (position == listSize-1) {
             viewHolder.cardView2.setVisibility(View.VISIBLE);
             viewHolder.cardView.setVisibility(View.GONE);
 
@@ -60,16 +60,17 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
                     .placeholder(R.drawable.image_not_found)
                     .into(viewHolder.imageGrid);
 
+            viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, SubcategoryActivity.class);
+                    intent.putExtra("FeaturedCategory", (Serializable) featuredlist);
+                    context.startActivity(intent);
+                }
+            });
 
         }
-        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, SubcategoryActivity.class);
-               // intent.putExtra("FeaturedCategory", (Serializable) featuredlist);
-                context.startActivity(intent);
-            }
-        });
+
 
         viewHolder.cardView2.setOnClickListener(new View.OnClickListener() {
             @Override
