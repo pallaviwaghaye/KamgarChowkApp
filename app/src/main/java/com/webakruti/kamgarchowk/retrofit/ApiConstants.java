@@ -30,6 +30,18 @@ public class ApiConstants {
 
     public static final String changepwd_API = "userchangepass";
 
+    public static final String userprofile_API = "userprofile";
+
+    public static final String updateuserprofile_API = "updateuserprofile";
+
+    public static final String myenquiry_API = "userenquiry";
+
+
+
+
+
+
+
     /*public static final String OTP_VERIFICATION = "verifymobile";
     public static final String GET_RAILWAY_CATEGORY = "getservices";
 

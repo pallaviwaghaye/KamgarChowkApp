@@ -66,21 +66,19 @@ public class HomeActivity extends AppCompatActivity {
         textViewMobileNo = (TextView) headerLayout.findViewById(R.id.textViewMobileNo);
         imageViewNavUser = (ImageView)headerLayout.findViewById(R.id.imageViewNavUser);
 
-
-
         Menu menu = navigationView.getMenu();
 
         MenuItem navigationLogout = menu.findItem(R.id.navigationLogout);
 
-        if (user != null) {
+        /*if (user != null) {
             textViewMobileNo.setVisibility(View.VISIBLE);
             textViewFName.setText(user.getSuccess().getAuthuser().getFirstName());
             textViewLName.setText(user.getSuccess().getAuthuser().getLastName());
             textViewMobileNo.setText(user.getSuccess().getAuthuser().getMobileNo());
 
-            /*Picasso.with(getApplicationContext())
+            *//*Picasso.with(getApplicationContext())
                     .placeholder(R.drawable.carpenter_icon)
-                    .into(imageViewNavUser);*/
+                    .into(imageViewNavUser);*//*
 
             navigationLogout.setVisible(true);
         } else {
@@ -90,7 +88,7 @@ public class HomeActivity extends AppCompatActivity {
             textViewLName.setText("Guest");
             navigationLogout.setVisible(false);
 
-        }
+        }*/
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override

@@ -2,14 +2,16 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item><layer-list>
-        <item ><shape android:shape="rectangle">
-            <solid android:color="@color/white" />
-            <corners android:bottomLeftRadius="10dp" android:topLeftRadius="10dp"></corners>
+        <item><shape android:shape="rectangle">
+
+            <corners android:radius="5dp"/>
+            <solid android:color="@color/white"/>
+            <stroke android:color="@color/gray" android:width="1dp" ></stroke>
 
         </shape></item>
 
-        <item android:drawable="@drawable/map"
-            android:gravity="left|center"
+        <item android:drawable="@drawable/down_arrow"
+            android:gravity="right|center"
             android:width="20dp"
             android:height="20dp"
             android:left="5dp"

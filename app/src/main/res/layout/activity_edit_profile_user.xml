@@ -18,7 +18,6 @@
             android:background="@color/pink_red">
 
 
-
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -125,6 +124,7 @@
                                 android:textColor="@color/black"
                                 android:layout_marginTop="5dp"
                                 android:paddingLeft="10dp"
+                                android:enabled="false"
                                 android:background="@drawable/edittext_rectangular_oval"
                                 android:textSize="16sp" />
                         </LinearLayout>
@@ -176,6 +176,7 @@
                         android:hint="Last name"
                         android:textColor="@color/black"
                         android:layout_marginTop="5dp"
+                        android:enabled="false"
                         android:paddingLeft="10dp"
                         android:background="@drawable/edittext_rectangular_oval"
                         android:textSize="16sp" />
@@ -194,15 +195,18 @@
                         android:textSize="14dp"
                         android:textColor="@color/grey" />
 
+
                     <EditText
                         android:id="@+id/editTextDOB"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:hint="Date of birth"
+                        android:hint="Date of birth (dd/MM/yyyy)"
                         android:textColor="@color/black"
                         android:layout_marginTop="5dp"
                         android:paddingLeft="10dp"
                         android:inputType="date"
+                        android:enabled="true"
+
                         android:background="@drawable/edittext_rectangular_oval"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -225,7 +229,7 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
                         android:paddingLeft="10dp"
-                        android:background="@drawable/edittext_rectangular_oval"
+                        android:background="@drawable/custom_spinner"
                         />
 
                 </LinearLayout>
@@ -383,7 +387,7 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
                         android:paddingLeft="10dp"
-                        android:background="@drawable/edittext_rectangular_oval"
+                        android:background="@drawable/custom_spinner"
                         />
 
                 </LinearLayout>
@@ -406,7 +410,7 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
                         android:paddingLeft="10dp"
-                        android:background="@drawable/edittext_rectangular_oval"
+                        android:background="@drawable/custom_spinner"
                         />
 
                 </LinearLayout>
@@ -429,7 +433,7 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
                         android:paddingLeft="10dp"
-                        android:background="@drawable/edittext_rectangular_oval"
+                        android:background="@drawable/custom_spinner"
                         />
 
                 </LinearLayout>
@@ -446,14 +450,17 @@
                         android:textSize="14dp"
                         android:textColor="@color/grey" />
 
-                    <Spinner
-                        android:id="@+id/spinnerPincode"
+                    <EditText
+                        android:id="@+id/editTextPincode"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:hint="Pincode"
+                        android:textColor="@color/black"
                         android:layout_marginTop="5dp"
                         android:paddingLeft="10dp"
+                        android:inputType="number"
                         android:background="@drawable/edittext_rectangular_oval"
-                        />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 

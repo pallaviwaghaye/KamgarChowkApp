@@ -22,10 +22,10 @@
             >
             <ImageView
                 android:id="@+id/imageViewNavKamgar"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_marginLeft="20dp"
-                android:src="@drawable/kamgar" />
+                android:src="@drawable/kamgarborder" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"

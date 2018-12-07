@@ -113,10 +113,11 @@ public class HomeFragment extends Fragment {
 
                     if (searchLocationList != null) {
 
-                        /*ArrayAdapter<SearchLocationList> adapterLocation = new ArrayAdapter<SearchLocationList>(getActivity(), android.R.layout.simple_spinner_dropdown_item, searchLocationList);
-                        spinnerLocation.setAdapter(adapterLocation);*/
-                            setSearchLocation(searchLocationList);
-                            //setPlatFormSpinnerData(0, -1); // should be 0
+                        List<SearchLocationList> locationLists = searchLocationList;
+                        ArrayAdapter<SearchLocationList> adapterLocation = new ArrayAdapter<SearchLocationList>(getActivity(), android.R.layout.simple_spinner_dropdown_item, locationLists);
+                        spinnerLocation.setAdapter(adapterLocation);
+                          /*  setSearchLocation(searchLocationList);
+                            //setPlatFormSpinnerData(0, -1); // should be 0*/
 
                     }
 
@@ -235,12 +236,10 @@ public class HomeFragment extends Fragment {
                         recyclerViewAvailableAllServices.setAdapter(new HomeAvailAllServicesAdapter(getContext(), workavllists));
 
                         final List<HomeResponse.Featuredlist> listOfCategories1 = details.getFeaturedlist();
-                       /* LinearLayoutManager layoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-                        recyclerViewCategory.setLayoutManager(layoutManager2);*/
                         recyclerViewCategory.setAdapter(new HomeGridAdapter(getContext(), listOfCategories1));
 
 
-                        final List<HomeResponse.Featuredlist> listOfCategories = details.getFeaturedlist();
+                        /*final List<HomeResponse.Featuredlist> listOfCategories = details.getFeaturedlist();
                         final ArrayAdapter<HomeResponse.Featuredlist> HomeCategoryGridAdapter = new ArrayAdapter<HomeResponse.Featuredlist>
                                 (getContext(),android.R.layout.simple_list_item_1, listOfCategories);
                         gridview.setAdapter(new HomeCategoryGridAdapter(getActivity(), listOfCategories));
@@ -265,7 +264,7 @@ public class HomeFragment extends Fragment {
 
                             }
                         });
-
+*/
 
                     }
 
@@ -295,79 +294,6 @@ public class HomeFragment extends Fragment {
 
 
     }
-
-
-
-    /*    // Populate a List from Array elements
-        final List<HomeResponse.Featuredlist> listOfCategories = new ArrayList<HomeResponse.Featuredlist>();
-
-
-       *//* listOfCategories.add(listOfCategories.size(),"More",getResources().getDrawable(R.drawable.moreicon));
-
-
-        HomeResponse.Featuredlist addedItemText = listOfCategories.get(listOfCategories.size()-1);*//*
-
-        // Create a new ArrayAdapter
-        final ArrayAdapter<HomeResponse.Featuredlist> HomeCategoryGridAdapter = new ArrayAdapter<HomeResponse.Featuredlist>
-                (getContext(),android.R.layout.simple_list_item_1, listOfCategories);
-        //HomeCategoryGridAdapter.notifyDataSetChanged();
-        // Data bind GridView with ArrayAdapter (String Array elements)
-        //gridview.setAdapter(gridViewArrayAdapter);
-
-        //list of featured kamgar categories with more option
-       // List<HomeResponse.Featuredlist> listOfCategories = new ArrayList<HomeResponse.Featuredlist>();
-        //listOfCategories.add(new HomeResponse().getFeaturedlist("plumbers",));
-        *//*listOfCategories.add(new HomeResponse.Featuredlist(1,"Plumbers", getResources().getDrawable(R.drawable.plumber_icon)));
-        listOfCategories.add(new HomeResponse.Featuredlist("Painter", getResources().getDrawable(R.drawable.painter_icon)));
-
-        listOfCategories.add(new HomeResponse.Featuredlist("Carpenter", getResources().getDrawable(R.drawable.carpenter_icon)));
-
-        listOfCategories.add(new HomeResponse.Featuredlist("Welder", getResources().getDrawable(R.drawable.welder_icon)));
-
-        listOfCategories.add(new HomeResponse.Featuredlist("Plasterer", getResources().getDrawable(R.drawable.plasterer_icon)));
-        listOfCategories.add(new HomeResponse.Featuredlist("Masonry", getResources().getDrawable(R.drawable.masonry_icon)));
-        listOfCategories.add(new HomeResponse.Featuredlist("Electricians", getResources().getDrawable(R.drawable.electrician)));*//*
-        //listOfCategories.add(new HomeResponse.Featuredlist("More", getResources().getDrawable(R.drawable.moreicon)));
-
-
-        //pass this in adapter
-        gridview.setAdapter(new HomeCategoryGridAdapter(getActivity(), listOfCategories));
-
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                // showDlg();
-
-                HomeResponse.Featuredlist featuredlist = (HomeResponse.Featuredlist) adapterView.getItemAtPosition(i);
-                Intent intent = new Intent(getActivity(), SubcategoryActivity.class);
-
-                intent.putExtra("CategoryName", featuredlist.getName());
-                startActivity(intent);
-
-                if (i+1 == adapterView.getLastVisiblePosition()) {
-                    Intent intent1 = new Intent(getActivity(), CategoryActivity.class);
-
-                    //intent.putExtra("CategoryName", category.getCategoryName());
-                    startActivity(intent1);
-                }
-
-
-            }
-        });
-
-
-        //list of popular images
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewPopular.setLayoutManager(layoutManager);
-        //recyclerViewPopular.setAdapter(new HomePopularKamgarAdapter(getContext(), 4));
-
-        //list of kamgar available for all services
-
-        LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        recyclerViewAvailableAllServices.setLayoutManager(layoutManager1);
-        recyclerViewAvailableAllServices.setAdapter(new HomeAvailAllServicesAdapter(getContext(), 15));
-*/
 
 
     private void setSearchLocation(List<SearchLocationList> locationList) {

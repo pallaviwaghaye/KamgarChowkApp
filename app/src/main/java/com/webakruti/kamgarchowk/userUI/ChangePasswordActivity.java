@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.model.ChangePasswordResponse;
 import com.webakruti.kamgarchowk.model.SupportResponse;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 import com.webakruti.kamgarchowk.retrofit.service.RestClient;
@@ -63,17 +64,20 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 if (editTextUserOldPwd.getText().toString().length() > 0) {
                     if (editTextUserNewPwd.getText().toString().length() > 0) {
                         if (editTextUserConfirmNewPwd.getText().toString().length() > 0) {
-                            if(editTextUserNewPwd.getText().toString().length() == editTextUserConfirmNewPwd.getText().toString().length())
+                            if(editTextUserConfirmNewPwd.getText().toString().equalsIgnoreCase(editTextUserNewPwd.getText().toString())){
 
-                        if (NetworkUtil.hasConnectivity(ChangePasswordActivity.this)) {
-                           // callChangePwdAPI();
-                            //Toast.makeText(SupportActivity.this, "Request Sent To Support Team! We Will Contact You Soon!!!",Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(ChangePasswordActivity.this, HomeActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Toast.makeText(ChangePasswordActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
-                        }
+                                if (NetworkUtil.hasConnectivity(ChangePasswordActivity.this)) {
+                                    callChangePwdAPI();
+                                    //Toast.makeText(SupportActivity.this, "Request Sent To Support Team! We Will Contact You Soon!!!",Toast.LENGTH_LONG).show();
+                                    /*Intent intent = new Intent(ChangePasswordActivity.this, HomeActivity.class);
+                                    startActivity(intent);
+                                    finish();*/
+                                } else {
+                                    Toast.makeText(ChangePasswordActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(ChangePasswordActivity.this, "Password and Confirm password should be same", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
                             Toast.makeText(ChangePasswordActivity.this, "Confirm password Can't be Empty", Toast.LENGTH_SHORT).show();
                         }
@@ -90,33 +94,31 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     private void callChangePwdAPI() {
 
-
-        /*progressDialogForAPI = new ProgressDialog(this);
+        progressDialogForAPI = new ProgressDialog(this);
         progressDialogForAPI.setCancelable(false);
         progressDialogForAPI.setIndeterminate(true);
         progressDialogForAPI.setMessage("Please wait...");
         progressDialogForAPI.show();
 
-        //SharedPreferenceManager.setApplicationContext(SupportActivity.this);
+        SharedPreferenceManager.setApplicationContext(ChangePasswordActivity.this);
 
         String token = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getToken();
-        String FirstName = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getAuthuser().getFirstName();
-        String LastName = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getAuthuser().getLastName();
-        String ContactNumber = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getAuthuser().getMobileNo();
+        Integer userid = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getAuthuser().getId();
+
 
         //String API = "http://beta.kamgarchowk.com/api/";
         String headers = "Bearer " + token;
-        Call<SupportResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).sendSupportRequest(headers,FirstName,LastName,ContactNumber,editTextSubject.getText().toString(),editTextProblemDetails.getText().toString());
-        requestCallback.enqueue(new Callback<SupportResponse>() {
+        Call<ChangePasswordResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).changepwd(headers,userid,editTextUserOldPwd.getText().toString(),editTextUserNewPwd.getText().toString(),editTextUserConfirmNewPwd.getText().toString());
+        requestCallback.enqueue(new Callback<ChangePasswordResponse>() {
             @Override
-            public void onResponse(Call<SupportResponse> call, Response<SupportResponse> response) {
+            public void onResponse(Call<ChangePasswordResponse> call, Response<ChangePasswordResponse> response) {
                 if (response.isSuccessful() && response.body() != null && response.code() == 200) {
 
-                    SupportResponse details = response.body();
+                    ChangePasswordResponse details = response.body();
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
                     if (details.getSuccess() != null) {
 
-                        Toast.makeText(SupportActivity.this, details.getSuccess().getMsg(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(ChangePasswordActivity.this, details.getSuccess(),Toast.LENGTH_LONG).show();
 
                     }
 
@@ -130,7 +132,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<SupportResponse> call, Throwable t) {
+            public void onFailure(Call<ChangePasswordResponse> call, Throwable t) {
 
                 if (t != null) {
 
@@ -144,7 +146,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
             }
         });
 
-*/
     }
 
 

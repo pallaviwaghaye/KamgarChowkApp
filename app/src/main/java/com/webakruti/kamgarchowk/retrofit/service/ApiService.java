@@ -2,15 +2,19 @@ package com.webakruti.kamgarchowk.retrofit.service;
 
 
 import com.webakruti.kamgarchowk.model.CategoryList;
+import com.webakruti.kamgarchowk.model.ChangePasswordResponse;
 import com.webakruti.kamgarchowk.model.HomeResponse;
+import com.webakruti.kamgarchowk.model.MyEnquiryResponse;
 import com.webakruti.kamgarchowk.model.SearchAutofill;
 import com.webakruti.kamgarchowk.model.SearchLocationList;
 import com.webakruti.kamgarchowk.model.SearchResponse;
 import com.webakruti.kamgarchowk.model.SubcategoryListResponse;
 import com.webakruti.kamgarchowk.model.SupportResponse;
+import com.webakruti.kamgarchowk.model.UpdateProfileResponse;
 import com.webakruti.kamgarchowk.model.UserForgotPassword;
 import com.webakruti.kamgarchowk.model.UserForgtPassSndOtpResponse;
 import com.webakruti.kamgarchowk.model.UserLoginResponse;
+import com.webakruti.kamgarchowk.model.UserProfileResponse;
 import com.webakruti.kamgarchowk.model.UserRegistrationResponse;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 
@@ -76,11 +80,35 @@ public interface ApiService {
     Call<HomeResponse> homeList(@Header("Authorization") String header);
 
     @POST(ApiConstants.changepwd_API)
-    Call<SupportResponse> changepwd(@Header("Authorization") String header,
-                                             @Query("id") Integer id,
-                                             @Query("old_password") String oldpassword,
-                                             @Query("password") String password,
-                                             @Query("cpassword") String cpassword);
+    Call<ChangePasswordResponse> changepwd(@Header("Authorization") String header,
+                                           @Query("id") Integer id,
+                                           @Query("old_password") String oldpassword,
+                                           @Query("password") String password,
+                                           @Query("cpassword") String cpassword);
+
+    @POST(ApiConstants.userprofile_API)
+    Call<UserProfileResponse> userprofile(@Header("Authorization") String header,
+                                        @Query("id") Integer id);
+
+    @POST(ApiConstants.updateuserprofile_API)
+    Call<UpdateProfileResponse> updateprofile(@Header("Authorization") String header,
+                                              @Query("id") Integer id,
+                                              @Query("first_name") String FName,
+                                              @Query("middle_name") String middleName,
+                                              @Query("last_name") String LName,
+                                              @Query("mobile_no") String mobNo,
+                                              @Query("email") String emailid,
+                                              @Query("address") String address,
+                                              @Query("dob") String datebirth,
+                                              @Query("gender_id") String gender,
+                                              @Query("country_id") String country,
+                                              @Query("state_id") String state,
+                                              @Query("city_id") String city,
+                                              @Query("pincode") String pincode);
+
+    @POST(ApiConstants.myenquiry_API)
+    Call<MyEnquiryResponse> myenquiry(@Header("Authorization") String header,
+                                        @Query("id") Integer id);
 
 
 

@@ -12,17 +12,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.model.CategoryList;
+import com.webakruti.kamgarchowk.model.MyEnquiryResponse;
 import com.webakruti.kamgarchowk.userUI.HireKamgarActivity;
+
+import java.util.List;
 
 public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdapter.ViewHolder> {
 
     private Context context;
-    private int size;
+    List<MyEnquiryResponse.Userenquiry> list;
 
-    public UserMyEnquiryAdapter(Context context, int size) {
+    public UserMyEnquiryAdapter(Context context, List<MyEnquiryResponse.Userenquiry> list) {
         this.context = context;
-        this.size = size;
+        this.list = list;
 
     }
 
@@ -39,36 +44,38 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
     @Override
     public void onBindViewHolder(@NonNull final UserMyEnquiryAdapter.ViewHolder viewHolder, final int position) {
 
-       /* viewHolder.textViewKamgarShowHideDetais.setOnClickListener(new View.OnClickListener() {
+        viewHolder.textViewKamgarShowHideDetais.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {*/
+            public void onClick(View v) {
                 if (viewHolder.linearLayoutEnquiryShowHide.getVisibility() == View.GONE)
                 {
-                    viewHolder.linearLayoutEnquiryShowHide.setVisibility(View.VISIBLE);
                     viewHolder.textViewKamgarShowHideDetais.setText("Less Details");
+                    viewHolder.linearLayoutEnquiryShowHide.setVisibility(View.VISIBLE);
+
                 } else{
-                    viewHolder.linearLayoutEnquiryShowHide.setVisibility(View.GONE);
                     viewHolder.textViewKamgarShowHideDetais.setText("More Details");
+                    viewHolder.linearLayoutEnquiryShowHide.setVisibility(View.GONE);
+
                 }
-           /* }
-        });*/
+            }
+        });
 
 
-        /*//final Student.Studentbatch studentbatch = list.get(position);
 
-        viewHolder.textViewBatchCourseName.setText(size[position]);
-        viewHolder.textViewBatchTime.setText(studentbatch.getBatch().getStartTime());
-        viewHolder.textViewCourseTeacher.setText(studentbatch.getWhoAssinged());
 
-        viewHolder.textViewBatchCourseDuration.setText(studentbatch.getBatch().getCourse().getDuration());
-        viewHolder.textViewBatchStartDate.setText(studentbatch.getBatch().getStartDate());
-        viewHolder.textViewBatchEndDate.setText(studentbatch.getBatch().getEndDate());*/
+        final MyEnquiryResponse.Userenquiry myEnquiry = list.get(position);
 
-        /*Picasso.with(context)
-                .load(R.drawable.navab_thali)
-                .into(viewHolder.imageViewVegImage);
+        viewHolder.textViewKamgarName.setText(myEnquiry.getKamgarFirstName()+" "+myEnquiry.getKamgarLastName());
+        viewHolder.textViewKamgarDesignation.setText(myEnquiry.getSubcategory());
+        viewHolder.textViewKamgarDate.setText(myEnquiry.getEnquiryDate());
 
-        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+        viewHolder.textViewKamgarAddress.setText(myEnquiry.getKamgarAddress()+", "+myEnquiry.getCityname()+", "+myEnquiry.getKamgarPincode());
+        viewHolder.textViewKamgarContactNo.setText(myEnquiry.getKamgarMobileNo());
+        viewHolder.textViewKamgarStatus.setText(myEnquiry.getWorkstatus());
+        viewHolder.textViewRatingType.setText(myEnquiry.getRateremark());
+
+
+        /*viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, GoOutForLunchDinnerActivity.class);
@@ -80,7 +87,7 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
 
     @Override
     public int getItemCount() {
-        return size;
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

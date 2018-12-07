@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.adapter.HomeAvailAllServicesAdapter;
 import com.webakruti.kamgarchowk.adapter.KamgarListAdapter;
+import com.webakruti.kamgarchowk.model.CategoryList;
+import com.webakruti.kamgarchowk.model.SubcategoryListResponse;
 
 public class KamgarListActivity extends AppCompatActivity {
 
@@ -24,10 +26,16 @@ public class KamgarListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private TextView textViewNoData;
 
+    private SubcategoryListResponse.Subcategory kamgarSubcategory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kamgar_list);
+
+        kamgarSubcategory = (SubcategoryListResponse.Subcategory) getIntent().getSerializableExtra("KamgarSubCategory");
+        Integer subcategoryid = kamgarSubcategory.getId();
+        /*Integer cityid = */
 
         initViews();
 
