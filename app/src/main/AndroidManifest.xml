@@ -52,7 +52,8 @@
         <activity android:name=".userUI.EditProfileUserActivity" />
         <activity android:name=".AdvertiseActivity" />
         <activity android:name=".CustomPopupActivity" />
-        <activity android:name=".FreeListingActivity"></activity>
+        <activity android:name=".FreeListingActivity" />
+        <activity android:name=".userUI.CitySelectActivity"></activity>
     </application>
 
 </manifest>

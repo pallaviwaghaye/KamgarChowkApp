@@ -51,7 +51,7 @@ public interface ApiService {
                                     @Query("otp_code") String otp);
 
     @GET(ApiConstants.search_location_API)
-    Call<List<SearchLocationList>> search_location(@Header("Authorization") String header);
+    Call<SearchLocationList> search_location(@Header("Authorization") String header);
 
     @POST(ApiConstants.search_autofill_API)
     Call<SearchAutofill> search_autofill(@Header("Authorization") String header);

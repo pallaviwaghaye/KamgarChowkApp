@@ -32,6 +32,7 @@ import com.webakruti.kamgarchowk.model.CategoryList;
 import com.webakruti.kamgarchowk.model.HomeGridCategory;
 import com.webakruti.kamgarchowk.model.HomeResponse;
 import com.webakruti.kamgarchowk.model.SearchLocationList;
+import com.webakruti.kamgarchowk.model.UserProfileResponse;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 import com.webakruti.kamgarchowk.retrofit.service.RestClient;
 import com.webakruti.kamgarchowk.userUI.CategoryActivity;
@@ -61,9 +62,13 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerViewPopular;
     private RecyclerView recyclerViewAvailableAllServices;
 
-    String selectedLocations = "Select";
-    SearchLocationList selectedLocation;
+    String selectedLocations = "Select city";
+    SearchLocationList.Citylist selectedLocation;
     private ProgressDialog progressDialogForAPI;
+
+    private SearchLocationList.Citylist city;
+
+    SearchLocationList.Citylist obj;
 
 
     @Override
@@ -86,7 +91,7 @@ public class HomeFragment extends Fragment {
             Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
         }*/
 
-        selectedLocation = new SearchLocationList();
+        selectedLocation = new SearchLocationList.Citylist();
         selectedLocation.setName(selectedLocations);
 
         return rootView;
@@ -104,20 +109,25 @@ public class HomeFragment extends Fragment {
         String token = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getToken();
 
         String headers = "Bearer " + token;
-        Call<List<SearchLocationList>> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).search_location(headers);
-        requestCallback.enqueue(new Callback<List<SearchLocationList>>() {
+        Call<SearchLocationList> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).search_location(headers);
+        requestCallback.enqueue(new Callback<SearchLocationList>() {
             @Override
-            public void onResponse(Call<List<SearchLocationList>> call, Response<List<SearchLocationList>> response) {
+            public void onResponse(Call<SearchLocationList> call, Response<SearchLocationList> response) {
                 if (response.isSuccessful() && response.body() != null && response.code() == 200) {
-                    List<SearchLocationList> searchLocationList = response.body();
+                    SearchLocationList searchLocationList = response.body();
 
                     if (searchLocationList != null) {
 
-                        List<SearchLocationList> locationLists = searchLocationList;
-                        ArrayAdapter<SearchLocationList> adapterLocation = new ArrayAdapter<SearchLocationList>(getActivity(), android.R.layout.simple_spinner_dropdown_item, locationLists);
+                        List<SearchLocationList.Citylist> locationLists = searchLocationList.getCitylist();
+                        /*ArrayAdapter<SearchLocationList.Citylist> adapterLocation = new ArrayAdapter<SearchLocationList.Citylist>(getActivity(), android.R.layout.simple_spinner_dropdown_item, locationLists);
                         spinnerLocation.setAdapter(adapterLocation);
-                          /*  setSearchLocation(searchLocationList);
-                            //setPlatFormSpinnerData(0, -1); // should be 0*/
+
+                        Integer cityid = SharedPreferenceManager.getUserLocationObjectFromSharedPreference().getCitylist().indexOf(locationLists);
+                        spinnerLocation.setSelection(cityid+1);*/
+
+
+                          setSearchLocation(locationLists);
+                            //setPlatFormSpinnerData(0, -1); // should be 0
 
                     }
 
@@ -131,7 +141,7 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<SearchLocationList>> call, Throwable t) {
+            public void onFailure(Call<SearchLocationList> call, Throwable t) {
 
                 if (t != null) {
 
@@ -296,48 +306,31 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void setSearchLocation(List<SearchLocationList> locationList) {
+    private void setSearchLocation(List<SearchLocationList.Citylist> locationList) {
 
-        List<SearchLocationList> finalList = new ArrayList<>();
+        if(locationList!=null && locationList.size() > 0) {
+            ArrayAdapter<SearchLocationList.Citylist> adapterLocation = new ArrayAdapter<SearchLocationList.Citylist>(getActivity(), android.R.layout.simple_spinner_dropdown_item, locationList);
+            spinnerLocation.setAdapter(adapterLocation);
+        }
 
-        SearchLocationList locationList1 = new SearchLocationList();
-        locationList1.setId(-1);
-        locationList1.setName(selectedLocations);
-        //locationList.get(0).getName();
+        obj = SharedPreferenceManager.getUserLocationObjectFromSharedPreference();
+        int position = locationList.indexOf(obj);
+        spinnerLocation.setSelection(position);
 
-        finalList.add(locationList1);
-        finalList.addAll(locationList);
+         spinnerLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+             @Override
+             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                 obj = (SearchLocationList.Citylist)parent.getItemAtPosition(position);
+                 SharedPreferenceManager.storeUserLocationResponseInSharedPreference(obj);
+             }
 
-        /*SendRequestFormResponse.Station station = new SendRequestFormResponse.Station();
-        station.setId(-1);
-        station.setName(selectedStations);
+             @Override
+             public void onNothingSelected(AdapterView<?> parent) {
 
-        finalList.add(station);
-        finalList.addAll(stationList);*/
-
-
-        ArrayAdapter<SearchLocationList> adapterLocation = new ArrayAdapter<SearchLocationList>(getActivity(), android.R.layout.simple_spinner_dropdown_item, finalList);
-        spinnerLocation.setAdapter(adapterLocation);
-
-        Toast.makeText(getActivity(), finalList.get(1).getName().toString(), Toast.LENGTH_LONG).show();
-
-       /* spinnerLocation.setSelection(0, true);
-        View v = spinnerLocation.getSelectedView();
-        setTextCustom(v);*/
+             }
+         });
 
 
-        /*spinnerLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                selectedLocation = (SearchLocationList) adapterView.getItemAtPosition(position);
-                //setPlatFormSpinnerData(position, selectedLocation.getId());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });*/
     }
 
     public void setTextCustom(View view) {

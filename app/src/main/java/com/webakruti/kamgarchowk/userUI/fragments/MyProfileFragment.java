@@ -238,7 +238,9 @@ public class MyProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),EditProfileUserActivity.class);
-                /*intent.putExtra("cities", (Serializable) cities);
+
+                intent.putExtra("SpinnerData", (Serializable) details);
+               /* intent.putExtra("cities", (Serializable) cities);
                 intent.putExtra("states", (Serializable) states);
                 intent.putExtra("countries", (Serializable) countries);
                 intent.putExtra("gender", (Serializable) gender);*/

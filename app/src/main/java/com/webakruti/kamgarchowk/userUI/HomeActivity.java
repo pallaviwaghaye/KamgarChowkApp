@@ -70,25 +70,26 @@ public class HomeActivity extends AppCompatActivity {
 
         MenuItem navigationLogout = menu.findItem(R.id.navigationLogout);
 
-        /*if (user != null) {
+        if (user != null) {
             textViewMobileNo.setVisibility(View.VISIBLE);
             textViewFName.setText(user.getSuccess().getAuthuser().getFirstName());
             textViewLName.setText(user.getSuccess().getAuthuser().getLastName());
             textViewMobileNo.setText(user.getSuccess().getAuthuser().getMobileNo());
 
-            *//*Picasso.with(getApplicationContext())
+            /*Picasso.with(getApplicationContext())
                     .placeholder(R.drawable.carpenter_icon)
-                    .into(imageViewNavUser);*//*
+                    .into(imageViewNavUser);
 
-            navigationLogout.setVisible(true);
+            navigationLogout.setVisible(true);*/
+
         } else {
             textViewMobileNo.setVisibility(View.INVISIBLE);
 
             textViewFName.setText("Welcome,");
             textViewLName.setText("Guest");
-            navigationLogout.setVisible(false);
+            //navigationLogout.setVisible(false);
 
-        }*/
+        }
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override

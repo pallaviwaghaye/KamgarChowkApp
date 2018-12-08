@@ -57,10 +57,12 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
     private Spinner spinnerCity;
     private EditText editTextPincode;
 
-    private UserProfileResponse.City city;
+   /* private UserProfileResponse.City city;
     private UserProfileResponse.State state;
     private UserProfileResponse.Country country;
-    private UserProfileResponse.Gender gender;
+    private UserProfileResponse.Gender gender;*/
+
+    private UserProfileResponse SpinnerData;
 
     private Button buttonSave;
 
@@ -74,11 +76,18 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
         SharedPreferenceManager.setApplicationContext(EditProfileUserActivity.this);
 
-      /*  city = (UserProfileResponse.City) getIntent().getSerializableExtra("cities");
+        SpinnerData = (UserProfileResponse)getIntent().getSerializableExtra("SpinnerData");
+
+        final List<UserProfileResponse.City> cities = SpinnerData.getSuccess().getCities();
+        final List<UserProfileResponse.State> states = SpinnerData.getSuccess().getStates();
+        final List<UserProfileResponse.Country> countries = SpinnerData.getSuccess().getCountries();
+        final List<UserProfileResponse.Gender> gender = SpinnerData.getSuccess().getGender();
+
+        /*city = (UserProfileResponse.City) getIntent().getSerializableExtra("cities");
         state = (UserProfileResponse.State) getIntent().getSerializableExtra("states");
         country = (UserProfileResponse.Country) getIntent().getSerializableExtra("countries");
-        gender = (UserProfileResponse.Gender) getIntent().getSerializableExtra("gender");*/
-
+        gender = (UserProfileResponse.Gender) getIntent().getSerializableExtra("gender");
+*/
         initViews();
     }
 
@@ -111,7 +120,6 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                 finish();
             }
         });
-
 
         user = SharedPreferenceManager.getUserObjectFromSharedPreference();
         if (user != null) {

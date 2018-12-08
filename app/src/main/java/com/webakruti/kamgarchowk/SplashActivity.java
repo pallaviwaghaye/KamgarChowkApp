@@ -27,6 +27,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        SharedPreferenceManager.setApplicationContext(SplashActivity.this);
+
         new Handler().postDelayed(new Runnable() {
             /*
              * Showing splash screen with a timer. This will be useful when you
@@ -38,7 +40,7 @@ public class SplashActivity extends AppCompatActivity {
                 // Start your app main activity
                 try {
 
-                   /* if (SharedPreferenceManager.getUserObjectFromSharedPreference() != null) {
+                  /*  if (SharedPreferenceManager.getUserObjectFromSharedPreference() != null) {
                         Intent i = new Intent(SplashActivity.this, HomeActivity.class);
                         startActivity(i);
                         finish();
@@ -47,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(i);
                     finish();
 
-                        //}
+                      //  }
 
                 } catch (Exception e) {
                     // TODO Auto-generated catch block

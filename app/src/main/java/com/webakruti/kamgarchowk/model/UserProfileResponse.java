@@ -201,6 +201,11 @@ public class UserProfileResponse implements Serializable{
             this.countryId = countryId;
         }
 
+        @Override
+        public String toString() {
+            return name;
+        }
+
     }
 
     public class Country implements Serializable{
@@ -226,10 +231,12 @@ public class UserProfileResponse implements Serializable{
             this.id = id;
         }
 
+        @Override
+        public String toString() {
+            return name;
+        }
+
     }
-
-
-
 
 
     public class Gender implements Serializable{
@@ -275,6 +282,11 @@ public class UserProfileResponse implements Serializable{
             this.gmId = gmId;
         }
 
+        @Override
+        public String toString() {
+            return value;
+        }
+
     }
 
     public class State implements Serializable{
@@ -308,6 +320,11 @@ public class UserProfileResponse implements Serializable{
 
         public void setCountryId(Integer countryId) {
             this.countryId = countryId;
+        }
+
+        @Override
+        public String toString() {
+            return name;
         }
 
     }

@@ -139,7 +139,7 @@ public class UserLoginActivity extends AppCompatActivity implements View.OnClick
 
                         // Save UserResponse to SharedPref
                         SharedPreferenceManager.storeUserResponseObjectInSharedPreference(result);
-                        Intent intent = new Intent(UserLoginActivity.this, HomeActivity.class);
+                        Intent intent = new Intent(UserLoginActivity.this, CitySelectActivity.class);
                         startActivity(intent);
                         finish();
 
