@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.model.KamgarResponse;
+import com.webakruti.kamgarchowk.model.SubcategoryListResponse;
 
 public class HireKamgarActivity extends AppCompatActivity {
     private ImageView imageViewBack;
@@ -34,10 +36,17 @@ public class HireKamgarActivity extends AppCompatActivity {
 
     private Button buttonHire;
 
+    private KamgarResponse.Kamgar kamgarid;
+    private KamgarResponse.Kamgar subcategoryid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hire_kamgar);
+
+        kamgarid = (KamgarResponse.Kamgar) getIntent().getSerializableExtra("kamgarid");
+        subcategoryid = (KamgarResponse.Kamgar) getIntent().getSerializableExtra("subcategoryid");
+
 
         initViews();
     }

@@ -40,16 +40,16 @@ public class SplashActivity extends AppCompatActivity {
                 // Start your app main activity
                 try {
 
-                  /*  if (SharedPreferenceManager.getUserObjectFromSharedPreference() != null) {
+                    if (SharedPreferenceManager.getUserObjectFromSharedPreference() != null) {
                         Intent i = new Intent(SplashActivity.this, HomeActivity.class);
                         startActivity(i);
                         finish();
-                    } else {*/
+                    } else {
                     Intent i = new Intent(SplashActivity.this, LandingActivity.class);
                     startActivity(i);
                     finish();
 
-                      //  }
+                        }
 
                 } catch (Exception e) {
                     // TODO Auto-generated catch block

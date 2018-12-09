@@ -26,6 +26,8 @@ public class ApiConstants {
 
     public static final String subcategory_API = "subcategorylist";
 
+    public static final String kamgar_API = "listingpage";
+
     public static final String support_API = "support";
 
     public static final String changepwd_API = "userchangepass";

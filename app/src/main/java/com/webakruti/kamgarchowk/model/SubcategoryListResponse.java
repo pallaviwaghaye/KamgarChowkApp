@@ -36,7 +36,7 @@ public class SubcategoryListResponse implements Serializable{
         }
 
 
-    public class Subcategory implements Serializable{
+    public static class Subcategory implements Serializable{
 
         @SerializedName("id")
         private Integer id;

@@ -2,23 +2,26 @@ package com.webakruti.kamgarchowk.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by DELL on 12/3/2018.
  */
 
 public class SearchAutofill {
 
+        @SerializedName("subcategory")
 
-        @SerializedName("value")
-        private String value;
+        private List<SubcategoryListResponse.Subcategory> subcategory = null;
 
-        public String getValue() {
-            return value;
+        public List<SubcategoryListResponse.Subcategory> getSubcategory() {
+            return subcategory;
         }
 
-        public void setValue(String value) {
-            this.value = value;
+        public void setSubcategory(List<SubcategoryListResponse.Subcategory> subcategory) {
+            this.subcategory = subcategory;
         }
+
 
 
 }

@@ -17,17 +17,23 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.model.KamgarResponse;
+import com.webakruti.kamgarchowk.model.SubcategoryListResponse;
 import com.webakruti.kamgarchowk.userUI.HireKamgarActivity;
+
+import java.io.Serializable;
+import java.util.List;
 
 public class KamgarListAdapter extends RecyclerView.Adapter<KamgarListAdapter.ViewHolder> {
 
     private Context context;
-    private int size;
+    List<KamgarResponse.Kamgar> list;
 
-    public KamgarListAdapter(Context context, int size) {
+    public KamgarListAdapter(Context context, List<KamgarResponse.Kamgar> list) {
         this.context = context;
-        this.size = size;
+        this.list = list;
 
     }
 
@@ -44,45 +50,43 @@ public class KamgarListAdapter extends RecyclerView.Adapter<KamgarListAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull final KamgarListAdapter.ViewHolder viewHolder, final int position) {
 
+        final KamgarResponse.Kamgar kamgar = list.get(position);
 
-        viewHolder.textViewEnquiry.setText("Enquiry");
+        viewHolder.textViewKamgarName.setText(kamgar.getFirstName());
+        viewHolder.textViewExperience.setText(kamgar.getExperience()+"");
+        viewHolder.textViewAddress.setText(kamgar.getAddress());
+
+        viewHolder.textViewIncome.setText(kamgar.getCount()+"");
+
+        //viewHolder.textViewEnquiry.setText("Enquiry");
         viewHolder.textViewEnquiry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //viewHolder.myDialog = new Dialog(context);
                 Intent intent = new Intent(context, HireKamgarActivity.class);
+                /*intent.putExtra("subcategoryid",kamgars.getSubcategoryId());
+                intent.putExtra("kamgarid", kamgars.getKamgarId());*/
                 context.startActivity(intent);
             }
         });
+       /* Picasso.with(context)
+                .load(R.drawable.defaultmaleimg)
+                *//*.placeholder(R.drawable.defaultmaleimg)*//*
+                .into(viewHolder.imageViewKamgarImage);
+*/
+       /* viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(context, GoOutForLunchDinnerActivity.class);
+            context.startActivity(intent);
 
-
-        /*//final Student.Studentbatch studentbatch = list.get(position);
-
-        viewHolder.textViewBatchCourseName.setText(size[position]);
-        viewHolder.textViewBatchTime.setText(studentbatch.getBatch().getStartTime());
-        viewHolder.textViewCourseTeacher.setText(studentbatch.getWhoAssinged());
-
-        viewHolder.textViewBatchCourseDuration.setText(studentbatch.getBatch().getCourse().getDuration());
-        viewHolder.textViewBatchStartDate.setText(studentbatch.getBatch().getStartDate());
-        viewHolder.textViewBatchEndDate.setText(studentbatch.getBatch().getEndDate());*/
-
-        /*Picasso.with(context)
-                .load(R.drawable.navab_thali)
-                .into(viewHolder.imageViewVegImage);
-
-        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, GoOutForLunchDinnerActivity.class);
-                context.startActivity(intent);
-
-            }
-        });*/
-    }
+        }
+    });*/
+}
 
     @Override
     public int getItemCount() {
-        return size;
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

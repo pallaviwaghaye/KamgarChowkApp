@@ -4,6 +4,7 @@ package com.webakruti.kamgarchowk.retrofit.service;
 import com.webakruti.kamgarchowk.model.CategoryList;
 import com.webakruti.kamgarchowk.model.ChangePasswordResponse;
 import com.webakruti.kamgarchowk.model.HomeResponse;
+import com.webakruti.kamgarchowk.model.KamgarResponse;
 import com.webakruti.kamgarchowk.model.MyEnquiryResponse;
 import com.webakruti.kamgarchowk.model.SearchAutofill;
 import com.webakruti.kamgarchowk.model.SearchLocationList;
@@ -54,7 +55,7 @@ public interface ApiService {
     Call<SearchLocationList> search_location(@Header("Authorization") String header);
 
     @POST(ApiConstants.search_autofill_API)
-    Call<SearchAutofill> search_autofill(@Header("Authorization") String header);
+    Call<SearchAutofill> autofillsearch(@Header("Authorization") String header);
 
     @POST(ApiConstants.search_API)
     Call<SearchResponse> search(@Query("city_id") String cityId,
@@ -66,6 +67,11 @@ public interface ApiService {
     @POST(ApiConstants.subcategory_API)
     Call<SubcategoryListResponse> getsubcategorylist(@Header("Authorization") String header,
                                                      @Query("category_id") Integer categoryId);
+
+    @POST(ApiConstants.kamgar_API)
+    Call<KamgarResponse> getkamgarlist(@Header("Authorization") String header,
+                                       @Query("subcat_id") Integer subcategoryid,
+                                       @Query("city_id") Integer cityid);
 
     //http://beta.kamgarchowk.com/api/support?contact_no=7975972248&first_name=pallavi&last_name=waghaye&subject=abcdasnsj&problem_details=testing sbdhsdhsd
     @POST(ApiConstants.support_API)

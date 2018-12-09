@@ -9,7 +9,7 @@ import java.util.List;
  * Created by DELL on 12/3/2018.
  */
 
-public class SearchLocationList{
+public class SearchLocationList {
 
     @SerializedName("citylist")
     private List<Citylist> citylist = null;
@@ -22,7 +22,7 @@ public class SearchLocationList{
         this.citylist = citylist;
     }
 
-    public static class Citylist implements Serializable{
+    public static class Citylist implements Serializable {
 
         @SerializedName("id")
         private Integer id;
@@ -48,6 +48,13 @@ public class SearchLocationList{
         @Override
         public String toString() {
             return name;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+                if(!(obj instanceof Citylist)) return false;
+                Citylist other = (Citylist) obj;
+                return (this.id == other.id);
         }
 
     }

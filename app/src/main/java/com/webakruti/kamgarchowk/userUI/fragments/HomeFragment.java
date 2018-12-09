@@ -1,12 +1,16 @@
 package com.webakruti.kamgarchowk.userUI.fragments;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -15,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -22,16 +27,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.annotations.SerializedName;
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.adapter.CategoryAdapter;
 import com.webakruti.kamgarchowk.adapter.HomeAvailAllServicesAdapter;
 import com.webakruti.kamgarchowk.adapter.HomeCategoryGridAdapter;
 import com.webakruti.kamgarchowk.adapter.HomeGridAdapter;
 import com.webakruti.kamgarchowk.adapter.HomePopularKamgarAdapter;
+import com.webakruti.kamgarchowk.adapter.SubcategoryAdapter;
 import com.webakruti.kamgarchowk.model.CategoryList;
 import com.webakruti.kamgarchowk.model.HomeGridCategory;
 import com.webakruti.kamgarchowk.model.HomeResponse;
+import com.webakruti.kamgarchowk.model.SearchAutofill;
 import com.webakruti.kamgarchowk.model.SearchLocationList;
+import com.webakruti.kamgarchowk.model.SubcategoryListResponse;
 import com.webakruti.kamgarchowk.model.UserProfileResponse;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 import com.webakruti.kamgarchowk.retrofit.service.RestClient;
@@ -42,6 +51,11 @@ import com.webakruti.kamgarchowk.utils.GridSpacingItemDecoration;
 import com.webakruti.kamgarchowk.utils.NetworkUtil;
 import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
 import com.webakruti.kamgarchowk.utils.Utils;
+import com.webakruti.kamgarchowk.utils.httpparsers.JSONParserGETRequest;
+import com.webakruti.kamgarchowk.utils.httpparsers.JSONParserPOSTRequest;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,7 +68,7 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
     private View rootView;
     private Spinner spinnerLocation;
-    private EditText editTextSearch;
+    private AutoCompleteTextView autoComTextViewSearch;
     private ImageView imageViewSearch;
     private ImageView imageViewHomeImage;
     private RecyclerView recyclerViewCategory;
@@ -74,9 +88,10 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        initViews();
+
         SharedPreferenceManager.setApplicationContext(getActivity());
 
+        initViews();
 
         if (NetworkUtil.hasConnectivity(getActivity())) {
             callGetLocationAPI();
@@ -97,6 +112,8 @@ public class HomeFragment extends Fragment {
         return rootView;
     }
 
+
+
     private void callGetLocationAPI() {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
@@ -104,8 +121,6 @@ public class HomeFragment extends Fragment {
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
 
-
-        SharedPreferenceManager.setApplicationContext(getActivity());
         String token = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getToken();
 
         String headers = "Bearer " + token;
@@ -157,12 +172,194 @@ public class HomeFragment extends Fragment {
 
     }
 
+    public class BGTaskForTest extends AsyncTask<String, String, JSONObject> {
+        Activity context;
+        private ProgressDialog dialog;
+        private String testAPI;
+        private JSONObject jsonObject;
+        private String token;
+        private String searchQuery;
+
+
+        /**
+         * Constructor
+         */
+        public BGTaskForTest(Activity context,String token,String searchQuery) {
+            this.context = context;
+            this.token = token;
+            this.searchQuery = searchQuery;
+
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+
+        /**
+         * Calling API and Getting Response
+         */
+        @Override
+        protected JSONObject doInBackground(String... args) {
+
+            testAPI = "http://beta.kamgarchowk.com/api/autofill/" + searchQuery;
+
+            try {
+                // for making request, we have to pass URL and json object in string format
+                JSONParserPOSTRequest parser = new JSONParserPOSTRequest();
+                jsonObject = parser.makeRequest(testAPI,token);
+            } catch (Exception ex) {
+                Log.e("Exception Login Parse:", ex.toString());
+            }
+            return jsonObject;
+        }
+
+        /**
+         * Handling response
+         */
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            try {
+
+                if(jsonObject != null)
+                {
+                    List<SubcategoryListResponse.Subcategory> list = new ArrayList<>();
+                    JSONArray jsonArray = jsonObject.getJSONArray("subcategory");
+                    if(jsonArray != null && jsonArray.length() > 0)
+                    {
+                        for(int i=0;i<jsonArray.length();i++)
+                        {
+
+                            JSONObject subcategoryJsonObject = jsonArray.getJSONObject(i);
+                            SubcategoryListResponse.Subcategory autofillObj = new SubcategoryListResponse.Subcategory();
+                            autofillObj.setId(subcategoryJsonObject.getInt("id"));
+                            autofillObj.setCategoryId(subcategoryJsonObject.getInt("category_id"));
+                            autofillObj.setName(subcategoryJsonObject.getString("name"));
+
+                            list.add(autofillObj);
+                        }
+
+                        ArrayAdapter<SubcategoryListResponse.Subcategory> arrAdapter = new ArrayAdapter<SubcategoryListResponse.Subcategory>(getActivity(), android.R.layout.simple_dropdown_item_1line, list);
+                        autoComTextViewSearch.setAdapter(arrAdapter);
+                    }else{
+                        //Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
+    private void callBGSearchTask(String token,String searchQuery)
+    {
+        new BGTaskForTest(getActivity(),token,searchQuery).execute();
+    }
+
     private void initViews() {
 
-        editTextSearch = (EditText) rootView.findViewById(R.id.editTextSearch);
+        autoComTextViewSearch = (AutoCompleteTextView) rootView.findViewById(R.id.autoComTextViewSearch);
+
+        autoComTextViewSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.toString().length() > 0) {
+                    if (NetworkUtil.hasConnectivity(getActivity())) {
+                       /* progressDialogForAPI = new ProgressDialog(getActivity());
+                        progressDialogForAPI.setCancelable(false);
+                        progressDialogForAPI.setIndeterminate(true);
+                        progressDialogForAPI.setMessage("Please wait...");
+                        progressDialogForAPI.show();*/
+
+                        String token = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getToken();
+
+                        callBGSearchTask(token, s.toString());
+                        /*String str = s.toString();
+                        String API = "http://beta.kamgarchowk.com/api/autofill/" + s.toString();
+                        String headers = "Bearer " + token;
+                        Call<SearchAutofill> requestCallback = RestClient.getApiService(API).autofillsearch(headers);
+                        requestCallback.enqueue(new Callback<SearchAutofill>() {
+                            @Override
+                            public void onResponse(Call<SearchAutofill> call, Response<SearchAutofill> response) {
+                                if (response.isSuccessful() && response.body() != null && response.code() == 200) {
+
+                                    SearchAutofill details = response.body();
+                                    //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
+                                    if (details != null) {
+
+                                        List<SearchAutofill.Subcategory> list = details.getSubcategory();
+                                        ArrayAdapter<SearchAutofill.Subcategory> arrAdapter = new ArrayAdapter<SearchAutofill.Subcategory>(getActivity(), android.R.layout.simple_dropdown_item_1line, list);
+                                        autoComTextViewSearch.setAdapter(arrAdapter);
+                                    }
+
+                                } else {
+                                    // Response code is 401
+                                }
+
+                                if (progressDialogForAPI != null) {
+                                    progressDialogForAPI.cancel();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<SearchAutofill> call, Throwable t) {
+
+                                if (t != null) {
+
+                                    if (progressDialogForAPI != null) {
+                                        progressDialogForAPI.cancel();
+                                    }
+                                    if (t.getMessage() != null)
+                                        Log.e("error", t.getMessage());
+                                }
+
+                            }
+                        });
+*/
+
+
+                    } else {
+                        Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+
+
+        autoComTextViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                SubcategoryListResponse.Subcategory subcategory = (SubcategoryListResponse.Subcategory) parent.getItemAtPosition(position);
+               Intent intent = new Intent(getActivity(),KamgarListActivity.class);
+               intent.putExtra("KamgarSubCategory",subcategory);
+               startActivity(intent);
+
+
+            }
+        });
 
         //click on keyboard search icon
-        editTextSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+       /* autoComTextViewSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -174,7 +371,7 @@ public class HomeFragment extends Fragment {
                 }
                 return false;
             }
-        });
+        });*/
 
         imageViewHomeImage = (ImageView) rootView.findViewById(R.id.imageViewHomeImage);
 

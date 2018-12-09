@@ -51,11 +51,11 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="60"
+                android:layout_weight="70"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/editTextSearch"
+                <AutoCompleteTextView
+                    android:id="@+id/autoComTextViewSearch"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@color/white"
@@ -63,9 +63,9 @@
                     android:hint="Search for kamgar"
                     android:textSize="16dp"
                     android:inputType="text"
-                    android:imeOptions="actionSearch"
+
                     >
-                </EditText>
+                </AutoCompleteTextView>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -74,7 +74,8 @@
                 android:gravity="center"
                 android:background="@drawable/search_css"
                 android:paddingRight="5dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/imageViewSearch"

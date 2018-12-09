@@ -13,8 +13,8 @@ public class CategoryList implements Serializable{
 
     @SerializedName("categorylist")
     private List<Categorylist> categorylist = null;
-    @SerializedName("subcategorylist")
-    private List<Subcategorylist> subcategorylist = null;
+   /* @SerializedName("subcategorylist")
+    private List<Subcategorylist> subcategorylist = null;*/
 
     public List<Categorylist> getCategorylist() {
         return categorylist;
@@ -24,14 +24,14 @@ public class CategoryList implements Serializable{
         this.categorylist = categorylist;
     }
 
-    public List<Subcategorylist> getSubcategorylist() {
+   /* public List<Subcategorylist> getSubcategorylist() {
         return subcategorylist;
     }
 
     public void setSubcategorylist(List<Subcategorylist> subcategorylist) {
         this.subcategorylist = subcategorylist;
     }
-
+*/
 
     public class Categorylist implements Serializable{
 
@@ -79,7 +79,7 @@ public class CategoryList implements Serializable{
     }
 
 
-    public class Subcategorylist {
+    /*public class Subcategorylist {
 
         @SerializedName("id")
         private Integer id;
@@ -112,6 +112,6 @@ public class CategoryList implements Serializable{
             this.categoryId = categoryId;
         }
 
-    }
+    }*/
 
 }

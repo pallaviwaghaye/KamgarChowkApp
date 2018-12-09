@@ -44,6 +44,7 @@ public class CitySelectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_select);
+        SharedPreferenceManager.setApplicationContext(CitySelectActivity.this);
 
         imageViewBack = (ImageView)findViewById(R.id.imageViewBack);
         imageViewBack.setOnClickListener(new View.OnClickListener() {
