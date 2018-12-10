@@ -143,7 +143,7 @@
                         <LinearLayout
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="15dp"
                             android:orientation="horizontal">
 
                             <ImageView
@@ -151,7 +151,7 @@
                                 android:layout_height="13dp"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="10dp"
-                                android:src="@drawable/map" />
+                                android:src="@drawable/pin_black_icon" />
 
                             <TextView
                                 android:id="@+id/textViewAddress"
@@ -167,15 +167,14 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="2dp"
-                            android:orientation="horizontal"
-                            android:visibility="gone">
+                            android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="13dp"
                                 android:layout_height="13dp"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="10dp"
-                                android:src="@drawable/search1" />
+                                android:src="@drawable/trophy_icon" />
 
 
                             <TextView
@@ -189,7 +188,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="7dp"
+                                android:layout_marginLeft="5dp"
                                 android:text="Yrs of Experience"
                                 android:textColor="@color/grey"
                                 android:textSize="13sp" />

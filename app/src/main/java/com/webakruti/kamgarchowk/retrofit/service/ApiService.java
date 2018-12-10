@@ -3,6 +3,7 @@ package com.webakruti.kamgarchowk.retrofit.service;
 
 import com.webakruti.kamgarchowk.model.CategoryList;
 import com.webakruti.kamgarchowk.model.ChangePasswordResponse;
+import com.webakruti.kamgarchowk.model.HireKamgarResponse;
 import com.webakruti.kamgarchowk.model.HomeResponse;
 import com.webakruti.kamgarchowk.model.KamgarResponse;
 import com.webakruti.kamgarchowk.model.MyEnquiryResponse;
@@ -116,6 +117,12 @@ public interface ApiService {
     @POST(ApiConstants.myenquiry_API)
     Call<MyEnquiryResponse> myenquiry(@Header("Authorization") String header,
                                       @Query("id") Integer id);
+
+    @POST(ApiConstants.HireKamgar_API)
+    Call<HireKamgarResponse> hirekamgar(@Header("Authorization") String header,
+                                        @Query("kamgar_id") Integer kamgarid,
+                                        @Query("user_id") Integer userid,
+                                        @Query("subcategory_id") Integer subcategoryid);
 
 
     @POST(ApiConstants.Give_Rating_API)

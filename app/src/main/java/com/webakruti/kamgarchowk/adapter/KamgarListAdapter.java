@@ -52,11 +52,10 @@ public class KamgarListAdapter extends RecyclerView.Adapter<KamgarListAdapter.Vi
 
         final KamgarResponse.Kamgar kamgar = list.get(position);
 
-        viewHolder.textViewKamgarName.setText(kamgar.getFirstName());
+        viewHolder.textViewKamgarName.setText(kamgar.getFirstName()+" "+kamgar.getLastName());
         viewHolder.textViewExperience.setText(kamgar.getExperience()+"");
         viewHolder.textViewAddress.setText(kamgar.getAddress());
-
-        viewHolder.textViewIncome.setText(kamgar.getCount()+"");
+        viewHolder.textViewIncome.setText(kamgar.getFullday()+"");
 
         //viewHolder.textViewEnquiry.setText("Enquiry");
         viewHolder.textViewEnquiry.setOnClickListener(new View.OnClickListener() {
