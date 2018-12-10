@@ -36,17 +36,15 @@ public class HireKamgarActivity extends AppCompatActivity {
 
     private Button buttonHire;
 
-    private KamgarResponse.Kamgar kamgarid;
-    private KamgarResponse.Kamgar subcategoryid;
+    private KamgarResponse.Kamgar kamgar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hire_kamgar);
 
-        kamgarid = (KamgarResponse.Kamgar) getIntent().getSerializableExtra("kamgarid");
-        subcategoryid = (KamgarResponse.Kamgar) getIntent().getSerializableExtra("subcategoryid");
-
+        kamgar = (KamgarResponse.Kamgar) getIntent().getSerializableExtra("kamgar");
 
         initViews();
     }
@@ -81,6 +79,9 @@ public class HireKamgarActivity extends AppCompatActivity {
         imageViewRating3 = (ImageView)findViewById(R.id.imageViewRating3);
         imageViewRating4 = (ImageView)findViewById(R.id.imageViewRating4);
         imageViewRating5 = (ImageView)findViewById(R.id.imageViewRating5);
+
+
+
 
         buttonHire = (Button)findViewById(R.id.buttonHire);
         buttonHire.setOnClickListener(new View.OnClickListener() {
