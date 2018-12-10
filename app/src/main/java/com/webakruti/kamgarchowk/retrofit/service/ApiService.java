@@ -6,6 +6,7 @@ import com.webakruti.kamgarchowk.model.ChangePasswordResponse;
 import com.webakruti.kamgarchowk.model.HomeResponse;
 import com.webakruti.kamgarchowk.model.KamgarResponse;
 import com.webakruti.kamgarchowk.model.MyEnquiryResponse;
+import com.webakruti.kamgarchowk.model.RateResponse;
 import com.webakruti.kamgarchowk.model.SearchAutofill;
 import com.webakruti.kamgarchowk.model.SearchLocationList;
 import com.webakruti.kamgarchowk.model.SearchResponse;
@@ -59,7 +60,7 @@ public interface ApiService {
 
     @POST(ApiConstants.search_API)
     Call<SearchResponse> search(@Query("city_id") String cityId,
-                                         @Query("name") String queryName);
+                                @Query("name") String queryName);
 
     @POST(ApiConstants.category_API)
     Call<CategoryList> getcategorylist(@Header("Authorization") String header);
@@ -94,7 +95,7 @@ public interface ApiService {
 
     @POST(ApiConstants.userprofile_API)
     Call<UserProfileResponse> userprofile(@Header("Authorization") String header,
-                                        @Query("id") Integer id);
+                                          @Query("id") Integer id);
 
     @POST(ApiConstants.updateuserprofile_API)
     Call<UpdateProfileResponse> updateprofile(@Header("Authorization") String header,
@@ -114,7 +115,13 @@ public interface ApiService {
 
     @POST(ApiConstants.myenquiry_API)
     Call<MyEnquiryResponse> myenquiry(@Header("Authorization") String header,
-                                        @Query("id") Integer id);
+                                      @Query("id") Integer id);
+
+
+    @POST(ApiConstants.Give_Rating_API)
+    Call<RateResponse> giveRating(@Header("Authorization") String header,
+                                  @Query("enquiryId") String enquiryId,
+                                  @Query("workRatingId") String workRatingId);
 
 
 

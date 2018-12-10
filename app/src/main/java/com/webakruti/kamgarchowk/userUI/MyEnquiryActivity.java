@@ -95,7 +95,7 @@ public class MyEnquiryActivity extends AppCompatActivity {
                         final List<MyEnquiryResponse.Userenquiry> myEnquiry = details.getSuccess().getUserenquiry();
                         LinearLayoutManager layoutManager1 = new LinearLayoutManager(MyEnquiryActivity.this,LinearLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(layoutManager1);
-                        recyclerView.setAdapter(new UserMyEnquiryAdapter(getApplicationContext(), myEnquiry));
+                        recyclerView.setAdapter(new UserMyEnquiryAdapter(MyEnquiryActivity.this, myEnquiry));
                     }
 
                 } else {

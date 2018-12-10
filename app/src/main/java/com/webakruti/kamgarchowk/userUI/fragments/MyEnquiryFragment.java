@@ -89,7 +89,7 @@ public class MyEnquiryFragment extends Fragment {
                         final List<MyEnquiryResponse.Userenquiry> myEnquiry = details.getSuccess().getUserenquiry();
                         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(layoutManager1);
-                        recyclerView.setAdapter(new UserMyEnquiryAdapter(getContext(), myEnquiry));
+                        recyclerView.setAdapter(new UserMyEnquiryAdapter(getActivity(), myEnquiry));
                     }
 
                 } else {

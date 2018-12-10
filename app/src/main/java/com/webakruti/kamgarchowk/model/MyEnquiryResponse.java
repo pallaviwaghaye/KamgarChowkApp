@@ -82,7 +82,7 @@ public class MyEnquiryResponse {
         private Integer workStatus;
         @SerializedName("rating")
 
-        private Object rating;
+        private Integer rating;
         @SerializedName("subcategory")
 
         private String subcategory;
@@ -183,11 +183,11 @@ public class MyEnquiryResponse {
             this.workStatus = workStatus;
         }
 
-        public Object getRating() {
+        public Integer getRating() {
             return rating;
         }
 
-        public void setRating(Object rating) {
+        public void setRating(Integer rating) {
             this.rating = rating;
         }
 
