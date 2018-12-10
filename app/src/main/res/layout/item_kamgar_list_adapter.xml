@@ -111,7 +111,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="7dp"
-                                android:text="5 Yrs of Experience"
+                                android:text="5"
+                                android:textColor="@color/grey"
+                                android:textSize="13sp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="7dp"
+                                android:text="Yrs of Experience"
                                 android:textColor="@color/grey"
                                 android:textSize="13sp" />
                         </LinearLayout>
@@ -185,25 +192,25 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:text="@string/rs"
-                            android:layout_gravity="center"
-                            android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/rs"
+                                android:layout_gravity="center"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
 
-                        <TextView
-                            android:id="@+id/textViewIncome"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
-                            android:text="500-700"
-                            android:layout_gravity="center"
-                            android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            <TextView
+                                android:id="@+id/textViewIncome"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:text="500-700"
+                                android:layout_gravity="center"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <TextView

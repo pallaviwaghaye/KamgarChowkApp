@@ -64,8 +64,7 @@ public class KamgarListAdapter extends RecyclerView.Adapter<KamgarListAdapter.Vi
             public void onClick(View v) {
                 //viewHolder.myDialog = new Dialog(context);
                 Intent intent = new Intent(context, HireKamgarActivity.class);
-                intent.putExtra("subcategoryid",(Serializable) kamgar.getSubcategoryId());
-                intent.putExtra("kamgarid",(Serializable) kamgar.getKamgarId());
+                intent.putExtra("kamgar",(Serializable) kamgar);
                 context.startActivity(intent);
             }
         });
@@ -82,7 +81,7 @@ public class KamgarListAdapter extends RecyclerView.Adapter<KamgarListAdapter.Vi
 
         }
     });*/
-}
+    }
 
     @Override
     public int getItemCount() {
@@ -109,23 +108,23 @@ public class KamgarListAdapter extends RecyclerView.Adapter<KamgarListAdapter.Vi
 
         private CardView cardView;
 
-       /* public void ShowPopup(View v) {
-            TextView txtclose;
-            Button btnFollow;
-            myDialog.setContentView(R.layout.custom_popup);
-            txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
-            txtclose.setText("X");
-            btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
-            txtclose.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    myDialog.dismiss();
-                }
-            });
-            myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            myDialog.show();
-        }
-*/
+        /* public void ShowPopup(View v) {
+             TextView txtclose;
+             Button btnFollow;
+             myDialog.setContentView(R.layout.custom_popup);
+             txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+             txtclose.setText("X");
+             btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
+             txtclose.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     myDialog.dismiss();
+                 }
+             });
+             myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+             myDialog.show();
+         }
+ */
         public ViewHolder(View itemView) {
             super(itemView);
 
