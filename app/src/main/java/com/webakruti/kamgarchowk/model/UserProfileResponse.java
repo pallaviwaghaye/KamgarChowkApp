@@ -23,7 +23,7 @@ public class UserProfileResponse implements Serializable{
     }
 
 
-    public class Authuser {
+    public class Authuser implements Serializable{
 
         @SerializedName("id")
         private Integer id;
@@ -158,7 +158,7 @@ public class UserProfileResponse implements Serializable{
 
     }
 
-    public class City implements Serializable{
+    public static class City implements Serializable{
 
         @SerializedName("name")
         private String name;
@@ -208,7 +208,7 @@ public class UserProfileResponse implements Serializable{
 
     }
 
-    public class Country implements Serializable{
+    public static class Country implements Serializable{
 
         @SerializedName("name")
         private String name;
@@ -239,7 +239,7 @@ public class UserProfileResponse implements Serializable{
     }
 
 
-    public class Gender implements Serializable{
+    public static class Gender implements Serializable{
 
         @SerializedName("id")
         private Integer id;
@@ -289,7 +289,7 @@ public class UserProfileResponse implements Serializable{
 
     }
 
-    public class State implements Serializable{
+    public static class State implements Serializable{
 
         @SerializedName("name")
         private String name;

@@ -92,6 +92,7 @@ public class HireKamgarActivity extends AppCompatActivity {
             }
         });
 
-
     }
+
+
 }

@@ -41,7 +41,7 @@ public class UserLoginResponse {
         @SerializedName("first_name")
         private String firstName;
         @SerializedName("middle_name")
-        private Object middleName;
+        private String middleName;
         @SerializedName("last_name")
         private String lastName;
         @SerializedName("mobile_no")
@@ -49,19 +49,19 @@ public class UserLoginResponse {
         @SerializedName("email")
         private String email;
         @SerializedName("dob")
-        private Object dob;
+        private String dob;
         @SerializedName("gender_id")
-        private Object genderId;
+        private String genderId;
         @SerializedName("address")
-        private Object address;
+        private String address;
         @SerializedName("country_id")
-        private Object countryId;
+        private String countryId;
         @SerializedName("state_id")
-        private Object stateId;
+        private String stateId;
         @SerializedName("city_id")
-        private Object cityId;
+        private String cityId;
         @SerializedName("pincode")
-        private Object pincode;
+        private Integer pincode;
 
         public Integer getId() {
             return id;
@@ -79,11 +79,11 @@ public class UserLoginResponse {
             this.firstName = firstName;
         }
 
-        public Object getMiddleName() {
+        public String getMiddleName() {
             return middleName;
         }
 
-        public void setMiddleName(Object middleName) {
+        public void setMiddleName(String middleName) {
             this.middleName = middleName;
         }
 
@@ -111,59 +111,59 @@ public class UserLoginResponse {
             this.email = email;
         }
 
-        public Object getDob() {
+        public String getDob() {
             return dob;
         }
 
-        public void setDob(Object dob) {
+        public void setDob(String dob) {
             this.dob = dob;
         }
 
-        public Object getGenderId() {
+        public String getGenderId() {
             return genderId;
         }
 
-        public void setGenderId(Object genderId) {
+        public void setGenderId(String genderId) {
             this.genderId = genderId;
         }
 
-        public Object getAddress() {
+        public String getAddress() {
             return address;
         }
 
-        public void setAddress(Object address) {
+        public void setAddress(String address) {
             this.address = address;
         }
 
-        public Object getCountryId() {
+        public String getCountryId() {
             return countryId;
         }
 
-        public void setCountryId(Object countryId) {
+        public void setCountryId(String countryId) {
             this.countryId = countryId;
         }
 
-        public Object getStateId() {
+        public String getStateId() {
             return stateId;
         }
 
-        public void setStateId(Object stateId) {
+        public void setStateId(String stateId) {
             this.stateId = stateId;
         }
 
-        public Object getCityId() {
+        public String getCityId() {
             return cityId;
         }
 
-        public void setCityId(Object cityId) {
+        public void setCityId(String cityId) {
             this.cityId = cityId;
         }
 
-        public Object getPincode() {
+        public Integer getPincode() {
             return pincode;
         }
 
-        public void setPincode(Object pincode) {
+        public void setPincode(Integer pincode) {
             this.pincode = pincode;
         }
 

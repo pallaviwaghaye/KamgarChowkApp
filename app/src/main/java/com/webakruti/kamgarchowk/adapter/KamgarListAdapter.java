@@ -64,8 +64,8 @@ public class KamgarListAdapter extends RecyclerView.Adapter<KamgarListAdapter.Vi
             public void onClick(View v) {
                 //viewHolder.myDialog = new Dialog(context);
                 Intent intent = new Intent(context, HireKamgarActivity.class);
-                /*intent.putExtra("subcategoryid",kamgars.getSubcategoryId());
-                intent.putExtra("kamgarid", kamgars.getKamgarId());*/
+                intent.putExtra("subcategoryid",(Serializable) kamgar.getSubcategoryId());
+                intent.putExtra("kamgarid",(Serializable) kamgar.getKamgarId());
                 context.startActivity(intent);
             }
         });

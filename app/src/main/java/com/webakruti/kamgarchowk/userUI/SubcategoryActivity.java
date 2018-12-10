@@ -39,6 +39,8 @@ public class SubcategoryActivity extends AppCompatActivity {
 
     private CategoryList.Categorylist kamgarCategory;
     private HomeResponse.Featuredlist featuredCategory;
+    private HomeResponse.Popularlist popularCategory;
+    private HomeResponse.Workavllist workavlCategory;
     private SubcategoryAdapter subcategoryAdapter;
     private ProgressDialog progressDialogForAPI;
 
@@ -51,6 +53,8 @@ public class SubcategoryActivity extends AppCompatActivity {
 
         kamgarCategory = (CategoryList.Categorylist) getIntent().getSerializableExtra("KamgarCategory");
         featuredCategory = (HomeResponse.Featuredlist) getIntent().getSerializableExtra("FeaturedCategory");
+        popularCategory = (HomeResponse.Popularlist) getIntent().getSerializableExtra("PopularCategory");
+        workavlCategory = (HomeResponse.Workavllist) getIntent().getSerializableExtra("WorkAvlCategory");
 
         textViewSubcategoryHeading = (TextView)findViewById(R.id.textViewSubcategoryHeading);
         textViewNoData = (TextView)findViewById(R.id.textViewNoData);
@@ -68,11 +72,29 @@ public class SubcategoryActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager1);
         //recyclerView.setAdapter(new SubcategoryAdapter(getApplicationContext(), 15));
 
+        if(kamgarCategory != null)
+        {
+            textViewSubcategoryHeading.setText(kamgarCategory.getName());
+        }
+        else if(featuredCategory != null)
+        {
+            textViewSubcategoryHeading.setText(featuredCategory.getName());
+        }
+        else if(popularCategory != null)
+        {
+            textViewSubcategoryHeading.setText(popularCategory.getName());
+        }
+        else{
+            textViewSubcategoryHeading.setText(workavlCategory.getName());
+        }
+
         if (NetworkUtil.hasConnectivity(SubcategoryActivity.this)) {
             callGetKamgarSubcategoryAPI();
         } else {
             Toast.makeText(SubcategoryActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
         }
+
+
 
     }
 
@@ -87,10 +109,20 @@ public class SubcategoryActivity extends AppCompatActivity {
 
         SharedPreferenceManager.setApplicationContext(SubcategoryActivity.this);
         String token = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getToken();
-        if(kamgarCategory != null) {
+        if(kamgarCategory != null)
+        {
             catrgoryid = kamgarCategory.getId();
-        }else {
+        }
+        else if(featuredCategory != null)
+        {
             catrgoryid = featuredCategory.getId();
+        }
+        else if(popularCategory != null)
+        {
+            catrgoryid = popularCategory.getId();
+        }
+        else{
+            catrgoryid = workavlCategory.getId();
         }
 
         String API = "http://beta.kamgarchowk.com/api/";

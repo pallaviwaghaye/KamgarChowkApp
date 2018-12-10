@@ -80,7 +80,7 @@ public class HomeResponse implements Serializable{
     }
 
 
-    public class Popularlist {
+    public class Popularlist implements Serializable{
 
         @SerializedName("id")
         private Integer id;
@@ -115,7 +115,7 @@ public class HomeResponse implements Serializable{
 
     }
 
-    public class Workavllist {
+    public class Workavllist implements Serializable{
 
         @SerializedName("id")
         private Integer id;

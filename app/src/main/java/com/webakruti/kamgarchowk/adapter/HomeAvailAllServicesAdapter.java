@@ -1,6 +1,7 @@
 package com.webakruti.kamgarchowk.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,7 +17,9 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.model.HomeResponse;
+import com.webakruti.kamgarchowk.userUI.SubcategoryActivity;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class HomeAvailAllServicesAdapter extends RecyclerView.Adapter<HomeAvailAllServicesAdapter.ViewHolder> {
@@ -54,14 +57,15 @@ public class HomeAvailAllServicesAdapter extends RecyclerView.Adapter<HomeAvailA
                 .resize(500, 300)
                 .into(viewHolder.imageViewAllServicesImage);
 
-        /*viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, GoOutForLunchDinnerActivity.class);
+                Intent intent = new Intent(context, SubcategoryActivity.class);
+                intent.putExtra("WorkAvlCategory", (Serializable) workavllist);
                 context.startActivity(intent);
 
             }
-        });*/
+        });
     }
 
     @Override

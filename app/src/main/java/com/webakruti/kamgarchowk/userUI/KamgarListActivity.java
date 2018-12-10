@@ -84,6 +84,11 @@ public class KamgarListActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
 
+        if(kamgarSubcategory != null)
+        {
+            textViewHeading.setText(kamgarSubcategory.getName());
+        }
+
     }
 
 

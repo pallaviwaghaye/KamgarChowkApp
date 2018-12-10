@@ -1,5 +1,6 @@
 package com.webakruti.kamgarchowk.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -24,7 +25,9 @@ public class KamgarResponse implements Serializable{
         }
 
 
+
         @SerializedName("kamgar")
+
         private List<Kamgar> kamgar = null;
 
         public List<Kamgar> getKamgar() {
@@ -36,44 +39,64 @@ public class KamgarResponse implements Serializable{
         }
 
 
-    public class Kamgar implements Serializable{
+
+
+    public class Kamgar implements  Serializable{
 
         @SerializedName("kamgar_id")
-
+        @Expose
         private Integer kamgarId;
         @SerializedName("first_name")
-
+        @Expose
         private String firstName;
         @SerializedName("last_name")
-
+        @Expose
         private String lastName;
         @SerializedName("mobile_no")
-
+        @Expose
         private String mobileNo;
         @SerializedName("email")
-
+        @Expose
         private String email;
         @SerializedName("address")
-
+        @Expose
         private String address;
         @SerializedName("city")
-
+        @Expose
         private String city;
         @SerializedName("cont_img_url")
-
+        @Expose
         private Object contImgUrl;
         @SerializedName("rating")
-
+        @Expose
         private Object rating;
         @SerializedName("experience")
-
+        @Expose
         private Integer experience;
         @SerializedName("count")
-
+        @Expose
         private Integer count;
         @SerializedName("subcategory_id")
-
+        @Expose
         private Integer subcategoryId;
+        @SerializedName("hourly")
+        @Expose
+        private Integer hourly;
+        @SerializedName("halfday")
+        @Expose
+        private Integer halfday;
+        @SerializedName("fullday")
+        @Expose
+        private Integer fullday;
+        @SerializedName("weekly")
+        @Expose
+        private Integer weekly;
+        @SerializedName("monthly")
+        @Expose
+        private Integer monthly;
+        @SerializedName("subcategory")
+        @Expose
+        private String subcategory;
 
         public Integer getKamgarId() {
             return kamgarId;
@@ -169,6 +192,54 @@ public class KamgarResponse implements Serializable{
 
         public void setSubcategoryId(Integer subcategoryId) {
             this.subcategoryId = subcategoryId;
+        }
+
+        public Integer getHourly() {
+            return hourly;
+        }
+
+        public void setHourly(Integer hourly) {
+            this.hourly = hourly;
+        }
+
+        public Integer getHalfday() {
+            return halfday;
+        }
+
+        public void setHalfday(Integer halfday) {
+            this.halfday = halfday;
+        }
+
+        public Integer getFullday() {
+            return fullday;
+        }
+
+        public void setFullday(Integer fullday) {
+            this.fullday = fullday;
+        }
+
+        public Integer getWeekly() {
+            return weekly;
+        }
+
+        public void setWeekly(Integer weekly) {
+            this.weekly = weekly;
+        }
+
+        public Integer getMonthly() {
+            return monthly;
+        }
+
+        public void setMonthly(Integer monthly) {
+            this.monthly = monthly;
+        }
+
+        public String getSubcategory() {
+            return subcategory;
+        }
+
+        public void setSubcategory(String subcategory) {
+            this.subcategory = subcategory;
         }
 
     }

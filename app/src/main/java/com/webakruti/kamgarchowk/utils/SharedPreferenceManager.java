@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.webakruti.kamgarchowk.model.SearchLocationList;
+import com.webakruti.kamgarchowk.model.User;
 import com.webakruti.kamgarchowk.model.UserLoginResponse;
 
 
@@ -46,6 +47,23 @@ public class SharedPreferenceManager {
         Gson gson1 = new Gson();
         String json1 = tuitionPlusPreferences.getString("UserResponseObject", "");
         UserLoginResponse obj = gson1.fromJson(json1, UserLoginResponse.class);
+//		Log.e("RetrivedName:", obj.getFirstName());
+        return obj;
+    }
+
+    public static void storeUser(User user) {
+        SharedPreferences.Editor prefsEditor = tuitionPlusPreferences.edit();
+        //  prefsEditor.clear();
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
+        prefsEditor.putString("UserResponse", json);
+        prefsEditor.commit();
+    }
+
+    public static User getUser() {
+        Gson gson1 = new Gson();
+        String json1 = tuitionPlusPreferences.getString("UserResponse", "");
+        User obj = gson1.fromJson(json1, User.class);
 //		Log.e("RetrivedName:", obj.getFirstName());
         return obj;
     }

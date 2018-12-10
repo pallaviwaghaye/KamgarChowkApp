@@ -15,7 +15,9 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.model.HomeResponse;
+import com.webakruti.kamgarchowk.userUI.SubcategoryActivity;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class HomePopularKamgarAdapter extends RecyclerView.Adapter<HomePopularKamgarAdapter.ViewHolder> {
@@ -53,14 +55,15 @@ public class HomePopularKamgarAdapter extends RecyclerView.Adapter<HomePopularKa
                 .placeholder(R.drawable.image_not_found)
                 .into(viewHolder.imageViewPoprWorkrImage);
 
-        /*viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, GoOutForLunchDinnerActivity.class);
+                Intent intent = new Intent(context, SubcategoryActivity.class);
+                intent.putExtra("PopularCategory", (Serializable) popularlist);
                 context.startActivity(intent);
 
             }
-        });*/
+        });
     }
 
     @Override
@@ -83,8 +86,6 @@ public class HomePopularKamgarAdapter extends RecyclerView.Adapter<HomePopularKa
             textViewPoprWorkrName = (TextView)itemView.findViewById(R.id.textViewPoprWorkrName);
             linearLayoutPoprWorkrArrow = (LinearLayout) itemView.findViewById(R.id.linearLayoutPoprWorkrArrow);
             imageViewPoprWorkrImage = (ImageView)itemView.findViewById(R.id.imageViewPoprWorkrImage);
-
-
 
         }
     }

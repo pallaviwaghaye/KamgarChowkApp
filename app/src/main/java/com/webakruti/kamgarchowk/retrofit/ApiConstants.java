@@ -38,6 +38,10 @@ public class ApiConstants {
 
     public static final String myenquiry_API = "userenquiry";
 
+    public static final String getHireKamgar_API = "enquiryview";
+
+    
+
 
 
 

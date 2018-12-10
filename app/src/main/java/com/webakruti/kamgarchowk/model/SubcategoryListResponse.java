@@ -69,6 +69,10 @@ public class SubcategoryListResponse implements Serializable{
             this.categoryId = categoryId;
         }
 
+        @Override
+        public String toString() {
+            return name;
+        }
     }
 
 }
