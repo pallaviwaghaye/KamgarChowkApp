@@ -2,6 +2,7 @@ package com.webakruti.kamgarchowk.userUI.fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -109,9 +111,22 @@ public class HomeFragment extends Fragment {
         selectedLocation = new SearchLocationList.Citylist();
         selectedLocation.setName(selectedLocations);
 
+     //   hideKeyboard();
         return rootView;
     }
 
+   /* private void hideKeyboard() {
+        autoComTextViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                in.hideSoftInputFromWindow(arg1.getWindowToken(), 0);
+
+            }
+
+        });
+    }*/
 
 
     private void callGetLocationAPI() {
@@ -141,8 +156,8 @@ public class HomeFragment extends Fragment {
                         spinnerLocation.setSelection(cityid+1);*/
 
 
-                          setSearchLocation(locationLists);
-                            //setPlatFormSpinnerData(0, -1); // should be 0
+                        setSearchLocation(locationLists);
+                        //setPlatFormSpinnerData(0, -1); // should be 0
 
                     }
 
@@ -184,7 +199,7 @@ public class HomeFragment extends Fragment {
         /**
          * Constructor
          */
-        public BGTaskForTest(Activity context,String token,String searchQuery) {
+        public BGTaskForTest(Activity context, String token, String searchQuery) {
             this.context = context;
             this.token = token;
             this.searchQuery = searchQuery;
@@ -210,7 +225,7 @@ public class HomeFragment extends Fragment {
             try {
                 // for making request, we have to pass URL and json object in string format
                 JSONParserPOSTRequest parser = new JSONParserPOSTRequest();
-                jsonObject = parser.makeRequest(testAPI,token);
+                jsonObject = parser.makeRequest(testAPI, token);
             } catch (Exception ex) {
                 Log.e("Exception Login Parse:", ex.toString());
             }
@@ -224,14 +239,11 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(JSONObject jsonObject) {
             try {
 
-                if(jsonObject != null)
-                {
+                if (jsonObject != null) {
                     List<SubcategoryListResponse.Subcategory> list = new ArrayList<>();
                     JSONArray jsonArray = jsonObject.getJSONArray("subcategory");
-                    if(jsonArray != null && jsonArray.length() > 0)
-                    {
-                        for(int i=0;i<jsonArray.length();i++)
-                        {
+                    if (jsonArray != null && jsonArray.length() > 0) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
 
                             JSONObject subcategoryJsonObject = jsonArray.getJSONObject(i);
                             SubcategoryListResponse.Subcategory autofillObj = new SubcategoryListResponse.Subcategory();
@@ -244,7 +256,7 @@ public class HomeFragment extends Fragment {
 
                         ArrayAdapter<SubcategoryListResponse.Subcategory> arrAdapter = new ArrayAdapter<SubcategoryListResponse.Subcategory>(getActivity(), android.R.layout.simple_dropdown_item_1line, list);
                         autoComTextViewSearch.setAdapter(arrAdapter);
-                    }else{
+                    } else {
                         //Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -258,9 +270,8 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void callBGSearchTask(String token,String searchQuery)
-    {
-        new BGTaskForTest(getActivity(),token,searchQuery).execute();
+    private void callBGSearchTask(String token, String searchQuery) {
+        new BGTaskForTest(getActivity(), token, searchQuery).execute();
     }
 
     private void initViews() {
@@ -277,12 +288,11 @@ public class HomeFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
 
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.toString().length() > 0) {
+                if (s.toString().length() > 0) {
                     if (NetworkUtil.hasConnectivity(getActivity())) {
                        /* progressDialogForAPI = new ProgressDialog(getActivity());
                         progressDialogForAPI.setCancelable(false);
@@ -345,14 +355,13 @@ public class HomeFragment extends Fragment {
         });
 
 
-
         autoComTextViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 SubcategoryListResponse.Subcategory subcategory = (SubcategoryListResponse.Subcategory) parent.getItemAtPosition(position);
-               Intent intent = new Intent(getActivity(),KamgarListActivity.class);
-               intent.putExtra("KamgarSubCategory",subcategory);
-               startActivity(intent);
+                Intent intent = new Intent(getActivity(), KamgarListActivity.class);
+                intent.putExtra("KamgarSubCategory", subcategory);
+                startActivity(intent);
 
 
             }
@@ -505,7 +514,7 @@ public class HomeFragment extends Fragment {
 
     private void setSearchLocation(List<SearchLocationList.Citylist> locationList) {
 
-        if(locationList!=null && locationList.size() > 0) {
+        if (locationList != null && locationList.size() > 0) {
             ArrayAdapter<SearchLocationList.Citylist> adapterLocation = new ArrayAdapter<SearchLocationList.Citylist>(getActivity(), android.R.layout.simple_spinner_dropdown_item, locationList);
             spinnerLocation.setAdapter(adapterLocation);
         }
@@ -514,18 +523,18 @@ public class HomeFragment extends Fragment {
         int position = locationList.indexOf(obj);
         spinnerLocation.setSelection(position);
 
-         spinnerLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-             @Override
-             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                 obj = (SearchLocationList.Citylist)parent.getItemAtPosition(position);
-                 SharedPreferenceManager.storeUserLocationResponseInSharedPreference(obj);
-             }
+        spinnerLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                obj = (SearchLocationList.Citylist) parent.getItemAtPosition(position);
+                SharedPreferenceManager.storeUserLocationResponseInSharedPreference(obj);
+            }
 
-             @Override
-             public void onNothingSelected(AdapterView<?> parent) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-             }
-         });
+            }
+        });
 
 
     }

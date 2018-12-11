@@ -1,5 +1,6 @@
 package com.webakruti.kamgarchowk.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -9,9 +10,10 @@ import java.util.List;
  * Created by DELL on 12/7/2018.
  */
 
-public class UserProfileResponse implements Serializable{
+public class UserProfileResponse implements Serializable {
 
     @SerializedName("success")
+    @Expose
     private Success success;
 
     public Success getSuccess() {
@@ -23,34 +25,97 @@ public class UserProfileResponse implements Serializable{
     }
 
 
-    public class Authuser implements Serializable{
+    public class Success implements Serializable {
+
+        @SerializedName("authuser")
+        @Expose
+        private List<Authuser> authuser = null;
+        @SerializedName("data")
+        @Expose
+        private List<Country> country = null;
+        @SerializedName("gender")
+        @Expose
+        private List<Gender> gender = null;
+
+        public List<Authuser> getAuthuser() {
+            return authuser;
+        }
+
+        public void setAuthuser(List<Authuser> authuser) {
+            this.authuser = authuser;
+        }
+
+        public List<Country> getCountry() {
+            return country;
+        }
+
+        public void setCountry(List<Country> data) {
+            this.country = data;
+        }
+
+        public List<Gender> getGender() {
+            return gender;
+        }
+
+        public void setGender(List<Gender> gender) {
+            this.gender = gender;
+        }
+
+    }
+
+    public static class Authuser implements Serializable {
 
         @SerializedName("id")
+        @Expose
         private Integer id;
         @SerializedName("first_name")
+        @Expose
         private String firstName;
         @SerializedName("middle_name")
+        @Expose
         private String middleName;
         @SerializedName("last_name")
+        @Expose
         private String lastName;
         @SerializedName("mobile_no")
+        @Expose
         private String mobileNo;
         @SerializedName("email")
+        @Expose
         private String email;
         @SerializedName("dob")
+        @Expose
         private String dob;
-        @SerializedName("gender")
-        private String gender;
         @SerializedName("address")
+        @Expose
         private String address;
-        @SerializedName("country")
-        private String country;
-        @SerializedName("state")
-        private String state;
-        @SerializedName("city")
-        private String city;
+        @SerializedName("country_id")
+        @Expose
+        private Integer countryId;
+        @SerializedName("state_id")
+        @Expose
+        private Integer stateId;
+        @SerializedName("city_id")
+        @Expose
+        private Integer cityId;
+        @SerializedName("gender_id")
+        @Expose
+        private Integer genderId;
         @SerializedName("pincode")
-        private Integer pincode;
+        @Expose
+        private long pincode;
+        @SerializedName("country")
+        @Expose
+        private Country country;
+        @SerializedName("state")
+        @Expose
+        private State state;
+        @SerializedName("city")
+        @Expose
+        private City city;
+        @SerializedName("gender")
+        @Expose
+        private Gender gender;
 
         public Integer getId() {
             return id;
@@ -108,89 +173,12 @@ public class UserProfileResponse implements Serializable{
             this.dob = dob;
         }
 
-        public String getGender() {
-            return gender;
-        }
-
-        public void setGender(String gender) {
-            this.gender = gender;
-        }
-
         public String getAddress() {
             return address;
         }
 
         public void setAddress(String address) {
             this.address = address;
-        }
-
-        public String getCountry() {
-            return country;
-        }
-
-        public void setCountry(String country) {
-            this.country = country;
-        }
-
-        public String getState() {
-            return state;
-        }
-
-        public void setState(String state) {
-            this.state = state;
-        }
-
-        public String getCity() {
-            return city;
-        }
-
-        public void setCity(String city) {
-            this.city = city;
-        }
-
-        public Integer getPincode() {
-            return pincode;
-        }
-
-        public void setPincode(Integer pincode) {
-            this.pincode = pincode;
-        }
-
-    }
-
-    public static class City implements Serializable{
-
-        @SerializedName("name")
-        private String name;
-        @SerializedName("id")
-        private Integer id;
-        @SerializedName("state_id")
-        private Integer stateId;
-        @SerializedName("country_id")
-        private Integer countryId;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public Integer getId() {
-            return id;
-        }
-
-        public void setId(Integer id) {
-            this.id = id;
-        }
-
-        public Integer getStateId() {
-            return stateId;
-        }
-
-        public void setStateId(Integer stateId) {
-            this.stateId = stateId;
         }
 
         public Integer getCountryId() {
@@ -201,27 +189,83 @@ public class UserProfileResponse implements Serializable{
             this.countryId = countryId;
         }
 
-        @Override
-        public String toString() {
-            return name;
+        public Integer getStateId() {
+            return stateId;
+        }
+
+        public void setStateId(Integer stateId) {
+            this.stateId = stateId;
+        }
+
+        public Integer getCityId() {
+            return cityId;
+        }
+
+        public void setCityId(Integer cityId) {
+            this.cityId = cityId;
+        }
+
+        public Integer getGenderId() {
+            return genderId;
+        }
+
+        public void setGenderId(Integer genderId) {
+            this.genderId = genderId;
+        }
+
+        public long getPincode() {
+            return pincode;
+        }
+
+        public void setPincode(long pincode) {
+            this.pincode = pincode;
+        }
+
+        public Country getCountry() {
+            return country;
+        }
+
+        public void setCountry(Country country) {
+            this.country = country;
+        }
+
+        public State getState() {
+            return state;
+        }
+
+        public void setState(State state) {
+            this.state = state;
+        }
+
+        public City getCity() {
+            return city;
+        }
+
+        public void setCity(City city) {
+            this.city = city;
+        }
+
+        public Gender getGender() {
+            return gender;
+        }
+
+        public void setGender(Gender gender) {
+            this.gender = gender;
         }
 
     }
 
-    public static class Country implements Serializable{
+    public static class City implements Serializable {
 
-        @SerializedName("name")
-        private String name;
         @SerializedName("id")
+        @Expose
         private Integer id;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
+        @SerializedName("name")
+        @Expose
+        private String name;
+        @SerializedName("state_id")
+        @Expose
+        private Integer stateId;
 
         public Integer getId() {
             return id;
@@ -231,23 +275,98 @@ public class UserProfileResponse implements Serializable{
             this.id = id;
         }
 
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Integer getStateId() {
+            return stateId;
+        }
+
+        public void setStateId(Integer stateId) {
+            this.stateId = stateId;
+        }
+
         @Override
         public String toString() {
+            return this.name;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof City)) return false;
+            City other = (City) o;
+            return (this.id == other.id);
+        }
+    }
+
+    public static class Country implements Serializable {
+
+        @SerializedName("id")
+        @Expose
+        private Integer id;
+        @SerializedName("name")
+        @Expose
+        private String name;
+        @SerializedName("states")
+        @Expose
+        private List<State> states = null;
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getName() {
             return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public List<State> getStates() {
+            return states;
+        }
+
+        public void setStates(List<State> states) {
+            this.states = states;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof Country)) return false;
+            Country other = (Country) o;
+            return (this.id == other.id);
         }
 
     }
 
-
-    public static class Gender implements Serializable{
+    public static class Gender implements Serializable {
 
         @SerializedName("id")
+        @Expose
         private Integer id;
         @SerializedName("name")
+        @Expose
         private String name;
         @SerializedName("value")
+        @Expose
         private String value;
         @SerializedName("gm_id")
+        @Expose
         private Integer gmId;
 
         public Integer getId() {
@@ -284,27 +403,31 @@ public class UserProfileResponse implements Serializable{
 
         @Override
         public String toString() {
-            return value;
+            return this.value;
         }
 
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof Gender)) return false;
+            Gender other = (Gender) o;
+            return (this.id == other.id);
+        }
     }
 
-    public static class State implements Serializable{
+    public static class State implements Serializable {
 
-        @SerializedName("name")
-        private String name;
         @SerializedName("id")
+        @Expose
         private Integer id;
+        @SerializedName("name")
+        @Expose
+        private String name;
         @SerializedName("country_id")
+        @Expose
         private Integer countryId;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
+        @SerializedName("cities")
+        @Expose
+        private List<City> cities = null;
 
         public Integer getId() {
             return id;
@@ -312,6 +435,14 @@ public class UserProfileResponse implements Serializable{
 
         public void setId(Integer id) {
             this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
 
         public Integer getCountryId() {
@@ -322,50 +453,6 @@ public class UserProfileResponse implements Serializable{
             this.countryId = countryId;
         }
 
-        @Override
-        public String toString() {
-            return name;
-        }
-
-    }
-
-    public class Success implements Serializable{
-
-        @SerializedName("authuser")
-        private List<Authuser> authuser = null;
-        @SerializedName("countries")
-        private List<Country> countries = null;
-        @SerializedName("states")
-        private List<State> states = null;
-        @SerializedName("cities")
-        private List<City> cities = null;
-        @SerializedName("gender")
-        private List<Gender> gender = null;
-
-        public List<Authuser> getAuthuser() {
-            return authuser;
-        }
-
-        public void setAuthuser(List<Authuser> authuser) {
-            this.authuser = authuser;
-        }
-
-        public List<Country> getCountries() {
-            return countries;
-        }
-
-        public void setCountries(List<Country> countries) {
-            this.countries = countries;
-        }
-
-        public List<State> getStates() {
-            return states;
-        }
-
-        public void setStates(List<State> states) {
-            this.states = states;
-        }
-
         public List<City> getCities() {
             return cities;
         }
@@ -374,13 +461,19 @@ public class UserProfileResponse implements Serializable{
             this.cities = cities;
         }
 
-        public List<Gender> getGender() {
-            return gender;
+        @Override
+        public String toString() {
+            return this.name;
         }
 
-        public void setGender(List<Gender> gender) {
-            this.gender = gender;
-        }
 
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof State)) return false;
+            State other = (State) o;
+            return (this.id == other.id);
+        }
     }
+
+
 }

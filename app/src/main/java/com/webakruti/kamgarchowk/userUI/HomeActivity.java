@@ -64,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
         textViewFName = (TextView) headerLayout.findViewById(R.id.textViewFName);
         textViewLName = (TextView) headerLayout.findViewById(R.id.textViewLName);
         textViewMobileNo = (TextView) headerLayout.findViewById(R.id.textViewMobileNo);
-        imageViewNavUser = (ImageView)headerLayout.findViewById(R.id.imageViewNavUser);
+        imageViewNavUser = (ImageView) headerLayout.findViewById(R.id.imageViewNavUser);
 
         Menu menu = navigationView.getMenu();
 
@@ -90,6 +90,7 @@ public class HomeActivity extends AppCompatActivity {
             //navigationLogout.setVisible(false);
 
         }
+
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -137,7 +138,6 @@ public class HomeActivity extends AppCompatActivity {
                         toolbarUserDetailsHomeTitle.setText("Support");
                         fragManager.beginTransaction().replace(R.id.home_container, new SupportFragment()).commit();
                         break;
-
 
 
                     case R.id.navigationLogout:
@@ -189,8 +189,17 @@ public class HomeActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
 
         fragManager = getSupportFragmentManager();
-        fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
 
+        // from update
+
+        boolean fromUpdate = getIntent().getBooleanExtra("fromUpdate", false);
+        if (fromUpdate) {
+            navigationView.getMenu().getItem(1).setChecked(true);
+            fragManager.beginTransaction().replace(R.id.home_container, new MyProfileFragment()).commit();
+        } else {
+            navigationView.getMenu().getItem(0).setChecked(true);
+            fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
+        }
     }
 
     @Override

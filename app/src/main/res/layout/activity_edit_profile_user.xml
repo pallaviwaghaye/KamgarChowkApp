@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -60,96 +60,101 @@
     </android.support.design.widget.AppBarLayout>
 
     <ScrollView
-        android:scrollbars="none"
         android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_below="@+id/appBarLayout"
-        android:layout_height="fill_parent">
+        android:scrollbars="none">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <LinearLayout
                 android:id="@+id/linearLayoutUserPersonalInfo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/linearLayoutUserInfo"
-                android:orientation="vertical"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="Personal Information"
                     android:padding="10dp"
+                    android:text="Personal Information"
                     android:textColor="@color/black"
                     android:textSize="15dp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/gray"
                     android:layout_marginTop="5dp"
-                    >
-                </View>
+                    android:background="@color/gray"></View>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:weightSum="100"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="50"
                             android:layout_marginRight="5dp"
+                            android:layout_weight="50"
                             android:orientation="vertical">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="First Name"
-                                android:textSize="14dp"
-                                android:textColor="@color/grey" />
+                                android:textColor="@color/grey"
+                                android:textSize="14dp" />
 
                             <EditText
                                 android:id="@+id/editTextFname"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
-                                android:hint="First name"
-                                android:textColor="@color/black"
                                 android:layout_marginTop="5dp"
-                                android:paddingLeft="10dp"
-                                android:enabled="true"
                                 android:background="@drawable/edittext_rectangular_oval"
+                                android:enabled="true"
+                                android:hint="First name"
+                                android:paddingLeft="10dp"
+                                android:textColor="@color/black"
                                 android:textSize="16sp" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="50"
                             android:layout_marginLeft="5dp"
+                            android:layout_weight="50"
                             android:orientation="vertical">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Middle Name"
-                                android:textSize="14dp"
-                                android:textColor="@color/grey" />
+                                android:textColor="@color/grey"
+                                android:textSize="14dp" />
 
                             <EditText
                                 android:id="@+id/editTextMname"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
-                                android:hint="Middle name"
-                                android:textColor="@color/black"
                                 android:layout_marginTop="5dp"
-                                android:paddingLeft="10dp"
                                 android:background="@drawable/edittext_rectangular_oval"
+                                android:hint="Middle name"
+                                android:paddingLeft="10dp"
+                                android:textColor="@color/black"
                                 android:textSize="16sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -166,19 +171,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Last Name"
-                        android:textSize="14dp"
-                        android:textColor="@color/grey" />
+                        android:textColor="@color/grey"
+                        android:textSize="14dp" />
 
                     <EditText
                         android:id="@+id/editTextLname"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:hint="Last name"
-                        android:textColor="@color/black"
                         android:layout_marginTop="5dp"
-                        android:enabled="true"
-                        android:paddingLeft="10dp"
                         android:background="@drawable/edittext_rectangular_oval"
+                        android:enabled="true"
+                        android:hint="Last name"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -192,24 +197,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Date of Birth"
-                        android:textSize="14dp"
-                        android:textColor="@color/grey" />
+                        android:textColor="@color/grey"
+                        android:textSize="14dp" />
 
 
                     <EditText
                         android:id="@+id/editTextDOB"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:hint="Date of birth (dd/MM/yyyy)"
-                        android:textColor="@color/black"
                         android:layout_marginTop="5dp"
-                        android:paddingLeft="10dp"
-                        android:inputType="date"
-                        android:enabled="true"
-
                         android:background="@drawable/edittext_rectangular_oval"
+                        android:enabled="true"
+                        android:hint="Date of birth (dd/MM/yyyy)"
+                        android:inputType="none"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -220,17 +225,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Gender"
-                        android:textSize="14dp"
-                        android:textColor="@color/grey" />
+                        android:textColor="@color/grey"
+                        android:textSize="14dp" />
 
                     <Spinner
                         android:id="@+id/spinnerGender"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
-                        android:paddingLeft="10dp"
                         android:background="@drawable/custom_spinner"
-                        />
+                        android:paddingLeft="10dp" />
 
                 </LinearLayout>
 
@@ -242,26 +246,24 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/linearLayoutUserPersonalInfo"
                 android:layout_marginTop="15dp"
-                android:orientation="vertical"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textViewCosting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="Contact Informnation"
                     android:padding="10dp"
+                    android:text="Contact Informnation"
                     android:textColor="@color/black"
                     android:textSize="15dp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/gray"
                     android:layout_marginTop="5dp"
-                    >
-                </View>
+                    android:background="@color/gray"></View>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -274,21 +276,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Email Id"
-                        android:textSize="14dp"
-                        android:textColor="@color/grey" />
+                        android:textColor="@color/grey"
+                        android:textSize="14dp" />
 
                     <EditText
                         android:id="@+id/editTextEmail"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:hint="Email"
-                        android:textColor="@color/black"
                         android:layout_marginTop="5dp"
-                        android:paddingLeft="10dp"
-                        android:inputType="textEmailAddress"
                         android:background="@drawable/edittext_rectangular_oval"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -300,19 +303,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Mobile No."
-                        android:textSize="14dp"
-                        android:textColor="@color/grey" />
+                        android:textColor="@color/grey"
+                        android:textSize="14dp" />
 
                     <EditText
                         android:id="@+id/editTextMobile"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:hint="Mobile number"
-                        android:textColor="@color/black"
                         android:layout_marginTop="5dp"
-                        android:paddingLeft="10dp"
-                        android:inputType="phone|number"
                         android:background="@drawable/edittext_rectangular_oval"
+                        android:hint="Mobile number"
+                        android:inputType="phone|number"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -323,51 +326,52 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/linearLayoutUserContactInfo"
                 android:layout_marginTop="15dp"
-                android:orientation="vertical"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="Residence Informnation"
                     android:padding="10dp"
+                    android:text="Residence Informnation"
                     android:textColor="@color/black"
                     android:textSize="15dp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/gray"
                     android:layout_marginTop="5dp"
-                    >
-                </View>
+                    android:background="@color/gray"></View>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Address"
-                        android:textSize="14dp"
-                        android:textColor="@color/grey" />
+                        android:textColor="@color/grey"
+                        android:textSize="14dp" />
 
                     <EditText
                         android:id="@+id/editTextAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="address"
-                        android:textColor="@color/black"
                         android:layout_marginTop="5dp"
-                        android:padding="7dp"
+                        android:background="@drawable/edittext_rectangular_oval"
+                        android:gravity="left|top"
+                        android:hint="address"
                         android:inputType="textMultiLine"
                         android:lines="4"
-                        android:gravity="left|top"
-                        android:background="@drawable/edittext_rectangular_oval"
+                        android:padding="7dp"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -378,19 +382,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Country"
-                        android:textSize="14dp"
-                        android:textColor="@color/grey" />
+                        android:textColor="@color/grey"
+                        android:textSize="14dp" />
 
                     <Spinner
                         android:id="@+id/spinnerCountry"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
-                        android:paddingLeft="10dp"
                         android:background="@drawable/custom_spinner"
-                        />
+                        android:paddingLeft="10dp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -401,19 +405,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="State"
-                        android:textSize="14dp"
-                        android:textColor="@color/grey" />
+                        android:textColor="@color/grey"
+                        android:textSize="14dp" />
 
                     <Spinner
                         android:id="@+id/spinnerState"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
-                        android:paddingLeft="10dp"
                         android:background="@drawable/custom_spinner"
-                        />
+                        android:paddingLeft="10dp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -424,19 +428,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="City"
-                        android:textSize="14dp"
-                        android:textColor="@color/grey" />
+                        android:textColor="@color/grey"
+                        android:textSize="14dp" />
 
                     <Spinner
                         android:id="@+id/spinnerCity"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
-                        android:paddingLeft="10dp"
                         android:background="@drawable/custom_spinner"
-                        />
+                        android:paddingLeft="10dp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -447,19 +451,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pincode"
-                        android:textSize="14dp"
-                        android:textColor="@color/grey" />
+                        android:textColor="@color/grey"
+                        android:textSize="14dp" />
 
                     <EditText
                         android:id="@+id/editTextPincode"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:hint="Pincode"
-                        android:textColor="@color/black"
                         android:layout_marginTop="5dp"
-                        android:paddingLeft="10dp"
-                        android:inputType="number"
                         android:background="@drawable/edittext_rectangular_oval"
+                        android:hint="Pincode"
+                        android:inputType="number"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -469,6 +473,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     android:orientation="vertical">
+
                     <Button
                         android:id="@+id/buttonSave"
                         android:layout_width="match_parent"

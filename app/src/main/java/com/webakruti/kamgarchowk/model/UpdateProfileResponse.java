@@ -12,6 +12,18 @@ import java.util.List;
 public class UpdateProfileResponse {
 
 
+    @SerializedName("success")
+    @Expose
+    private Success success;
+
+    public Success getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Success success) {
+        this.success = success;
+    }
+
 
     public class Authuser {
 
@@ -160,19 +172,6 @@ public class UpdateProfileResponse {
         }
 
     }
-
-
-        @SerializedName("success")
-        @Expose
-        private Success success;
-
-        public Success getSuccess() {
-            return success;
-        }
-
-        public void setSuccess(Success success) {
-            this.success = success;
-        }
 
 
 

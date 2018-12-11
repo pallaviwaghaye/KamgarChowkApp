@@ -223,16 +223,11 @@ public class MyProfileFragment extends Fragment {
         textViewUserMobileNo.setText(list.get(0).getMobileNo());
 
         textViewEmail.setText(list.get(0).getEmail());
-        if (list.get(0).getAddress()!=null && list.get(0).getCity()!=null && list.get(0).getState()!=null && list.get(0).getCountry()!=null && list.get(0).getPincode()!=null) {
-            textViewAddress.setText(list.get(0).getAddress()+", "+list.get(0).getCity()+", "+list.get(0).getState()+", "+list.get(0).getCountry()+", "+list.get(0).getPincode());
+        if (list.get(0).getAddress()!=null && list.get(0).getCity()!=null && list.get(0).getState()!=null && list.get(0).getCountry()!=null && list.get(0).getPincode() > 0) {
+            textViewAddress.setText(list.get(0).getAddress()+", "+list.get(0).getCity().getName()+", "+list.get(0).getState().getName()+", "+list.get(0).getCountry().getName()+", "+list.get(0).getPincode());
         } else {
             textViewAddress.setText("N/A");
         }
-
-        final List<UserProfileResponse.City> cities = details.getSuccess().getCities();
-        final List<UserProfileResponse.State> states = details.getSuccess().getStates();
-        final List<UserProfileResponse.Country> countries = details.getSuccess().getCountries();
-        final List<UserProfileResponse.Gender> gender = details.getSuccess().getGender();
 
         imageViewUserEdit.setOnClickListener(new View.OnClickListener() {
             @Override

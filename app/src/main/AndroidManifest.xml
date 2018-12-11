@@ -34,12 +34,10 @@
         <activity android:name=".userUI.UserRegistrationActivity" />
         <activity android:name=".kamgarUI.KamgarLoginActivity" />
         <activity android:name=".userUI.UserLoginActivity" />
-        <activity android:name=".userUI.HomeActivity" />
+        <activity
+            android:name=".userUI.HomeActivity" />
         <activity android:name=".userUI.SubcategoryActivity" />
-        <activity android:name=".adapter.HomePopularKamgarAdapter" />
-        <activity android:name=".adapter.HomeAvailAllServicesAdapter" />
         <activity android:name=".userUI.KamgarListActivity" />
-        <activity android:name=".adapter.KamgarListAdapter" />
         <activity android:name=".kamgarUI.HomeOrProfileActivity" />
         <activity android:name=".userUI.HireKamgarActivity" />
         <activity android:name=".userUI.ForgotPasswordUserActivity" />
