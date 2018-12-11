@@ -21,6 +21,7 @@ import com.webakruti.kamgarchowk.model.UserProfileResponse;
 import com.webakruti.kamgarchowk.model.UserRegistrationResponse;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -104,14 +105,14 @@ public interface ApiService {
                                               @Query("first_name") String FName,
                                               @Query("middle_name") String middleName,
                                               @Query("last_name") String LName,
+                                              @Query("dob") String datebirth,
+                                              @Query("gender_id") Integer gender,
                                               @Query("mobile_no") String mobNo,
                                               @Query("email") String emailid,
                                               @Query("address") String address,
-                                              @Query("dob") String datebirth,
-                                              @Query("gender_id") String gender,
-                                              @Query("country_id") String country,
-                                              @Query("state_id") String state,
-                                              @Query("city_id") String city,
+                                              @Query("country_id") Integer country,
+                                              @Query("state_id") Integer state,
+                                              @Query("city_id") Integer city,
                                               @Query("pincode") String pincode);
 
     @POST(ApiConstants.myenquiry_API)

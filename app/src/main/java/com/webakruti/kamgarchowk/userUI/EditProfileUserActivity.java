@@ -32,6 +32,7 @@ import com.webakruti.kamgarchowk.retrofit.service.RestClient;
 import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -71,6 +72,11 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
     UserProfileResponse.Country selectedCountry;
     UserProfileResponse.Gender selectedGender;
 
+    Integer spinnerGenderId;
+    Integer spinnerCityId;
+    Integer spinnerStateId;
+    Integer spinnerCountryId;
+
     private UserProfileResponse SpinnerData;
 
     private Button buttonSave;
@@ -87,15 +93,9 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
         SpinnerData = (UserProfileResponse)getIntent().getSerializableExtra("SpinnerData");
 
-
-
-        /*city = (UserProfileResponse.City) getIntent().getSerializableExtra("cities");
-        state = (UserProfileResponse.State) getIntent().getSerializableExtra("states");
-        country = (UserProfileResponse.Country) getIntent().getSerializableExtra("countries");
-        gender = (UserProfileResponse.Gender) getIntent().getSerializableExtra("gender");
-*/
         initViews();
     }
+
 
     private void initViews()
     {
@@ -140,38 +140,46 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
             }
         });
 
-        user = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getAuthuser();
+       /* user = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getAuthuser();
         if (user != null) {
             editTextFname.setText(user.getFirstName());
             editTextLname.setText(user.getLastName());
-           /* editTextDOB.setText(user.getSuccess().getAuthuser().getDob().toString());
-            editTextAddress.setText(user.getSuccess().getAuthuser().getAddress().toString());*/
+           *//* editTextDOB.setText(user.getSuccess().getAuthuser().getDob().toString());
+            editTextAddress.setText(user.getSuccess().getAuthuser().getAddress().toString());*//*
             editTextEmail.setText(user.getEmail());
             editTextMobile.setText(user.getMobileNo());
-        }
+        }*/
 
         final List<UserProfileResponse.City> cities = SpinnerData.getSuccess().getCities();
         final List<UserProfileResponse.State> states = SpinnerData.getSuccess().getStates();
         final List<UserProfileResponse.Country> countries = SpinnerData.getSuccess().getCountries();
         final List<UserProfileResponse.Gender> gender = SpinnerData.getSuccess().getGender();
 
-        ArrayAdapter<UserProfileResponse.City> adapterCity = new ArrayAdapter<UserProfileResponse.City>(EditProfileUserActivity.this, android.R.layout.simple_spinner_dropdown_item, cities);
-        spinnerCity.setAdapter(adapterCity);
+        setCitySpinner(cities);
+        setStateSpinner(states);
+        setCountrySpinner(countries);
+        setGenderSpinner(gender);
+    }
 
-        ArrayAdapter<UserProfileResponse.State> adapterState = new ArrayAdapter<UserProfileResponse.State>(EditProfileUserActivity.this, android.R.layout.simple_spinner_dropdown_item, states);
-        spinnerState.setAdapter(adapterState);
 
-        ArrayAdapter<UserProfileResponse.Country> adapterCountry = new ArrayAdapter<UserProfileResponse.Country>(EditProfileUserActivity.this, android.R.layout.simple_spinner_dropdown_item, countries);
-        spinnerCountry.setAdapter(adapterCountry);
+    private void setCitySpinner(List<UserProfileResponse.City> cityList) {
 
-        ArrayAdapter<UserProfileResponse.Gender> adapterGender = new ArrayAdapter<UserProfileResponse.Gender>(EditProfileUserActivity.this, android.R.layout.simple_spinner_dropdown_item, gender);
-        spinnerGender.setAdapter(adapterGender);
+        List<UserProfileResponse.City> finalList = new ArrayList<>();
+
+        UserProfileResponse.City city = new UserProfileResponse.City();
+        city.setId(-1);
+        city.setName(defaultCity);
+
+        finalList.add(city);
+        finalList.addAll(cityList);
+        ArrayAdapter<UserProfileResponse.City> adapterStation = new ArrayAdapter<UserProfileResponse.City>(EditProfileUserActivity.this, android.R.layout.simple_spinner_dropdown_item, finalList);
+        spinnerCity.setAdapter(adapterStation);
 
         spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 selectedCity = (UserProfileResponse.City) adapterView.getItemAtPosition(position);
-                //cityid = selectedLocation.getId();
+                spinnerCityId = selectedCity.getId();
             }
 
             @Override
@@ -179,12 +187,26 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
             }
         });
+    }
+
+    private void setStateSpinner(List<UserProfileResponse.State> stateList) {
+
+        List<UserProfileResponse.State> finalList = new ArrayList<>();
+
+        UserProfileResponse.State state1 = new UserProfileResponse.State();
+        state1.setId(-1);
+        state1.setName(defaultState);
+
+        finalList.add(state1);
+        finalList.addAll(stateList);
+        ArrayAdapter<UserProfileResponse.State> adapterStation = new ArrayAdapter<UserProfileResponse.State>(EditProfileUserActivity.this, android.R.layout.simple_spinner_dropdown_item, finalList);
+        spinnerState.setAdapter(adapterStation);
 
         spinnerState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 selectedState = (UserProfileResponse.State) adapterView.getItemAtPosition(position);
-                //cityid = selectedLocation.getId();
+                spinnerStateId =selectedState.getId();
             }
 
             @Override
@@ -192,12 +214,26 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
             }
         });
+    }
+
+    private void setCountrySpinner(List<UserProfileResponse.Country> countryList) {
+
+        List<UserProfileResponse.Country> finalList = new ArrayList<>();
+
+        UserProfileResponse.Country country = new UserProfileResponse.Country();
+        country.setId(-1);
+        country.setName(defaultCountry);
+
+        finalList.add(country);
+        finalList.addAll(countryList);
+        ArrayAdapter<UserProfileResponse.Country> adapterStation = new ArrayAdapter<UserProfileResponse.Country>(EditProfileUserActivity.this, android.R.layout.simple_spinner_dropdown_item, finalList);
+        spinnerCountry.setAdapter(adapterStation);
 
         spinnerCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 selectedCountry = (UserProfileResponse.Country) adapterView.getItemAtPosition(position);
-                //cityid = selectedLocation.getId();
+                spinnerCountryId = selectedCountry.getId();
             }
 
             @Override
@@ -205,12 +241,26 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
             }
         });
+    }
+
+    private void setGenderSpinner(List<UserProfileResponse.Gender> genderList) {
+
+        List<UserProfileResponse.Gender> finalList = new ArrayList<>();
+
+        UserProfileResponse.Gender gender = new UserProfileResponse.Gender();
+        gender.setId(-1);
+        gender.setValue(defaultGender);
+
+        finalList.add(gender);
+        finalList.addAll(genderList);
+        ArrayAdapter<UserProfileResponse.Gender> adapterStation = new ArrayAdapter<UserProfileResponse.Gender>(EditProfileUserActivity.this, android.R.layout.simple_spinner_dropdown_item, finalList);
+        spinnerGender.setAdapter(adapterStation);
 
         spinnerGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 selectedGender = (UserProfileResponse.Gender) adapterView.getItemAtPosition(position);
-                //cityid = selectedLocation.getId();
+                spinnerGenderId = selectedGender.getId();
             }
 
             @Override
@@ -218,8 +268,8 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
             }
         });
-
     }
+
 
     @Override
     public void onClick(View view) {
@@ -233,19 +283,30 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                                         if (editTextMobile.getText().toString().length() > 0) {
                                             if (editTextMobile.getText().toString().length() == 10) {
                                                 if (editTextAddress.getText().toString().length() > 0) {
-                                             /*   if (spinnerGender.getText().toString().length() == 10) {
-                                                    if (spinnerCountry.getText().toString().length() == 10) {
-                                                        if (spinnerState.getText().toString().length() == 10) {
-                                                            if (spinnerCity.getText().toString().length() == 10) {*/
-                                                    CallUpdateUserAPI();
-                                                    UpdateProfileResponse user = new UpdateProfileResponse();
+                                                if (selectedCity.toString().length() > 0) {
+                                                    if (selectedState.toString().length() > 0) {
+                                                        if (selectedCountry.toString().length() > 0) {
+                                                            if (selectedGender.toString().length() > 0) {
+                                                                CallUpdateUserAPI();
+                                                                //UpdateProfileResponse user = new UpdateProfileResponse();
 
-                                                 //   SharedPreferenceManager.storeUserResponseObjectInSharedPreference(user);
+                                                             //   SharedPreferenceManager.storeUserResponseObjectInSharedPreference(user);
 
-                                                    Intent i = new Intent(EditProfileUserActivity.this,HomeActivity.class);
-                                                    startActivity(i);
-                                                    finish();
-
+                                                                Intent i = new Intent(EditProfileUserActivity.this,HomeActivity.class);
+                                                                startActivity(i);
+                                                                finish();
+                                                            }else{
+                                                                Toast.makeText(EditProfileUserActivity.this, "Select gender", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        }else{
+                                                            Toast.makeText(EditProfileUserActivity.this, "Select country", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }else{
+                                                        Toast.makeText(EditProfileUserActivity.this, "Select state", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }else{
+                                                    Toast.makeText(EditProfileUserActivity.this, "Select city", Toast.LENGTH_SHORT).show();
+                                                }
 
                                                 }else{
                                                     Toast.makeText(EditProfileUserActivity.this, "Address Can't be empty", Toast.LENGTH_SHORT).show();
@@ -294,14 +355,13 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
         progressDialogForAPI.setMessage("Please wait...");
         progressDialogForAPI.show();
 
-        SharedPreferenceManager.setApplicationContext(EditProfileUserActivity.this);
 
         String token = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getToken();
         Integer userid = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getAuthuser().getId();
 
         //String API = "http://beta.kamgarchowk.com/api/";
         String headers = "Bearer " + token;
-        Call<UpdateProfileResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).updateprofile(headers,userid,editTextFname.getText().toString(),editTextMname.getText().toString(),editTextLname.getText().toString(),editTextMobile.getText().toString(),editTextEmail.getText().toString(),editTextDOB.getText().toString(),editTextAddress.getText().toString(),selectedCity.toString(),selectedState.toString(),selectedCountry.toString(),selectedGender.toString(),editTextPincode.getText().toString());
+        Call<UpdateProfileResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).updateprofile(headers,userid,editTextFname.getText().toString(),editTextMname.getText().toString(),editTextLname.getText().toString(),editTextDOB.getText().toString(),spinnerGenderId,editTextEmail.getText().toString(),editTextMobile.getText().toString(),editTextAddress.getText().toString(),spinnerCountryId,spinnerStateId,spinnerCityId,editTextPincode.getText().toString());
 
         requestCallback.enqueue(new Callback<UpdateProfileResponse>() {
             @Override

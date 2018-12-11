@@ -84,18 +84,18 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
             switch (myEnquiry.getRating()) {
 
                 case 0:
-                    viewHolder.imageViewRating1.setEnabled(false);
+                    /*viewHolder.imageViewRating1.setEnabled(false);
                     viewHolder.imageViewRating2.setEnabled(false);
                     viewHolder.imageViewRating3.setEnabled(false);
                     viewHolder.imageViewRating4.setEnabled(false);
-                    viewHolder.imageViewRating5.setEnabled(false);
+                    viewHolder.imageViewRating5.setEnabled(false);*/
 
                     viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
-                    viewHolder.buttonRateNow.setEnabled(false);
+                    //viewHolder.buttonRateNow.setEnabled(false);
 
                     break;
 
