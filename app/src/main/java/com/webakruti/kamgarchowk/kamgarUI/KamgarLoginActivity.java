@@ -10,10 +10,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.webakruti.kamgarchowk.LandingActivity;
+import com.webakruti.kamgarchowk.userUI.ForgotPasswordUserActivity;
 import com.webakruti.kamgarchowk.userUI.HomeActivity;
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.userUI.UserLoginActivity;
+import com.webakruti.kamgarchowk.userUI.UserRegistrationActivity;
 
-public class KamgarLoginActivity extends AppCompatActivity {
+public class KamgarLoginActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView textViewGotoKamgarRegistration;
     private Button buttonKamgarLogin;
     private ImageView imageViewBack;
@@ -25,14 +28,7 @@ public class KamgarLoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_kamgar_login);
 
         textViewGotoKamgarRegistration = (TextView)findViewById(R.id.textViewGotoKamgarRegistration);
-        textViewGotoKamgarRegistration.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(KamgarLoginActivity.this, KamgarRegistrationActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        textViewGotoKamgarRegistration.setOnClickListener(this);
 
         imageViewBack = (ImageView)findViewById(R.id.imageViewBack);
         imageViewBack.setOnClickListener(new View.OnClickListener() {
@@ -45,23 +41,41 @@ public class KamgarLoginActivity extends AppCompatActivity {
         });
 
         buttonKamgarLogin = (Button)findViewById(R.id.buttonKamgarLogin);
-        buttonKamgarLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(KamgarLoginActivity.this, HomeOrProfileActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        buttonKamgarLogin.setOnClickListener(this);
 
         linearLayoutKamgarForgotPassword = (LinearLayout)findViewById(R.id.linearLayoutKamgarForgotPassword);
-        linearLayoutKamgarForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(KamgarLoginActivity.this, ForgotPassKamgarActivity.class);
-                startActivity(intent);
+        linearLayoutKamgarForgotPassword.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+
+            case R.id.textViewGotoKamgarRegistration:
+                Intent intent1 = new Intent(KamgarLoginActivity.this, KamgarRegistrationActivity.class);
+                startActivity(intent1);
                 finish();
-            }
-        });
+
+                break;
+            case R.id.linearLayoutKamgarForgotPassword:
+                Intent intent2 = new Intent(KamgarLoginActivity.this, ForgotPassKamgarActivity.class);
+                startActivity(intent2);
+                finish();
+
+                break;
+
+            case R.id.buttonKamgarLogin:
+                Intent intent3 = new Intent(KamgarLoginActivity.this, HomeOrProfileActivity.class);
+                startActivity(intent3);
+                finish();
+
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent new_intent = new Intent(KamgarLoginActivity.this, LandingActivity.class);
+        this.startActivity(new_intent);
     }
 }

@@ -48,12 +48,9 @@ public class CategoryActivity extends AppCompatActivity {
         } else {
             Toast.makeText(CategoryActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
     private void callGetKamgarCategoryAPI() {
-
 
         progressDialogForAPI = new ProgressDialog(this);
         progressDialogForAPI.setCancelable(false);
@@ -154,13 +151,6 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
 
-@Override
-    public void onBackPressed() {
 
-        Intent new_intent = new Intent(CategoryActivity.this, HomeActivity.class);
-
-        this.startActivity(new_intent);
-
-    }
 
 }

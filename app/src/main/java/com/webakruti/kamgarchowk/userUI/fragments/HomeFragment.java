@@ -102,16 +102,10 @@ public class HomeFragment extends Fragment {
             Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
         }
 
-       /* if (NetworkUtil.hasConnectivity(getActivity())) {
-            callGetHomeAPI();
-        } else {
-            Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
-        }*/
-
         selectedLocation = new SearchLocationList.Citylist();
         selectedLocation.setName(selectedLocations);
 
-     //   hideKeyboard();
+        //   hideKeyboard();
         return rootView;
     }
 
@@ -158,6 +152,7 @@ public class HomeFragment extends Fragment {
 
                         setSearchLocation(locationLists);
                         //setPlatFormSpinnerData(0, -1); // should be 0
+                        setSearchLocation(locationLists);
 
                     }
 

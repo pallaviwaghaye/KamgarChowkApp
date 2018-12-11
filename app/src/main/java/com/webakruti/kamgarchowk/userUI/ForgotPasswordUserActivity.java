@@ -216,9 +216,7 @@ public class ForgotPasswordUserActivity extends AppCompatActivity implements Vie
 
     @Override
     public void onBackPressed() {
-
         Intent new_intent = new Intent(ForgotPasswordUserActivity.this, UserLoginActivity.class);
-
         this.startActivity(new_intent);
 
     }

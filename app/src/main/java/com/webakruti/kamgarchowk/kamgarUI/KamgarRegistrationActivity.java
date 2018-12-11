@@ -30,4 +30,10 @@ public class KamgarRegistrationActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent new_intent = new Intent(KamgarRegistrationActivity.this, KamgarLoginActivity.class);
+        this.startActivity(new_intent);
+    }
 }

@@ -40,6 +40,8 @@ public class SupportFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_support, container, false);
         // Inflate the layout for this fragment
 
+        SharedPreferenceManager.setApplicationContext(getActivity());
+
         initViews();
 
         return rootView;
@@ -86,7 +88,7 @@ public class SupportFragment extends Fragment {
         progressDialogForAPI.setMessage("Please wait...");
         progressDialogForAPI.show();
 
-        //SharedPreferenceManager.setApplicationContext(SupportActivity.this);
+
 
         String token = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getToken();
         String FirstName = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getAuthuser().getFirstName();

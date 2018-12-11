@@ -1,6 +1,9 @@
 package com.webakruti.kamgarchowk;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AdvertiseActivity extends AppCompatActivity {
     private ImageView imageViewBack;
@@ -24,13 +28,14 @@ public class AdvertiseActivity extends AppCompatActivity {
     private Spinner spinnerState;
     private Spinner spinnerCity;
 
-
     private Button buttonContinue;
+    Dialog myDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advertise);
-
+        myDialog = new Dialog(this);
         initViews();
     }
 
@@ -62,10 +67,44 @@ public class AdvertiseActivity extends AppCompatActivity {
         buttonContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdvertiseActivity.this,CustomPopupActivity.class);
+                ShowPopup(v);
+            }
+        });
+    }
+
+    public void ShowPopup(View v) {
+        TextView txtclose;
+        Button btnGotIt;
+        myDialog.setContentView(R.layout.custom_popup);
+        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+        txtclose.setText("X");
+        btnGotIt = (Button) myDialog.findViewById(R.id.btnGotIt);
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+
+        btnGotIt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+                Toast.makeText(AdvertiseActivity.this,"Your advertise successfully saved.",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(AdvertiseActivity.this,LandingActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
+
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent new_intent = new Intent(AdvertiseActivity.this, LandingActivity.class);
+        this.startActivity(new_intent);
+
     }
 }
