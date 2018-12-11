@@ -184,9 +184,6 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
             // so, set country spinner
             int pos = finalList.indexOf(countryObj);
             spinnerCountry.setSelection(pos, false);
-            selectedCountry.setName(countryObj.getName());
-            selectedCountry.setId(countryObj.getId());
-
             // get states for selected country
             List<State> states = finalList.get(pos).getStates();
             // set adapter with these states
@@ -328,8 +325,6 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
         int pos = finalList.indexOf(city);
         spinnerCity.setSelection(pos, false);
 
-        selectedCity.setName(city.getName());
-        selectedCity.setId(city.getId());
     }
 
     private void setGenderSpinner(List<UserProfileResponse.Gender> genderList, Gender gender) {
@@ -381,9 +376,9 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                                         if (editTextMobile.getText().toString().length() == 10) {
                                             if (selectedGender.getId() != -1) {
                                                 if (editTextAddress.getText().toString().length() > 0) {
-                                                    if (selectedCountry.getId() != -1) {
+                                                    if (((Country) spinnerCountry.getSelectedItem()).getId() != -1) {
                                                         if (((State) spinnerState.getSelectedItem()).getId() != -1) {
-                                                            if (selectedCity.getId() != -1) {
+                                                            if (((City) spinnerCity.getSelectedItem()).getId() != -1) {
 
                                                                 if (NetworkUtil.hasConnectivity(EditProfileUserActivity.this)) {
                                                                     CallUpdateUserAPI();
@@ -454,7 +449,7 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
         //String API = "http://beta.kamgarchowk.com/api/";
         String headers = "Bearer " + token;
-        Call<UpdateProfileResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).updateprofile(headers, userid, editTextFname.getText().toString(), editTextMname.getText().toString(), editTextLname.getText().toString(), editTextDOB.getText().toString(), selectedGender.getId(), editTextMobile.getText().toString(), editTextEmail.getText().toString(), editTextAddress.getText().toString(), selectedCountry.getId(), ((State) spinnerState.getSelectedItem()).getId(), selectedCity.getId(), editTextPincode.getText().toString());
+        Call<UpdateProfileResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).updateprofile(headers, userid, editTextFname.getText().toString(), editTextMname.getText().toString(), editTextLname.getText().toString(), editTextDOB.getText().toString(), selectedGender.getId(), editTextMobile.getText().toString(), editTextEmail.getText().toString(), editTextAddress.getText().toString(), ((Country) spinnerCountry.getSelectedItem()).getId(), ((State) spinnerState.getSelectedItem()).getId(),((City) spinnerCity.getSelectedItem()).getId(), editTextPincode.getText().toString());
 
         requestCallback.enqueue(new Callback<UpdateProfileResponse>() {
             @Override
