@@ -38,32 +38,6 @@ public class CategoryFragment extends Fragment {
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
 
-       /* GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(gridLayoutManager);
-        int spacing = (int) Utils.DpToPixel(getActivity(), 11); // 40px
-
-        GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration(2, spacing, true);
-        recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setNestedScrollingEnabled(false);
-
-
-            recyclerView.setAdapter(new CategoryAdapter(getContext(), 11));
-*/
-
-       /* List<Category> listOfCategories = new ArrayList<Category>();
-        listOfCategories.add(new Category("Waiting Hall", getResources().getDrawable(R.drawable.icons_01)));
-        listOfCategories.add(new Category("Urinal", getResources().getDrawable(R.drawable.icons_02)));
-        listOfCategories.add(new Category("Lavatories", getResources().getDrawable(R.drawable.icons_03)));
-        listOfCategories.add(new Category("Divyanhjan Toilet", getResources().getDrawable(R.drawable.icons_10)));
-        listOfCategories.add(new Category("Foot Over Bridge", getResources().getDrawable(R.drawable.icons_09)));
-        listOfCategories.add(new Category("Water Cooler", getResources().getDrawable(R.drawable.icons_08)));
-        listOfCategories.add(new Category("Parking", getResources().getDrawable(R.drawable.icons_07)));
-        listOfCategories.add(new Category("Dustbin", getResources().getDrawable(R.drawable.icons_06)));
-        listOfCategories.add(new Category("Catering", getResources().getDrawable(R.drawable.icons_05)));
-        listOfCategories.add(new Category("Waiting Room", getResources().getDrawable(R.drawable.icons_01)));
-        listOfCategories.add(new Category("Any Other Places", getResources().getDrawable(R.drawable.icons_04)));*/
-
-
     }
 
 

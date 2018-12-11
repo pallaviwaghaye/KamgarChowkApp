@@ -66,11 +66,17 @@ public class ForgotPassKamgarActivity extends AppCompatActivity implements View.
                 break;
 
             case R.id.buttonSubmitKamgarForgot:
-                Intent intent3 = new Intent(ForgotPassKamgarActivity.this, UserLoginActivity.class);
+                Intent intent3 = new Intent(ForgotPassKamgarActivity.this, KamgarLoginActivity.class);
                 startActivity(intent3);
                 finish();
 
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent new_intent = new Intent(ForgotPassKamgarActivity.this, KamgarLoginActivity.class);
+        this.startActivity(new_intent);
     }
 }

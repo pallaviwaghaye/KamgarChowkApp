@@ -100,12 +100,6 @@ public class HomeFragment extends Fragment {
             Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
         }
 
-       /* if (NetworkUtil.hasConnectivity(getActivity())) {
-            callGetHomeAPI();
-        } else {
-            Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
-        }*/
-
         selectedLocation = new SearchLocationList.Citylist();
         selectedLocation.setName(selectedLocations);
 
@@ -142,7 +136,6 @@ public class HomeFragment extends Fragment {
 
 
                           setSearchLocation(locationLists);
-                            //setPlatFormSpinnerData(0, -1); // should be 0
 
                     }
 
@@ -275,8 +268,6 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
 
             }
 

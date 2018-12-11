@@ -50,9 +50,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         //viewHolder.textViewCategory.setText("Category " + position);
         viewHolder.textViewCategoryName.setText(category.getName());
 
-        Toast.makeText(context,"CategoryName = "+ category.getName(),Toast.LENGTH_LONG).show();
+       /* Toast.makeText(context,"CategoryName = "+ category.getName(),Toast.LENGTH_LONG).show();
         Toast.makeText(context,"CategoryName : "+ category.getName(),Toast.LENGTH_LONG).show();
-
+*/
         Picasso.with(context)
                 .load(category.getCategoryicon())
                 .placeholder(R.drawable.carpenter_icon)
@@ -95,7 +95,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             cardView = (CardView)itemView.findViewById(R.id.cardView);
             textViewCategoryName = (TextView)itemView.findViewById(R.id.textViewCategoryName);
             imageViewCategory = (ImageView)itemView.findViewById(R.id.imageViewCategory);
-
 
 
         }
