@@ -474,6 +474,7 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
                         Intent intent = new Intent(EditProfileUserActivity.this, HomeActivity.class);
                         intent.putExtra("fromUpdate", true);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();
                     }
