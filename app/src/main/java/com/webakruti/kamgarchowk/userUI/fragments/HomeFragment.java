@@ -233,9 +233,9 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             try {
+                List<SubcategoryListResponse.Subcategory> list = new ArrayList<>();
 
                 if (jsonObject != null) {
-                    List<SubcategoryListResponse.Subcategory> list = new ArrayList<>();
                     JSONArray jsonArray = jsonObject.getJSONArray("subcategory");
                     if (jsonArray != null && jsonArray.length() > 0) {
                         for (int i = 0; i < jsonArray.length(); i++) {
@@ -253,7 +253,14 @@ public class HomeFragment extends Fragment {
                         autoComTextViewSearch.setAdapter(arrAdapter);
                     } else {
                         //Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                        /*SubcategoryListResponse.Subcategory noResultObj = new SubcategoryListResponse.Subcategory();
+                        noResultObj.setId(-1);
+                        noResultObj.setName("No result for " + searchQuery);
+                        list.add(noResultObj);
+                        ArrayAdapter<SubcategoryListResponse.Subcategory> arrAdapter = new ArrayAdapter<SubcategoryListResponse.Subcategory>(getActivity(), android.R.layout.simple_dropdown_item_1line, list);
+                        autoComTextViewSearch.setAdapter(arrAdapter);*/
                     }
+                } else {
                 }
 
             } catch (Exception e) {
@@ -353,11 +360,13 @@ public class HomeFragment extends Fragment {
         autoComTextViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SubcategoryListResponse.Subcategory subcategory = (SubcategoryListResponse.Subcategory) parent.getItemAtPosition(position);
-                Intent intent = new Intent(getActivity(), KamgarListActivity.class);
-                intent.putExtra("KamgarSubCategory", subcategory);
-                startActivity(intent);
 
+                SubcategoryListResponse.Subcategory subcategory = (SubcategoryListResponse.Subcategory) parent.getItemAtPosition(position);
+                if (subcategory.getId() != -1) {
+                    Intent intent = new Intent(getActivity(), KamgarListActivity.class);
+                    intent.putExtra("KamgarSubCategory", subcategory);
+                    startActivity(intent);
+                }
 
             }
         });

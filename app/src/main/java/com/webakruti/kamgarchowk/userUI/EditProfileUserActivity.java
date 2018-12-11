@@ -294,8 +294,6 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
         List<City> cityList = finalList.get(pos).getCities();
         setSelectedCitySpinner(cityList, user.getCity());
 
-        selectedState.setName(state.getName());
-        selectedState.setId(state.getId());
     }
 
     private void setCitySpinner(List<UserProfileResponse.City> cityList) {
@@ -384,7 +382,7 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                                             if (selectedGender.getId() != -1) {
                                                 if (editTextAddress.getText().toString().length() > 0) {
                                                     if (selectedCountry.getId() != -1) {
-                                                        if (selectedState.getId() != -1) {
+                                                        if (((State) spinnerState.getSelectedItem()).getId() != -1) {
                                                             if (selectedCity.getId() != -1) {
 
                                                                 if (NetworkUtil.hasConnectivity(EditProfileUserActivity.this)) {
@@ -456,7 +454,7 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
         //String API = "http://beta.kamgarchowk.com/api/";
         String headers = "Bearer " + token;
-        Call<UpdateProfileResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).updateprofile(headers, userid, editTextFname.getText().toString(), editTextMname.getText().toString(), editTextLname.getText().toString(), editTextDOB.getText().toString(), selectedGender.getId(), editTextMobile.getText().toString(), editTextEmail.getText().toString(), editTextAddress.getText().toString(), selectedCountry.getId(), selectedState.getId(), selectedCity.getId(), editTextPincode.getText().toString());
+        Call<UpdateProfileResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).updateprofile(headers, userid, editTextFname.getText().toString(), editTextMname.getText().toString(), editTextLname.getText().toString(), editTextDOB.getText().toString(), selectedGender.getId(), editTextMobile.getText().toString(), editTextEmail.getText().toString(), editTextAddress.getText().toString(), selectedCountry.getId(), ((State) spinnerState.getSelectedItem()).getId(), selectedCity.getId(), editTextPincode.getText().toString());
 
         requestCallback.enqueue(new Callback<UpdateProfileResponse>() {
             @Override
