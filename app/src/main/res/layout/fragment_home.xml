@@ -58,12 +58,11 @@
                     android:id="@+id/autoComTextViewSearch"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:background="@color/white"
+                    android:background="@drawable/search_css"
                     android:paddingLeft="7dp"
                     android:hint="Search for kamgar"
                     android:textSize="16dp"
                     android:inputType="text"
-
                     >
                 </AutoCompleteTextView>
             </LinearLayout>

@@ -535,7 +535,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="70"
                         android:orientation="vertical"
-                        android:visibility="gone"
                         >
 
                         <TextView
@@ -560,35 +559,35 @@
                                 android:layout_height="13dp"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="10dp"
-                                android:src="@drawable/star" />
+                                android:src="@drawable/greystar" />
                             <ImageView
                                 android:id="@+id/imageViewRating2"
                                 android:layout_width="13dp"
                                 android:layout_height="13dp"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="5dp"
-                                android:src="@drawable/star" />
+                                android:src="@drawable/greystar" />
                             <ImageView
                                 android:id="@+id/imageViewRating3"
                                 android:layout_width="13dp"
                                 android:layout_height="13dp"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="5dp"
-                                android:src="@drawable/star" />
+                                android:src="@drawable/greystar" />
                             <ImageView
                                 android:id="@+id/imageViewRating4"
                                 android:layout_width="13dp"
                                 android:layout_height="13dp"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="5dp"
-                                android:src="@drawable/star" />
+                                android:src="@drawable/greystar" />
                             <ImageView
                                 android:id="@+id/imageViewRating5"
                                 android:layout_width="13dp"
                                 android:layout_height="13dp"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="5dp"
-                                android:src="@drawable/star" />
+                                android:src="@drawable/greystar" />
                         </LinearLayout>
 
 

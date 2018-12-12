@@ -69,7 +69,7 @@ public class KamgarResponse implements Serializable{
         private Object contImgUrl;
         @SerializedName("rating")
         @Expose
-        private Object rating;
+        private Integer rating;
         @SerializedName("experience")
         @Expose
         private Integer experience;
@@ -162,11 +162,11 @@ public class KamgarResponse implements Serializable{
             this.contImgUrl = contImgUrl;
         }
 
-        public Object getRating() {
+        public Integer getRating() {
             return rating;
         }
 
-        public void setRating(Object rating) {
+        public void setRating(Integer rating) {
             this.rating = rating;
         }
 

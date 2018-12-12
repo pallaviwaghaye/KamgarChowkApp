@@ -379,9 +379,15 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                                                     if (((Country) spinnerCountry.getSelectedItem()).getId() != -1) {
                                                         if (((State) spinnerState.getSelectedItem()).getId() != -1) {
                                                             if (((City) spinnerCity.getSelectedItem()).getId() != -1) {
+                                                                if(editTextPincode.getText().toString().length() > 0) {
 
-                                                                if (NetworkUtil.hasConnectivity(EditProfileUserActivity.this)) {
-                                                                    CallUpdateUserAPI();
+                                                                    if (NetworkUtil.hasConnectivity(EditProfileUserActivity.this)) {
+                                                                        CallUpdateUserAPI();
+                                                                    }else{
+                                                                        Toast.makeText(EditProfileUserActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                }else{
+                                                                    Toast.makeText(EditProfileUserActivity.this, "Pincode can't be empty", Toast.LENGTH_SHORT).show();
                                                                 }
                                                             } else {
                                                                 Toast.makeText(EditProfileUserActivity.this, "Select city", Toast.LENGTH_SHORT).show();

@@ -103,7 +103,7 @@ public class UserProfileResponse implements Serializable {
         private Integer genderId;
         @SerializedName("pincode")
         @Expose
-        private long pincode;
+        private Integer pincode;
         @SerializedName("country")
         @Expose
         private Country country;
@@ -213,11 +213,11 @@ public class UserProfileResponse implements Serializable {
             this.genderId = genderId;
         }
 
-        public long getPincode() {
+        public Integer getPincode() {
             return pincode;
         }
 
-        public void setPincode(long pincode) {
+        public void setPincode(Integer pincode) {
             this.pincode = pincode;
         }
 

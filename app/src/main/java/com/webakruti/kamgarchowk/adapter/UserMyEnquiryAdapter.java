@@ -81,6 +81,8 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
             viewHolder.imageViewRating5.setEnabled(true);
             viewHolder.buttonRateNow.setEnabled(true);
 
+
+
             switch (myEnquiry.getRating()) {
 
                 case 0:
@@ -97,11 +99,18 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
                     viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     //viewHolder.buttonRateNow.setEnabled(false);
 
+                  /*  viewHolder.buttonRateNow.setBackgroundColor(context.getResources().getColor(R.color.pink_red));
+                    viewHolder.buttonRateNow.setTextColor(context.getResources().getColor(R.color.white));
+
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(190,90);
+                    params.setMargins(5, 10, 5, 10);
+                    viewHolder.buttonRateNow.setLayoutParams(params);*/
+
                     break;
 
                 case 1:
 
-                    viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                    viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
                     viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
@@ -119,8 +128,8 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
                     break;
 
                 case 2:
-                    viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                    viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                    viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
                     viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
@@ -138,9 +147,9 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
 
                 case 3:
 
-                    viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                    viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                    viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                    viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
                     viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     viewHolder.buttonRateNow.setEnabled(false);
@@ -155,10 +164,10 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
 
                 case 4:
 
-                    viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                    viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                    viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                    viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                    viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
                     viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     viewHolder.buttonRateNow.setEnabled(false);
                     viewHolder.imageViewRating1.setEnabled(false);
@@ -172,11 +181,11 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
 
                 case 5:
 
-                    viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                    viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                    viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                    viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                    viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                    viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
                     viewHolder.buttonRateNow.setEnabled(false);
                     viewHolder.imageViewRating1.setEnabled(false);
                     viewHolder.imageViewRating2.setEnabled(false);
@@ -204,7 +213,7 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
             @Override
             public void onClick(View view) {
                 countRating = 1;
-                viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
                 viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                 viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                 viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
@@ -217,8 +226,8 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
             @Override
             public void onClick(View view) {
                 countRating = 2;
-                viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
                 viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                 viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                 viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
@@ -230,9 +239,9 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
             @Override
             public void onClick(View view) {
                 countRating = 3;
-                viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
                 viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                 viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
 
@@ -243,10 +252,10 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
             @Override
             public void onClick(View view) {
                 countRating = 4;
-                viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
                 viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
 
             }
@@ -255,11 +264,11 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
             @Override
             public void onClick(View view) {
                 countRating = 5;
-                viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+                viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
 
             }
         });
@@ -389,6 +398,7 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
         private TextView textViewKamgarStatus;
         private TextView textViewKamgarShowHideDetais;
         private LinearLayout linearLayoutEnquiryShowHide;
+        private LinearLayout linearLayoutRateButton;
 
         private ImageView imageViewRating1;
         private ImageView imageViewRating2;
@@ -434,7 +444,7 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
             imageViewRating3 = (ImageView) itemView.findViewById(R.id.imageViewRating3);
             imageViewRating4 = (ImageView) itemView.findViewById(R.id.imageViewRating4);
             imageViewRating5 = (ImageView) itemView.findViewById(R.id.imageViewRating5);
-
+            linearLayoutRateButton = (LinearLayout) itemView.findViewById(R.id.linearLayoutRateButton);
 
         }
     }

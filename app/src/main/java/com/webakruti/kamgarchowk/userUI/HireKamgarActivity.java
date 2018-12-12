@@ -49,6 +49,7 @@ public class HireKamgarActivity extends AppCompatActivity {
     private Button buttonHire;
 
     private KamgarResponse.Kamgar kamgar;
+    int countRating = 0;
 
     private ProgressDialog progressDialogForAPI;
 
@@ -99,11 +100,133 @@ public class HireKamgarActivity extends AppCompatActivity {
         textViewKamgarProfession.setText(kamgar.getSubcategory());
         textViewAddress.setText(kamgar.getAddress()+", "+kamgar.getCity());
         textViewExperience.setText(kamgar.getExperience()+"");
-        textViewHourlyPrice.setText(kamgar.getHourly()+"");
-        textViewHalfdayPrice.setText(kamgar.getHalfday()+"");
-        textViewFulldayPrice.setText(kamgar.getFullday()+"");
-        textViewWeeklyPrice.setText(kamgar.getWeekly()+"");
-        textViewMonthlyPrice.setText(kamgar.getMonthly()+"");
+
+        if(kamgar.getHourly() != 0) {
+            textViewHourlyPrice.setText(kamgar.getHourly() + "");
+        }else{
+            textViewHourlyPrice.setText("N/A");
+        }
+        if(kamgar.getFullday() != 0) {
+            textViewFulldayPrice.setText(kamgar.getFullday()+"");
+        }else{
+            textViewHourlyPrice.setText("N/A");
+        }
+        if(kamgar.getWeekly() != 0) {
+            textViewWeeklyPrice.setText(kamgar.getWeekly()+"");
+        }else{
+            textViewHourlyPrice.setText("N/A");
+        }
+        if(kamgar.getMonthly() != 0) {
+            textViewMonthlyPrice.setText(kamgar.getMonthly()+"");
+        }else{
+            textViewHourlyPrice.setText("N/A");
+        }
+
+
+        switch (kamgar.getRating()) {
+
+            case 0:
+                imageViewRating1.setEnabled(false);
+                imageViewRating2.setEnabled(false);
+                imageViewRating3.setEnabled(false);
+                imageViewRating4.setEnabled(false);
+                imageViewRating5.setEnabled(false);
+
+                imageViewRating1.setImageDrawable(getResources().getDrawable(R.drawable.greystar));
+                imageViewRating2.setImageDrawable(getResources().getDrawable(R.drawable.greystar));
+                imageViewRating3.setImageDrawable(getResources().getDrawable(R.drawable.greystar));
+                imageViewRating4.setImageDrawable(getResources().getDrawable(R.drawable.greystar));
+                imageViewRating5.setImageDrawable(getResources().getDrawable(R.drawable.greystar));
+                //viewHolder.buttonRateNow.setEnabled(false);
+
+                break;
+
+            case 1:
+
+                imageViewRating1.setImageDrawable(getResources().getDrawable(R.drawable.greenstar));
+                imageViewRating2.setImageDrawable(getResources().getDrawable(R.drawable.greystar));
+                imageViewRating3.setImageDrawable(getResources().getDrawable(R.drawable.greystar));
+                imageViewRating4.setImageDrawable(getResources().getDrawable(R.drawable.greystar));
+                imageViewRating5.setImageDrawable(getResources().getDrawable(R.drawable.greystar));
+
+                imageViewRating1.setEnabled(false);
+                imageViewRating2.setEnabled(false);
+                imageViewRating3.setEnabled(false);
+                imageViewRating4.setEnabled(false);
+                imageViewRating5.setEnabled(false);
+
+
+
+                break;
+
+            case 2:
+                imageViewRating1.setImageDrawable(getResources().getDrawable(R.drawable.greenstar));
+                imageViewRating2.setImageDrawable(getResources().getDrawable(R.drawable.greenstar));
+                imageViewRating3.setImageDrawable(getResources().getDrawable(R.drawable.greystar));
+                imageViewRating4.setImageDrawable(getResources().getDrawable(R.drawable.greystar));
+                imageViewRating5.setImageDrawable(getResources().getDrawable(R.drawable.greystar));
+
+                imageViewRating1.setEnabled(false);
+                imageViewRating2.setEnabled(false);
+                imageViewRating3.setEnabled(false);
+                imageViewRating4.setEnabled(false);
+                imageViewRating5.setEnabled(false);
+
+
+                break;
+
+            case 3:
+
+                imageViewRating1.setImageDrawable(getResources().getDrawable(R.drawable.greenstar));
+                imageViewRating2.setImageDrawable(getResources().getDrawable(R.drawable.greenstar));
+                imageViewRating3.setImageDrawable(getResources().getDrawable(R.drawable.greenstar));
+                imageViewRating4.setImageDrawable(getResources().getDrawable(R.drawable.greystar));
+                imageViewRating5.setImageDrawable(getResources().getDrawable(R.drawable.greystar));
+
+                imageViewRating1.setEnabled(false);
+                imageViewRating2.setEnabled(false);
+                imageViewRating3.setEnabled(false);
+                imageViewRating4.setEnabled(false);
+                imageViewRating5.setEnabled(false);
+
+
+                break;
+
+            case 4:
+
+                imageViewRating1.setImageDrawable(getResources().getDrawable(R.drawable.greenstar));
+                imageViewRating2.setImageDrawable(getResources().getDrawable(R.drawable.greenstar));
+                imageViewRating3.setImageDrawable(getResources().getDrawable(R.drawable.greenstar));
+                imageViewRating4.setImageDrawable(getResources().getDrawable(R.drawable.greenstar));
+                imageViewRating5.setImageDrawable(getResources().getDrawable(R.drawable.greystar));
+
+                imageViewRating1.setEnabled(false);
+                imageViewRating2.setEnabled(false);
+                imageViewRating3.setEnabled(false);
+                imageViewRating4.setEnabled(false);
+                imageViewRating5.setEnabled(false);
+
+
+                break;
+
+            case 5:
+
+                imageViewRating1.setImageDrawable(getResources().getDrawable(R.drawable.greenstar));
+                imageViewRating2.setImageDrawable(getResources().getDrawable(R.drawable.greenstar));
+                imageViewRating3.setImageDrawable(getResources().getDrawable(R.drawable.greenstar));
+                imageViewRating4.setImageDrawable(getResources().getDrawable(R.drawable.greenstar));
+                imageViewRating5.setImageDrawable(getResources().getDrawable(R.drawable.greenstar));
+
+                imageViewRating1.setEnabled(false);
+                imageViewRating2.setEnabled(false);
+                imageViewRating3.setEnabled(false);
+                imageViewRating4.setEnabled(false);
+                imageViewRating5.setEnabled(false);
+
+
+                break;
+
+        }
 
 
         buttonHire = (Button)findViewById(R.id.buttonHire);

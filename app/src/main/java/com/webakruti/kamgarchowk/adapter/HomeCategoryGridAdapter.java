@@ -62,7 +62,7 @@ public class HomeCategoryGridAdapter extends BaseAdapter {
         //myImage.setImageDrawable(featuredlist.getCategoryicon());
         Picasso.with(context)
                 .load(featuredlist.getCategoryicon())
-                .placeholder(R.drawable.carpenter_icon)
+                .placeholder(R.drawable.weldericon)
                 .into(imageGrid);
 
 

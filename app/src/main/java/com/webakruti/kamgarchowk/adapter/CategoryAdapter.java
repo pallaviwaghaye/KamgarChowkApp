@@ -55,7 +55,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 */
         Picasso.with(context)
                 .load(category.getCategoryicon())
-                .placeholder(R.drawable.carpenter_icon)
+                .placeholder(R.drawable.weldericon)
                 .into(viewHolder.imageViewCategory);
 
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {

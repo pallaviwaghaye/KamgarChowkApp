@@ -123,7 +123,7 @@ public class KamgarListActivity extends AppCompatActivity {
                         final List<KamgarResponse.Kamgar> kamgars = details.getKamgar();
                         LinearLayoutManager layoutManager1 = new LinearLayoutManager(KamgarListActivity.this,LinearLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(layoutManager1);
-                        recyclerView.setAdapter(new KamgarListAdapter(getApplicationContext(), kamgars));
+                        recyclerView.setAdapter(new KamgarListAdapter(KamgarListActivity.this, kamgars));
                     }
 
                 } else {

@@ -28,7 +28,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:padding="10dp"
-            android:src="@drawable/plumber_icon"
+            android:src="@drawable/weldericon"
             />
         <TextView
             android:id="@+id/textView"
