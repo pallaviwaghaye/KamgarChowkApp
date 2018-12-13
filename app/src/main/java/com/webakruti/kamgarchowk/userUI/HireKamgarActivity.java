@@ -18,6 +18,7 @@ import com.webakruti.kamgarchowk.model.KamgarResponse;
 import com.webakruti.kamgarchowk.model.SubcategoryListResponse;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 import com.webakruti.kamgarchowk.retrofit.service.RestClient;
+import com.webakruti.kamgarchowk.utils.NetworkUtil;
 import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
 
 import retrofit2.Call;
@@ -123,7 +124,7 @@ public class HireKamgarActivity extends AppCompatActivity {
         }
 
 
-        /*switch (kamgar.getRating()) {
+        switch (kamgar.getRating()) {
 
             case 0:
                 imageViewRating1.setEnabled(false);
@@ -226,14 +227,18 @@ public class HireKamgarActivity extends AppCompatActivity {
 
                 break;
 
-        }*/
+        }
 
 
         buttonHire = (Button)findViewById(R.id.buttonHire);
         buttonHire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callHireKamgarAPI();
+                if (NetworkUtil.hasConnectivity(HireKamgarActivity.this)) {
+                    callHireKamgarAPI();
+                }else{
+                    Toast.makeText(HireKamgarActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -258,7 +263,7 @@ public class HireKamgarActivity extends AppCompatActivity {
 
         //String API = "http://beta.kamgarchowk.com/api/";
         String headers = "Bearer " + token;
-        Call<HireKamgarResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).hirekamgar(headers,userid,kamgarid,subcategoryid);
+        Call<HireKamgarResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).hirekamgar(headers,kamgarid,userid,subcategoryid);
         requestCallback.enqueue(new Callback<HireKamgarResponse>() {
             @Override
             public void onResponse(Call<HireKamgarResponse> call, Response<HireKamgarResponse> response) {
@@ -267,8 +272,6 @@ public class HireKamgarActivity extends AppCompatActivity {
                     HireKamgarResponse details = response.body();
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
                     if (details.getMsg() != null) {
-
-
 
                         Intent intent = new Intent(HireKamgarActivity.this,HomeActivity.class);
                         startActivity(intent);

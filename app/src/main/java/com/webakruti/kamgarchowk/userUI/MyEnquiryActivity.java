@@ -53,6 +53,7 @@ public class MyEnquiryActivity extends AppCompatActivity {
     private void initViews()
     {
         imageViewBack = (ImageView)findViewById(R.id.imageViewBack);
+        textViewNoData = (TextView)findViewById(R.id.textViewNoData);
         textViewMyEnquiryHeading = (TextView)findViewById(R.id.textViewMyEnquiryHeading);
 
         imageViewBack.setOnClickListener(new View.OnClickListener() {

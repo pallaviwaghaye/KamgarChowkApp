@@ -73,6 +73,21 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
         viewHolder.textViewRatingType.setText(myEnquiry.getRateremark());
 
 
+        /*if(myEnquiry.getRating() == 1) {
+            viewHolder.textViewRatingType.setText("Poor");
+        }else if(myEnquiry.getRating() == 2) {
+            viewHolder.textViewRatingType.setText("Satisfactory");
+        }else if(myEnquiry.getRating() == 3) {
+            viewHolder.textViewRatingType.setText("Good");
+        }else if(myEnquiry.getRating() == 4){
+            viewHolder.textViewRatingType.setText("Very good");
+        }else if(myEnquiry.getRating() == 5){
+            viewHolder.textViewRatingType.setText("Excellent");
+        }else{
+            viewHolder.textViewRatingType.setText("No Rating");
+        }*/
+
+
         if (myEnquiry.getWorkstatus().equalsIgnoreCase("Completed")) {
             viewHolder.imageViewRating1.setEnabled(true);
             viewHolder.imageViewRating2.setEnabled(true);
@@ -80,7 +95,6 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
             viewHolder.imageViewRating4.setEnabled(true);
             viewHolder.imageViewRating5.setEnabled(true);
             viewHolder.buttonRateNow.setEnabled(true);
-
 
 
             switch (myEnquiry.getRating()) {
@@ -91,6 +105,8 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
                     viewHolder.imageViewRating3.setEnabled(false);
                     viewHolder.imageViewRating4.setEnabled(false);
                     viewHolder.imageViewRating5.setEnabled(false);*/
+
+                    viewHolder.textViewRatingType.setText("No Rating");
 
                     viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
@@ -116,6 +132,8 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
                     viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
 
+                    viewHolder.textViewRatingType.setText("Poor");
+
                     viewHolder.imageViewRating1.setEnabled(false);
                     viewHolder.imageViewRating2.setEnabled(false);
                     viewHolder.imageViewRating3.setEnabled(false);
@@ -133,6 +151,8 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
                     viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
+
+                    viewHolder.textViewRatingType.setText("Satisfactory");
 
                     viewHolder.imageViewRating1.setEnabled(false);
                     viewHolder.imageViewRating2.setEnabled(false);
@@ -152,6 +172,9 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
                     viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
                     viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
+
+                    viewHolder.textViewRatingType.setText("Good");
+
                     viewHolder.buttonRateNow.setEnabled(false);
                     viewHolder.imageViewRating1.setEnabled(false);
                     viewHolder.imageViewRating2.setEnabled(false);
@@ -169,6 +192,9 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
                     viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
                     viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
                     viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
+
+                    viewHolder.textViewRatingType.setText("Very good");
+
                     viewHolder.buttonRateNow.setEnabled(false);
                     viewHolder.imageViewRating1.setEnabled(false);
                     viewHolder.imageViewRating2.setEnabled(false);
@@ -186,6 +212,9 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
                     viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
                     viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
                     viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.yellowstar));
+
+                    viewHolder.textViewRatingType.setText("Excellent");
+
                     viewHolder.buttonRateNow.setEnabled(false);
                     viewHolder.imageViewRating1.setEnabled(false);
                     viewHolder.imageViewRating2.setEnabled(false);
@@ -281,6 +310,9 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
                 if (countRating > 0 && countRating < 6) {
                     if (NetworkUtil.hasConnectivity(context)) {
                         callRatingAPI(myEnquiry.getId(), countRating, position);
+
+
+
                     } else {
                         Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
                     }
@@ -376,6 +408,7 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
 
     private void updateUI(int position, int rating) {
         list.get(position).setRating(rating);
+
         this.notifyDataSetChanged();
 
     }

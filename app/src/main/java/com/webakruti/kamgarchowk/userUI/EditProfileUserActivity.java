@@ -99,7 +99,12 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
         editTextAddress.setText(user.getAddress());
         editTextEmail.setText(user.getEmail());
         editTextMname.setText(user.getMiddleName());
-        editTextPincode.setText(user.getPincode() + "");
+        if(user.getPincode() == 0)
+        {
+            editTextPincode.setText("");
+        }else {
+            editTextPincode.setText(user.getPincode()+"");
+        }
         editTextMobile.setText(user.getMobileNo());
         editTextDOB.setText(user.getDob());
 
@@ -176,7 +181,8 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
         // set normal spinner for State, City
         stateList.add(selectedState);
         cityList.add(selectedCity);
-        if (countryObj == null && countryObj.getName() == null) {
+        if (countryObj == null) {
+            //&& countryObj.getName() == null
 
             setInitialSpinnersForStateAndCity(stateList, cityList);
         } else {
@@ -379,16 +385,12 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                                                     if (((Country) spinnerCountry.getSelectedItem()).getId() != -1) {
                                                         if (((State) spinnerState.getSelectedItem()).getId() != -1) {
                                                             if (((City) spinnerCity.getSelectedItem()).getId() != -1) {
-                                                                if(editTextPincode.getText().toString().length() > 0) {
 
                                                                     if (NetworkUtil.hasConnectivity(EditProfileUserActivity.this)) {
                                                                         CallUpdateUserAPI();
                                                                     }else{
                                                                         Toast.makeText(EditProfileUserActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
                                                                     }
-                                                                }else{
-                                                                    Toast.makeText(EditProfileUserActivity.this, "Pincode can't be empty", Toast.LENGTH_SHORT).show();
-                                                                }
                                                             } else {
                                                                 Toast.makeText(EditProfileUserActivity.this, "Select city", Toast.LENGTH_SHORT).show();
                                                             }
@@ -476,6 +478,7 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                         user.getSuccess().getAuthuser().setEmail(authuser.getEmail());
                         user.getSuccess().getAuthuser().setLastName(authuser.getLastName());
                         user.getSuccess().getAuthuser().setMobileNo(authuser.getMobileNo());
+                        user.getSuccess().getAuthuser().setPincode(authuser.getPincode());
                         SharedPreferenceManager.storeUserResponseObjectInSharedPreference(user);
 
                         Intent intent = new Intent(EditProfileUserActivity.this, HomeActivity.class);
