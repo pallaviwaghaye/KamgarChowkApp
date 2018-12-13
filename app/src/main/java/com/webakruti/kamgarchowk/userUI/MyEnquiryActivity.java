@@ -32,6 +32,7 @@ public class MyEnquiryActivity extends AppCompatActivity {
     private ImageView imageViewBack;
     private TextView textViewMyEnquiryHeading;
     private RecyclerView recyclerView;
+    private TextView textViewNoData;
     private ProgressDialog progressDialogForAPI;
 
     @Override
@@ -88,14 +89,20 @@ public class MyEnquiryActivity extends AppCompatActivity {
 
                     MyEnquiryResponse details = response.body();
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
-                    if (details != null) {
+                    if (details.getSuccess().getUserenquiry() != null && details.getSuccess().getUserenquiry().size() > 0) {
 
                         //handleStationPlatformData(details);
+                        textViewNoData.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
 
                         final List<MyEnquiryResponse.Userenquiry> myEnquiry = details.getSuccess().getUserenquiry();
                         LinearLayoutManager layoutManager1 = new LinearLayoutManager(MyEnquiryActivity.this,LinearLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(layoutManager1);
                         recyclerView.setAdapter(new UserMyEnquiryAdapter(MyEnquiryActivity.this, myEnquiry));
+                    }
+                    else{
+                        textViewNoData.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.GONE);
                     }
 
                 } else {

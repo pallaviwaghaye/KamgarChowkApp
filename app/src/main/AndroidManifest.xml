@@ -34,8 +34,7 @@
         <activity android:name=".userUI.UserRegistrationActivity" />
         <activity android:name=".kamgarUI.KamgarLoginActivity" />
         <activity android:name=".userUI.UserLoginActivity" />
-        <activity
-            android:name=".userUI.HomeActivity" />
+        <activity android:name=".userUI.HomeActivity" />
         <activity android:name=".userUI.SubcategoryActivity" />
         <activity android:name=".userUI.KamgarListActivity" />
         <activity android:name=".kamgarUI.HomeOrProfileActivity" />
@@ -50,7 +49,9 @@
         <activity android:name=".userUI.EditProfileUserActivity" />
         <activity android:name=".AdvertiseActivity" />
         <activity android:name=".FreeListingActivity" />
-        <activity android:name=".userUI.CitySelectActivity"></activity>
+        <activity android:name=".userUI.CitySelectActivity" />
+        <activity android:name=".kamgarUI.KamgarSupportActivity" />
+        <activity android:name=".kamgarUI.MyOrdersActivity"></activity>
     </application>
 
 </manifest>

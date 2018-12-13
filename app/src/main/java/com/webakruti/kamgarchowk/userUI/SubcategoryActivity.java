@@ -135,12 +135,16 @@ public class SubcategoryActivity extends AppCompatActivity {
 
                     SubcategoryListResponse details = response.body();
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
-                    if (details != null) {
-
+                    if (details.getSubcategory() != null && details.getSubcategory().size() > 0) {
+                        textViewNoData.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
                         List<SubcategoryListResponse.Subcategory> list = details.getSubcategory();
                         //Toast.makeText(SubcategoryActivity.this, list.size(),Toast.LENGTH_LONG).show();
                         subcategoryAdapter = new SubcategoryAdapter(getApplicationContext(), list);
                         recyclerView.setAdapter(subcategoryAdapter);
+                    }else{
+                        textViewNoData.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.GONE);
                     }
 
                 } else {

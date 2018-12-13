@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webakruti.kamgarchowk.R;
@@ -36,6 +37,7 @@ import retrofit2.Response;
 public class MyEnquiryFragment extends Fragment {
     private View rootView;
     private RecyclerView recyclerView;
+    private TextView textViewNoData;
     private ProgressDialog progressDialogForAPI;
 
     @Override
@@ -57,6 +59,7 @@ public class MyEnquiryFragment extends Fragment {
     private void initViews()
     {
         recyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerView);
+        textViewNoData = (TextView)rootView.findViewById(R.id.textViewNoData);
 
     }
 
@@ -82,14 +85,19 @@ public class MyEnquiryFragment extends Fragment {
 
                     MyEnquiryResponse details = response.body();
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
-                    if (details != null) {
+                    if (details.getSuccess().getUserenquiry() != null && details.getSuccess().getUserenquiry().size() > 0) {
 
                         //handleStationPlatformData(details);
+                        textViewNoData.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
 
                         final List<MyEnquiryResponse.Userenquiry> myEnquiry = details.getSuccess().getUserenquiry();
                         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(layoutManager1);
                         recyclerView.setAdapter(new UserMyEnquiryAdapter(getActivity(), myEnquiry));
+                    }else{
+                        textViewNoData.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.GONE);
                     }
 
                 } else {

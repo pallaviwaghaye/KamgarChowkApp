@@ -34,7 +34,7 @@ public class CategoryActivity extends AppCompatActivity {
     private CategoryAdapter categoryAdapter;
 
     private ProgressDialog progressDialogForAPI;
-
+    private TextView textViewNoData;
     private ImageView imageViewBack;
     private TextView textViewHeading;
     @Override
@@ -71,12 +71,16 @@ public class CategoryActivity extends AppCompatActivity {
 
                     CategoryList details = response.body();
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
-                    if (details != null) {
-
+                    if (details.getCategorylist() != null && details.getCategorylist().size() > 0) {
+                        textViewNoData.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
                         List<CategoryList.Categorylist> list = details.getCategorylist();
                         //Toast.makeText(CategoryActivity.this, list.size(),Toast.LENGTH_LONG).show();
                         categoryAdapter = new CategoryAdapter(getApplicationContext(), list);
                         recyclerView.setAdapter(categoryAdapter);
+                    }else{
+                        textViewNoData.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.GONE);
                     }
 
                 } else {
@@ -107,6 +111,8 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+
+        textViewNoData = (TextView)findViewById(R.id.textViewNoData);
 
         imageViewBack = (ImageView)findViewById(R.id.imageViewBack);
         imageViewBack.setOnClickListener(new View.OnClickListener() {

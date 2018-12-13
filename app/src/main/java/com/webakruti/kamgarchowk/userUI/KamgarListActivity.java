@@ -116,14 +116,19 @@ public class KamgarListActivity extends AppCompatActivity {
 
                     KamgarResponse details = response.body();
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
-                    if (details != null) {
+                    if (details.getKamgar() != null && details.getKamgar().size() > 0) {
 
                         //handleStationPlatformData(details);
+                        textViewNoData.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
 
                         final List<KamgarResponse.Kamgar> kamgars = details.getKamgar();
                         LinearLayoutManager layoutManager1 = new LinearLayoutManager(KamgarListActivity.this,LinearLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(layoutManager1);
                         recyclerView.setAdapter(new KamgarListAdapter(KamgarListActivity.this, kamgars));
+                    }else{
+                        textViewNoData.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.GONE);
                     }
 
                 } else {

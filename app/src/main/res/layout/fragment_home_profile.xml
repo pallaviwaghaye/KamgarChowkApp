@@ -1,129 +1,449 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayoutMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    >
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:gravity="center"
-            android:background="@color/faintPink1"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/linearLayoutKamgarInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:background="@color/pink_red"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:id="@+id/imageViewKamgarImage"
+                    android:layout_width="90dp"
+                    android:layout_height="87dp"
+                    android:background="@drawable/kamgarborder"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center"/>
+
+
+                <TextView
+                    android:id="@+id/textViewKamgarFullname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Rajesh Addf Sharma"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textViewKamgarMobNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9876543210"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/textViewProfession"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Electrician"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:visibility="gone"/>
+                <ImageView
+                    android:id="@+id/imageViewKamgarEdit"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/edit1"
+                    android:scaleType="fitXY"
+                    android:layout_marginRight="20dp"
+                    android:layout_gravity="right"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayoutKamgarContactInfo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/linearLayoutKamgarInfo"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/textViewCosting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Contact Informnation"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/gray"
+                    android:layout_marginTop="5dp"
+                    >
+                </View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email Id"
+                        android:textSize="14dp"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="@color/grey" />
+
+                    <TextView
+                        android:id="@+id/textViewkamgarEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="abc@gmail.com"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"
+                    android:layout_marginTop="5dp"
+                    >
+                </View>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mobile No."
+                        android:textSize="14dp"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="@color/grey" />
+
+                    <TextView
+                        android:id="@+id/textViewKamgarMobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="9876543210"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"
+                    android:layout_marginTop="5dp">
+                </View>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Address"
+                        android:textSize="14dp"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="@color/grey" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textViewKamgarAddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="#121 Mate Square, Nagpur,India,440010"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="15dp"
+                            android:textSize="16sp" />
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:weightSum="100"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:layout_below="@+id/linearLayoutKamgarContactInfo"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:padding="10dp"
+                    android:text="Other Informnation"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/gray"
+                    android:layout_marginTop="5dp"
+                    >
+                </View>
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="60"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/textViewText1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="You need help !!!"
-                        android:textSize="16dp"
-                        android:textColor="@color/pink_red" />
-                    <TextView
-                        android:id="@+id/textViewText2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="Please tell Us how can we help you."
-                        android:textSize="14dp"
-                        android:textColor="@color/dark_blue" />
-                    </LinearLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/linearLayoutSubcategoryArrow"
-                    android:layout_width="0dp"
+                    android:id="@+id/linearLayoutGotoCategory"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="40"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal"
-                    >
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+
                     <ImageView
-                        android:id="@+id/imageViewSubcategoryArrow"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_marginLeft="15dp"
-                        android:src="@drawable/support_image"
-                        />
+                        android:src="@drawable/category_icon"
+                        android:layout_marginTop="3dp"/>
+
+                    <TextView
+                        android:id="@+id/textViewGotoCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Categories"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"
+                    android:layout_marginTop="5dp"
+                    >
+                </View>
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutGotoMyorders"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/order_icon"
+                        android:layout_marginTop="3dp"/>
+
+                    <TextView
+                        android:id="@+id/textViewGotoMyOrders"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="My Orders"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"
+                    android:layout_marginTop="5dp"
+                    >
+                </View>
+                <LinearLayout
+                    android:id="@+id/linearLayoutGotoDocuments"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/document_icon"
+                        android:layout_marginTop="3dp"/>
+
+                    <TextView
+                        android:id="@+id/textViewGotoDocuments"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Documents"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"
+                    android:layout_marginTop="5dp"
+                    >
+                </View>
+                <LinearLayout
+                    android:id="@+id/linearLayoutGotoSubscriptionPlan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/sub_icon"
+                        android:layout_marginTop="3dp"/>
+
+                    <TextView
+                        android:id="@+id/textViewGotoSubscriptionPlan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Subscription Plan"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"
+                    android:layout_marginTop="5dp"
+                    >
+                </View>
+                <LinearLayout
+                    android:id="@+id/linearLayoutGotoChangePassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/lockchange"
+                        android:layout_marginTop="3dp"/>
+
+                    <TextView
+                        android:id="@+id/textViewGotoChangePassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Change Password"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"
+                    android:layout_marginTop="5dp">
+                </View>
+                <LinearLayout
+                    android:id="@+id/linearLayoutGotoSupport"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/support_icon"
+                        android:layout_marginTop="3dp"/>
+
+                    <TextView
+                        android:id="@+id/textViewGotoSupport"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Support"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"
+                    android:layout_marginTop="5dp">
+                </View>
+                <LinearLayout
+                    android:id="@+id/linearLayoutGotoLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/logout_icon"
+                        android:layout_marginTop="3dp"/>
+
+                    <TextView
+                        android:id="@+id/textViewGotoLogout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Logout"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:padding="20dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/textViewTextHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Please enter your query our customer support will connect you soon"
-            android:textSize="13dp"
-            android:textColor="@color/black" />
-        <EditText
-            android:id="@+id/editTextSubject"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/edittext_rectangular_oval"
-            android:hint="Subject"
-            android:layout_marginTop="20dp"
-            android:paddingLeft="10dp"
-            android:imeOptions="actionNext"
-            android:inputType="text"
-            android:textColor="@color/dark_blue"
-            android:textColorHint="@color/grey"
-            android:textSize="17sp" />
-
-        <EditText
-            android:id="@+id/editTextProblemDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edittext_rectangular_oval"
-            android:hint="Problem Detail"
-            android:layout_marginTop="20dp"
-            android:padding="10dp"
-            android:gravity="left|top|start"
-            android:imeOptions="actionNext"
-            android:inputType="textMultiLine"
-            android:lines="7"
-            android:textColor="@color/dark_blue"
-            android:textColorHint="@color/grey"
-            android:textSize="17sp" />
-
-        <Button
-            android:id="@+id/buttonUserSupportSubmit"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/button_css"
-            android:text="Submit"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-</LinearLayout>
+    </ScrollView>
+</RelativeLayout>

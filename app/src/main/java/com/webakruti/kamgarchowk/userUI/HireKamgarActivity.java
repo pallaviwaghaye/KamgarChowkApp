@@ -123,7 +123,7 @@ public class HireKamgarActivity extends AppCompatActivity {
         }
 
 
-        switch (kamgar.getRating()) {
+        /*switch (kamgar.getRating()) {
 
             case 0:
                 imageViewRating1.setEnabled(false);
@@ -226,7 +226,7 @@ public class HireKamgarActivity extends AppCompatActivity {
 
                 break;
 
-        }
+        }*/
 
 
         buttonHire = (Button)findViewById(R.id.buttonHire);
@@ -234,9 +234,7 @@ public class HireKamgarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 callHireKamgarAPI();
-                Intent intent = new Intent(HireKamgarActivity.this,HomeActivity.class);
-                startActivity(intent);
-                finish();
+
             }
         });
 
@@ -244,11 +242,11 @@ public class HireKamgarActivity extends AppCompatActivity {
 
     private void callHireKamgarAPI()
     {
-        progressDialogForAPI = new ProgressDialog(HireKamgarActivity.this);
+        /*progressDialogForAPI = new ProgressDialog(HireKamgarActivity.this);
         progressDialogForAPI.setCancelable(false);
         progressDialogForAPI.setIndeterminate(true);
         progressDialogForAPI.setMessage("Please wait...");
-        progressDialogForAPI.show();
+        progressDialogForAPI.show();*/
 
         SharedPreferenceManager.setApplicationContext(HireKamgarActivity.this);
 
@@ -268,19 +266,28 @@ public class HireKamgarActivity extends AppCompatActivity {
 
                     HireKamgarResponse details = response.body();
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
-                    if (details.getStatus() != null) {
+                    if (details.getMsg() != null) {
+
+
+
+                        Intent intent = new Intent(HireKamgarActivity.this,HomeActivity.class);
+                        startActivity(intent);
+                        finish();
 
                         Toast.makeText(HireKamgarActivity.this, details.getMsg(),Toast.LENGTH_LONG).show();
 
+                    }else{
+                        Toast.makeText(HireKamgarActivity.this, "enquiry not successful",Toast.LENGTH_LONG).show();
                     }
 
                 } else {
                     // Response code is 401
+                    Toast.makeText(HireKamgarActivity.this, "enquiry not successful",Toast.LENGTH_LONG).show();
                 }
 
-                if (progressDialogForAPI != null) {
+                /*if (progressDialogForAPI != null) {
                     progressDialogForAPI.cancel();
-                }
+                }*/
             }
 
             @Override
@@ -288,9 +295,9 @@ public class HireKamgarActivity extends AppCompatActivity {
 
                 if (t != null) {
 
-                    if (progressDialogForAPI != null) {
+                   /* if (progressDialogForAPI != null) {
                         progressDialogForAPI.cancel();
-                    }
+                    }*/
                     if (t.getMessage() != null)
                         Log.e("error", t.getMessage());
                 }

@@ -19,6 +19,7 @@ public class CategoryFragment extends Fragment {
     private View rootView;
     private RecyclerView recyclerView;
     private CategoryAdapter categoryAdapter;
+
     //private ProgressDialog progressDialogForAPI;
 
 

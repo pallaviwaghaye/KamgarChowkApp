@@ -17,8 +17,6 @@
             android:layout_height="wrap_content"
             android:background="@color/pink_red">
 
-
-
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -59,14 +57,26 @@
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/appBarLayout"
-        android:layout_width="fill_parent"
+        android:orientation="vertical">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/textViewNoData"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp">
-
-    </android.support.v7.widget.RecyclerView>
+        android:layout_centerInParent="true"
+        android:text="No Data Found"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:visibility="gone" />
 
 </RelativeLayout>
