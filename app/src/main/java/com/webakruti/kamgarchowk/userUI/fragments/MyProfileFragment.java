@@ -221,7 +221,11 @@ public class MyProfileFragment extends Fragment {
         textViewUserName.setText(list.get(0).getFirstName()+" "+list.get(0).getLastName());
         textViewMobile.setText(list.get(0).getMobileNo());
         textViewUserMobileNo.setText(list.get(0).getMobileNo());
-        textViewEmail.setText(list.get(0).getEmail());
+        if(list.get(0).getEmail()!= null) {
+            textViewEmail.setText(list.get(0).getEmail());
+        }else{
+            textViewEmail.setText("N/A");
+        }
         if (list.get(0).getAddress()!=null && list.get(0).getCity()!=null && list.get(0).getState()!=null && list.get(0).getCountry()!=null && list.get(0).getPincode() > 0) {
             textViewAddress.setText(list.get(0).getAddress()+", "+list.get(0).getCity().getName()+", "+list.get(0).getState().getName()+", "+list.get(0).getCountry().getName()+", "+list.get(0).getPincode());
         } else {

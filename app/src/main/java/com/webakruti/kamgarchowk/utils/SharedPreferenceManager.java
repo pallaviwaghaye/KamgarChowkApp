@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.webakruti.kamgarchowk.model.KamgarLoginResponse;
 import com.webakruti.kamgarchowk.model.SearchLocationList;
 import com.webakruti.kamgarchowk.model.User;
 import com.webakruti.kamgarchowk.model.UserLoginResponse;
@@ -51,22 +52,6 @@ public class SharedPreferenceManager {
         return obj;
     }
 
-    public static void storeUser(User user) {
-        SharedPreferences.Editor prefsEditor = tuitionPlusPreferences.edit();
-        //  prefsEditor.clear();
-        Gson gson = new Gson();
-        String json = gson.toJson(user);
-        prefsEditor.putString("UserResponse", json);
-        prefsEditor.commit();
-    }
-
-    public static User getUser() {
-        Gson gson1 = new Gson();
-        String json1 = tuitionPlusPreferences.getString("UserResponse", "");
-        User obj = gson1.fromJson(json1, User.class);
-//		Log.e("RetrivedName:", obj.getFirstName());
-        return obj;
-    }
 
     public static void storeUserLocationResponseInSharedPreference(SearchLocationList.Citylist location) {
         SharedPreferences.Editor prefsEditor = tuitionPlusPreferences.edit();
@@ -86,21 +71,23 @@ public class SharedPreferenceManager {
     }
 
 
-   /* public static void storeAdminResponseObjectInSharedPreference(AdminLoginSuccess adminLoginSuccess) {
+   //kamgar references-------------------------------------------------------------------------------
+
+    public static void storeKamgarObject(KamgarLoginResponse kamgar) {
         SharedPreferences.Editor prefsEditor = tuitionPlusPreferences.edit();
         //  prefsEditor.clear();
         Gson gson = new Gson();
-        String json = gson.toJson(adminLoginSuccess);
-        prefsEditor.putString("AdminResponseObject", json);
+        String json = gson.toJson(kamgar);
+        prefsEditor.putString("KamgarResponseObject", json);
         prefsEditor.commit();
     }
 
-    public static AdminLoginSuccess getAdminObjectFromSharedPreference() {
+    public static KamgarLoginResponse getKamgarObject() {
         Gson gson1 = new Gson();
-        String json1 = tuitionPlusPreferences.getString("AdminResponseObject", "");
-        AdminLoginSuccess obj = gson1.fromJson(json1, AdminLoginSuccess.class);
+        String json1 = tuitionPlusPreferences.getString("KamgarResponseObject", "");
+        KamgarLoginResponse obj = gson1.fromJson(json1, KamgarLoginResponse.class);
 //		Log.e("RetrivedName:", obj.getFirstName());
         return obj;
-    }*/
+    }
 
 }

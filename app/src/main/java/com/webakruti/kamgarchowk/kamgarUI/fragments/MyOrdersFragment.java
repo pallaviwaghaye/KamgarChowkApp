@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.adapter.KamgarMyOrdersAdapter;
@@ -21,6 +22,7 @@ public class MyOrdersFragment extends Fragment {
     private View rootView;
     private RecyclerView recyclerView;
     private ProgressDialog progressDialogForAPI;
+    private TextView textViewNoData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class MyOrdersFragment extends Fragment {
 
     private void initViews()
     {
+        textViewNoData = (TextView)rootView.findViewById(R.id.textViewNoData);
+
         recyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager1);

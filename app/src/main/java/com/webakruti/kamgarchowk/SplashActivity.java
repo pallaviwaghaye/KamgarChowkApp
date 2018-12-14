@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.webakruti.kamgarchowk.kamgarUI.HomeOrProfileActivity;
 import com.webakruti.kamgarchowk.userUI.HomeActivity;
 import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
 
@@ -45,11 +46,18 @@ public class SplashActivity extends AppCompatActivity {
                         startActivity(i);
                         finish();
                     } else {
-                    Intent i = new Intent(SplashActivity.this, LandingActivity.class);
-                    startActivity(i);
-                    finish();
+                            if (SharedPreferenceManager.getKamgarObject() != null) {
+                                Intent i = new Intent(SplashActivity.this, HomeOrProfileActivity.class);
+                                startActivity(i);
+                                finish();
+                            } else {
+                                Intent i = new Intent(SplashActivity.this, LandingActivity.class);
+                                startActivity(i);
+                                finish();
 
+                            }
                         }
+
 
                 } catch (Exception e) {
                     // TODO Auto-generated catch block

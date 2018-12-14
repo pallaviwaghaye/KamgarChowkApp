@@ -92,7 +92,7 @@ public class ForgotPasswordUserActivity extends AppCompatActivity implements Vie
                             Toast.makeText(ForgotPasswordUserActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
                         }
                         }else{
-                            Toast.makeText(ForgotPasswordUserActivity.this, "Password must be greater than 6", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ForgotPasswordUserActivity.this, "OTP must be greater than 6", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         Toast.makeText(ForgotPasswordUserActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
@@ -124,8 +124,7 @@ public class ForgotPasswordUserActivity extends AppCompatActivity implements Vie
                     if (result.getError() == null && result.getSuccess() != null) {
                         if (result.getSuccess() != null) {
 
-                            // Save UserResponse to SharedPref
-                            //SharedPreferenceManager.storeUserResponseObjectInSharedPreference(result);
+                            Toast.makeText(ForgotPasswordUserActivity.this, "New Password sent to your Mobile Number", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(ForgotPasswordUserActivity.this, UserLoginActivity.class);
                             startActivity(intent);
                             finish();
@@ -135,6 +134,8 @@ public class ForgotPasswordUserActivity extends AppCompatActivity implements Vie
                         // Response code is 401
                         Toast.makeText(ForgotPasswordUserActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
                     }
+                }else{
+                    Toast.makeText(ForgotPasswordUserActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
                 }
 
                 if (progressDialogForAPI != null) {
@@ -177,12 +178,6 @@ public class ForgotPasswordUserActivity extends AppCompatActivity implements Vie
                     UserForgtPassSndOtpResponse result = response.body();
                     if (result.getErrors() == null && result.getMsgstatus() != null) {
                         if (result.getMsgstatus()) {
-                            //callForgotAPI();
-                            // Save UserResponse to SharedPref
-                            //SharedPreferenceManager.storeUserResponseObjectInSharedPreference(result);
-                        /*Intent intent = new Intent(ForgotPasswordUserActivity.this, UserLoginActivity.class);
-                        startActivity(intent);
-                        finish();*/
 
                             Toast.makeText(ForgotPasswordUserActivity.this,"OTP sent to your mobile number", Toast.LENGTH_LONG).show();
                             //progressDialogForAPI.cancel();

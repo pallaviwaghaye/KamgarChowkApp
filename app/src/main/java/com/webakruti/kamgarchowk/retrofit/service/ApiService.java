@@ -5,6 +5,13 @@ import com.webakruti.kamgarchowk.model.CategoryList;
 import com.webakruti.kamgarchowk.model.ChangePasswordResponse;
 import com.webakruti.kamgarchowk.model.HireKamgarResponse;
 import com.webakruti.kamgarchowk.model.HomeResponse;
+import com.webakruti.kamgarchowk.model.KamgarCategoryResponse;
+import com.webakruti.kamgarchowk.model.KamgarChangePwdResp;
+import com.webakruti.kamgarchowk.model.KamgarForgotPwdOtp;
+import com.webakruti.kamgarchowk.model.KamgarForgotPwdResp;
+import com.webakruti.kamgarchowk.model.KamgarLoginResponse;
+import com.webakruti.kamgarchowk.model.KamgarRegOtp;
+import com.webakruti.kamgarchowk.model.KamgarRegistrationResp;
 import com.webakruti.kamgarchowk.model.KamgarResponse;
 import com.webakruti.kamgarchowk.model.MyEnquiryResponse;
 import com.webakruti.kamgarchowk.model.RateResponse;
@@ -133,40 +140,53 @@ public interface ApiService {
 
 
 
-    /*// OTP API
-    //http://nirmalrail.webakruti.in/api/login?mobile=9561665846&password=9561665846&otp=123456
-    @POST(ApiConstants.OTP_VERIFICATION)
-    Call<OTPResponse> otpVerification(@Query("mobile") String mobileNo);
-
-
-    // GET RAILWAY CATEGORY API
-    @POST(ApiConstants.GET_RAILWAY_CATEGORY)
-    Call<RailwayCategoryResponse> getServices(@Header("Authorization") String header);
-
 
     // --------------------Kamgar APIS-------------------------
 
-    @POST(ApiConstants.ADMIN_LOGIN_API)
-    Call<AdminLoginSuccess> adminLogin(@Query("email") String emailId,
-                                       @Query("password") String password);
+
+    @POST(ApiConstants.RegSendOTP_API)
+    Call<KamgarRegOtp> kamgarRegOTP(@Query("first_name") String firstname,
+                                    @Query("last_name") String lastname,
+                                    @Query("mobile_no") String mobileno);
+
+    @POST(ApiConstants.Registration_API)
+    Call<KamgarRegistrationResp> kamgarRegistration(@Query("first_name") String firstname,
+                                              @Query("last_name") String lastname,
+                                              @Query("mobile_no") String mobileno,
+                                              @Query("otp") String otp);
 
 
-    @POST(ApiConstants.GET_ADMIN_REQUEST_STATUS)
-    Call<MyRequestStatusResponse> getAdminRequestStatus(@Header("Authorization") String header,
-                                                        @Query("status") String status);
+    @POST(ApiConstants.Kamgar_Login_API)
+    Call<KamgarLoginResponse> kamgarLogin(@Query("mobile_no") String mobileno,
+                                             @Query("password") String password);
 
-    @POST(ApiConstants.ADMIN_GET_COMPLAINT_BY_ID)
-    Call<AdmintGetComplaintResponse> getAdminComplaintById(@Header("Authorization") String header,
-                                                           @Query("id") String id);
+    @POST(ApiConstants.Kamgar_forgotOTP_API)
+    Call<KamgarForgotPwdOtp> kamgarforgotOTP(@Query("mobile_no") String mobileno);
 
 
-    @Multipart
+    @POST(ApiConstants.Kamgar_forgot_API)
+    Call<KamgarForgotPwdResp> kamgarForgot(@Query("mobile_no") String mobileno,
+                                          @Query("otp") String otp);
+
+
+    @POST(ApiConstants.Kamgar_ChangePwd_API)
+    Call<KamgarChangePwdResp> kamgarChangepwd(@Header("Authorization") String header,
+                                              @Query("id") Integer kamgarid,
+                                              @Query("old_password") String oldpassword,
+                                              @Query("password") String newpassword,
+                                              @Query("cpassword") String confirmpassword);
+
+    @POST(ApiConstants.Kamgar_Category_API)
+    Call<KamgarCategoryResponse> getkamgarCategory(@Header("Authorization") String header);
+
+
+
+   /* @Multipart
     @POST(ApiConstants.ADMIN_UPDATE_COMPLAINT_UPLOAD_IMAGE)
     Call<SaveComplaintResponse> uploadAdminComplaintUpdaate(
             @Header("Authorization") String header,
             @Part("id") RequestBody id,
             @Part("status") RequestBody status,
             @Part("comment") RequestBody comment,
-            @Part MultipartBody.Part baseImage);
-*/
+            @Part MultipartBody.Part baseImage);*/
 }

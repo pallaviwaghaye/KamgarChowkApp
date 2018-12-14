@@ -51,7 +51,13 @@
         <activity android:name=".FreeListingActivity" />
         <activity android:name=".userUI.CitySelectActivity" />
         <activity android:name=".kamgarUI.KamgarSupportActivity" />
-        <activity android:name=".kamgarUI.MyOrdersActivity"></activity>
+        <activity android:name=".kamgarUI.MyOrdersActivity" />
+        <activity android:name=".kamgarUI.KamgarCategoryActivity" />
+        <activity android:name=".kamgarUI.KamgarDocumentsActivity" />
+        <activity android:name=".kamgarUI.KamgarMyOrdersActivity" />
+        <activity android:name=".kamgarUI.KamgarSubscriptionPlanActivity" />
+        <activity android:name=".kamgarUI.KamgarChangePasswordActivity" />
+        <activity android:name=".kamgarUI.KamgarEditProfileActivity"></activity>
     </application>
 
 </manifest>

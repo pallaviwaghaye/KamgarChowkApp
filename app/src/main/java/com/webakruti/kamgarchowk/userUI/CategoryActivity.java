@@ -37,6 +37,7 @@ public class CategoryActivity extends AppCompatActivity {
     private TextView textViewNoData;
     private ImageView imageViewBack;
     private TextView textViewHeading;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +77,7 @@ public class CategoryActivity extends AppCompatActivity {
                         recyclerView.setVisibility(View.VISIBLE);
                         List<CategoryList.Categorylist> list = details.getCategorylist();
                         //Toast.makeText(CategoryActivity.this, list.size(),Toast.LENGTH_LONG).show();
-                        categoryAdapter = new CategoryAdapter(getApplicationContext(), list);
+                        categoryAdapter = new CategoryAdapter(CategoryActivity.this, list);
                         recyclerView.setAdapter(categoryAdapter);
                     }else{
                         textViewNoData.setVisibility(View.VISIBLE);

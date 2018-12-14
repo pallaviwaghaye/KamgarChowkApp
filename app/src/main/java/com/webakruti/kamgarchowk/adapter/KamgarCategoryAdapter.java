@@ -1,5 +1,6 @@
 package com.webakruti.kamgarchowk.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -14,39 +15,39 @@ import android.widget.TextView;
 
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.kamgarUI.KamgarSubcategoryActivity;
+import com.webakruti.kamgarchowk.model.CategoryList;
+import com.webakruti.kamgarchowk.model.KamgarCategoryResponse;
+
+import java.util.List;
 
 public class KamgarCategoryAdapter extends RecyclerView.Adapter<KamgarCategoryAdapter.ViewHolder> {
 
-    private Context context;
+    private Activity context;
     private int size;
+    List<KamgarCategoryResponse.Kamgarcategorylist> list;
 
-    public KamgarCategoryAdapter(Context context, int size) {
+    public KamgarCategoryAdapter(Activity context, List<KamgarCategoryResponse.Kamgarcategorylist> list) {
         this.context = context;
-        this.size = size;
+        this.list = list;
 
     }
 
     @NonNull
     @Override
-    public KamgarCategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public KamgarCategoryAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_kamgar_category, viewGroup, false);
         KamgarCategoryAdapter.ViewHolder viewHolder = new KamgarCategoryAdapter.ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull KamgarCategoryAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final KamgarCategoryAdapter.ViewHolder viewHolder, final int position) {
 
 
-        /*//final Student.Studentbatch studentbatch = list.get(position);
+        final KamgarCategoryResponse.Kamgarcategorylist kamgarcategorylist = list.get(position);
+        //viewHolder.textViewCategory.setText("Category " + position);
+        viewHolder.textViewKamgarcategoryName.setText(kamgarcategorylist.getName());
 
-        viewHolder.textViewBatchCourseName.setText(size[position]);
-        viewHolder.textViewBatchTime.setText(studentbatch.getBatch().getStartTime());
-        viewHolder.textViewCourseTeacher.setText(studentbatch.getWhoAssinged());
-
-        viewHolder.textViewBatchCourseDuration.setText(studentbatch.getBatch().getCourse().getDuration());
-        viewHolder.textViewBatchStartDate.setText(studentbatch.getBatch().getStartDate());
-        viewHolder.textViewBatchEndDate.setText(studentbatch.getBatch().getEndDate());*/
 
        /* Picasso.with(context)
                 .load(R.drawable.navab_thali)
@@ -64,7 +65,7 @@ public class KamgarCategoryAdapter extends RecyclerView.Adapter<KamgarCategoryAd
 
     @Override
     public int getItemCount() {
-        return size;
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -84,7 +85,6 @@ public class KamgarCategoryAdapter extends RecyclerView.Adapter<KamgarCategoryAd
             textViewKamgarcategoryName = (TextView)itemView.findViewById(R.id.textViewKamgarcategoryName);
             linearLayoutKamgarcategoryArrow = (LinearLayout)itemView.findViewById(R.id.linearLayoutKamgarcategoryArrow);
             imageViewKamgarcategoryArrow = (ImageView)itemView.findViewById(R.id.imageViewKamgarcategoryArrow);
-
 
 
         }

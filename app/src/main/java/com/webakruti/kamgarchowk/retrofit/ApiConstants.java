@@ -2,6 +2,8 @@ package com.webakruti.kamgarchowk.retrofit;
 
 
 public class ApiConstants {
+
+    //User APIs............................................
     //192.168.29.107/kamgar-chowk/api/user-registration
     //http://192.168.29.107/kamgarchowk/api/autofill/
     //http://192.168.29.107/kamgarchowk/api/locationlist
@@ -42,6 +44,22 @@ public class ApiConstants {
     public static final String Give_Rating_API = "usersetrating";
 
 
+    //Kamgar APIs...........................................
+
+    public static final String RegSendOTP_API = "kamgarregistrationsendotp";
+    public static final String Registration_API = "kamgarregistrationsubmit";
+
+    public static final String Kamgar_Login_API = "kamgarlogin";
+
+    public static final String Kamgar_forgotOTP_API = "kamgarforgetpasssendotp";
+    public static final String Kamgar_forgot_API = "kamgarforgetpasssubmitbtn";
+
+    public static final String Kamgar_ChangePwd_API = "kamgarchangepass";
+
+
+    public static final String Kamgar_Category_API = "kamgarcategorylist";
+
+
     
 
 
@@ -50,29 +68,6 @@ public class ApiConstants {
 
 
 
-    /*public static final String OTP_VERIFICATION = "verifymobile";
-    public static final String GET_RAILWAY_CATEGORY = "getservices";
 
-    public static final String SAVE_COMPLAINT = "savecomplaint";
-
-
-    public static final String SAVE_COMPLAINT_COLONY = "savecomplaint";
-
-    public static final String GET_STATION_PLATFORM = "getplatformnstation";
-
-    public static final String GET_MY_REQUEST_STATUS = "getcomplaint";
-
-
-    public static final String GET_COLONIES = "getcolonylist";
-    public static final String GET_TECHNOLOGIES = "gettechnologylist";
-    public static final String GET_EVENTS = "geteventslist";
-
-
-    // Admin
-    public static final String ADMIN_LOGIN_API = "adminlogin";
-    public static final String GET_ADMIN_REQUEST_STATUS = "admingetcomplaint";
-    public static final String ADMIN_GET_COMPLAINT_BY_ID = "admingetcomplaintbyid";
-    public static final String ADMIN_UPDATE_COMPLAINT_UPLOAD_IMAGE= "adminupdatecomplaint";
-*/
 
 }

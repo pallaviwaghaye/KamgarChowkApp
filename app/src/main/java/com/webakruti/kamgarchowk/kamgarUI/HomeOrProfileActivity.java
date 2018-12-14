@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.webakruti.kamgarchowk.R;
@@ -22,8 +23,12 @@ import com.webakruti.kamgarchowk.kamgarUI.fragments.DocumentsFragment;
 import com.webakruti.kamgarchowk.kamgarUI.fragments.HomeOrProfileFragment;
 import com.webakruti.kamgarchowk.kamgarUI.fragments.MyOrdersFragment;
 import com.webakruti.kamgarchowk.kamgarUI.fragments.SubscriptionPlansFragment;
+import com.webakruti.kamgarchowk.model.KamgarLoginResponse;
+import com.webakruti.kamgarchowk.model.UserLoginResponse;
+import com.webakruti.kamgarchowk.userUI.HomeActivity;
 import com.webakruti.kamgarchowk.userUI.fragments.CategoryFragment;
 import com.webakruti.kamgarchowk.userUI.fragments.SupportFragment;
+import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
 
 public class HomeOrProfileActivity extends AppCompatActivity {
     private Toolbar toolbarKamgar;
@@ -31,6 +36,12 @@ public class HomeOrProfileActivity extends AppCompatActivity {
     private NavigationView navigationViewKamgar;
     private FragmentManager fragManager;
     private TextView toolbarKamgarDetailsHomeTitle;
+
+    private TextView textViewKamgarName;
+    private TextView textViewKamgarMobileNo;
+    private ImageView imageViewNavKamgar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
@@ -46,11 +57,38 @@ public class HomeOrProfileActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_kamgar);
         navigationViewKamgar = (NavigationView) findViewById(R.id.navigationViewKamgar);
 
+        SharedPreferenceManager.setApplicationContext(HomeOrProfileActivity.this);
+        KamgarLoginResponse kamgar = SharedPreferenceManager.getKamgarObject();
+
         View headerLayout = navigationViewKamgar.getHeaderView(0);
+
+        textViewKamgarName = (TextView) headerLayout.findViewById(R.id.textViewKamgarName);
+        textViewKamgarMobileNo = (TextView) headerLayout.findViewById(R.id.textViewKamgarMobileNo);
+        imageViewNavKamgar = (ImageView) headerLayout.findViewById(R.id.imageViewNavKamgar);
+
 
         Menu menu = navigationViewKamgar.getMenu();
 
         MenuItem navigationLogout = menu.findItem(R.id.navigationLogout);
+
+        if (kamgar != null) {
+            textViewKamgarMobileNo.setVisibility(View.VISIBLE);
+            textViewKamgarName.setText(kamgar.getSuccess().getAuthuser().getFirstName() +" "+ kamgar.getSuccess().getAuthuser().getLastName());
+            textViewKamgarMobileNo.setText(kamgar.getSuccess().getAuthuser().getMobileNo());
+
+            /*Picasso.with(getApplicationContext())
+                    .placeholder(R.drawable.carpenter_icon)
+                    .into(imageViewNavUser);
+
+            navigationLogout.setVisible(true);*/
+
+        } else {
+            textViewKamgarMobileNo.setVisibility(View.INVISIBLE);
+
+            textViewKamgarName.setText("Welcome, Guest");
+            //navigationLogout.setVisible(false);
+
+        }
 
         navigationViewKamgar.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -112,7 +150,7 @@ public class HomeOrProfileActivity extends AppCompatActivity {
                         // Setting Positive "Yes" Button
                         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                // SharedPreferenceManager.clearPreferences();
+                                SharedPreferenceManager.clearPreferences();
                                 Intent intent = new Intent(HomeOrProfileActivity.this, KamgarLoginActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);

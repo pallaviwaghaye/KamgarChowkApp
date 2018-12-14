@@ -15,7 +15,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.kamgarUI.KamgarCategoryActivity;
+import com.webakruti.kamgarchowk.kamgarUI.KamgarChangePasswordActivity;
+import com.webakruti.kamgarchowk.kamgarUI.KamgarDocumentsActivity;
+import com.webakruti.kamgarchowk.kamgarUI.KamgarEditProfileActivity;
 import com.webakruti.kamgarchowk.kamgarUI.KamgarLoginActivity;
+import com.webakruti.kamgarchowk.kamgarUI.KamgarMyOrdersActivity;
+import com.webakruti.kamgarchowk.kamgarUI.KamgarSubscriptionPlanActivity;
+import com.webakruti.kamgarchowk.kamgarUI.KamgarSupportActivity;
+import com.webakruti.kamgarchowk.userUI.ChangePasswordActivity;
 import com.webakruti.kamgarchowk.userUI.HomeActivity;
 import com.webakruti.kamgarchowk.userUI.UserLoginActivity;
 import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
@@ -72,45 +80,60 @@ public class HomeOrProfileFragment extends Fragment {
         linearLayoutGotoLogout = (LinearLayout) rootView.findViewById(R.id.linearLayoutGotoLogout);
 
 
+        imageViewKamgarEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),KamgarEditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
         linearLayoutGotoCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(getContext(),KamgarCategoryActivity.class);
+                startActivity(intent);
             }
         });
 
         linearLayoutGotoMyorders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(),KamgarMyOrdersActivity.class);
+                startActivity(intent);
             }
         });
 
         linearLayoutGotoDocuments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(),KamgarDocumentsActivity.class);
+                startActivity(intent);
             }
         });
 
         linearLayoutGotoSubscriptionPlan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(),KamgarSubscriptionPlanActivity.class);
+                startActivity(intent);
             }
         });
 
         linearLayoutGotoChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(),KamgarChangePasswordActivity.class);
+                startActivity(intent);
             }
         });
 
         linearLayoutGotoSupport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(),KamgarSupportActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -126,7 +149,7 @@ public class HomeOrProfileFragment extends Fragment {
                 // Setting Positive "Yes" Button
                 alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        //SharedPreferenceManager.clearPreferences();
+                        SharedPreferenceManager.clearPreferences();
                         Intent intent = new Intent(getContext(), KamgarLoginActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);

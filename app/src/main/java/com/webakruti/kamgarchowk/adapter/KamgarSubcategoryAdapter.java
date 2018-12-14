@@ -1,5 +1,6 @@
 package com.webakruti.kamgarchowk.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -19,10 +20,10 @@ import com.webakruti.kamgarchowk.userUI.KamgarListActivity;
 
 public class KamgarSubcategoryAdapter extends RecyclerView.Adapter<KamgarSubcategoryAdapter.ViewHolder> {
 
-    private Context context;
+    private Activity context;
     private int size;
 
-    public KamgarSubcategoryAdapter(Context context, int size) {
+    public KamgarSubcategoryAdapter(Activity context, int size) {
         this.context = context;
         this.size = size;
 

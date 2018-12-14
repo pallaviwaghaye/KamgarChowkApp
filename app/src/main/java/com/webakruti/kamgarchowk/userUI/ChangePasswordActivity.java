@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.kamgarUI.KamgarChangePasswordActivity;
 import com.webakruti.kamgarchowk.model.ChangePasswordResponse;
 import com.webakruti.kamgarchowk.model.SupportResponse;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
@@ -120,6 +121,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
                         Toast.makeText(ChangePasswordActivity.this, details.getSuccess(),Toast.LENGTH_LONG).show();
 
+                    }
+                    else{
+                        Toast.makeText(ChangePasswordActivity.this, "Enter correct Old Password",Toast.LENGTH_LONG).show();
                     }
 
                 } else {

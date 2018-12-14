@@ -73,14 +73,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp">
                     <EditText
-                        android:id="@+id/editTextUserPassword"
+                        android:id="@+id/editTextKamgarLastName"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/edittext_rectangular_oval"
                         android:hint="Last Name"
                         android:paddingLeft="60dp"
-                        android:imeOptions="actionDone"
-                        android:inputType="textPassword"
+                        android:imeOptions="actionNext"
                         android:textColor="@color/dark_blue"
                         android:textColorHint="@color/grey"
                         android:textSize="17sp" />
@@ -144,7 +143,7 @@
                         android:background="@drawable/edittext_rectangular_oval"
                         android:hint="OTP"
                         android:paddingLeft="60dp"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionDone"
                         android:inputType="textEmailAddress"
                         android:textColor="@color/dark_blue"
                         android:textColorHint="@color/grey"

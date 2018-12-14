@@ -1,5 +1,6 @@
 package com.webakruti.kamgarchowk.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -24,11 +25,11 @@ import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
-    private Context context;
+    private Activity context;
     List<CategoryList.Categorylist> list;
     int size;
 
-    public CategoryAdapter(Context context, List<CategoryList.Categorylist> list) {
+    public CategoryAdapter(Activity context, List<CategoryList.Categorylist> list) {
         this.context = context;
         this.size = size;
         this.list = list;

@@ -126,10 +126,14 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
                     if (result.getError() == null && result.getSuccess() != null) {
                         if (result.getSuccess().getStatus()) {
 
+                            Toast.makeText(UserRegistrationActivity.this, "Registered Successfully !!", Toast.LENGTH_SHORT).show();
+
                             Intent intent = new Intent(UserRegistrationActivity.this, UserLoginActivity.class);
                             //intent.putExtra("MOBILE_NO", editTextUserMobileNumber.getText().toString());
                             startActivity(intent);
                             finish();
+
+
                         }
                     } else {
                         Toast.makeText(UserRegistrationActivity.this, result.getError(), Toast.LENGTH_SHORT).show();

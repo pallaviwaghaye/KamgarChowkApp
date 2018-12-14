@@ -1,33 +1,36 @@
 package com.webakruti.kamgarchowk.kamgarUI;
 
-import android.os.Bundle;
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.webakruti.kamgarchowk.R;
-import com.webakruti.kamgarchowk.adapter.KamgarSubcategoryAdapter;
-import com.webakruti.kamgarchowk.adapter.SubcategoryAdapter;
+import com.webakruti.kamgarchowk.adapter.KamgarMyOrdersAdapter;
 
-public class KamgarSubcategoryActivity extends AppCompatActivity {
+public class KamgarMyOrdersActivity extends AppCompatActivity {
     private ImageView imageViewBack;
-    private TextView textViewCategoryHeading;
     private RecyclerView recyclerView;
+   // private ProgressDialog progressDialogForAPI;
     private TextView textViewNoData;
-    private Button buttonDoneSubcategory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kamgar_subcategory);
+        setContentView(R.layout.activity_kamgar_my_orders);
 
-        textViewCategoryHeading = (TextView)findViewById(R.id.textViewCategoryHeading);
-        textViewNoData = (TextView)findViewById(R.id.textViewNoData);
+        initViews();
+    }
 
-        imageViewBack = (ImageView)findViewById(R.id.imageViewBack);
+    private void initViews()
+    {
+
+        imageViewBack = (ImageView) findViewById(R.id.imageViewBack);
+
         imageViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,9 +38,12 @@ public class KamgarSubcategoryActivity extends AppCompatActivity {
             }
         });
 
+        textViewNoData = (TextView)findViewById(R.id.textViewNoData);
+
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager1 = new LinearLayoutManager(KamgarSubcategoryActivity.this,LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(KamgarMyOrdersActivity.this,LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager1);
-        recyclerView.setAdapter(new KamgarSubcategoryAdapter(KamgarSubcategoryActivity.this, 5));
+        recyclerView.setAdapter(new KamgarMyOrdersAdapter(getApplicationContext(),10));
+
     }
 }

@@ -1,32 +1,26 @@
-package com.webakruti.kamgarchowk.kamgarUI.fragments;
+package com.webakruti.kamgarchowk.kamgarUI;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.adapter.CategoryAdapter;
 import com.webakruti.kamgarchowk.adapter.KamgarCategoryAdapter;
-import com.webakruti.kamgarchowk.adapter.SubcategoryAdapter;
-import com.webakruti.kamgarchowk.kamgarUI.KamgarCategoryActivity;
+import com.webakruti.kamgarchowk.model.CategoryList;
 import com.webakruti.kamgarchowk.model.KamgarCategoryResponse;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 import com.webakruti.kamgarchowk.retrofit.service.RestClient;
-import com.webakruti.kamgarchowk.utils.GridSpacingItemDecoration;
+import com.webakruti.kamgarchowk.userUI.CategoryActivity;
 import com.webakruti.kamgarchowk.utils.NetworkUtil;
 import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
-import com.webakruti.kamgarchowk.utils.Utils;
 
 import java.util.List;
 
@@ -34,50 +28,54 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CategoryKamgarFragment extends Fragment {
-
-    private View rootView;
+public class KamgarCategoryActivity extends AppCompatActivity {
+    private ImageView imageViewBack;
     private RecyclerView recyclerView;
     private TextView textViewNoData;
     private KamgarCategoryAdapter kamgarCategoryAdapter;
+
     private ProgressDialog progressDialogForAPI;
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_category_kamgar, container, false);
-        // Inflate the layout for this fragment
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_kamgar_category);
 
         initViews();
 
-        if (NetworkUtil.hasConnectivity(getActivity())) {
+        if (NetworkUtil.hasConnectivity(KamgarCategoryActivity.this)) {
             callGetKamgarCategoryAPI();
         } else {
-            Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(KamgarCategoryActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
         }
-
-        return rootView;
     }
 
     private void initViews() {
-        textViewNoData = (TextView)rootView.findViewById(R.id.textViewNoData);
+        textViewNoData = (TextView)findViewById(R.id.textViewNoData);
+        imageViewBack = (ImageView)findViewById(R.id.imageViewBack);
 
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        imageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
 
 
     }
+
     private void callGetKamgarCategoryAPI() {
 
-        progressDialogForAPI = new ProgressDialog(getActivity());
+        progressDialogForAPI = new ProgressDialog(this);
         progressDialogForAPI.setCancelable(false);
         progressDialogForAPI.setIndeterminate(true);
         progressDialogForAPI.setMessage("Please wait...");
         progressDialogForAPI.show();
 
-        SharedPreferenceManager.setApplicationContext(getActivity());
+        SharedPreferenceManager.setApplicationContext(KamgarCategoryActivity.this);
         String token = SharedPreferenceManager.getKamgarObject().getSuccess().getToken();
 
         String API = "http://beta.kamgarchowk.com/api/";
@@ -95,9 +93,9 @@ public class CategoryKamgarFragment extends Fragment {
                         recyclerView.setVisibility(View.VISIBLE);
                         List<KamgarCategoryResponse.Kamgarcategorylist> list = details.getKamgarcategorylist();
                         //Toast.makeText(CategoryActivity.this, list.size(),Toast.LENGTH_LONG).show();
-                        LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false);
+                        LinearLayoutManager layoutManager1 = new LinearLayoutManager(KamgarCategoryActivity.this,LinearLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(layoutManager1);
-                        recyclerView.setAdapter(new KamgarCategoryAdapter(getActivity(), list));
+                        recyclerView.setAdapter(new KamgarCategoryAdapter(KamgarCategoryActivity.this, list));
                     }else{
                         textViewNoData.setVisibility(View.VISIBLE);
                         recyclerView.setVisibility(View.GONE);
@@ -129,5 +127,6 @@ public class CategoryKamgarFragment extends Fragment {
 
 
     }
+
 
 }
