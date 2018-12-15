@@ -16,40 +16,74 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.model.KamgarSubcategoriesResponse;
 import com.webakruti.kamgarchowk.userUI.KamgarListActivity;
+
+import java.util.List;
 
 public class KamgarSubcategoryAdapter extends RecyclerView.Adapter<KamgarSubcategoryAdapter.ViewHolder> {
 
     private Activity context;
     private int size;
+    List<KamgarSubcategoriesResponse.Subcategory> list;
 
-    public KamgarSubcategoryAdapter(Activity context, int size) {
+        public KamgarSubcategoryAdapter(Activity context, List<KamgarSubcategoriesResponse.Subcategory> list) {
         this.context = context;
-        this.size = size;
+        this.list = list;
 
     }
 
     @NonNull
     @Override
-    public KamgarSubcategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public KamgarSubcategoryAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_kamgar_subcategory, viewGroup, false);
         KamgarSubcategoryAdapter.ViewHolder viewHolder = new KamgarSubcategoryAdapter.ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull KamgarSubcategoryAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final KamgarSubcategoryAdapter.ViewHolder viewHolder, final int position) {
 
 
-        /*//final Student.Studentbatch studentbatch = list.get(position);
+        final KamgarSubcategoriesResponse.Subcategory kamgarSubcategory = list.get(position);
+        //viewHolder.textViewCategory.setText("Category " + position);
 
-        viewHolder.textViewBatchCourseName.setText(size[position]);
-        viewHolder.textViewBatchTime.setText(studentbatch.getBatch().getStartTime());
-        viewHolder.textViewCourseTeacher.setText(studentbatch.getWhoAssinged());
+        viewHolder.checkboxSubcategoryName.setText(kamgarSubcategory.getName());
 
-        viewHolder.textViewBatchCourseDuration.setText(studentbatch.getBatch().getCourse().getDuration());
-        viewHolder.textViewBatchStartDate.setText(studentbatch.getBatch().getStartDate());
-        viewHolder.textViewBatchEndDate.setText(studentbatch.getBatch().getEndDate());*/
+        if(viewHolder.edittextHourlyPrice.getText().toString().length() == 0)
+        {
+           viewHolder.edittextHourlyPrice.setText("");
+        } else{
+            viewHolder.edittextHourlyPrice.setText(kamgarSubcategory.getHourly()+"");
+        }
+
+        if(viewHolder.edittextHalfdayPrice.getText().toString().length() == 0)
+        {
+            viewHolder.edittextHalfdayPrice.setText("");
+        }else{
+            viewHolder.edittextHalfdayPrice.setText(kamgarSubcategory.getHalfday()+"");
+        }
+
+        if(viewHolder.edittextFulldayPrice.getText().toString().length() == 0)
+        {
+            viewHolder.edittextFulldayPrice.setText("");
+        }else{
+            viewHolder.edittextFulldayPrice.setText(kamgarSubcategory.getFullday()+"");
+        }
+
+        if(viewHolder.edittextWeeklyPrice.getText().toString().length() == 0)
+        {
+            viewHolder.edittextWeeklyPrice.setText("");
+        }else{
+            viewHolder.edittextWeeklyPrice.setText(kamgarSubcategory.getWeekly()+"");
+        }
+
+        if(viewHolder.edittextMonthlyPrice.getText().toString().length() == 0)
+        {
+            viewHolder.edittextMonthlyPrice.setText("");
+        }else{
+            viewHolder.edittextMonthlyPrice.setText(kamgarSubcategory.getMonthly()+"");
+        }
 
        /* Picasso.with(context)
                 .load(R.drawable.navab_thali)
@@ -67,7 +101,7 @@ public class KamgarSubcategoryAdapter extends RecyclerView.Adapter<KamgarSubcate
 
     @Override
     public int getItemCount() {
-        return size;
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

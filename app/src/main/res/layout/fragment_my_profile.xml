@@ -177,10 +177,18 @@
                         android:id="@+id/textViewAddress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="#121 Mate Square, Nagpur,India,440010"
+                        android:text="#121 Mate Square, Nagpur,India"
                         android:textColor="@color/black"
                         android:layout_marginLeft="15dp"
                         android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/textViewPincode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="16sp" />
 
 
 

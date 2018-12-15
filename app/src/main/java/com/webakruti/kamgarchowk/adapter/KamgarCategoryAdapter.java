@@ -18,6 +18,7 @@ import com.webakruti.kamgarchowk.kamgarUI.KamgarSubcategoryActivity;
 import com.webakruti.kamgarchowk.model.CategoryList;
 import com.webakruti.kamgarchowk.model.KamgarCategoryResponse;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class KamgarCategoryAdapter extends RecyclerView.Adapter<KamgarCategoryAdapter.ViewHolder> {
@@ -44,9 +45,9 @@ public class KamgarCategoryAdapter extends RecyclerView.Adapter<KamgarCategoryAd
     public void onBindViewHolder(final KamgarCategoryAdapter.ViewHolder viewHolder, final int position) {
 
 
-        final KamgarCategoryResponse.Kamgarcategorylist kamgarcategorylist = list.get(position);
+        final KamgarCategoryResponse.Kamgarcategorylist kamgarcategory = list.get(position);
         //viewHolder.textViewCategory.setText("Category " + position);
-        viewHolder.textViewKamgarcategoryName.setText(kamgarcategorylist.getName());
+        viewHolder.textViewKamgarcategoryName.setText(kamgarcategory.getName());
 
 
        /* Picasso.with(context)
@@ -57,6 +58,7 @@ public class KamgarCategoryAdapter extends RecyclerView.Adapter<KamgarCategoryAd
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, KamgarSubcategoryActivity.class);
+                intent.putExtra("KamgarCategory", (Serializable) kamgarcategory);
                 context.startActivity(intent);
 
             }

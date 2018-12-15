@@ -478,7 +478,6 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                         user.getSuccess().getAuthuser().setEmail(authuser.getEmail());
                         user.getSuccess().getAuthuser().setLastName(authuser.getLastName());
                         user.getSuccess().getAuthuser().setMobileNo(authuser.getMobileNo());
-                        user.getSuccess().getAuthuser().setPincode(authuser.getPincode());
                         SharedPreferenceManager.storeUserResponseObjectInSharedPreference(user);
 
                         Intent intent = new Intent(EditProfileUserActivity.this, HomeActivity.class);

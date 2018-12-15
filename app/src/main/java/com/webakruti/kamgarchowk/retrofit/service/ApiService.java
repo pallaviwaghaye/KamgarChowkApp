@@ -13,6 +13,7 @@ import com.webakruti.kamgarchowk.model.KamgarLoginResponse;
 import com.webakruti.kamgarchowk.model.KamgarRegOtp;
 import com.webakruti.kamgarchowk.model.KamgarRegistrationResp;
 import com.webakruti.kamgarchowk.model.KamgarResponse;
+import com.webakruti.kamgarchowk.model.KamgarSubcategoriesResponse;
 import com.webakruti.kamgarchowk.model.MyEnquiryResponse;
 import com.webakruti.kamgarchowk.model.RateResponse;
 import com.webakruti.kamgarchowk.model.SearchAutofill;
@@ -178,6 +179,10 @@ public interface ApiService {
 
     @POST(ApiConstants.Kamgar_Category_API)
     Call<KamgarCategoryResponse> getkamgarCategory(@Header("Authorization") String header);
+
+    @POST(ApiConstants.Kamgar_GetSubcat_API)
+    Call<KamgarSubcategoriesResponse> getKamgarSubcat(@Header("Authorization") String header,
+                                                      @Query("category_id") Integer categoryid);
 
 
 

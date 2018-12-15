@@ -58,8 +58,8 @@ public class MyProfileFragment extends Fragment {
     private TextView textViewAddress;
 /*    private TextView textViewCity;
     private TextView textViewState;
-    private TextView textViewCountry;
-    private TextView textViewPincode;*/
+    private TextView textViewCountry;*/
+    private TextView textViewPincode;
     private LinearLayout linearLayoutGotoMyenquiry;
     private LinearLayout linearLayoutGotoChangePassword;
     private LinearLayout linearLayoutGotoSupport;
@@ -98,8 +98,8 @@ public class MyProfileFragment extends Fragment {
         textViewAddress = (TextView)rootView.findViewById(R.id.textViewAddress);
         /*textViewCity = (TextView)rootView.findViewById(R.id.textViewCity);
         textViewState = (TextView)rootView.findViewById(R.id.textViewState);
-        textViewCountry = (TextView)rootView.findViewById(R.id.textViewCountry);
-        textViewPincode = (TextView)rootView.findViewById(R.id.textViewPincode);*/
+        textViewCountry = (TextView)rootView.findViewById(R.id.textViewCountry);*/
+        textViewPincode = (TextView)rootView.findViewById(R.id.textViewPincode);
         linearLayoutGotoMyenquiry = (LinearLayout)rootView.findViewById(R.id.linearLayoutGotoMyenquiry);
         linearLayoutGotoMyenquiry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,11 +226,23 @@ public class MyProfileFragment extends Fragment {
         }else{
             textViewEmail.setText("N/A");
         }
-        if (list.get(0).getAddress()!=null && list.get(0).getCity()!=null && list.get(0).getState()!=null && list.get(0).getCountry()!=null && list.get(0).getPincode() > 0) {
-            textViewAddress.setText(list.get(0).getAddress()+", "+list.get(0).getCity().getName()+", "+list.get(0).getState().getName()+", "+list.get(0).getCountry().getName()+", "+list.get(0).getPincode());
+        if (list.get(0).getAddress()!=null && list.get(0).getCity()!=null && list.get(0).getState()!=null && list.get(0).getCountry()!=null) {
+            textViewAddress.setText(list.get(0).getAddress()+", "+list.get(0).getCity().getName()+", "+list.get(0).getState().getName()+", "+list.get(0).getCountry().getName());
+            /*if(list.get(0).getPincode() > 0) {
+                textViewPincode.setText(list.get(0).getPincode());
+            }else{
+                textViewPincode.setText("");
+            }*/
         } else {
             textViewAddress.setText("N/A");
+            //textViewPincode.setText("");
         }
+
+     /*   if(list.get(0).getPincode() > 0) {
+            textViewPincode.setText(list.get(0).getPincode());
+        }else{
+            textViewPincode.setText("");
+        }*/
 
         imageViewUserEdit.setOnClickListener(new View.OnClickListener() {
             @Override

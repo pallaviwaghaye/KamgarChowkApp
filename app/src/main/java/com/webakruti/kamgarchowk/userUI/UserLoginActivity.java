@@ -146,7 +146,7 @@ public class UserLoginActivity extends AppCompatActivity implements View.OnClick
                     }
                 } else {
                     // Response code is 401
-                    Toast.makeText(UserLoginActivity.this, "Error!! MobileNo or Password is Not Correct.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserLoginActivity.this, "Unauthorized User!! MobileNo or Password is incorrect.", Toast.LENGTH_SHORT).show();
                 }
 
                 if (progressDialogForAPI != null) {

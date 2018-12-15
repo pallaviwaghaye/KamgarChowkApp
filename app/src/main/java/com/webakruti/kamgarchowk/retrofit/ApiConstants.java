@@ -59,6 +59,8 @@ public class ApiConstants {
 
     public static final String Kamgar_Category_API = "kamgarcategorylist";
 
+    public static final String Kamgar_GetSubcat_API = "kamgarsubcategories";
+
 
     
 

@@ -125,7 +125,7 @@ public class SubcategoryActivity extends AppCompatActivity {
             catrgoryid = workavlCategory.getId();
         }
 
-        String API = "http://beta.kamgarchowk.com/api/";
+        //String API = "http://beta.kamgarchowk.com/api/";
         String headers = "Bearer " + token;
         Call<SubcategoryListResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).getsubcategorylist(headers,catrgoryid);
         requestCallback.enqueue(new Callback<SubcategoryListResponse>() {

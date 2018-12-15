@@ -53,7 +53,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="2dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/textViewKamgarDesignation"
@@ -66,16 +66,11 @@
                             android:textColor="@color/pink_red"
                             android:textSize="15dp" />
 
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/grey" />
-
                         <TextView
                             android:id="@+id/textViewKamgarDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="25dp"
                             android:text="26 Oct 2018"
                             android:textAllCaps="false"
                             android:textColor="@color/black"

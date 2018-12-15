@@ -2,13 +2,14 @@ package com.webakruti.kamgarchowk.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by DELL on 12/14/2018.
  */
 
-public class KamgarCategoryResponse {
+public class KamgarCategoryResponse implements Serializable{
 
 
         @SerializedName("kamgarcategorylist")
@@ -23,7 +24,7 @@ public class KamgarCategoryResponse {
         }
 
 
-    public class Kamgarcategorylist {
+    public class Kamgarcategorylist implements Serializable{
 
         @SerializedName("id")
         private Integer id;
