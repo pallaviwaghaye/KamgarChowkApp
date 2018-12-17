@@ -3,6 +3,7 @@ package com.webakruti.kamgarchowk.adapter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,11 +14,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.model.MyEnquiryResponse;
+import com.webakruti.kamgarchowk.model.MyOrdersResponse;
 import com.webakruti.kamgarchowk.model.RateResponse;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 import com.webakruti.kamgarchowk.retrofit.service.RestClient;
@@ -32,21 +35,21 @@ import retrofit2.Response;
 
 public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAdapter.ViewHolder> {
 
-    private Context context;
+    private Activity context;
     private int size;
-    /*List<MyEnquiryResponse.Userenquiry> list;
-    int countRating = 0;*/
+    List<MyOrdersResponse.Kamgaractenquiry> list;
+    int countRating = 0;
     private ProgressDialog progressDialogForAPI;
 
-    public KamgarMyOrdersAdapter(Context context, int size) {
+    public KamgarMyOrdersAdapter(Activity context, List<MyOrdersResponse.Kamgaractenquiry> list) {
         this.context = context;
-       // this.list = list;
-        this.size = size;
+        this.list = list;
+        //this.size = size;
     }
 
     @NonNull
     @Override
-    public KamgarMyOrdersAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public KamgarMyOrdersAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_my_orders, viewGroup, false);
         KamgarMyOrdersAdapter.ViewHolder viewHolder = new KamgarMyOrdersAdapter.ViewHolder(view);
         return viewHolder;
@@ -54,35 +57,34 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
 
 
     @Override
-    public void onBindViewHolder(@NonNull final KamgarMyOrdersAdapter.ViewHolder viewHolder, final int position) {
-       /* final MyEnquiryResponse.Userenquiry myEnquiry = list.get(position);
+    public void onBindViewHolder(final KamgarMyOrdersAdapter.ViewHolder viewHolder, final int position) {
+        final MyOrdersResponse.Kamgaractenquiry orders = list.get(position);
 
 
-        viewHolder.textViewKamgarName.setText(myEnquiry.getKamgarFirstName() + " " + myEnquiry.getKamgarLastName());
-        viewHolder.textViewKamgarDesignation.setText(myEnquiry.getSubcategory());
-        viewHolder.textViewKamgarDate.setText(myEnquiry.getEnquiryDate());
-        viewHolder.textViewKamgarAddress.setText(myEnquiry.getKamgarAddress() + ", " + myEnquiry.getCityname() + ", " + myEnquiry.getKamgarPincode());
-        viewHolder.textViewKamgarContactNo.setText(myEnquiry.getKamgarMobileNo());
-        viewHolder.textViewKamgarStatus.setText(myEnquiry.getWorkstatus());
-        viewHolder.textViewRatingType.setText(myEnquiry.getRateremark());
+        viewHolder.textViewUserName.setText(orders.getUserFirstName() + " " + orders.getUserLastName());
+       // viewHolder.textViewUserDesignation.setText(orders.getWorkstatus());
+        viewHolder.textViewUserDate.setText(orders.getEnquiryDate());
+        viewHolder.textViewUserAddress.setText(orders.getUserAddress() + ", " + orders.getCityname());
+        viewHolder.textViewUserContactNo.setText(orders.getUserMobileNo());
+       // viewHolder.textViewRatingType.setText(orders.getRateremark());
 
 
-        if (myEnquiry.getWorkstatus().equalsIgnoreCase("Completed")) {
+       /* if (orders.getWorkstatus().equalsIgnoreCase("Completed")) {
             viewHolder.imageViewRating1.setEnabled(true);
             viewHolder.imageViewRating2.setEnabled(true);
             viewHolder.imageViewRating3.setEnabled(true);
             viewHolder.imageViewRating4.setEnabled(true);
             viewHolder.imageViewRating5.setEnabled(true);
-            viewHolder.buttonRateNow.setEnabled(true);
+            viewHolder.buttonRateNow.setEnabled(true);*/
 
-            switch (myEnquiry.getRating()) {
+            switch (orders.getRating()) {
 
                 case 0:
-                    *//*viewHolder.imageViewRating1.setEnabled(false);
+                    viewHolder.imageViewRating1.setEnabled(false);
                     viewHolder.imageViewRating2.setEnabled(false);
                     viewHolder.imageViewRating3.setEnabled(false);
                     viewHolder.imageViewRating4.setEnabled(false);
-                    viewHolder.imageViewRating5.setEnabled(false);*//*
+                    viewHolder.imageViewRating5.setEnabled(false);
 
                     viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                     viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
@@ -184,7 +186,7 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
             }
 
 
-        } else {
+       /* } else {
             viewHolder.imageViewRating1.setEnabled(false);
             viewHolder.imageViewRating2.setEnabled(false);
             viewHolder.imageViewRating3.setEnabled(false);
@@ -271,25 +273,25 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
                     }
                 }
             }
-        });
+        });*/
 
 
-        viewHolder.textViewKamgarShowHideDetais.setOnClickListener(new View.OnClickListener() {
+        viewHolder.textViewUserShowHideDetais.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (viewHolder.linearLayoutEnquiryShowHide.getVisibility() == View.GONE) {
-                    viewHolder.textViewKamgarShowHideDetais.setText("Less Details");
+                    viewHolder.textViewUserShowHideDetais.setText("Less Details");
                     viewHolder.linearLayoutEnquiryShowHide.setVisibility(View.VISIBLE);
 
                 } else {
-                    viewHolder.textViewKamgarShowHideDetais.setText("More Details");
+                    viewHolder.textViewUserShowHideDetais.setText("More Details");
                     viewHolder.linearLayoutEnquiryShowHide.setVisibility(View.GONE);
 
                 }
             }
         });
 
-        *//*viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+       /* viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, GoOutForLunchDinnerActivity.class);
@@ -367,23 +369,24 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
 
     @Override
     public int getItemCount() {
-        return size;
-        //list.size();
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         //Dialog myDialog;
 
-        private TextView textViewKamgarName;
-        private TextView textViewKamgarDesignation;
-        private TextView textViewKamgarDate;
+        private TextView textViewUserName;
+        private TextView textViewUserDesignation;
+        private TextView textViewUserDate;
         private TextView textViewRatingType;
-        private TextView textViewKamgarAddress;
-        private TextView textViewKamgarContactNo;
-        private TextView textViewKamgarStatus;
-        private TextView textViewKamgarShowHideDetais;
+        private TextView textViewUserAddress;
+        private TextView textViewUserContactNo;
+        private TextView textViewUserStatus;
+        private TextView textViewUserShowHideDetais;
         private LinearLayout linearLayoutEnquiryShowHide;
+
+        private Spinner spinnerStatus;
 
         private ImageView imageViewRating1;
         private ImageView imageViewRating2;
@@ -398,14 +401,14 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
             super(itemView);
 
             cardView = (CardView) itemView.findViewById(R.id.cardView);
-            textViewKamgarName = (TextView) itemView.findViewById(R.id.textViewKamgarName);
-            textViewKamgarDesignation = (TextView) itemView.findViewById(R.id.textViewKamgarDesignation);
-            textViewKamgarDate = (TextView) itemView.findViewById(R.id.textViewKamgarDate);
+            textViewUserName = (TextView) itemView.findViewById(R.id.textViewKamgarName);
+            textViewUserDesignation = (TextView) itemView.findViewById(R.id.textViewKamgarDesignation);
+            textViewUserDate = (TextView) itemView.findViewById(R.id.textViewKamgarDate);
             textViewRatingType = (TextView) itemView.findViewById(R.id.textViewRatingType);
-            textViewKamgarAddress = (TextView) itemView.findViewById(R.id.textViewKamgarAddress);
-            textViewKamgarContactNo = (TextView) itemView.findViewById(R.id.textViewKamgarContactNo);
-            textViewKamgarStatus = (TextView) itemView.findViewById(R.id.textViewKamgarStatus);
-            textViewKamgarShowHideDetais = (TextView) itemView.findViewById(R.id.textViewKamgarShowHideDetais);
+            textViewUserAddress = (TextView) itemView.findViewById(R.id.textViewKamgarAddress);
+            textViewUserContactNo = (TextView) itemView.findViewById(R.id.textViewKamgarContactNo);
+            textViewUserStatus = (TextView) itemView.findViewById(R.id.textViewKamgarStatus);
+            textViewUserShowHideDetais = (TextView) itemView.findViewById(R.id.textViewKamgarShowHideDetais);
             linearLayoutEnquiryShowHide = (LinearLayout) itemView.findViewById(R.id.linearLayoutEnquiryShowHide);
             buttonRateNow = (Button) itemView.findViewById(R.id.buttonRateNow);
             imageViewRating1 = (ImageView) itemView.findViewById(R.id.imageViewRating1);
@@ -413,6 +416,8 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
             imageViewRating3 = (ImageView) itemView.findViewById(R.id.imageViewRating3);
             imageViewRating4 = (ImageView) itemView.findViewById(R.id.imageViewRating4);
             imageViewRating5 = (ImageView) itemView.findViewById(R.id.imageViewRating5);
+
+            spinnerStatus = (Spinner)itemView.findViewById(R.id.spinnerStatus);
 
 
         }

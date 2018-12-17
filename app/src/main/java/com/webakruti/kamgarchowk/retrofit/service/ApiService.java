@@ -18,6 +18,7 @@ import com.webakruti.kamgarchowk.model.KamgarResponse;
 import com.webakruti.kamgarchowk.model.KamgarSubcategoriesResponse;
 import com.webakruti.kamgarchowk.model.KamgarUpdateResp;
 import com.webakruti.kamgarchowk.model.MyEnquiryResponse;
+import com.webakruti.kamgarchowk.model.MyOrdersResponse;
 import com.webakruti.kamgarchowk.model.RateResponse;
 import com.webakruti.kamgarchowk.model.SearchAutofill;
 import com.webakruti.kamgarchowk.model.SearchLocationList;
@@ -234,4 +235,9 @@ public interface ApiService {
 
     @GET(ApiConstants.SubscriptionPlans)
     Call<SubscripnPlanResp> subscriptionPlan(@Header("Authorization") String header);
+
+    @GET(ApiConstants.KamgarOrders)
+    Call<MyOrdersResponse> kamgaroders(@Header("Authorization") String header);
+
+
 }

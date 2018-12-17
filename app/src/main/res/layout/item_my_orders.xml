@@ -54,29 +54,23 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="2dp"
-                        android:gravity="top|center"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/textViewKamgarDesignation"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="25dp"
                             android:text="Plumber"
                             android:textAllCaps="false"
                             android:textColor="@color/pink_red"
                             android:textSize="15dp" />
 
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/grey" />
-
                         <TextView
                             android:id="@+id/textViewKamgarDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="25dp"
                             android:text="26 Oct 2018"
                             android:textAllCaps="false"
                             android:textColor="@color/black"
@@ -251,7 +245,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="2dp"
-                        android:layout_weight="50"
+                        android:layout_weight="70"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -267,7 +261,8 @@
                             android:layout_width="8dp"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="15dp"
-                            android:src="@drawable/dot" />
+                            android:src="@drawable/dot"
+                            android:visibility="gone"/>
 
                         <TextView
                             android:id="@+id/textViewKamgarStatus"
@@ -279,14 +274,23 @@
                             android:text="Completed"
                             android:textAllCaps="false"
                             android:textColor="@color/green"
-                            android:textSize="15dp" />
+                            android:textSize="15dp"
+                            android:visibility="gone"/>
+
+                        <Spinner
+                            android:id="@+id/spinnerStatus"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/custom_spinner"
+                            android:paddingLeft="10dp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:layout_weight="50"
+                        android:layout_weight="30"
                         android:gravity="center">
 
                         <TextView

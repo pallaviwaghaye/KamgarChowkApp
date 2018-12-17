@@ -109,7 +109,6 @@ public class KamgarChangePasswordActivity extends AppCompatActivity {
         Integer kamgarid = SharedPreferenceManager.getKamgarObject().getSuccess().getAuthkamgar().getId();
 
 
-        //String API = "http://beta.kamgarchowk.com/api/";
         String headers = "Bearer " + token;
         Call<KamgarChangePwdResp> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).kamgarChangepwd(headers,kamgarid,editTextKamgarOldPwd.getText().toString(),editTextKamgarNewPwd.getText().toString(),editTextKamgarConfirmNewPwd.getText().toString());
         requestCallback.enqueue(new Callback<KamgarChangePwdResp>() {

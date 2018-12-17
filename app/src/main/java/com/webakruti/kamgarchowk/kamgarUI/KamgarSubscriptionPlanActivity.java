@@ -77,7 +77,6 @@ public class KamgarSubscriptionPlanActivity extends AppCompatActivity {
         SharedPreferenceManager.setApplicationContext(KamgarSubscriptionPlanActivity.this);
         String token = SharedPreferenceManager.getKamgarObject().getSuccess().getToken();
 
-        String API = "http://beta.kamgarchowk.com/api/";
         String headers = "Bearer " + token;
         Call<SubscripnPlanResp> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).subscriptionPlan(headers);
         requestCallback.enqueue(new Callback<SubscripnPlanResp>() {

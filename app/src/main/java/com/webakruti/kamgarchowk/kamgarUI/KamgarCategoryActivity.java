@@ -78,7 +78,6 @@ public class KamgarCategoryActivity extends AppCompatActivity {
         SharedPreferenceManager.setApplicationContext(KamgarCategoryActivity.this);
         String token = SharedPreferenceManager.getKamgarObject().getSuccess().getToken();
 
-        String API = "http://beta.kamgarchowk.com/api/";
         String headers = "Bearer " + token;
         Call<KamgarCategoryResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).getkamgarCategory(headers);
         requestCallback.enqueue(new Callback<KamgarCategoryResponse>() {

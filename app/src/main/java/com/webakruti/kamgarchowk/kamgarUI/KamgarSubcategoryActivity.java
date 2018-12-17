@@ -84,7 +84,6 @@ public class KamgarSubcategoryActivity extends AppCompatActivity {
 
         Integer categoryid = kamgarCategory.getId();
 
-        //String API = "http://beta.kamgarchowk.com/api/";
         String headers = "Bearer " + token;
         Call<KamgarSubcategoriesResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).getKamgarSubcat(headers,categoryid);
         requestCallback.enqueue(new Callback<KamgarSubcategoriesResponse>() {

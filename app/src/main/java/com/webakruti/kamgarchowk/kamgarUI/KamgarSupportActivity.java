@@ -97,7 +97,6 @@ public class KamgarSupportActivity extends AppCompatActivity {
         String LastName = SharedPreferenceManager.getKamgarObject().getSuccess().getAuthkamgar().getLastName();
         String ContactNumber = SharedPreferenceManager.getKamgarObject().getSuccess().getAuthkamgar().getMobileNo();
 
-        //String API = "http://beta.kamgarchowk.com/api/";
         String headers = "Bearer " + token;
         Call<SupportResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).sendSupportRequest(headers,FirstName,LastName,ContactNumber,editTextSubject.getText().toString(),editTextProblemDetails.getText().toString());
         requestCallback.enqueue(new Callback<SupportResponse>() {
