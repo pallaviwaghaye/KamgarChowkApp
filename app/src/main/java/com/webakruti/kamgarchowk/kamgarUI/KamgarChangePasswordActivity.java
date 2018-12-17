@@ -106,7 +106,7 @@ public class KamgarChangePasswordActivity extends AppCompatActivity {
 
 
         String token = SharedPreferenceManager.getKamgarObject().getSuccess().getToken();
-        Integer kamgarid = SharedPreferenceManager.getKamgarObject().getSuccess().getAuthuser().getId();
+        Integer kamgarid = SharedPreferenceManager.getKamgarObject().getSuccess().getAuthkamgar().getId();
 
 
         //String API = "http://beta.kamgarchowk.com/api/";

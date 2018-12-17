@@ -219,7 +219,7 @@ public class KamgarRegistrationActivity extends AppCompatActivity implements Vie
                     }
                 } else {
                     // Response code is 401
-                    Toast.makeText(KamgarRegistrationActivity.this, "Server error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(KamgarRegistrationActivity.this, "Unauthorized Kamgar!! Server Error.", Toast.LENGTH_SHORT).show();
                 }
 
                 if (progressDialogForAPI != null) {

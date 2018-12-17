@@ -1,5 +1,6 @@
 package com.webakruti.kamgarchowk.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -14,40 +15,50 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.model.SubscripnPlanResp;
 import com.webakruti.kamgarchowk.userUI.KamgarListActivity;
+
+import java.util.List;
 
 public class SubscriptionPlanAdapter extends RecyclerView.Adapter<SubscriptionPlanAdapter.ViewHolder> {
 
-    private Context context;
-    private int size;
-
-    public SubscriptionPlanAdapter(Context context, int size) {
+    private Activity context;
+    List<SubscripnPlanResp.Subcriptionplan> list;
+    public SubscriptionPlanAdapter(Activity context, List<SubscripnPlanResp.Subcriptionplan> list) {
         this.context = context;
-        this.size = size;
+        this.list = list;
 
     }
 
     @NonNull
     @Override
-    public SubscriptionPlanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public SubscriptionPlanAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_subscription_plans, viewGroup, false);
         SubscriptionPlanAdapter.ViewHolder viewHolder = new SubscriptionPlanAdapter.ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SubscriptionPlanAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final SubscriptionPlanAdapter.ViewHolder viewHolder, final int position) {
 
 
-        /*//final Student.Studentbatch studentbatch = list.get(position);
+        final SubscripnPlanResp.Subcriptionplan plans = list.get(position);
+        //viewHolder.textViewCategory.setText("Category " + position);
+        viewHolder.textViewSubPlanType.setText(plans.getName());
+        viewHolder.textViewSubPlanPrice.setText(plans.getAmount());
+        viewHolder.textView1stText.setText(plans.getDuration());
 
-        viewHolder.textViewBatchCourseName.setText(size[position]);
-        viewHolder.textViewBatchTime.setText(studentbatch.getBatch().getStartTime());
-        viewHolder.textViewCourseTeacher.setText(studentbatch.getWhoAssinged());
 
-        viewHolder.textViewBatchCourseDuration.setText(studentbatch.getBatch().getCourse().getDuration());
-        viewHolder.textViewBatchStartDate.setText(studentbatch.getBatch().getStartDate());
-        viewHolder.textViewBatchEndDate.setText(studentbatch.getBatch().getEndDate());*/
+        if (plans.getName().equalsIgnoreCase("Free")) {
+            viewHolder.textViewSubPlanType.setBackgroundColor(context.getResources().getColor(R.color.green));
+            viewHolder.textViewSubPlanType.setText(plans.getName());
+        } else if (plans.getName().equalsIgnoreCase("Silver")) {
+            viewHolder.textViewSubPlanType.setBackgroundColor(context.getResources().getColor(R.color.purple));
+            viewHolder.textViewSubPlanType.setText(plans.getName());
+        } else {
+            viewHolder.textViewSubPlanType.setBackgroundColor(context.getResources().getColor(R.color.yellow));
+            viewHolder.textViewSubPlanType.setText(plans.getName());
+        }
 
        /* Picasso.with(context)
                 .load(R.drawable.navab_thali)
@@ -65,7 +76,7 @@ public class SubscriptionPlanAdapter extends RecyclerView.Adapter<SubscriptionPl
 
     @Override
     public int getItemCount() {
-        return size;
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

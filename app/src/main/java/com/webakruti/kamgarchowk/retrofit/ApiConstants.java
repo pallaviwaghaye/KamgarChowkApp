@@ -56,10 +56,20 @@ public class ApiConstants {
 
     public static final String Kamgar_ChangePwd_API = "kamgarchangepass";
 
+    public static final String Kamgar_GetProfile_API = "kamgarprofile";
+
+    public static final String Kamgar_updateProfile_API = "updatekamgarprofile";
+
 
     public static final String Kamgar_Category_API = "kamgarcategorylist";
 
     public static final String Kamgar_GetSubcat_API = "kamgarsubcategories";
+
+    public static final String Kamgar_support_API = "support";
+
+    public static final String Save_Documents = "kamgardocumentsupdate";
+
+    public static final String SubscriptionPlans = "subcriptionplans";
 
 
     

@@ -50,44 +50,48 @@ public class KamgarSubcategoryAdapter extends RecyclerView.Adapter<KamgarSubcate
 
         viewHolder.checkboxSubcategoryName.setText(kamgarSubcategory.getName());
 
-        if(viewHolder.edittextHourlyPrice.getText().toString().length() == 0)
+       /* viewHolder.edittextHourlyPrice.setText(kamgarSubcategory.getHourly()+"");
+        viewHolder.edittextHalfdayPrice.setText(kamgarSubcategory.getHalfday()+"");
+        viewHolder.edittextFulldayPrice.setText(kamgarSubcategory.getFullday()+"");
+        viewHolder.edittextWeeklyPrice.setText(kamgarSubcategory.getWeekly()+"");
+        viewHolder.edittextMonthlyPrice.setText(kamgarSubcategory.getMonthly()+"");*/
+
+
+        if(kamgarSubcategory.getHourly() == 0)
         {
            viewHolder.edittextHourlyPrice.setText("");
         } else{
             viewHolder.edittextHourlyPrice.setText(kamgarSubcategory.getHourly()+"");
         }
 
-        if(viewHolder.edittextHalfdayPrice.getText().toString().length() == 0)
+        if(kamgarSubcategory.getHalfday() == 0)
         {
             viewHolder.edittextHalfdayPrice.setText("");
         }else{
             viewHolder.edittextHalfdayPrice.setText(kamgarSubcategory.getHalfday()+"");
         }
 
-        if(viewHolder.edittextFulldayPrice.getText().toString().length() == 0)
+        if(kamgarSubcategory.getFullday() == 0)
         {
             viewHolder.edittextFulldayPrice.setText("");
         }else{
             viewHolder.edittextFulldayPrice.setText(kamgarSubcategory.getFullday()+"");
         }
 
-        if(viewHolder.edittextWeeklyPrice.getText().toString().length() == 0)
+        if(kamgarSubcategory.getWeekly() == 0)
         {
             viewHolder.edittextWeeklyPrice.setText("");
         }else{
             viewHolder.edittextWeeklyPrice.setText(kamgarSubcategory.getWeekly()+"");
         }
 
-        if(viewHolder.edittextMonthlyPrice.getText().toString().length() == 0)
+        if(kamgarSubcategory.getMonthly() == 0)
         {
             viewHolder.edittextMonthlyPrice.setText("");
         }else{
             viewHolder.edittextMonthlyPrice.setText(kamgarSubcategory.getMonthly()+"");
         }
 
-       /* Picasso.with(context)
-                .load(R.drawable.navab_thali)
-                .into(viewHolder.imageViewVegImage);*/
 
        /* viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,8 +130,6 @@ public class KamgarSubcategoryAdapter extends RecyclerView.Adapter<KamgarSubcate
             edittextWeeklyPrice = (EditText)itemView.findViewById(R.id.edittextWeeklyPrice);
             edittextMonthlyPrice = (EditText)itemView.findViewById(R.id.edittextMonthlyPrice);
             checkboxSubcategoryName = (CheckBox)itemView.findViewById(R.id.checkboxSubcategoryName);
-
-
 
         }
     }

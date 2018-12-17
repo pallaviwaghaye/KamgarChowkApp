@@ -71,9 +71,7 @@ public class SupportActivity extends AppCompatActivity {
                         if (NetworkUtil.hasConnectivity(SupportActivity.this)) {
                             callSupportAPI();
                             //Toast.makeText(SupportActivity.this, "Request Sent To Support Team! We Will Contact You Soon!!!",Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(SupportActivity.this, HomeActivity.class);
-                                startActivity(intent);
-                                finish();
+
                         } else {
                             Toast.makeText(SupportActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
                         }
@@ -116,7 +114,9 @@ public class SupportActivity extends AppCompatActivity {
                     if (details.getSuccess() != null) {
 
                         Toast.makeText(SupportActivity.this, details.getSuccess().getMsg(),Toast.LENGTH_LONG).show();
-
+                        Intent intent = new Intent(SupportActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
 
                 } else {

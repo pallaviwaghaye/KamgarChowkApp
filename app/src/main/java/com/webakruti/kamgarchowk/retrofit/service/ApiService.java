@@ -7,6 +7,8 @@ import com.webakruti.kamgarchowk.model.HireKamgarResponse;
 import com.webakruti.kamgarchowk.model.HomeResponse;
 import com.webakruti.kamgarchowk.model.KamgarCategoryResponse;
 import com.webakruti.kamgarchowk.model.KamgarChangePwdResp;
+import com.webakruti.kamgarchowk.model.KamgarGetProfile;
+import com.webakruti.kamgarchowk.model.KamgarSaveDocsResp;
 import com.webakruti.kamgarchowk.model.KamgarForgotPwdOtp;
 import com.webakruti.kamgarchowk.model.KamgarForgotPwdResp;
 import com.webakruti.kamgarchowk.model.KamgarLoginResponse;
@@ -14,12 +16,14 @@ import com.webakruti.kamgarchowk.model.KamgarRegOtp;
 import com.webakruti.kamgarchowk.model.KamgarRegistrationResp;
 import com.webakruti.kamgarchowk.model.KamgarResponse;
 import com.webakruti.kamgarchowk.model.KamgarSubcategoriesResponse;
+import com.webakruti.kamgarchowk.model.KamgarUpdateResp;
 import com.webakruti.kamgarchowk.model.MyEnquiryResponse;
 import com.webakruti.kamgarchowk.model.RateResponse;
 import com.webakruti.kamgarchowk.model.SearchAutofill;
 import com.webakruti.kamgarchowk.model.SearchLocationList;
 import com.webakruti.kamgarchowk.model.SearchResponse;
 import com.webakruti.kamgarchowk.model.SubcategoryListResponse;
+import com.webakruti.kamgarchowk.model.SubscripnPlanResp;
 import com.webakruti.kamgarchowk.model.SupportResponse;
 import com.webakruti.kamgarchowk.model.UpdateProfileResponse;
 import com.webakruti.kamgarchowk.model.UserForgotPassword;
@@ -29,13 +33,14 @@ import com.webakruti.kamgarchowk.model.UserProfileResponse;
 import com.webakruti.kamgarchowk.model.UserRegistrationResponse;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 
-import java.util.Date;
-import java.util.List;
-
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -177,6 +182,26 @@ public interface ApiService {
                                               @Query("password") String newpassword,
                                               @Query("cpassword") String confirmpassword);
 
+    @POST(ApiConstants.Kamgar_GetProfile_API)
+    Call<KamgarGetProfile> kamgarprofile(@Header("Authorization") String header);
+
+    @POST(ApiConstants.Kamgar_updateProfile_API)
+    Call<KamgarUpdateResp> updatekamgarprofile(@Header("Authorization") String header,
+                                               @Query("id") Integer id,
+                                               @Query("first_name") String FName,
+                                               @Query("middle_name") String middleName,
+                                               @Query("last_name") String LName,
+                                               @Query("dob") String datebirth,
+                                               @Query("gender_id") Integer gender,
+                                               @Query("mobile_no") String mobNo,
+                                               @Query("email") String emailid,
+                                               @Query("address") String address,
+                                               @Query("country_id") Integer country,
+                                               @Query("state_id") Integer state,
+                                               @Query("city_id") Integer city,
+                                               @Query("pincode") String pincode);
+
+
     @POST(ApiConstants.Kamgar_Category_API)
     Call<KamgarCategoryResponse> getkamgarCategory(@Header("Authorization") String header);
 
@@ -186,12 +211,27 @@ public interface ApiService {
 
 
 
-   /* @Multipart
-    @POST(ApiConstants.ADMIN_UPDATE_COMPLAINT_UPLOAD_IMAGE)
-    Call<SaveComplaintResponse> uploadAdminComplaintUpdaate(
+    @POST(ApiConstants.Kamgar_support_API)
+    Call<SupportResponse> KamgarSupportRequest(@Header("Authorization") String header,
+                                             @Query("first_name") String firstName,
+                                             @Query("last_name") String lastName,
+                                             @Query("contact_no") String mobileNo,
+                                             @Query("subject") String subject,
+                                             @Query("problem_details") String problemDetails);
+
+
+
+    @Multipart
+    @POST(ApiConstants.Save_Documents)
+    Call<KamgarSaveDocsResp> saveDocuments(
             @Header("Authorization") String header,
-            @Part("id") RequestBody id,
-            @Part("status") RequestBody status,
-            @Part("comment") RequestBody comment,
-            @Part MultipartBody.Part baseImage);*/
+            @Part("pan_no") RequestBody PANno,
+            @Part("bank_name") RequestBody BankName,
+            @Part("bank_acc_no") RequestBody BankAccntNo,
+            @Part MultipartBody.Part panImage,
+            @Part MultipartBody.Part passbookImage);
+
+
+    @GET(ApiConstants.SubscriptionPlans)
+    Call<SubscripnPlanResp> subscriptionPlan(@Header("Authorization") String header);
 }

@@ -109,15 +109,33 @@
                     android:layout_height="15dp"
                     android:layout_gravity="center"
                     android:src="@drawable/right"/>
-                <TextView
-                    android:id="@+id/textView1stText"
+                <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="center"
-                    android:text="Get 3 Months Subscription with all features of listing."
+                    android:text="Get "
                     android:textSize="12dp"
                     android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/textView1stText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Days Subscription with all features of listing."
+                    android:textSize="12dp"
+                    android:textColor="@color/black"/>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout

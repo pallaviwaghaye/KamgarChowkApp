@@ -142,7 +142,7 @@ public class KamgarLoginActivity extends AppCompatActivity implements View.OnCli
                     }
                 } else {
                     // Response code is 401
-                    Toast.makeText(KamgarLoginActivity.this, "Error!! MobileNo or Password is Not Correct.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(KamgarLoginActivity.this, "Unauthorized Kamgar!! MobileNo or Password is Not Correct.", Toast.LENGTH_SHORT).show();
                 }
 
                 if (progressDialogForAPI != null) {

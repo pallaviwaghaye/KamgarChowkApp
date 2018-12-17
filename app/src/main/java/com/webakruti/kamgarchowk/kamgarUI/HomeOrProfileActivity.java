@@ -73,8 +73,8 @@ public class HomeOrProfileActivity extends AppCompatActivity {
 
         if (kamgar != null) {
             textViewKamgarMobileNo.setVisibility(View.VISIBLE);
-            textViewKamgarName.setText(kamgar.getSuccess().getAuthuser().getFirstName() +" "+ kamgar.getSuccess().getAuthuser().getLastName());
-            textViewKamgarMobileNo.setText(kamgar.getSuccess().getAuthuser().getMobileNo());
+            textViewKamgarName.setText(kamgar.getSuccess().getAuthkamgar().getFirstName() +" "+ kamgar.getSuccess().getAuthkamgar().getLastName());
+            textViewKamgarMobileNo.setText(kamgar.getSuccess().getAuthkamgar().getMobileNo());
 
             /*Picasso.with(getApplicationContext())
                     .placeholder(R.drawable.carpenter_icon)
@@ -189,7 +189,18 @@ public class HomeOrProfileActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
 
         fragManager = getSupportFragmentManager();
-        fragManager.beginTransaction().replace(R.id.home_container_kamgar, new HomeOrProfileFragment()).commit();
+        //fragManager.beginTransaction().replace(R.id.home_container_kamgar, new HomeOrProfileFragment()).commit();
+
+        // from update
+
+        boolean fromUpdate = getIntent().getBooleanExtra("fromUpdate", false);
+        if (fromUpdate) {
+            navigationViewKamgar.getMenu().getItem(1).setChecked(true);
+            fragManager.beginTransaction().replace(R.id.home_container_kamgar, new HomeOrProfileFragment()).commit();
+        } else {
+            navigationViewKamgar.getMenu().getItem(0).setChecked(true);
+            fragManager.beginTransaction().replace(R.id.home_container_kamgar, new HomeOrProfileFragment()).commit();
+        }
 
     }
 

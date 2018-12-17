@@ -489,6 +489,7 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
                 } else {
                     // Response code is 401
+                    Toast.makeText(EditProfileUserActivity.this, "Server error!!Email or MobileNo already in use.", Toast.LENGTH_LONG).show();
                 }
 
                 if (progressDialogForAPI != null) {

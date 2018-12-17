@@ -32,7 +32,7 @@ public class KamgarLoginResponse {
     }
 
 
-    public class Authuser {
+    public class Authkamgar {
 
         @SerializedName("id")
         private Integer id;
@@ -168,33 +168,30 @@ public class KamgarLoginResponse {
     }
 
 
-
-
-
     public class Success {
 
-        @SerializedName("authuser")
-        private Authuser authuser;
-        @SerializedName("status")
-        private Boolean status;
-        @SerializedName("token")
-        private String token;
+            @SerializedName("authkamgar")
+            private Authkamgar authkamgar;
+            @SerializedName("status")
+            private Boolean status;
+            @SerializedName("token")
+            private String token;
 
-        public Authuser getAuthuser() {
-            return authuser;
-        }
+            public Authkamgar getAuthkamgar() {
+                return authkamgar;
+            }
 
-        public void setAuthuser(Authuser authuser) {
-            this.authuser = authuser;
-        }
+            public void setAuthkamgar(Authkamgar authkamgar) {
+                this.authkamgar = authkamgar;
+            }
 
-        public Boolean getStatus() {
-            return status;
-        }
+            public Boolean getStatus() {
+                return status;
+            }
 
-        public void setStatus(Boolean status) {
-            this.status = status;
-        }
+            public void setStatus(Boolean status) {
+                this.status = status;
+            }
 
         public String getToken() {
             return token;
@@ -205,9 +202,6 @@ public class KamgarLoginResponse {
         }
 
     }
-
-
-
 
 
 }

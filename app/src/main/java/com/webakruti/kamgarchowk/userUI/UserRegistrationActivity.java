@@ -142,7 +142,7 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
                     }
                 } else {
                     // Response code is 401
-                    Toast.makeText(UserRegistrationActivity.this, "Unauthorized User", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserRegistrationActivity.this, "Unauthorized User!! Server Error!!", Toast.LENGTH_SHORT).show();
                 }
 
                 if (progressDialogForAPI != null) {
