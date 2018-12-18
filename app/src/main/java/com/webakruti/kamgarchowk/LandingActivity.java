@@ -55,9 +55,9 @@ public class LandingActivity extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.linearLayoutAdvertise:
-                Intent intent2 = new Intent(LandingActivity.this, AdvertiseActivity.class);
+                /*Intent intent2 = new Intent(LandingActivity.this, AdvertiseActivity.class);
                 startActivity(intent2);
-                finish();
+                finish();*/
                 break;
             case R.id.linearLayoutFreeListing:
                 Intent intent3 = new Intent(LandingActivity.this, FreeListingActivity.class);

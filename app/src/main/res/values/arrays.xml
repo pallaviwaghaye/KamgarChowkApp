@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/tools">
 
-    <string-array name="serachlocation">
-        <item>Select</item>
-        <item>Nagpur</item>
-        <item>Pune</item>
-        <item>Mumbai</item>
-        <item>Satara</item>
-        <item>Bhandara</item>
-        <item>Gondia</item>
-        <item>Sakoli</item>
-        <item>Wardha</item>
-        <item>Chandrapur</item>
-        <item>Umred</item>
-        <item>Gadchiroli</item>
+    <string-array name="status">
+        <item>Pending</item>
+        <item>In Process</item>
+        <item>Completed</item>
+        <item>Cancellation</item>
     </string-array>
 
 </resources>

@@ -227,16 +227,16 @@ public interface ApiService {
     Call<KamgarSaveDocsResp> saveDocuments(
             @Header("Authorization") String header,
             @Part("pan_no") RequestBody PANno,
+            @Part MultipartBody.Part panImage,
             @Part("bank_name") RequestBody BankName,
             @Part("bank_acc_no") RequestBody BankAccntNo,
-            @Part MultipartBody.Part panImage,
             @Part MultipartBody.Part passbookImage);
 
 
     @GET(ApiConstants.SubscriptionPlans)
     Call<SubscripnPlanResp> subscriptionPlan(@Header("Authorization") String header);
 
-    @GET(ApiConstants.KamgarOrders)
+    @POST(ApiConstants.KamgarOrders)
     Call<MyOrdersResponse> kamgaroders(@Header("Authorization") String header);
 
 

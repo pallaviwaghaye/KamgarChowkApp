@@ -90,10 +90,12 @@ public class KamgarMyOrdersActivity extends AppCompatActivity {
                         textViewNoData.setVisibility(View.GONE);
                         recyclerView.setVisibility(View.VISIBLE);
                         List<MyOrdersResponse.Kamgaractenquiry> list = details.getSuccess().getKamgaractenquiries();
+                        List<MyOrdersResponse.Workstatusselect> list1 = details.getSuccess().getWorkstatusselect();
+
                         //Toast.makeText(CategoryActivity.this, list.size(),Toast.LENGTH_LONG).show();
                         LinearLayoutManager layoutManager1 = new LinearLayoutManager(KamgarMyOrdersActivity.this,LinearLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(layoutManager1);
-                        recyclerView.setAdapter(new KamgarMyOrdersAdapter(KamgarMyOrdersActivity.this,list));
+                        recyclerView.setAdapter(new KamgarMyOrdersAdapter(KamgarMyOrdersActivity.this,list,list1));
                     }else{
                         textViewNoData.setVisibility(View.VISIBLE);
                         recyclerView.setVisibility(View.GONE);

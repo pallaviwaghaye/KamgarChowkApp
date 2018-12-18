@@ -98,7 +98,7 @@ public class KamgarRegistrationActivity extends AppCompatActivity implements Vie
                     if (editTextKamgarLastName.getText().toString().length() > 0) {
                         if (editTextKamgarMobileNumber.getText().toString().length() > 0) {
                             if (editTextKamgarMobileNumber.getText().toString().length() == 10) {
-                                if(editTextKamgarOtp.getText().toString().length() >= 6) {
+                                if(editTextKamgarOtp.getText().toString().length() == 6) {
 
                                     if (NetworkUtil.hasConnectivity(KamgarRegistrationActivity.this)) {
                                         callRegistartionAPI();
@@ -110,7 +110,7 @@ public class KamgarRegistrationActivity extends AppCompatActivity implements Vie
                                         Toast.makeText(KamgarRegistrationActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
                                     }
                                 }else{
-                                    Toast.makeText(KamgarRegistrationActivity.this, "OTP must be greater than 6", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(KamgarRegistrationActivity.this, "OTP must be 6 digits.", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 Toast.makeText(KamgarRegistrationActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();

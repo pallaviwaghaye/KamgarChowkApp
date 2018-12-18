@@ -144,7 +144,7 @@
                         android:hint="OTP"
                         android:paddingLeft="60dp"
                         android:imeOptions="actionDone"
-                        android:inputType="textEmailAddress"
+                        android:inputType="number"
                         android:textColor="@color/dark_blue"
                         android:textColorHint="@color/grey"
                         android:textSize="17sp" />

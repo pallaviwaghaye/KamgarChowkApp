@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,6 +30,7 @@ import com.webakruti.kamgarchowk.retrofit.service.RestClient;
 import com.webakruti.kamgarchowk.utils.NetworkUtil;
 import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -40,10 +44,12 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
     List<MyOrdersResponse.Kamgaractenquiry> list;
     int countRating = 0;
     private ProgressDialog progressDialogForAPI;
+    List<MyOrdersResponse.Workstatusselect> list1;
 
-    public KamgarMyOrdersAdapter(Activity context, List<MyOrdersResponse.Kamgaractenquiry> list) {
+    public KamgarMyOrdersAdapter(Activity context, List<MyOrdersResponse.Kamgaractenquiry> list,List<MyOrdersResponse.Workstatusselect> list1) {
         this.context = context;
         this.list = list;
+        this.list1 = list1;
         //this.size = size;
     }
 
@@ -52,6 +58,7 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
     public KamgarMyOrdersAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_my_orders, viewGroup, false);
         KamgarMyOrdersAdapter.ViewHolder viewHolder = new KamgarMyOrdersAdapter.ViewHolder(view);
+
         return viewHolder;
     }
 
@@ -64,9 +71,37 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
         viewHolder.textViewUserName.setText(orders.getUserFirstName() + " " + orders.getUserLastName());
        // viewHolder.textViewUserDesignation.setText(orders.getWorkstatus());
         viewHolder.textViewUserDate.setText(orders.getEnquiryDate());
-        viewHolder.textViewUserAddress.setText(orders.getUserAddress() + ", " + orders.getCityname());
+        if(orders.getUserAddress() != null && orders.getCityname() !=null) {
+            viewHolder.textViewUserAddress.setText(orders.getUserAddress() + " " + orders.getCityname());
+        }else
+        {
+            viewHolder.textViewUserAddress.setText("N/A");
+        }
         viewHolder.textViewUserContactNo.setText(orders.getUserMobileNo());
        // viewHolder.textViewRatingType.setText(orders.getRateremark());
+
+
+        final MyOrdersResponse.Workstatusselect status = list1.get(position);
+        //list.add("TEST");
+
+        ArrayAdapter<MyOrdersResponse.Workstatusselect> dataAdapter =new ArrayAdapter<MyOrdersResponse.Workstatusselect>(context, android.R.layout.simple_spinner_item,list1);
+
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        viewHolder.spinnerStatus.setAdapter(dataAdapter);
+
+
+       /* List<MyOrdersResponse.Workstatusselect> status = new ArrayList<>();
+        ArrayAdapter<MyOrdersResponse.Workstatusselect> arrayAdapter = new ArrayAdapter<MyOrdersResponse.Workstatusselect>(context,android.R.layout.simple_spinner_dropdown_item,status);
+        viewHolder.spinnerStatus.setAdapter(arrayAdapter);*/
+
+                /* String[] platformList = getResources().getStringArray(R.array.platforms);
+        ArrayAdapter<String> adapterPlatform = new ArrayAdapter<String>(RailwayCategoryFormActivity.this, android.R.layout.simple_spinner_dropdown_item, platformList);
+        spinnerPlatform.setAdapter(adapterPlatform);
+
+        spinnerPlatform.setSelection(0, true);
+        View v1 = spinnerPlatform.getSelectedView();
+        setTextCustom(v1);*/
 
 
        /* if (orders.getWorkstatus().equalsIgnoreCase("Completed")) {
@@ -299,9 +334,29 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
 
             }
         });*/
+
+      /*  spinnerLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                obj = (SearchLocationList.Citylist) parent.getItemAtPosition(position);
+                SharedPreferenceManager.storeUserLocationResponseInSharedPreference(obj);
+            }*/
+
+     /*  viewHolder.spinnerStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+           @Override
+           public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               MyOrdersResponse.Workstatusselect pos = (MyOrdersResponse.Workstatusselect) parent.getItemAtPosition(position);
+           }
+
+           @Override
+           public void onNothingSelected(AdapterView<?> parent) {
+
+           }
+       });*/
+
     }
 
-   /* private void callRatingAPI(int enquiryId, final int ratingId, final int position) {
+    private void callRatingAPI(int enquiryId, final int ratingId, final int position) {
 
         progressDialogForAPI = new ProgressDialog(context);
         progressDialogForAPI.setCancelable(false);
@@ -365,7 +420,7 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
         list.get(position).setRating(rating);
         this.notifyDataSetChanged();
 
-    }*/
+    }
 
     @Override
     public int getItemCount() {

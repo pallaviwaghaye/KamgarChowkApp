@@ -63,6 +63,7 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
     /*private File panImage;
     private File passbookImage;*/
     private String path;
+    private String path1;
     Uri outPutfileUri;
 
     private ProgressDialog progressDialogForAPI;
@@ -114,28 +115,33 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
                 openGallery(SELECT_FILE2);
                 break;
             case R.id.buttonDocumentSubmit:
-                if (editTextPanNumber.getText().toString().length() > 0) {
-                    if (editTextBankName.getText().toString().length() > 0) {
-                        if (editTextAccountNo.getText().toString().length() > 0) {
-
-                            if (NetworkUtil.hasConnectivity(KamgarDocumentsActivity.this)) {
-                                //callUploadDocuments();
-                                    Intent intent = new Intent(KamgarDocumentsActivity.this, HomeOrProfileActivity.class);
-                                    startActivity(intent);
+                if (editTextPanNumber.getText().toString().length() == 10) {
+                    if (editTextChoosePancard.getText().toString().length() > 0) {
+                        if (editTextBankName.getText().toString().length() > 0) {
+                            if (editTextAccountNo.getText().toString().length() == 11) {
+                                if (editTextChooseBankPassbook.getText().toString().length() > 0) {
+                                    if (NetworkUtil.hasConnectivity(KamgarDocumentsActivity.this)) {
+                                        callUploadDocuments();
+                                    /*Intent intent = new Intent(KamgarDocumentsActivity.this, HomeOrProfileActivity.class);
+                                    startActivity(intent);*/
+                                    } else {
+                                        Toast.makeText(KamgarDocumentsActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    Toast.makeText(KamgarDocumentsActivity.this, "Please Upload Bank Passbook Image", Toast.LENGTH_SHORT).show();
+                                }
                             } else {
-                                Toast.makeText(KamgarDocumentsActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(KamgarDocumentsActivity.this, "Please Enter valid Bank Account Number.", Toast.LENGTH_SHORT).show();
                             }
-
                         } else {
-                            Toast.makeText(KamgarDocumentsActivity.this, "Please Enter Bank Account Number.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(KamgarDocumentsActivity.this, "Please Enter Bank Name", Toast.LENGTH_SHORT).show();
                         }
+
                     } else {
-                        Toast.makeText(KamgarDocumentsActivity.this, "Please Enter Bank Name", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(KamgarDocumentsActivity.this, "Please Upload PAN Card Image", Toast.LENGTH_SHORT).show();
                     }
-
-
                 } else {
-                    Toast.makeText(KamgarDocumentsActivity.this, "Please Enter PAN Card Number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(KamgarDocumentsActivity.this, "Please Enter valid PAN Card Number", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -148,23 +154,23 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
                // android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         //i.setType("*/*");
         //startActivityForResult(i, req_code);
-
         Intent i = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(i, req_code);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if (resultCode == RESULT_OK) {
             Uri selectedImageUri = data.getData();
 
             if (requestCode == SELECT_FILE1) {
                 panImage = getPath(selectedImageUri);
+                path = getPath(selectedImageUri);
                 editTextChoosePancard.setText(panImage);
             }
             if (requestCode == SELECT_FILE2) {
                 passbookImage = getPath(selectedImageUri);
+                path1 = getPath(selectedImageUri);
                 editTextChooseBankPassbook.setText(passbookImage);
             }
 
@@ -183,17 +189,21 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
     }
 
 
-    /*private void callUploadDocuments()
+    private void callUploadDocuments()
     {
-
-        *//*File panImage = null;
-        if (path != null) {
-            baseImage = new File(path);
+        /*File panImage = null;
+        File passbookImage = null;
+        if (path != null &&  path1 != null) {
+            panImage = new File(path);
+            passbookImage = new File(path1);
 
             int compressionRatio = 2; //1 == originalImage, 2 = 50% compression, 4=25% compress
             try {
-                Bitmap bitmap = BitmapFactory.decodeFile(baseImage.getPath());
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 75, new FileOutputStream(baseImage));
+                Bitmap bitmap = BitmapFactory.decodeFile(panImage.getPath());
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 75, new FileOutputStream(panImage));
+
+                Bitmap bitmap1 = BitmapFactory.decodeFile(passbookImage.getPath());
+                bitmap1.compress(Bitmap.CompressFormat.JPEG, 75, new FileOutputStream(passbookImage));
             } catch (Throwable t) {
                 Log.e("ERROR", "Error compressing file." + t.toString());
                 t.printStackTrace();
@@ -201,48 +211,54 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
         } else {
             Toast.makeText(KamgarDocumentsActivity.this, "Please select image", Toast.LENGTH_SHORT).show();
             return;
-            path = null;
-        }
-*//*
+           *//* path = null;
+            path1 = null;*//*
+        }*/
+
 
         progressDialogForAPI = new ProgressDialog(KamgarDocumentsActivity.this);
         progressDialogForAPI.setCancelable(false);
         progressDialogForAPI.setIndeterminate(true);
         progressDialogForAPI.setMessage("Please wait...");
         progressDialogForAPI.show();
-*//*
-   @Part("colony_id") RequestBody colonyId,
-            @Part("description") RequestBody description,
-            @Part("address") RequestBody address
- *//*
 
         RequestBody PANno = RequestBody.create(MediaType.parse("multipart/form-data"), editTextPanNumber.getText().toString());
         RequestBody BankName = RequestBody.create(MediaType.parse("multipart/form-data"), editTextBankName.getText().toString());
         RequestBody BankAccntNo = RequestBody.create(MediaType.parse("multipart/form-data"), editTextAccountNo.getText().toString());
-        RequestBody panImage = RequestBody.create(MediaType.parse("multipart/form-data"), editTextChoosePancard.getText().toString());
-        RequestBody passbookImage = RequestBody.create(MediaType.parse("multipart/form-data"), editTextChooseBankPassbook.getText().toString());
 
-
-        *//*RequestBody requestBaseFile;
+        RequestBody requestBaseFile;
+        RequestBody requestBaseFile1;
         MultipartBody.Part bodyImage = null;
+        MultipartBody.Part bodyImage1 = null;
         if (path != null) {
             // with image
             requestBaseFile = RequestBody.create(MediaType.parse("multipart/form-data"), panImage);
-            bodyImage = MultipartBody.Part.createFormData("image_path", "image" + System.currentTimeMillis(), requestBaseFile);
-
-
+            bodyImage = MultipartBody.Part.createFormData("pan_copy_url", "image" +
+                    System.currentTimeMillis(), requestBaseFile);
         } else {
             // without image
             requestBaseFile = RequestBody.create(MediaType.parse("multipart/form-data"), "");
-            bodyImage = MultipartBody.Part.createFormData("image_path", "image" + System.currentTimeMillis(), requestBaseFile);
+            bodyImage = MultipartBody.Part.createFormData("pan_copy_url", "image" +
+                    System.currentTimeMillis(), requestBaseFile);
         }
-*//*
+        if (path1 != null) {
+            // with image
+            requestBaseFile1 = RequestBody.create(MediaType.parse("multipart/form-data"), passbookImage);
+            bodyImage1 = MultipartBody.Part.createFormData("bank_passbook_copy_url", "image" +
+                    System.currentTimeMillis(), requestBaseFile1);
+        } else {
+            // without image
+            requestBaseFile1 = RequestBody.create(MediaType.parse("multipart/form-data"), "");
+            bodyImage1 = MultipartBody.Part.createFormData("bank_passbook_copy_url", "image" +
+                    System.currentTimeMillis(), requestBaseFile1);
+        }
 
         String header = "Bearer " + SharedPreferenceManager.getKamgarObject().getSuccess().getToken();
 
-        Call<KamgarSaveDocsResp> colorsCall = RestClient.getApiService(ApiConstants.BASE_URL).saveDocuments(header, PANno, BankName, BankAccntNo, panImage, passbookImage);
+        Call<KamgarSaveDocsResp> documents = RestClient.getApiService(ApiConstants.BASE_URL).
+                saveDocuments(header,PANno,bodyImage,BankName,BankAccntNo,bodyImage1);
 
-        colorsCall.enqueue(new Callback<KamgarSaveDocsResp>() {
+        documents.enqueue(new Callback<KamgarSaveDocsResp>() {
             @Override
             public void onResponse(Call<KamgarSaveDocsResp> call, Response<KamgarSaveDocsResp> response) {
                 if (response.isSuccessful() && response.body() != null && response.code() == 200) {
@@ -251,12 +267,11 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
                         KamgarSaveDocsResp saveDocsResponse = response.body();
 
                         if (saveDocsResponse.getSuccess() != null) {
-                            if (saveDocsResponse.getSuccess()) {
-                                //Toast.makeText(getApplicationContext(), saveComplaintResponse.getSuccess().getMsg(), Toast.LENGTH_SHORT).show();
-                                Log.e("Upload", "Upload Successful");
-                                showDialog();
+//                            if (saveDocsResponse.getSuccess()) {
 
-                            }
+                                Log.e("Upload", "Upload Successful");
+                                Toast.makeText(getApplicationContext(), saveDocsResponse.getSuccess().getMsg(), Toast.LENGTH_SHORT).show();
+                            //}
                         } else {
                             Toast.makeText(KamgarDocumentsActivity.this, "Unable to reach server ", Toast.LENGTH_SHORT).show();
                         }
@@ -293,7 +308,7 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
         });
 
 
-    }*/
+    }
 
 
 }

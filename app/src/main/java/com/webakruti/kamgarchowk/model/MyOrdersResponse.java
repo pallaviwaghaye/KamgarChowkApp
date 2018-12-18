@@ -217,5 +217,10 @@ public class MyOrdersResponse {
             this.gmId = gmId;
         }
 
+        @Override
+        public String toString() {
+            return this.value;
+        }
+
     }
 }
