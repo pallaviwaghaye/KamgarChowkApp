@@ -222,6 +222,7 @@ public interface ApiService {
 
 
 
+    // pan_no, pan_copy_url, bank_name, bank_acc_no, bank_passbook_copy_url
     @Multipart
     @POST(ApiConstants.Save_Documents)
     Call<KamgarSaveDocsResp> saveDocuments(

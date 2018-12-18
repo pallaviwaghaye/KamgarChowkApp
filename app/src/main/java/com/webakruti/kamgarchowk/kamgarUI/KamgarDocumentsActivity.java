@@ -1,12 +1,17 @@
 package com.webakruti.kamgarchowk.kamgarUI;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +23,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.model.KamgarSaveDocsResp;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
@@ -27,6 +34,7 @@ import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -35,7 +43,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class KamgarDocumentsActivity extends AppCompatActivity implements View.OnClickListener{
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
+public class KamgarDocumentsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView imageViewBack;
     private EditText editTextPanNumber;
@@ -95,7 +106,7 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
         editTextChooseBankPassbook = (EditText) findViewById(R.id.editTextChooseBankPassbook);
         relativeLayoutPANUpload = (RelativeLayout) findViewById(R.id.relativeLayoutPANUpload);
         relativeLayoutPassbookUpload = (RelativeLayout) findViewById(R.id.relativeLayoutPassbookUpload);
-        buttonDocumentSubmit = (Button)findViewById(R.id.buttonDocumentSubmit);
+        buttonDocumentSubmit = (Button) findViewById(R.id.buttonDocumentSubmit);
 
         relativeLayoutPANUpload.setOnClickListener(this);
         relativeLayoutPassbookUpload.setOnClickListener(this);
@@ -103,16 +114,23 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
 
     }
 
+    boolean flag = false;
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
 
             case R.id.relativeLayoutPANUpload:
-                openGallery(SELECT_FILE1);
+                flag = true;
+                openGalleryActivity(SELECT_FILE1);
+                //openGallery(SELECT_FILE1);
                 //openDocument();
                 break;
             case R.id.relativeLayoutPassbookUpload:
-                openGallery(SELECT_FILE2);
+                flag = false;
+                openGalleryActivity(SELECT_FILE2);
+                //openGallery(SELECT_FILE2);
                 break;
             case R.id.buttonDocumentSubmit:
                 if (editTextPanNumber.getText().toString().length() == 10) {
@@ -149,9 +167,66 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
         }
     }
 
+
+    // Camera Permission
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void openGalleryActivity(int req_code) {
+
+        if (!checkPermission()) {
+
+            if (shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)
+                    && shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)) {
+                new TedPermission(KamgarDocumentsActivity.this)
+                        .setPermissionListener(permissionlistener)
+                        .setRationaleConfirmText("ALLOW")
+                        .setRationaleMessage("App Requires Permission")
+                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE)
+                        .check();
+            } else {
+                new TedPermission(KamgarDocumentsActivity.this)
+                        .setPermissionListener(permissionlistener)
+                        .setDeniedCloseButtonText("Cancel")
+                        .setDeniedMessage("If you reject permission,you can not use this service \n Please turn on permissions from Settings")
+                        .setGotoSettingButtonText("Settings")
+                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE)
+                        .check();
+            }
+        } else {
+            openGallery(req_code);
+        }
+    }
+
+
+    private boolean checkPermission() {
+        int result1 = ContextCompat.checkSelfPermission(KamgarDocumentsActivity.this, WRITE_EXTERNAL_STORAGE);
+        int result2 = ContextCompat.checkSelfPermission(KamgarDocumentsActivity.this, READ_EXTERNAL_STORAGE);
+
+        return
+                result1 == PackageManager.PERMISSION_GRANTED &&
+                        result2 == PackageManager.PERMISSION_GRANTED;
+    }
+
+    PermissionListener permissionlistener = new PermissionListener() {
+        @Override
+        public void onPermissionGranted() {
+            if (flag) {
+                openGallery(SELECT_FILE1);
+            } else {
+                openGallery(SELECT_FILE2);
+            }
+        }
+
+        @Override
+        public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+
+        }
+
+    };
+
+
     public void openGallery(int req_code) {
         //Intent i = new Intent(Intent.ACTION_GET_CONTENT, android.provider.MediaStore.Files.getContentUri(volumeName));
-               // android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        // android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         //i.setType("*/*");
         //startActivityForResult(i, req_code);
         Intent i = new Intent(Intent.ACTION_PICK,
@@ -180,7 +255,7 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
     }
 
     public String getPath(Uri uri) {
-        String[] projection = { MediaStore.Images.Media.DATA };
+        String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = managedQuery(uri, projection, null, null, null);
         int column_index = cursor
                 .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -189,11 +264,10 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
     }
 
 
-    private void callUploadDocuments()
-    {
-        /*File panImage = null;
+    private void callUploadDocuments() {
+        File panImage = null;
         File passbookImage = null;
-        if (path != null &&  path1 != null) {
+        if (path != null && path1 != null) {
             panImage = new File(path);
             passbookImage = new File(path1);
 
@@ -209,11 +283,9 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
                 t.printStackTrace();
             }
         } else {
-            Toast.makeText(KamgarDocumentsActivity.this, "Please select image", Toast.LENGTH_SHORT).show();
-            return;
-           *//* path = null;
-            path1 = null;*//*
-        }*/
+            path = null;
+            path1 = null;
+        }
 
 
         progressDialogForAPI = new ProgressDialog(KamgarDocumentsActivity.this);
@@ -230,6 +302,9 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
         RequestBody requestBaseFile1;
         MultipartBody.Part bodyImage = null;
         MultipartBody.Part bodyImage1 = null;
+
+        // pan_no, pan_copy_url, bank_name, bank_acc_no, bank_passbook_copy_url
+
         if (path != null) {
             // with image
             requestBaseFile = RequestBody.create(MediaType.parse("multipart/form-data"), panImage);
@@ -238,7 +313,7 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
         } else {
             // without image
             requestBaseFile = RequestBody.create(MediaType.parse("multipart/form-data"), "");
-            bodyImage = MultipartBody.Part.createFormData("pan_copy_url", "image" +
+            bodyImage = MultipartBody.Part.createFormData("pan_copy_url", "image1" +
                     System.currentTimeMillis(), requestBaseFile);
         }
         if (path1 != null) {
@@ -249,14 +324,14 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
         } else {
             // without image
             requestBaseFile1 = RequestBody.create(MediaType.parse("multipart/form-data"), "");
-            bodyImage1 = MultipartBody.Part.createFormData("bank_passbook_copy_url", "image" +
+            bodyImage1 = MultipartBody.Part.createFormData("bank_passbook_copy_url", "image1" +
                     System.currentTimeMillis(), requestBaseFile1);
         }
 
         String header = "Bearer " + SharedPreferenceManager.getKamgarObject().getSuccess().getToken();
 
         Call<KamgarSaveDocsResp> documents = RestClient.getApiService(ApiConstants.BASE_URL).
-                saveDocuments(header,PANno,bodyImage,BankName,BankAccntNo,bodyImage1);
+                saveDocuments(header, PANno, bodyImage, BankName, BankAccntNo, bodyImage1);
 
         documents.enqueue(new Callback<KamgarSaveDocsResp>() {
             @Override
@@ -269,8 +344,8 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
                         if (saveDocsResponse.getSuccess() != null) {
 //                            if (saveDocsResponse.getSuccess()) {
 
-                                Log.e("Upload", "Upload Successful");
-                                Toast.makeText(getApplicationContext(), saveDocsResponse.getSuccess().getMsg(), Toast.LENGTH_SHORT).show();
+                            Log.e("Upload", "Upload Successful");
+                            Toast.makeText(getApplicationContext(), saveDocsResponse.getSuccess().getMsg(), Toast.LENGTH_SHORT).show();
                             //}
                         } else {
                             Toast.makeText(KamgarDocumentsActivity.this, "Unable to reach server ", Toast.LENGTH_SHORT).show();
@@ -313,12 +388,12 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
 
 }
 
-   // public void openDocument() {
+// public void openDocument() {
 
-       // Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-     //   intent.addCategory(Intent.CATEGORY_OPENABLE);
+// Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+//   intent.addCategory(Intent.CATEGORY_OPENABLE);
 
-        // intent.setType("**/*//*");
+// intent.setType("**/*//*");
 
-      //  startActivityForResult(intent, READ_REQUEST_CODE);
-   // }
+//  startActivityForResult(intent, READ_REQUEST_CODE);
+// }
