@@ -7,6 +7,7 @@ import com.webakruti.kamgarchowk.model.HireKamgarResponse;
 import com.webakruti.kamgarchowk.model.HomeResponse;
 import com.webakruti.kamgarchowk.model.KamgarCategoryResponse;
 import com.webakruti.kamgarchowk.model.KamgarChangePwdResp;
+import com.webakruti.kamgarchowk.model.KamgarChangeStatus;
 import com.webakruti.kamgarchowk.model.KamgarGetProfile;
 import com.webakruti.kamgarchowk.model.KamgarSaveDocsResp;
 import com.webakruti.kamgarchowk.model.KamgarForgotPwdOtp;
@@ -239,6 +240,11 @@ public interface ApiService {
 
     @POST(ApiConstants.KamgarOrders)
     Call<MyOrdersResponse> kamgaroders(@Header("Authorization") String header);
+
+    @POST(ApiConstants.ChangeWorkStatus)
+    Call<KamgarChangeStatus> kamgarChangeStatus(@Header("Authorization") String header,
+                                                @Query("order_id") String orderid,
+                                                @Query("work_status_id") String workstatusid);
 
 
 }

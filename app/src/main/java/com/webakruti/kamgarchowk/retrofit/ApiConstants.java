@@ -72,6 +72,8 @@ public class ApiConstants {
     public static final String SubscriptionPlans = "subcriptionplans";
 
     public static final String KamgarOrders = "kamgarorders";
+
+    public static final String ChangeWorkStatus = "kamgarchangeworkstatus";
     
 
 

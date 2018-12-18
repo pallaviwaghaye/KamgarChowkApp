@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.model.KamgarChangeStatus;
 import com.webakruti.kamgarchowk.model.MyEnquiryResponse;
 import com.webakruti.kamgarchowk.model.MyOrdersResponse;
 import com.webakruti.kamgarchowk.model.RateResponse;
@@ -89,6 +90,8 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         viewHolder.spinnerStatus.setAdapter(dataAdapter);
+
+
 
 
        /* List<MyOrdersResponse.Workstatusselect> status = new ArrayList<>();
@@ -342,21 +345,22 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
                 SharedPreferenceManager.storeUserLocationResponseInSharedPreference(obj);
             }*/
 
-     /*  viewHolder.spinnerStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+       viewHolder.spinnerStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
            @Override
            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                MyOrdersResponse.Workstatusselect pos = (MyOrdersResponse.Workstatusselect) parent.getItemAtPosition(position);
+               callStatusChangeAPI(orders.getId(),status.getId(),position);
            }
 
            @Override
            public void onNothingSelected(AdapterView<?> parent) {
-
+               progressDialogForAPI.cancel();
            }
-       });*/
+       });
 
     }
 
-    private void callRatingAPI(int enquiryId, final int ratingId, final int position) {
+    private void callStatusChangeAPI(int orderid, final int workstatusid, final int position) {
 
         progressDialogForAPI = new ProgressDialog(context);
         progressDialogForAPI.setCancelable(false);
@@ -365,21 +369,23 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
         progressDialogForAPI.show();
 
         // SharedPreferenceManager.setApplicationContext(KamgarListActivity.this);
-        String token = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getToken();
+        String token = SharedPreferenceManager.getKamgarObject().getSuccess().getToken();
         String headers = "Bearer " + token;
-        Call<RateResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).giveRating(headers, enquiryId + "", ratingId + "");
-        requestCallback.enqueue(new Callback<RateResponse>() {
+        Call<KamgarChangeStatus> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).kamgarChangeStatus(headers, orderid + "", workstatusid + "");
+        requestCallback.enqueue(new Callback<KamgarChangeStatus>() {
             @Override
-            public void onResponse(Call<RateResponse> call, Response<RateResponse> response) {
+            public void onResponse(Call<KamgarChangeStatus> call, Response<KamgarChangeStatus> response) {
                 if (response.isSuccessful() && response.body() != null && response.code() == 200) {
 
-                    RateResponse details = response.body();
+                    KamgarChangeStatus details = response.body();
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
                     if (details != null) {
 
-                        if (details.getStatus()) {
-                            Toast.makeText(context, "Thanks for Rating.", Toast.LENGTH_SHORT).show();
-                            updateUI(position, ratingId);
+                        if (details.getSuccess()!= null) {
+                            Toast.makeText(context, "Status changed successfully.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, details.getSuccess().getMsg(), Toast.LENGTH_SHORT).show();
+                            progressDialogForAPI.cancel();
+                           // updateUI(position, ratingId);
                         } else {
                             Toast.makeText(context, "Sorry... Some Error Occured", Toast.LENGTH_SHORT).show();
 
@@ -399,7 +405,7 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
             }
 
             @Override
-            public void onFailure(Call<RateResponse> call, Throwable t) {
+            public void onFailure(Call<KamgarChangeStatus> call, Throwable t) {
 
                 if (t != null) {
 
@@ -416,11 +422,11 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
 
     }
 
-    private void updateUI(int position, int rating) {
+    /*private void updateUI(int position, int rating) {
         list.get(position).setRating(rating);
         this.notifyDataSetChanged();
 
-    }
+    }*/
 
     @Override
     public int getItemCount() {
