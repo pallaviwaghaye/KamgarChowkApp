@@ -174,7 +174,7 @@ public class MyOrdersResponse {
     }
 
 
-    public class Workstatusselect {
+    public static class Workstatusselect {
 
         @SerializedName("id")
         private Integer id;
@@ -184,6 +184,14 @@ public class MyOrdersResponse {
         private String value;
         @SerializedName("gm_id")
         private Integer gmId;
+
+        public Workstatusselect() {
+        }
+
+        public Workstatusselect(Integer id, String value) {
+            this.id = id;
+            this.value = value;
+        }
 
         public Integer getId() {
             return id;

@@ -64,7 +64,7 @@
                             android:textAllCaps="false"
                             android:textColor="@color/pink_red"
                             android:textSize="15dp"
-                            android:visibility="gone"/>
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/textViewKamgarDate"
@@ -156,7 +156,7 @@
                         android:layout_height="40dp"
                         android:text="Rate Now"
                         android:textSize="7sp"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -229,8 +229,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -240,21 +240,33 @@
                     android:weightSum="100">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="7dp"
                         android:layout_marginRight="2dp"
                         android:layout_weight="80"
-                        android:gravity="center"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:layout_gravity="left"
+                            android:gravity="left"
                             android:text="Status :"
-                            android:gravity="center"
                             android:textAllCaps="false"
                             android:textColor="@color/green"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/textViewStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="left"
+                            android:textAllCaps="false"
+                            android:textColor="@color/red"
                             android:textSize="15dp" />
 
                         <Spinner
@@ -263,7 +275,9 @@
                             android:layout_height="30dp"
                             android:layout_marginLeft="5dp"
                             android:background="@drawable/custom_spinner"
-                            android:paddingLeft="10dp" />
+                            android:paddingLeft="10dp"
+                            android:visibility="gone" />
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -277,10 +291,10 @@
                             android:id="@+id/textViewKamgarShowHideDetais"
                             android:layout_width="wrap_content"
                             android:layout_height="25dp"
-                            android:text="Less Details"
+                            android:gravity="center|right"
                             android:paddingLeft="20dp"
                             android:paddingTop="5dp"
-                            android:gravity="center|right"
+                            android:text="Less Details"
                             android:textAllCaps="false"
                             android:textColor="@color/pink_red"
                             android:textSize="15dp" />

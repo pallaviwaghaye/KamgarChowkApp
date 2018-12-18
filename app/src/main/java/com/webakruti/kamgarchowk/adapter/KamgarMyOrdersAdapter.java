@@ -5,11 +5,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -46,8 +48,10 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
     int countRating = 0;
     private ProgressDialog progressDialogForAPI;
     List<MyOrdersResponse.Workstatusselect> list1;
+    String defaultStatus = "Select";
+    boolean flagForItemClickNotCalled = false;
 
-    public KamgarMyOrdersAdapter(Activity context, List<MyOrdersResponse.Kamgaractenquiry> list,List<MyOrdersResponse.Workstatusselect> list1) {
+    public KamgarMyOrdersAdapter(Activity context, List<MyOrdersResponse.Kamgaractenquiry> list, List<MyOrdersResponse.Workstatusselect> list1) {
         this.context = context;
         this.list = list;
         this.list1 = list1;
@@ -70,30 +74,18 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
 
 
         viewHolder.textViewUserName.setText(orders.getUserFirstName() + " " + orders.getUserLastName());
-       // viewHolder.textViewUserDesignation.setText(orders.getWorkstatus());
+        // viewHolder.textViewUserDesignation.setText(orders.getWorkstatus());
         viewHolder.textViewUserDate.setText(orders.getEnquiryDate());
-        if(orders.getUserAddress() != null && orders.getCityname() !=null) {
+        if (orders.getUserAddress() != null && orders.getCityname() != null) {
             viewHolder.textViewUserAddress.setText(orders.getUserAddress() + " " + orders.getCityname());
-        }else
-        {
+        } else {
             viewHolder.textViewUserAddress.setText("N/A");
         }
         viewHolder.textViewUserContactNo.setText(orders.getUserMobileNo());
-       // viewHolder.textViewRatingType.setText(orders.getRateremark());
+        // viewHolder.textViewRatingType.setText(orders.getRateremark());
 
 
-        final MyOrdersResponse.Workstatusselect status = list1.get(position);
-        //list.add("TEST");
-
-        ArrayAdapter<MyOrdersResponse.Workstatusselect> dataAdapter =new ArrayAdapter<MyOrdersResponse.Workstatusselect>(context, android.R.layout.simple_spinner_item,list1);
-
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        viewHolder.spinnerStatus.setAdapter(dataAdapter);
-
-
-
-
+        initStatusData(viewHolder, position, orders);
        /* List<MyOrdersResponse.Workstatusselect> status = new ArrayList<>();
         ArrayAdapter<MyOrdersResponse.Workstatusselect> arrayAdapter = new ArrayAdapter<MyOrdersResponse.Workstatusselect>(context,android.R.layout.simple_spinner_dropdown_item,status);
         viewHolder.spinnerStatus.setAdapter(arrayAdapter);*/
@@ -115,113 +107,113 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
             viewHolder.imageViewRating5.setEnabled(true);
             viewHolder.buttonRateNow.setEnabled(true);*/
 
-            switch (orders.getRating()) {
+        switch (orders.getRating()) {
 
-                case 0:
-                    viewHolder.imageViewRating1.setEnabled(false);
-                    viewHolder.imageViewRating2.setEnabled(false);
-                    viewHolder.imageViewRating3.setEnabled(false);
-                    viewHolder.imageViewRating4.setEnabled(false);
-                    viewHolder.imageViewRating5.setEnabled(false);
+            case 0:
+                viewHolder.imageViewRating1.setEnabled(false);
+                viewHolder.imageViewRating2.setEnabled(false);
+                viewHolder.imageViewRating3.setEnabled(false);
+                viewHolder.imageViewRating4.setEnabled(false);
+                viewHolder.imageViewRating5.setEnabled(false);
 
-                    viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
-                    viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
-                    viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
-                    viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
-                    viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
-                    //viewHolder.buttonRateNow.setEnabled(false);
+                viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
+                viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
+                viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
+                viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
+                viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
+                //viewHolder.buttonRateNow.setEnabled(false);
 
-                    break;
+                break;
 
-                case 1:
+            case 1:
 
-                    viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
-                    viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
-                    viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
-                    viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
+                viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
+                viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
+                viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
+                viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
 
-                    viewHolder.imageViewRating1.setEnabled(false);
-                    viewHolder.imageViewRating2.setEnabled(false);
-                    viewHolder.imageViewRating3.setEnabled(false);
-                    viewHolder.imageViewRating4.setEnabled(false);
-                    viewHolder.imageViewRating5.setEnabled(false);
-
-
-                    viewHolder.buttonRateNow.setEnabled(false);
-
-                    break;
-
-                case 2:
-                    viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
-                    viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
-                    viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
-
-                    viewHolder.imageViewRating1.setEnabled(false);
-                    viewHolder.imageViewRating2.setEnabled(false);
-                    viewHolder.imageViewRating3.setEnabled(false);
-                    viewHolder.imageViewRating4.setEnabled(false);
-                    viewHolder.imageViewRating5.setEnabled(false);
+                viewHolder.imageViewRating1.setEnabled(false);
+                viewHolder.imageViewRating2.setEnabled(false);
+                viewHolder.imageViewRating3.setEnabled(false);
+                viewHolder.imageViewRating4.setEnabled(false);
+                viewHolder.imageViewRating5.setEnabled(false);
 
 
-                    viewHolder.buttonRateNow.setEnabled(false);
+                viewHolder.buttonRateNow.setEnabled(false);
 
-                    break;
+                break;
 
-                case 3:
+            case 2:
+                viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
+                viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
+                viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
 
-                    viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
-                    viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
-                    viewHolder.buttonRateNow.setEnabled(false);
-                    viewHolder.imageViewRating1.setEnabled(false);
-                    viewHolder.imageViewRating2.setEnabled(false);
-                    viewHolder.imageViewRating3.setEnabled(false);
-                    viewHolder.imageViewRating4.setEnabled(false);
-                    viewHolder.imageViewRating5.setEnabled(false);
-
-
-                    break;
-
-                case 4:
-
-                    viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
-                    viewHolder.buttonRateNow.setEnabled(false);
-                    viewHolder.imageViewRating1.setEnabled(false);
-                    viewHolder.imageViewRating2.setEnabled(false);
-                    viewHolder.imageViewRating3.setEnabled(false);
-                    viewHolder.imageViewRating4.setEnabled(false);
-                    viewHolder.imageViewRating5.setEnabled(false);
+                viewHolder.imageViewRating1.setEnabled(false);
+                viewHolder.imageViewRating2.setEnabled(false);
+                viewHolder.imageViewRating3.setEnabled(false);
+                viewHolder.imageViewRating4.setEnabled(false);
+                viewHolder.imageViewRating5.setEnabled(false);
 
 
-                    break;
+                viewHolder.buttonRateNow.setEnabled(false);
 
-                case 5:
+                break;
 
-                    viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                    viewHolder.buttonRateNow.setEnabled(false);
-                    viewHolder.imageViewRating1.setEnabled(false);
-                    viewHolder.imageViewRating2.setEnabled(false);
-                    viewHolder.imageViewRating3.setEnabled(false);
-                    viewHolder.imageViewRating4.setEnabled(false);
-                    viewHolder.imageViewRating5.setEnabled(false);
+            case 3:
+
+                viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
+                viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
+                viewHolder.buttonRateNow.setEnabled(false);
+                viewHolder.imageViewRating1.setEnabled(false);
+                viewHolder.imageViewRating2.setEnabled(false);
+                viewHolder.imageViewRating3.setEnabled(false);
+                viewHolder.imageViewRating4.setEnabled(false);
+                viewHolder.imageViewRating5.setEnabled(false);
 
 
-                    break;
+                break;
 
-            }
+            case 4:
+
+                viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
+                viewHolder.buttonRateNow.setEnabled(false);
+                viewHolder.imageViewRating1.setEnabled(false);
+                viewHolder.imageViewRating2.setEnabled(false);
+                viewHolder.imageViewRating3.setEnabled(false);
+                viewHolder.imageViewRating4.setEnabled(false);
+                viewHolder.imageViewRating5.setEnabled(false);
+
+
+                break;
+
+            case 5:
+
+                viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
+                viewHolder.buttonRateNow.setEnabled(false);
+                viewHolder.imageViewRating1.setEnabled(false);
+                viewHolder.imageViewRating2.setEnabled(false);
+                viewHolder.imageViewRating3.setEnabled(false);
+                viewHolder.imageViewRating4.setEnabled(false);
+                viewHolder.imageViewRating5.setEnabled(false);
+
+
+                break;
+
+        }
 
 
        /* } else {
@@ -338,25 +330,6 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
             }
         });*/
 
-      /*  spinnerLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                obj = (SearchLocationList.Citylist) parent.getItemAtPosition(position);
-                SharedPreferenceManager.storeUserLocationResponseInSharedPreference(obj);
-            }*/
-
-       viewHolder.spinnerStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-           @Override
-           public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               MyOrdersResponse.Workstatusselect pos = (MyOrdersResponse.Workstatusselect) parent.getItemAtPosition(position);
-              // callStatusChangeAPI(orders.getId(),status.getId(),position);
-           }
-
-           @Override
-           public void onNothingSelected(AdapterView<?> parent) {
-
-           }
-       });
 
        /*viewHolder.spinnerStatus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
@@ -367,7 +340,68 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
 
     }
 
-    private void callStatusChangeAPI(int orderid, final int workstatusid, final int position) {
+    private void initStatusData(ViewHolder viewHolder, final int listItemPosition, final MyOrdersResponse.Kamgaractenquiry orders) {
+
+        if (orders.getWorkstatus().equalsIgnoreCase("Completed") || orders.getWorkstatus().equalsIgnoreCase("Cancelled")) {
+            viewHolder.spinnerStatus.setVisibility(View.GONE);
+            viewHolder.textViewStatus.setVisibility(View.VISIBLE);
+            viewHolder.textViewStatus.setText(orders.getWorkstatus());
+        } else {
+            viewHolder.spinnerStatus.setVisibility(View.VISIBLE);
+            viewHolder.textViewStatus.setVisibility(View.GONE);
+
+
+            List<MyOrdersResponse.Workstatusselect> finalListOfStatus = new ArrayList<>();
+            MyOrdersResponse.Workstatusselect workstatusselect = new MyOrdersResponse.Workstatusselect();
+            workstatusselect.setId(-1);
+            workstatusselect.setValue(defaultStatus);
+            finalListOfStatus.add(workstatusselect);
+            finalListOfStatus.addAll(list1);
+
+            ArrayAdapter<MyOrdersResponse.Workstatusselect> dataAdapter = new ArrayAdapter<MyOrdersResponse.Workstatusselect>(context, android.R.layout.simple_spinner_item, finalListOfStatus);
+            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            viewHolder.spinnerStatus.setAdapter(dataAdapter);
+
+            int pos = -1;
+            for (int i = 0; i < finalListOfStatus.size(); i++) {
+                if (orders.getWorkstatus().equalsIgnoreCase(finalListOfStatus.get(i).getValue())) {
+                    pos = i;
+                    break;
+                }
+            }
+            viewHolder.spinnerStatus.setSelected(false);
+            viewHolder.spinnerStatus.setSelection(pos, true);  //must
+
+
+            viewHolder.spinnerStatus.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    flagForItemClickNotCalled = true;
+                    return false;
+                }
+            });
+
+            viewHolder.spinnerStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    MyOrdersResponse.Workstatusselect selectedStatus = (MyOrdersResponse.Workstatusselect) parent.getItemAtPosition(position);
+                    if (selectedStatus.getId() != -1 && flagForItemClickNotCalled) {
+                        flagForItemClickNotCalled = false;
+                        callStatusChangeAPI(orders.getId(), selectedStatus.getValue(), listItemPosition, selectedStatus.getId());
+                    } else {
+                        //   Toast.makeText(context, "Please change the status", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+        }
+    }
+
+    private void callStatusChangeAPI(int orderid, final String workstatus, final int position, final int workstatusid) {
 
         progressDialogForAPI = new ProgressDialog(context);
         progressDialogForAPI.setCancelable(false);
@@ -388,10 +422,11 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
                     if (details != null) {
 
-                        if (details.getSuccess()!= null) {
-                            Toast.makeText(context, "Status changed successfully.", Toast.LENGTH_SHORT).show();
+                        if (details.getSuccess() != null) {
+                            // Toast.makeText(context, "Status changed successfully.", Toast.LENGTH_SHORT).show();
                             Toast.makeText(context, details.getSuccess().getMsg(), Toast.LENGTH_SHORT).show();
-                          //  updateUI(position, workstatusid);
+                            updateUI(position, workstatus, workstatusid);
+
                         } else {
                             Toast.makeText(context, "Sorry... Some Error Occured", Toast.LENGTH_SHORT).show();
 
@@ -428,11 +463,13 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
 
     }
 
-    /*private void updateUI(int position, int status) {
-        list.get(position).setWorkStatus(status);
+    private void updateUI(int position, String status, int statusId) {
+        list.get(position).setWorkstatus(status);
+        list.get(position).setWorkStatus(statusId);
         this.notifyDataSetChanged();
 
-    }*/
+
+    }
 
     @Override
     public int getItemCount() {
@@ -462,7 +499,7 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
         private ImageView imageViewRating5;
         Button buttonRateNow;
         private CardView cardView;
-
+        TextView textViewStatus;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -484,8 +521,8 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
             imageViewRating4 = (ImageView) itemView.findViewById(R.id.imageViewRating4);
             imageViewRating5 = (ImageView) itemView.findViewById(R.id.imageViewRating5);
 
-            spinnerStatus = (Spinner)itemView.findViewById(R.id.spinnerStatus);
-
+            spinnerStatus = (Spinner) itemView.findViewById(R.id.spinnerStatus);
+            textViewStatus = (TextView) itemView.findViewById(R.id.textViewStatus);
 
         }
     }
