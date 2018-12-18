@@ -70,7 +70,7 @@
                             android:id="@+id/textViewKamgarDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="25dp"
+                            android:layout_marginLeft="10dp"
                             android:text="26 Oct 2018"
                             android:textAllCaps="false"
                             android:textColor="@color/black"
@@ -250,8 +250,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_gravity="left"
-                            android:gravity="left"
+                            android:gravity="center|left"
                             android:text="Status :"
                             android:textAllCaps="false"
                             android:textColor="@color/green"
@@ -266,7 +265,7 @@
                             android:layout_marginRight="5dp"
                             android:gravity="left"
                             android:textAllCaps="false"
-                            android:textColor="@color/red"
+                            android:textColor="@color/pink_red"
                             android:textSize="15dp" />
 
                         <Spinner
@@ -274,8 +273,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_marginLeft="5dp"
-                            android:background="@drawable/custom_spinner"
-                            android:paddingLeft="10dp"
+                            android:background="@drawable/custom_spinner1"
                             android:visibility="gone" />
 
                     </LinearLayout>
@@ -293,7 +291,6 @@
                             android:layout_height="25dp"
                             android:gravity="center|right"
                             android:paddingLeft="20dp"
-                            android:paddingTop="5dp"
                             android:text="Less Details"
                             android:textAllCaps="false"
                             android:textColor="@color/pink_red"

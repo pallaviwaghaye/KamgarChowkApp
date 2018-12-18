@@ -116,6 +116,8 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
                 viewHolder.imageViewRating4.setEnabled(false);
                 viewHolder.imageViewRating5.setEnabled(false);
 
+                viewHolder.textViewRatingType.setText("No Rating");
+
                 viewHolder.imageViewRating1.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                 viewHolder.imageViewRating2.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                 viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
@@ -139,8 +141,8 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
                 viewHolder.imageViewRating4.setEnabled(false);
                 viewHolder.imageViewRating5.setEnabled(false);
 
-
-                viewHolder.buttonRateNow.setEnabled(false);
+                viewHolder.textViewRatingType.setText("Poor");
+                /*viewHolder.buttonRateNow.setEnabled(false);*/
 
                 break;
 
@@ -157,8 +159,10 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
                 viewHolder.imageViewRating4.setEnabled(false);
                 viewHolder.imageViewRating5.setEnabled(false);
 
+                viewHolder.textViewRatingType.setText("Satisfactory");
 
-                viewHolder.buttonRateNow.setEnabled(false);
+
+//                viewHolder.buttonRateNow.setEnabled(false);
 
                 break;
 
@@ -169,7 +173,10 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
                 viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
                 viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
                 viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
-                viewHolder.buttonRateNow.setEnabled(false);
+                //viewHolder.buttonRateNow.setEnabled(false);
+
+                viewHolder.textViewRatingType.setText("Good");
+
                 viewHolder.imageViewRating1.setEnabled(false);
                 viewHolder.imageViewRating2.setEnabled(false);
                 viewHolder.imageViewRating3.setEnabled(false);
@@ -186,7 +193,10 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
                 viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
                 viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
                 viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greystar));
-                viewHolder.buttonRateNow.setEnabled(false);
+                //viewHolder.buttonRateNow.setEnabled(false);
+
+                viewHolder.textViewRatingType.setText("Very good");
+
                 viewHolder.imageViewRating1.setEnabled(false);
                 viewHolder.imageViewRating2.setEnabled(false);
                 viewHolder.imageViewRating3.setEnabled(false);
@@ -203,7 +213,10 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
                 viewHolder.imageViewRating3.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
                 viewHolder.imageViewRating4.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
                 viewHolder.imageViewRating5.setImageDrawable(context.getResources().getDrawable(R.drawable.greenstar));
-                viewHolder.buttonRateNow.setEnabled(false);
+                //viewHolder.buttonRateNow.setEnabled(false);
+
+                viewHolder.textViewRatingType.setText("Excellent");
+
                 viewHolder.imageViewRating1.setEnabled(false);
                 viewHolder.imageViewRating2.setEnabled(false);
                 viewHolder.imageViewRating3.setEnabled(false);
