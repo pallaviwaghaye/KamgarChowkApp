@@ -256,9 +256,8 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
 
     public String getPath(Uri uri) {
         String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
-        int column_index = cursor
-                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
@@ -345,7 +344,10 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
 //                            if (saveDocsResponse.getSuccess()) {
 
                             Log.e("Upload", "Upload Successful");
-                            Toast.makeText(getApplicationContext(), saveDocsResponse.getSuccess().getMsg(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(KamgarDocumentsActivity.this, saveDocsResponse.getSuccess().getMsg(), Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(KamgarDocumentsActivity.this,HomeOrProfileActivity.class);
+                            startActivity(intent);
+                            finish();
                             //}
                         } else {
                             Toast.makeText(KamgarDocumentsActivity.this, "Unable to reach server ", Toast.LENGTH_SHORT).show();

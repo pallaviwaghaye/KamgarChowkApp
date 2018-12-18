@@ -120,7 +120,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     if (details.getSuccess() != null) {
 
                         Toast.makeText(ChangePasswordActivity.this, details.getSuccess(),Toast.LENGTH_LONG).show();
-
+                        Intent intent = new Intent(ChangePasswordActivity.this,HomeActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                     else{
                         Toast.makeText(ChangePasswordActivity.this, "Enter correct Old Password",Toast.LENGTH_LONG).show();

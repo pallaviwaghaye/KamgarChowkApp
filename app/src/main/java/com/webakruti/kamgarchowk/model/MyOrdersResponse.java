@@ -222,5 +222,12 @@ public class MyOrdersResponse {
             return this.value;
         }
 
+        @Override
+        public boolean equals(Object obj) {
+            if(!(obj instanceof Workstatusselect)) return false;
+            Workstatusselect other = (Workstatusselect) obj;
+            return (this.id == other.id);
+        }
+
     }
 }

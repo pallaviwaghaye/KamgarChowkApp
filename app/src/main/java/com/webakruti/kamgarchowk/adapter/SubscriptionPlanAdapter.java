@@ -55,6 +55,9 @@ public class SubscriptionPlanAdapter extends RecyclerView.Adapter<SubscriptionPl
         } else if (plans.getName().equalsIgnoreCase("Silver")) {
             viewHolder.textViewSubPlanType.setBackgroundColor(context.getResources().getColor(R.color.purple));
             viewHolder.textViewSubPlanType.setText(plans.getName());
+        }else if (plans.getName().equalsIgnoreCase("Platinum")) {
+            viewHolder.textViewSubPlanType.setBackgroundColor(context.getResources().getColor(R.color.pink_red));
+            viewHolder.textViewSubPlanType.setText(plans.getName());
         } else {
             viewHolder.textViewSubPlanType.setBackgroundColor(context.getResources().getColor(R.color.yellow));
             viewHolder.textViewSubPlanType.setText(plans.getName());

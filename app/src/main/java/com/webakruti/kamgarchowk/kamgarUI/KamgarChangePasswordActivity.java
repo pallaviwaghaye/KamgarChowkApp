@@ -121,6 +121,9 @@ public class KamgarChangePasswordActivity extends AppCompatActivity {
                     if (details.getSuccess() != null) {
 
                         Toast.makeText(KamgarChangePasswordActivity.this, details.getSuccess(),Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(KamgarChangePasswordActivity.this,HomeOrProfileActivity.class);
+                        startActivity(intent);
+                        finish();
 
                     }else{
                         Toast.makeText(KamgarChangePasswordActivity.this, "Enter correct Old Password",Toast.LENGTH_LONG).show();

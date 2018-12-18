@@ -349,14 +349,21 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
            @Override
            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                MyOrdersResponse.Workstatusselect pos = (MyOrdersResponse.Workstatusselect) parent.getItemAtPosition(position);
-               callStatusChangeAPI(orders.getId(),status.getId(),position);
+              // callStatusChangeAPI(orders.getId(),status.getId(),position);
            }
 
            @Override
            public void onNothingSelected(AdapterView<?> parent) {
-               progressDialogForAPI.cancel();
+
            }
        });
+
+       /*viewHolder.spinnerStatus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               callStatusChangeAPI(orders.getId(),status.getId(),position);
+           }
+       });*/
 
     }
 
@@ -384,8 +391,7 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
                         if (details.getSuccess()!= null) {
                             Toast.makeText(context, "Status changed successfully.", Toast.LENGTH_SHORT).show();
                             Toast.makeText(context, details.getSuccess().getMsg(), Toast.LENGTH_SHORT).show();
-                            progressDialogForAPI.cancel();
-                           // updateUI(position, ratingId);
+                          //  updateUI(position, workstatusid);
                         } else {
                             Toast.makeText(context, "Sorry... Some Error Occured", Toast.LENGTH_SHORT).show();
 
@@ -422,8 +428,8 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
 
     }
 
-    /*private void updateUI(int position, int rating) {
-        list.get(position).setRating(rating);
+    /*private void updateUI(int position, int status) {
+        list.get(position).setWorkStatus(status);
         this.notifyDataSetChanged();
 
     }*/
