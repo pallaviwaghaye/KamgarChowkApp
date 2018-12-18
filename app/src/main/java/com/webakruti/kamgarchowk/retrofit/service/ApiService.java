@@ -35,9 +35,12 @@ import com.webakruti.kamgarchowk.model.UserProfileResponse;
 import com.webakruti.kamgarchowk.model.UserRegistrationResponse;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 
+import org.json.JSONArray;
+
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
@@ -48,6 +51,14 @@ import retrofit2.http.Query;
 public interface ApiService {
 
     // --------------------User APIS-------------------------
+
+    @POST(ApiConstants.REG_API)
+    Call<UserRegistrationResponse> qq(@Query("first_name") String firstName,
+                                                @Body JSONArray lastName,
+                                                @Query("mobile_no") String mobileNo,
+                                                @Query("email") String email);
+
+
     // Registration API
     //192.168.29.107/kamgar-chowk/api/user-registration?first_name=Pallavi&last_name=Waghaye&mobile_no=7975972248
     @POST(ApiConstants.REG_API)

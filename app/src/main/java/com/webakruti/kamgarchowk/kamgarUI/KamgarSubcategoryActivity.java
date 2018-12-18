@@ -100,7 +100,7 @@ public class KamgarSubcategoryActivity extends AppCompatActivity {
                         //Toast.makeText(SubcategoryActivity.this, list.size(),Toast.LENGTH_LONG).show();
                         LinearLayoutManager layoutManager1 = new LinearLayoutManager(KamgarSubcategoryActivity.this,LinearLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(layoutManager1);
-                        recyclerView.setAdapter(new KamgarSubcategoryAdapter(KamgarSubcategoryActivity.this, list));
+                        recyclerView.setAdapter(new KamgarSubcategoryAdapter(KamgarSubcategoryActivity.this, list, recyclerView));
                     }else{
                         textViewNoData.setVisibility(View.VISIBLE);
                         recyclerView.setVisibility(View.GONE);
