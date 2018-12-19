@@ -643,9 +643,9 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
         progressDialogForAPI.setMessage("Please wait...");
         progressDialogForAPI.show();
 
-        Integer userid = SharedPreferenceManager.getKamgarObject().getSuccess().getAuthkamgar().getId();
+        //Integer userid = SharedPreferenceManager.getKamgarObject().getSuccess().getAuthkamgar().getId();
 
-        RequestBody id = RequestBody.create(MediaType.parse("multipart/form-data"), userid+"");
+        //RequestBody id = RequestBody.create(MediaType.parse("multipart/form-data"), userid+"");
         RequestBody FName = RequestBody.create(MediaType.parse("multipart/form-data"), editTextFname.getText().toString());
         RequestBody middleName = RequestBody.create(MediaType.parse("multipart/form-data"), editTextMname.getText().toString());
         RequestBody LName = RequestBody.create(MediaType.parse("multipart/form-data"), editTextLname.getText().toString());
@@ -683,7 +683,7 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
 
         //String API = "http://beta.kamgarchowk.com/api/";
         String header = "Bearer " + SharedPreferenceManager.getKamgarObject().getSuccess().getToken();
-        Call<KamgarUpdateResp> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).updatekamgarprofile(header,id,bodyImage,FName,middleName,LName,datebirth,gender,mobNo,emailid,address,country,state,city,pincode);
+        Call<KamgarUpdateResp> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).updatekamgarprofile(header,bodyImage,FName,middleName,LName,datebirth,gender,mobNo,emailid,address,country,state,city,pincode);
                 //.updatekamgarprofile(header, userid, editTextFname.getText().toString(), editTextMname.getText().toString(), editTextLname.getText().toString(), editTextDOB.getText().toString(), selectedGender.getId(), editTextMobile.getText().toString(), editTextEmail.getText().toString(), editTextAddress.getText().toString(), ((KamgarGetProfile.Country) spinnerCountry.getSelectedItem()).getId(), ((KamgarGetProfile.State) spinnerState.getSelectedItem()).getId(),((KamgarGetProfile.City) spinnerCity.getSelectedItem()).getId(), editTextPincode.getText().toString());
 
         requestCallback.enqueue(new Callback<KamgarUpdateResp>() {
