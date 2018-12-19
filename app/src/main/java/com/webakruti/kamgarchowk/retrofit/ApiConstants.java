@@ -74,8 +74,9 @@ public class ApiConstants {
     public static final String KamgarOrders = "kamgarorders";
 
     public static final String ChangeWorkStatus = "kamgarchangeworkstatus";
-    
 
+
+    public static final String Submit_kamgar_Status_Update = "kamgarsubcatratesupdate ";
 
 
 

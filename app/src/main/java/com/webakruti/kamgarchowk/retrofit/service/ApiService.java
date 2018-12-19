@@ -18,6 +18,7 @@ import com.webakruti.kamgarchowk.model.KamgarRegistrationResp;
 import com.webakruti.kamgarchowk.model.KamgarResponse;
 import com.webakruti.kamgarchowk.model.KamgarSubcategoriesResponse;
 import com.webakruti.kamgarchowk.model.KamgarUpdateResp;
+import com.webakruti.kamgarchowk.model.KamgarUpdateStatus;
 import com.webakruti.kamgarchowk.model.MyEnquiryResponse;
 import com.webakruti.kamgarchowk.model.MyOrdersResponse;
 import com.webakruti.kamgarchowk.model.RateResponse;
@@ -54,9 +55,9 @@ public interface ApiService {
 
     @POST(ApiConstants.REG_API)
     Call<UserRegistrationResponse> qq(@Query("first_name") String firstName,
-                                                @Body JSONArray lastName,
-                                                @Query("mobile_no") String mobileNo,
-                                                @Query("email") String email);
+                                      @Body JSONArray lastName,
+                                      @Query("mobile_no") String mobileNo,
+                                      @Query("email") String email);
 
 
     // Registration API
@@ -158,8 +159,6 @@ public interface ApiService {
                                   @Query("workRatingId") String workRatingId);
 
 
-
-
     // --------------------Kamgar APIS-------------------------
 
 
@@ -170,14 +169,14 @@ public interface ApiService {
 
     @POST(ApiConstants.Registration_API)
     Call<KamgarRegistrationResp> kamgarRegistration(@Query("first_name") String firstname,
-                                              @Query("last_name") String lastname,
-                                              @Query("mobile_no") String mobileno,
-                                              @Query("otp") String otp);
+                                                    @Query("last_name") String lastname,
+                                                    @Query("mobile_no") String mobileno,
+                                                    @Query("otp") String otp);
 
 
     @POST(ApiConstants.Kamgar_Login_API)
     Call<KamgarLoginResponse> kamgarLogin(@Query("mobile_no") String mobileno,
-                                             @Query("password") String password);
+                                          @Query("password") String password);
 
     @POST(ApiConstants.Kamgar_forgotOTP_API)
     Call<KamgarForgotPwdOtp> kamgarforgotOTP(@Query("mobile_no") String mobileno);
@@ -185,7 +184,7 @@ public interface ApiService {
 
     @POST(ApiConstants.Kamgar_forgot_API)
     Call<KamgarForgotPwdResp> kamgarForgot(@Query("mobile_no") String mobileno,
-                                          @Query("otp") String otp);
+                                           @Query("otp") String otp);
 
 
     @POST(ApiConstants.Kamgar_ChangePwd_API)
@@ -223,15 +222,13 @@ public interface ApiService {
                                                       @Query("category_id") Integer categoryid);
 
 
-
     @POST(ApiConstants.Kamgar_support_API)
     Call<SupportResponse> KamgarSupportRequest(@Header("Authorization") String header,
-                                             @Query("first_name") String firstName,
-                                             @Query("last_name") String lastName,
-                                             @Query("contact_no") String mobileNo,
-                                             @Query("subject") String subject,
-                                             @Query("problem_details") String problemDetails);
-
+                                               @Query("first_name") String firstName,
+                                               @Query("last_name") String lastName,
+                                               @Query("contact_no") String mobileNo,
+                                               @Query("subject") String subject,
+                                               @Query("problem_details") String problemDetails);
 
 
     // pan_no, pan_copy_url, bank_name, bank_acc_no, bank_passbook_copy_url
@@ -257,5 +254,9 @@ public interface ApiService {
                                                 @Query("order_id") String orderid,
                                                 @Query("work_status_id") String workstatusid);
 
+
+    @POST(ApiConstants.Submit_kamgar_Status_Update)
+    Call<KamgarUpdateStatus> updateKamgarStatus(@Header("Authorization") String header,
+                                                @Body RequestBody body);
 
 }
