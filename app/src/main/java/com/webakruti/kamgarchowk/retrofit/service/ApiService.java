@@ -234,7 +234,6 @@ public interface ApiService {
     @Multipart
     @POST(ApiConstants.Kamgar_updateProfile_API)
     Call<KamgarUpdateResp> updatekamgarprofile(@Header("Authorization") String header,
-                                               @Part("id") RequestBody id,
                                                @Part MultipartBody.Part kamgarImage,
                                                @Part("first_name") RequestBody FName,
                                                @Part("middle_name") RequestBody middleName,
