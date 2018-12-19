@@ -1,9 +1,19 @@
 package com.webakruti.kamgarchowk.userUI;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +28,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
+import com.squareup.picasso.Picasso;
 import com.webakruti.kamgarchowk.R;
+import com.webakruti.kamgarchowk.kamgarUI.KamgarEditProfileActivity;
 import com.webakruti.kamgarchowk.model.CategoryList;
 import com.webakruti.kamgarchowk.model.ChangePasswordResponse;
 import com.webakruti.kamgarchowk.model.HomeResponse;
@@ -32,6 +46,8 @@ import com.webakruti.kamgarchowk.retrofit.service.RestClient;
 import com.webakruti.kamgarchowk.utils.NetworkUtil;
 import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,6 +57,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static com.webakruti.kamgarchowk.model.UserProfileResponse.*;
 
 public class EditProfileUserActivity extends AppCompatActivity implements View.OnClickListener {
@@ -56,6 +74,8 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
     private EditText editTextMobile;
     private EditText editTextAddress;
 
+    private ImageView imageViewUserImage;
+    private Button buttonUploadImage;
 
     private Spinner spinnerGender;
     private Spinner spinnerCountry;
@@ -79,6 +99,13 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
     private Button buttonSave;
 
     private ProgressDialog progressDialogForAPI;
+
+    String kamgarImage;
+
+    private static final int REQUEST_IMAGE_TAKEN = 1;
+
+    private String path;
+    Uri outPutfileUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +150,10 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextMobile = (EditText) findViewById(R.id.editTextMobile);
         editTextAddress = (EditText) findViewById(R.id.editTextAddress);
+
+        imageViewUserImage = (ImageView)findViewById(R.id.imageViewUserImage);
+        buttonUploadImage = (Button)findViewById(R.id.buttonUploadImage);
+        buttonUploadImage.setOnClickListener(this);
 
         spinnerGender = (Spinner) findViewById(R.id.spinnerGender);
         spinnerCountry = (Spinner) findViewById(R.id.spinnerCountry);
@@ -368,7 +399,9 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
         });
     }
 
+    boolean flag = false;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -439,9 +472,155 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                 dlg.getDatePicker().setMaxDate(System.currentTimeMillis());
                 dlg.show();
                 break;
+            case R.id.buttonUploadImage:
+                flag = true;
+                openGalleryActivity(REQUEST_IMAGE_TAKEN);
+                //openGallery(SELECT_FILE1);
+                //openDocument();
+                break;
 
         }
     }
+
+    // Camera Permission
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void openGalleryActivity(int req_code) {
+
+        if (!checkPermission()) {
+
+            if (shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)
+                    && shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)) {
+                new TedPermission(EditProfileUserActivity.this)
+                        .setPermissionListener(permissionlistener)
+                        .setRationaleConfirmText("ALLOW")
+                        .setRationaleMessage("App Requires Permission")
+                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE)
+                        .check();
+            } else {
+                new TedPermission(EditProfileUserActivity.this)
+                        .setPermissionListener(permissionlistener)
+                        .setDeniedCloseButtonText("Cancel")
+                        .setDeniedMessage("If you reject permission,you can not use this service \n Please turn on permissions from Settings")
+                        .setGotoSettingButtonText("Settings")
+                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE)
+                        .check();
+            }
+        } else {
+            openGallery(req_code);
+        }
+    }
+
+
+    private boolean checkPermission() {
+        int result1 = ContextCompat.checkSelfPermission(EditProfileUserActivity.this, WRITE_EXTERNAL_STORAGE);
+        int result2 = ContextCompat.checkSelfPermission(EditProfileUserActivity.this, READ_EXTERNAL_STORAGE);
+
+        return
+                result1 == PackageManager.PERMISSION_GRANTED &&
+                        result2 == PackageManager.PERMISSION_GRANTED;
+    }
+
+    PermissionListener permissionlistener = new PermissionListener() {
+        @Override
+        public void onPermissionGranted() {
+            if (flag) {
+                openGallery(REQUEST_IMAGE_TAKEN);
+            }/* else {
+                openGallery(REQUEST_IMAGE_TAKEN);
+            }*/
+        }
+
+        @Override
+        public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+
+        }
+
+    };
+
+
+    public void openGallery(int req_code) {
+        //Intent i = new Intent(Intent.ACTION_GET_CONTENT, android.provider.MediaStore.Files.getContentUri(volumeName));
+        // android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        //i.setType("*/*");
+        //startActivityForResult(i, req_code);
+        Intent i = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(i, req_code);
+    }
+
+
+ /*   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_TAKEN && resultCode == RESULT_OK) {
+            try {
+
+                if (path != null) {
+                    linearLayoutCamera.setVisibility(View.GONE);
+                    imageViewKamgarImage.setVisibility(View.VISIBLE);
+                    Bitmap bitmap = decodeSampledBitmapFromFile(path, Utils.DpToPixel(KamgarEditProfileActivity.this, 270), Utils.DpToPixel(KamgarEditProfileActivity.this, 150));
+
+                    imageViewKamgarImage.setImageBitmap(bitmap);
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }*/
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            Uri selectedImageUri = data.getData();
+
+            if (requestCode == REQUEST_IMAGE_TAKEN) {
+                kamgarImage = getPath(selectedImageUri);
+                path = getPath(selectedImageUri);
+
+            }
+           /* else
+            {
+                Picasso.with(KamgarEditProfileActivity.this)
+                        .load(R.drawable.kamgar)
+                        .into(imageViewKamgarImage);
+            }*/
+
+            File kamgarImage = null;
+            if (path != null) {
+                kamgarImage = new File(path);
+
+                int compressionRatio = 2; //1 == originalImage, 2 = 50% compression, 4=25% compress
+                try {
+                    Bitmap bitmap = BitmapFactory.decodeFile(kamgarImage.getPath());
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 75, new FileOutputStream(kamgarImage));
+
+                    imageViewUserImage.setImageBitmap(bitmap);
+
+                } catch (Throwable t) {
+                    Log.e("ERROR", "Error compressing file." + t.toString());
+                    t.printStackTrace();
+                }
+            } else {
+                path = null;
+                Picasso.with(EditProfileUserActivity.this)
+                        .load(R.drawable.kamgar)
+                        .into(imageViewUserImage);
+            }
+
+
+           /* editTextChoosePancard.setText("Selected File paths : " + selectedPath1);
+            editTextChooseBankPassbook.setText("Selected File paths : " + selectedPath2);*/
+        }
+    }
+
+    public String getPath(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+
 
     private void CallUpdateUserAPI() {
 
