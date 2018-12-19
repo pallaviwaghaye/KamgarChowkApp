@@ -215,7 +215,7 @@ public interface ApiService {
     @POST(ApiConstants.Kamgar_GetProfile_API)
     Call<KamgarGetProfile> kamgarprofile(@Header("Authorization") String header);
 
-    @POST(ApiConstants.Kamgar_updateProfile_API)
+    /*@POST(ApiConstants.Kamgar_updateProfile_API)
     Call<KamgarUpdateResp> updatekamgarprofile(@Header("Authorization") String header,
                                                @Query("id") Integer id,
                                                @Query("first_name") String FName,
@@ -229,9 +229,9 @@ public interface ApiService {
                                                @Query("country_id") Integer country,
                                                @Query("state_id") Integer state,
                                                @Query("city_id") Integer city,
-                                               @Query("pincode") String pincode);
+                                               @Query("pincode") String pincode);*/
 
-    /*@Multipart
+    @Multipart
     @POST(ApiConstants.Kamgar_updateProfile_API)
     Call<KamgarUpdateResp> updatekamgarprofile(@Header("Authorization") String header,
                                                @Part("id") RequestBody id,
@@ -247,7 +247,7 @@ public interface ApiService {
                                                @Part("country_id") RequestBody country,
                                                @Part("state_id") RequestBody state,
                                                @Part("city_id") RequestBody city,
-                                               @Part("pincode") RequestBody pincode);*/
+                                               @Part("pincode") RequestBody pincode);
 
 
     @POST(ApiConstants.Kamgar_Category_API)

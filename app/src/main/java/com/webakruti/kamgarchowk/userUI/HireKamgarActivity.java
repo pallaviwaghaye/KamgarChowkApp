@@ -107,20 +107,25 @@ public class HireKamgarActivity extends AppCompatActivity {
         }else{
             textViewHourlyPrice.setText("N/A");
         }
+        if(kamgar.getHalfday() != 0) {
+            textViewHalfdayPrice.setText(kamgar.getHalfday() + "");
+        }else{
+            textViewHalfdayPrice.setText("N/A");
+        }
         if(kamgar.getFullday() != 0) {
             textViewFulldayPrice.setText(kamgar.getFullday()+"");
         }else{
-            textViewHourlyPrice.setText("N/A");
+            textViewFulldayPrice.setText("N/A");
         }
         if(kamgar.getWeekly() != 0) {
             textViewWeeklyPrice.setText(kamgar.getWeekly()+"");
         }else{
-            textViewHourlyPrice.setText("N/A");
+            textViewWeeklyPrice.setText("N/A");
         }
         if(kamgar.getMonthly() != 0) {
             textViewMonthlyPrice.setText(kamgar.getMonthly()+"");
         }else{
-            textViewHourlyPrice.setText("N/A");
+            textViewMonthlyPrice.setText("N/A");
         }
 
 

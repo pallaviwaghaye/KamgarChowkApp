@@ -405,8 +405,8 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
                 if (editTextFname.getText().toString().length() > 0) {
                     if (editTextLname.getText().toString().length() > 0) {
                         if (editTextDOB.getText().toString().length() > 0) {
-                            if (editTextEmail.getText().toString().length() > 0) {
-                                if (isValidEmailAddress(editTextEmail.getText().toString().trim())) {
+                            /*if (editTextEmail.getText().toString().length() > 0) {
+                                if (isValidEmailAddress(editTextEmail.getText().toString().trim())) {*/
                                     if (editTextMobile.getText().toString().length() > 0) {
                                         if (editTextMobile.getText().toString().length() == 10) {
                                            if (selectedGender.getId() != -1) {
@@ -442,12 +442,12 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
                                     } else {
                                         Toast.makeText(KamgarEditProfileActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
                                     }
-                                } else {
+                                /*} else {
                                     Toast.makeText(KamgarEditProfileActivity.this, "Email Id must be valid", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 Toast.makeText(KamgarEditProfileActivity.this, "Email Id Can't be empty", Toast.LENGTH_SHORT).show();
-                            }
+                            }*/
                         } else {
                             Toast.makeText(KamgarEditProfileActivity.this, "Date of birth Can't be empty", Toast.LENGTH_SHORT).show();
                         }
@@ -670,13 +670,13 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
         }
 
 
-        String token = SharedPreferenceManager.getKamgarObject().getSuccess().getToken();
+        //String token = SharedPreferenceManager.getKamgarObject().getSuccess().getToken();
 
 
         //String API = "http://beta.kamgarchowk.com/api/";
-        String header = "Bearer " + token;
-        Call<KamgarUpdateResp> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL)
-                .updatekamgarprofile(header, userid, editTextFname.getText().toString(), editTextMname.getText().toString(), editTextLname.getText().toString(), editTextDOB.getText().toString(), selectedGender.getId(), editTextMobile.getText().toString(), editTextEmail.getText().toString(), editTextAddress.getText().toString(), ((KamgarGetProfile.Country) spinnerCountry.getSelectedItem()).getId(), ((KamgarGetProfile.State) spinnerState.getSelectedItem()).getId(),((KamgarGetProfile.City) spinnerCity.getSelectedItem()).getId(), editTextPincode.getText().toString());
+        String header = "Bearer " + SharedPreferenceManager.getKamgarObject().getSuccess().getToken();
+        Call<KamgarUpdateResp> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).updatekamgarprofile(header,id,bodyImage,FName,middleName,LName,datebirth,gender,mobNo,emailid,address,country,state,city,pincode);
+                //.updatekamgarprofile(header, userid, editTextFname.getText().toString(), editTextMname.getText().toString(), editTextLname.getText().toString(), editTextDOB.getText().toString(), selectedGender.getId(), editTextMobile.getText().toString(), editTextEmail.getText().toString(), editTextAddress.getText().toString(), ((KamgarGetProfile.Country) spinnerCountry.getSelectedItem()).getId(), ((KamgarGetProfile.State) spinnerState.getSelectedItem()).getId(),((KamgarGetProfile.City) spinnerCity.getSelectedItem()).getId(), editTextPincode.getText().toString());
 
         requestCallback.enqueue(new Callback<KamgarUpdateResp>() {
             @Override
