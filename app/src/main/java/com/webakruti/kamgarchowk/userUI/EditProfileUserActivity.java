@@ -108,8 +108,8 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
     private static final int REQUEST_IMAGE_TAKEN = 1;
 
-    private String path;
     Uri outPutfileUri;
+    private File userImageFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,22 +131,20 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
         editTextEmail.setText(user.getEmail());
         editTextMname.setText(user.getMiddleName());
 
-        if(user.getUserImgUrl() == null)
-        {
+        if (user.getUserImgUrl() == null) {
             Picasso.with(EditProfileUserActivity.this)
                     .load(R.drawable.user_image)
                     .into(imageViewUserImage);
-        }else {
+        } else {
             Picasso.with(EditProfileUserActivity.this)
                     .load(user.getUserImgUrl())
                     .into(imageViewUserImage);
         }
 
-        if(user.getPincode() == 0)
-        {
+        if (user.getPincode() == 0) {
             editTextPincode.setText("");
-        }else {
-            editTextPincode.setText(user.getPincode()+"");
+        } else {
+            editTextPincode.setText(user.getPincode() + "");
         }
         editTextMobile.setText(user.getMobileNo());
         editTextDOB.setText(user.getDob());
@@ -167,8 +165,8 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
         editTextMobile = (EditText) findViewById(R.id.editTextMobile);
         editTextAddress = (EditText) findViewById(R.id.editTextAddress);
 
-        imageViewUserImage = (ImageView)findViewById(R.id.imageViewUserImage);
-        buttonUploadImage = (Button)findViewById(R.id.buttonUploadImage);
+        imageViewUserImage = (ImageView) findViewById(R.id.imageViewUserImage);
+        buttonUploadImage = (Button) findViewById(R.id.buttonUploadImage);
         buttonUploadImage.setOnClickListener(this);
 
         spinnerGender = (Spinner) findViewById(R.id.spinnerGender);
@@ -435,11 +433,11 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                                                         if (((State) spinnerState.getSelectedItem()).getId() != -1) {
                                                             if (((City) spinnerCity.getSelectedItem()).getId() != -1) {
 
-                                                                    if (NetworkUtil.hasConnectivity(EditProfileUserActivity.this)) {
-                                                                        CallUpdateUserAPI();
-                                                                    }else{
-                                                                        Toast.makeText(EditProfileUserActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
-                                                                    }
+                                                                if (NetworkUtil.hasConnectivity(EditProfileUserActivity.this)) {
+                                                                    CallUpdateUserAPI();
+                                                                } else {
+                                                                    Toast.makeText(EditProfileUserActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                }
                                                             } else {
                                                                 Toast.makeText(EditProfileUserActivity.this, "Select city", Toast.LENGTH_SHORT).show();
                                                             }
@@ -589,24 +587,17 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
             if (requestCode == REQUEST_IMAGE_TAKEN) {
                 userImage = getPath(selectedImageUri);
-                path = getPath(selectedImageUri);
 
             }
-           /* else
-            {
-                Picasso.with(KamgarEditProfileActivity.this)
-                        .load(R.drawable.kamgar)
-                        .into(imageViewKamgarImage);
-            }*/
 
-            File userImage = null;
-            if (path != null) {
-                userImage = new File(path);
+             userImageFile = null;
+            if (userImage != null) {
+                userImageFile = new File(userImage);
 
                 int compressionRatio = 2; //1 == originalImage, 2 = 50% compression, 4=25% compress
                 try {
-                    Bitmap bitmap = BitmapFactory.decodeFile(userImage.getPath());
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 75, new FileOutputStream(userImage));
+                    Bitmap bitmap = BitmapFactory.decodeFile(userImageFile.getPath());
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 75, new FileOutputStream(userImageFile));
 
                     imageViewUserImage.setImageBitmap(bitmap);
 
@@ -615,7 +606,7 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                     t.printStackTrace();
                 }
             } else {
-                path = null;
+                userImage = null;
                 Picasso.with(EditProfileUserActivity.this)
                         .load(R.drawable.kamgar)
                         .into(imageViewUserImage);
@@ -646,19 +637,19 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
         Integer userid = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getAuthuser().getId();
 
-        RequestBody id = RequestBody.create(MediaType.parse("multipart/form-data"), userid+"");
+        RequestBody id = RequestBody.create(MediaType.parse("multipart/form-data"), userid + "");
         RequestBody FName = RequestBody.create(MediaType.parse("multipart/form-data"), editTextFname.getText().toString());
         RequestBody middleName = RequestBody.create(MediaType.parse("multipart/form-data"), editTextMname.getText().toString());
         RequestBody LName = RequestBody.create(MediaType.parse("multipart/form-data"), editTextLname.getText().toString());
         RequestBody datebirth = RequestBody.create(MediaType.parse("multipart/form-data"), editTextDOB.getText().toString());
-        RequestBody gender = RequestBody.create(MediaType.parse("multipart/form-data"), selectedGender.getId()+"");
+        RequestBody gender = RequestBody.create(MediaType.parse("multipart/form-data"), selectedGender.getId() + "");
         RequestBody mobNo = RequestBody.create(MediaType.parse("multipart/form-data"), editTextMobile.getText().toString());
         RequestBody emailid = RequestBody.create(MediaType.parse("multipart/form-data"), editTextEmail.getText().toString());
         RequestBody address = RequestBody.create(MediaType.parse("multipart/form-data"), editTextAddress.getText().toString());
-        RequestBody country = RequestBody.create(MediaType.parse("multipart/form-data"), ((UserProfileResponse.Country) spinnerCountry.getSelectedItem()).getId()+"");
-        RequestBody state = RequestBody.create(MediaType.parse("multipart/form-data"), ((UserProfileResponse.State) spinnerState.getSelectedItem()).getId()+"");
-        RequestBody city = RequestBody.create(MediaType.parse("multipart/form-data"), ((UserProfileResponse.City) spinnerCity.getSelectedItem()).getId()+"");
-        RequestBody pincode = RequestBody.create(MediaType.parse("multipart/form-data"), editTextPincode.getText().toString()+"");
+        RequestBody country = RequestBody.create(MediaType.parse("multipart/form-data"), ((UserProfileResponse.Country) spinnerCountry.getSelectedItem()).getId() + "");
+        RequestBody state = RequestBody.create(MediaType.parse("multipart/form-data"), ((UserProfileResponse.State) spinnerState.getSelectedItem()).getId() + "");
+        RequestBody city = RequestBody.create(MediaType.parse("multipart/form-data"), ((UserProfileResponse.City) spinnerCity.getSelectedItem()).getId() + "");
+        RequestBody pincode = RequestBody.create(MediaType.parse("multipart/form-data"), editTextPincode.getText().toString() + "");
 
 
         RequestBody requestBaseFile;
@@ -666,9 +657,9 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
         // pan_no, pan_copy_url, bank_name, bank_acc_no, bank_passbook_copy_url
 
-        if (path != null) {
+        if (userImage != null) {
             // with image
-            requestBaseFile = RequestBody.create(MediaType.parse("multipart/form-data"), userImage);
+            requestBaseFile = RequestBody.create(MediaType.parse("multipart/form-data"), userImageFile);
             bodyImage = MultipartBody.Part.createFormData("user_img_url", "image" + System.currentTimeMillis(), requestBaseFile);
         } else {
             // without image
@@ -677,8 +668,7 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
         }
 
 
-
-       // String API = "http://beta.kamgarchowk.com/api/";
+        // String API = "http://beta.kamgarchowk.com/api/";
 
         String header = "Bearer " + SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getToken();
         Call<UpdateProfileResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).updateprofile(header, id, bodyImage, FName, middleName, LName, datebirth, gender, mobNo, emailid, address, country, state, city, pincode);

@@ -98,11 +98,10 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
     String kamgarImage;
 
     private static final int REQUEST_IMAGE_TAKEN = 1;
-
-    private String path;
     Uri outPutfileUri;
 
     private ProgressDialog progressDialogForAPI;
+    private File kamgarImageFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +123,16 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
         editTextAddress.setText(kamgar.getAddress());
         editTextEmail.setText(kamgar.getEmail());
         editTextMname.setText(kamgar.getMiddleName());
+
+        if (kamgar.getContImgUrl() == null) {
+            Picasso.with(KamgarEditProfileActivity.this)
+                    .load(R.drawable.user_image)
+                    .into(imageViewKamgarImage);
+        } else {
+            Picasso.with(KamgarEditProfileActivity.this)
+                    .load(kamgar.getContImgUrl())
+                    .into(imageViewKamgarImage);
+        }
         if(kamgar.getPincode() == 0)
         {
             editTextPincode.setText("");
@@ -571,7 +580,6 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
 
             if (requestCode == REQUEST_IMAGE_TAKEN) {
                 kamgarImage = getPath(selectedImageUri);
-                path = getPath(selectedImageUri);
 
                 /*Bitmap bitmap = decodeSampledBitmapFromFile(path, Utils.DpToPixel(KamgarEditProfileActivity.this, 270), Utils.DpToPixel(KamgarEditProfileActivity.this, 150));
 
@@ -589,14 +597,14 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
                         .into(imageViewKamgarImage);
             }*/
 
-            File kamgarImage = null;
-            if (path != null) {
-                kamgarImage = new File(path);
+            kamgarImageFile = null;
+            if (kamgarImage != null) {
+                kamgarImageFile = new File(kamgarImage);
 
                 int compressionRatio = 2; //1 == originalImage, 2 = 50% compression, 4=25% compress
                 try {
-                    Bitmap bitmap = BitmapFactory.decodeFile(kamgarImage.getPath());
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 75, new FileOutputStream(kamgarImage));
+                    Bitmap bitmap = BitmapFactory.decodeFile(kamgarImageFile.getPath());
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 75, new FileOutputStream(kamgarImageFile));
 
                     imageViewKamgarImage.setImageBitmap(bitmap);
 
@@ -605,7 +613,7 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
                     t.printStackTrace();
                 }
             } else {
-                path = null;
+                kamgarImage = null;
                 Picasso.with(KamgarEditProfileActivity.this)
                         .load(R.drawable.kamgar)
                         .into(imageViewKamgarImage);
@@ -657,15 +665,15 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
 
         // pan_no, pan_copy_url, bank_name, bank_acc_no, bank_passbook_copy_url
 
-        if (path != null) {
+        if (kamgarImage != null) {
             // with image
-            requestBaseFile = RequestBody.create(MediaType.parse("multipart/form-data"), kamgarImage);
+            requestBaseFile = RequestBody.create(MediaType.parse("multipart/form-data"), kamgarImageFile);
             bodyImage = MultipartBody.Part.createFormData("cont_img_url", "image" +
                     System.currentTimeMillis(), requestBaseFile);
         } else {
             // without image
             requestBaseFile = RequestBody.create(MediaType.parse("multipart/form-data"), "");
-            bodyImage = MultipartBody.Part.createFormData("cont_img_url", "image1" +
+            bodyImage = MultipartBody.Part.createFormData("cont_img_url", "image" +
                     System.currentTimeMillis(), requestBaseFile);
         }
 

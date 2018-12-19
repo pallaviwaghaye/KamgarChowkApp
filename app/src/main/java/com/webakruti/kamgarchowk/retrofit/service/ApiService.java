@@ -143,6 +143,7 @@ public interface ApiService {
                                               @Query("pincode") String pincode);*/
 
     @Multipart
+    //header, id, bodyImage, FName, middleName, LName, datebirth, gender, mobNo, emailid, address, country, state, city, pincode
     @POST(ApiConstants.updateuserprofile_API)
     Call<UpdateProfileResponse> updateprofile(@Header("Authorization") String header,
                                               @Part("id") RequestBody id,
