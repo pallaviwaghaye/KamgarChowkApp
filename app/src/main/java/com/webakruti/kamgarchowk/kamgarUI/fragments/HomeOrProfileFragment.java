@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.kamgarUI.KamgarCategoryActivity;
 import com.webakruti.kamgarchowk.kamgarUI.KamgarChangePasswordActivity;
@@ -258,6 +259,13 @@ public class HomeOrProfileFragment extends Fragment {
         textViewKamgarFullname.setText(list.getFirstName()+" "+list.getLastName());
         textViewKamgarMobile.setText(list.getMobileNo());
         textViewKamgarMobNo.setText(list.getMobileNo());
+
+        Picasso.with(getActivity())
+                .load(list.getContImgUrl())
+                .placeholder(R.drawable.kamgarborder)
+                .resize(300, 300)
+                .into(imageViewKamgarImage);
+
         if(list.getEmail()!= null) {
             textViewkamgarEmail.setText(list.getEmail());
         }else{

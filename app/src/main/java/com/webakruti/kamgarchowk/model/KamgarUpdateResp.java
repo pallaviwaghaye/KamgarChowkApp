@@ -169,6 +169,8 @@ public class KamgarUpdateResp {
 
         @SerializedName("id")
         private Integer id;
+        @SerializedName("cont_img_url")
+        private String contImgUrl;
         @SerializedName("first_name")
         private String firstName;
         @SerializedName("middle_name")
@@ -200,6 +202,14 @@ public class KamgarUpdateResp {
 
         public void setId(Integer id) {
             this.id = id;
+        }
+
+        public String getContImgUrl() {
+            return contImgUrl;
+        }
+
+        public void setContImgUrl(String contImgUrl) {
+            this.contImgUrl = contImgUrl;
         }
 
         public String getFirstName() {

@@ -9,8 +9,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class UserLoginResponse {
 
-    @SerializedName("success")
 
+    @SerializedName("success")
     private Success success;
 
     public Success getSuccess() {
@@ -21,23 +21,13 @@ public class UserLoginResponse {
         this.success = success;
     }
 
-    @SerializedName("error")
-    private String error;
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
-
-
 
     public class Authuser {
 
         @SerializedName("id")
         private Integer id;
+        @SerializedName("user_img_url")
+        private String userImgUrl;
         @SerializedName("first_name")
         private String firstName;
         @SerializedName("middle_name")
@@ -50,16 +40,16 @@ public class UserLoginResponse {
         private String email;
         @SerializedName("dob")
         private String dob;
-        @SerializedName("gender_id")
-        private String genderId;
+        @SerializedName("gender")
+        private String gender;
         @SerializedName("address")
         private String address;
-        @SerializedName("country_id")
-        private String countryId;
-        @SerializedName("state_id")
-        private String stateId;
-        @SerializedName("city_id")
-        private String cityId;
+        @SerializedName("city")
+        private String city;
+        @SerializedName("state")
+        private String state;
+        @SerializedName("country")
+        private String country;
         @SerializedName("pincode")
         private Integer pincode;
 
@@ -69,6 +59,14 @@ public class UserLoginResponse {
 
         public void setId(Integer id) {
             this.id = id;
+        }
+
+        public String getUserImgUrl() {
+            return userImgUrl;
+        }
+
+        public void setUserImgUrl(String userImgUrl) {
+            this.userImgUrl = userImgUrl;
         }
 
         public String getFirstName() {
@@ -119,12 +117,12 @@ public class UserLoginResponse {
             this.dob = dob;
         }
 
-        public String getGenderId() {
-            return genderId;
+        public String getGender() {
+            return gender;
         }
 
-        public void setGenderId(String genderId) {
-            this.genderId = genderId;
+        public void setGender(String gender) {
+            this.gender = gender;
         }
 
         public String getAddress() {
@@ -135,28 +133,28 @@ public class UserLoginResponse {
             this.address = address;
         }
 
-        public String getCountryId() {
-            return countryId;
+        public String getCity() {
+            return city;
         }
 
-        public void setCountryId(String countryId) {
-            this.countryId = countryId;
+        public void setCity(String city) {
+            this.city = city;
         }
 
-        public String getStateId() {
-            return stateId;
+        public String getState() {
+            return state;
         }
 
-        public void setStateId(String stateId) {
-            this.stateId = stateId;
+        public void setState(String state) {
+            this.state = state;
         }
 
-        public String getCityId() {
-            return cityId;
+        public String getCountry() {
+            return country;
         }
 
-        public void setCityId(String cityId) {
-            this.cityId = cityId;
+        public void setCountry(String country) {
+            this.country = country;
         }
 
         public Integer getPincode() {

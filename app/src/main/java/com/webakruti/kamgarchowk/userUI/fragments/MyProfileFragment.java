@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.adapter.UserMyEnquiryAdapter;
 import com.webakruti.kamgarchowk.model.HomeResponse;
@@ -221,6 +222,12 @@ public class MyProfileFragment extends Fragment {
         textViewUserName.setText(list.get(0).getFirstName()+" "+list.get(0).getLastName());
         textViewMobile.setText(list.get(0).getMobileNo());
         textViewUserMobileNo.setText(list.get(0).getMobileNo());
+
+        Picasso.with(getActivity())
+                .load(list.get(0).getUserImgUrl())
+                .placeholder(R.drawable.userborder)
+                .resize(300, 300)
+                .into(imageViewUserImage);
         if(list.get(0).getEmail()!= null) {
             textViewEmail.setText(list.get(0).getEmail());
         }else{

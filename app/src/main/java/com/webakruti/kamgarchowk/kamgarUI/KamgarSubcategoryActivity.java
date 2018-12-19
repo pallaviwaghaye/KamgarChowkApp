@@ -61,6 +61,8 @@ public class KamgarSubcategoryActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
 
+        textViewCategoryHeading.setText(kamgarCategory.getName());
+
         if (NetworkUtil.hasConnectivity(KamgarSubcategoryActivity.this)) {
             callGetKamgarSubcategoryAPI();
         } else {

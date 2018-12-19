@@ -30,6 +30,9 @@ public class UpdateProfileResponse {
         @SerializedName("id")
         @Expose
         private Integer id;
+        @SerializedName("user_img_url")
+        @Expose
+        private String userImgUrl;
         @SerializedName("first_name")
         @Expose
         private String firstName;
@@ -73,6 +76,14 @@ public class UpdateProfileResponse {
 
         public void setId(Integer id) {
             this.id = id;
+        }
+
+        public String getUserImgUrl() {
+            return userImgUrl;
+        }
+
+        public void setUserImgUrl(String userImgUrl) {
+            this.userImgUrl = userImgUrl;
         }
 
         public String getFirstName() {
@@ -174,7 +185,6 @@ public class UpdateProfileResponse {
     }
 
 
-
     public class Success {
 
         @SerializedName("msg")
@@ -201,7 +211,6 @@ public class UpdateProfileResponse {
         }
 
     }
-
 
     @SerializedName("error")
 

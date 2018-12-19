@@ -126,7 +126,7 @@ public interface ApiService {
     Call<UserProfileResponse> userprofile(@Header("Authorization") String header,
                                           @Query("id") Integer id);
 
-    @POST(ApiConstants.updateuserprofile_API)
+    /*@POST(ApiConstants.updateuserprofile_API)
     Call<UpdateProfileResponse> updateprofile(@Header("Authorization") String header,
                                               @Query("id") Integer id,
                                               @Query("first_name") String FName,
@@ -140,7 +140,25 @@ public interface ApiService {
                                               @Query("country_id") Integer country,
                                               @Query("state_id") Integer state,
                                               @Query("city_id") Integer city,
-                                              @Query("pincode") String pincode);
+                                              @Query("pincode") String pincode);*/
+
+    @Multipart
+    @POST(ApiConstants.updateuserprofile_API)
+    Call<UpdateProfileResponse> updateprofile(@Header("Authorization") String header,
+                                              @Part("id") RequestBody id,
+                                              @Part MultipartBody.Part userImage,
+                                              @Part("first_name") RequestBody FName,
+                                              @Part("middle_name") RequestBody middleName,
+                                              @Part("last_name") RequestBody LName,
+                                              @Part("dob") RequestBody datebirth,
+                                              @Part("gender_id") RequestBody gender,
+                                              @Part("mobile_no") RequestBody mobNo,
+                                              @Part("email") RequestBody emailid,
+                                              @Part("address") RequestBody address,
+                                              @Part("country_id") RequestBody country,
+                                              @Part("state_id") RequestBody state,
+                                              @Part("city_id") RequestBody city,
+                                              @Part("pincode") RequestBody pincode);
 
     @POST(ApiConstants.myenquiry_API)
     Call<MyEnquiryResponse> myenquiry(@Header("Authorization") String header,
@@ -212,6 +230,24 @@ public interface ApiService {
                                                @Query("state_id") Integer state,
                                                @Query("city_id") Integer city,
                                                @Query("pincode") String pincode);
+
+    /*@Multipart
+    @POST(ApiConstants.Kamgar_updateProfile_API)
+    Call<KamgarUpdateResp> updatekamgarprofile(@Header("Authorization") String header,
+                                               @Part("id") RequestBody id,
+                                               @Part MultipartBody.Part kamgarImage,
+                                               @Part("first_name") RequestBody FName,
+                                               @Part("middle_name") RequestBody middleName,
+                                               @Part("last_name") RequestBody LName,
+                                               @Part("dob") RequestBody datebirth,
+                                               @Part("gender_id") RequestBody gender,
+                                               @Part("mobile_no") RequestBody mobNo,
+                                               @Part("email") RequestBody emailid,
+                                               @Part("address") RequestBody address,
+                                               @Part("country_id") RequestBody country,
+                                               @Part("state_id") RequestBody state,
+                                               @Part("city_id") RequestBody city,
+                                               @Part("pincode") RequestBody pincode);*/
 
 
     @POST(ApiConstants.Kamgar_Category_API)

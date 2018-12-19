@@ -36,6 +36,8 @@ public class KamgarLoginResponse {
 
         @SerializedName("id")
         private Integer id;
+        @SerializedName("cont_img_url")
+        private String contImgUrl;
         @SerializedName("first_name")
         private String firstName;
         @SerializedName("middle_name")
@@ -67,6 +69,14 @@ public class KamgarLoginResponse {
 
         public void setId(Integer id) {
             this.id = id;
+        }
+
+        public String getContImgUrl() {
+            return contImgUrl;
+        }
+
+        public void setContImgUrl(String contImgUrl) {
+            this.contImgUrl = contImgUrl;
         }
 
         public String getFirstName() {
@@ -166,7 +176,6 @@ public class KamgarLoginResponse {
         }
 
     }
-
 
     public class Success {
 

@@ -36,6 +36,7 @@ import com.webakruti.kamgarchowk.kamgarUI.KamgarEditProfileActivity;
 import com.webakruti.kamgarchowk.model.CategoryList;
 import com.webakruti.kamgarchowk.model.ChangePasswordResponse;
 import com.webakruti.kamgarchowk.model.HomeResponse;
+import com.webakruti.kamgarchowk.model.KamgarGetProfile;
 import com.webakruti.kamgarchowk.model.SearchLocationList;
 import com.webakruti.kamgarchowk.model.UpdateProfileResponse;
 import com.webakruti.kamgarchowk.model.User;
@@ -53,6 +54,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -100,7 +104,7 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
     private ProgressDialog progressDialogForAPI;
 
-    String kamgarImage;
+    String userImage;
 
     private static final int REQUEST_IMAGE_TAKEN = 1;
 
@@ -126,6 +130,18 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
         editTextAddress.setText(user.getAddress());
         editTextEmail.setText(user.getEmail());
         editTextMname.setText(user.getMiddleName());
+
+        if(user.getUserImgUrl() == null)
+        {
+            Picasso.with(EditProfileUserActivity.this)
+                    .load(R.drawable.user_image)
+                    .into(imageViewUserImage);
+        }else {
+            Picasso.with(EditProfileUserActivity.this)
+                    .load(user.getUserImgUrl())
+                    .into(imageViewUserImage);
+        }
+
         if(user.getPincode() == 0)
         {
             editTextPincode.setText("");
@@ -567,14 +583,12 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
         }
     }*/
 
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             Uri selectedImageUri = data.getData();
 
             if (requestCode == REQUEST_IMAGE_TAKEN) {
-                kamgarImage = getPath(selectedImageUri);
+                userImage = getPath(selectedImageUri);
                 path = getPath(selectedImageUri);
 
             }
@@ -585,14 +599,14 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                         .into(imageViewKamgarImage);
             }*/
 
-            File kamgarImage = null;
+            File userImage = null;
             if (path != null) {
-                kamgarImage = new File(path);
+                userImage = new File(path);
 
                 int compressionRatio = 2; //1 == originalImage, 2 = 50% compression, 4=25% compress
                 try {
-                    Bitmap bitmap = BitmapFactory.decodeFile(kamgarImage.getPath());
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 75, new FileOutputStream(kamgarImage));
+                    Bitmap bitmap = BitmapFactory.decodeFile(userImage.getPath());
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 75, new FileOutputStream(userImage));
 
                     imageViewUserImage.setImageBitmap(bitmap);
 
@@ -630,13 +644,44 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
         progressDialogForAPI.setMessage("Please wait...");
         progressDialogForAPI.show();
 
-
-        String token = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getToken();
         Integer userid = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getAuthuser().getId();
 
-        //String API = "http://beta.kamgarchowk.com/api/";
-        String headers = "Bearer " + token;
-        Call<UpdateProfileResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).updateprofile(headers, userid, editTextFname.getText().toString(), editTextMname.getText().toString(), editTextLname.getText().toString(), editTextDOB.getText().toString(), selectedGender.getId(), editTextMobile.getText().toString(), editTextEmail.getText().toString(), editTextAddress.getText().toString(), ((Country) spinnerCountry.getSelectedItem()).getId(), ((State) spinnerState.getSelectedItem()).getId(),((City) spinnerCity.getSelectedItem()).getId(), editTextPincode.getText().toString());
+        RequestBody id = RequestBody.create(MediaType.parse("multipart/form-data"), userid+"");
+        RequestBody FName = RequestBody.create(MediaType.parse("multipart/form-data"), editTextFname.getText().toString());
+        RequestBody middleName = RequestBody.create(MediaType.parse("multipart/form-data"), editTextMname.getText().toString());
+        RequestBody LName = RequestBody.create(MediaType.parse("multipart/form-data"), editTextLname.getText().toString());
+        RequestBody datebirth = RequestBody.create(MediaType.parse("multipart/form-data"), editTextDOB.getText().toString());
+        RequestBody gender = RequestBody.create(MediaType.parse("multipart/form-data"), selectedGender.getId()+"");
+        RequestBody mobNo = RequestBody.create(MediaType.parse("multipart/form-data"), editTextMobile.getText().toString());
+        RequestBody emailid = RequestBody.create(MediaType.parse("multipart/form-data"), editTextEmail.getText().toString());
+        RequestBody address = RequestBody.create(MediaType.parse("multipart/form-data"), editTextAddress.getText().toString());
+        RequestBody country = RequestBody.create(MediaType.parse("multipart/form-data"), ((UserProfileResponse.Country) spinnerCountry.getSelectedItem()).getId()+"");
+        RequestBody state = RequestBody.create(MediaType.parse("multipart/form-data"), ((UserProfileResponse.State) spinnerState.getSelectedItem()).getId()+"");
+        RequestBody city = RequestBody.create(MediaType.parse("multipart/form-data"), ((UserProfileResponse.City) spinnerCity.getSelectedItem()).getId()+"");
+        RequestBody pincode = RequestBody.create(MediaType.parse("multipart/form-data"), editTextPincode.getText().toString()+"");
+
+
+        RequestBody requestBaseFile;
+        MultipartBody.Part bodyImage = null;
+
+        // pan_no, pan_copy_url, bank_name, bank_acc_no, bank_passbook_copy_url
+
+        if (path != null) {
+            // with image
+            requestBaseFile = RequestBody.create(MediaType.parse("multipart/form-data"), userImage);
+            bodyImage = MultipartBody.Part.createFormData("user_img_url", "image" + System.currentTimeMillis(), requestBaseFile);
+        } else {
+            // without image
+            requestBaseFile = RequestBody.create(MediaType.parse("multipart/form-data"), "");
+            bodyImage = MultipartBody.Part.createFormData("user_img_url", "image1" + System.currentTimeMillis(), requestBaseFile);
+        }
+
+
+
+       // String API = "http://beta.kamgarchowk.com/api/";
+
+        String header = "Bearer " + SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getToken();
+        Call<UpdateProfileResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).updateprofile(header, id, bodyImage, FName, middleName, LName, datebirth, gender, mobNo, emailid, address, country, state, city, pincode);
 
         requestCallback.enqueue(new Callback<UpdateProfileResponse>() {
             @Override
@@ -657,6 +702,7 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                         user.getSuccess().getAuthuser().setEmail(authuser.getEmail());
                         user.getSuccess().getAuthuser().setLastName(authuser.getLastName());
                         user.getSuccess().getAuthuser().setMobileNo(authuser.getMobileNo());
+                        user.getSuccess().getAuthuser().setUserImgUrl(authuser.getUserImgUrl());
                         SharedPreferenceManager.storeUserResponseObjectInSharedPreference(user);
 
                         Intent intent = new Intent(EditProfileUserActivity.this, HomeActivity.class);

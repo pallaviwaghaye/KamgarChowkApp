@@ -63,58 +63,43 @@ public class UserProfileResponse implements Serializable {
 
     }
 
-    public static class Authuser implements Serializable {
+    public static class Authuser implements Serializable{
 
         @SerializedName("id")
-        @Expose
         private Integer id;
+        @SerializedName("user_img_url")
+        private String userImgUrl;
         @SerializedName("first_name")
-        @Expose
         private String firstName;
         @SerializedName("middle_name")
-        @Expose
         private String middleName;
         @SerializedName("last_name")
-        @Expose
         private String lastName;
         @SerializedName("mobile_no")
-        @Expose
         private String mobileNo;
         @SerializedName("email")
-        @Expose
         private String email;
         @SerializedName("dob")
-        @Expose
         private String dob;
         @SerializedName("address")
-        @Expose
         private String address;
         @SerializedName("country_id")
-        @Expose
         private Integer countryId;
         @SerializedName("state_id")
-        @Expose
         private Integer stateId;
         @SerializedName("city_id")
-        @Expose
         private Integer cityId;
         @SerializedName("gender_id")
-        @Expose
         private Integer genderId;
         @SerializedName("pincode")
-        @Expose
         private Integer pincode;
         @SerializedName("country")
-        @Expose
         private Country country;
         @SerializedName("state")
-        @Expose
         private State state;
         @SerializedName("city")
-        @Expose
         private City city;
         @SerializedName("gender")
-        @Expose
         private Gender gender;
 
         public Integer getId() {
@@ -123,6 +108,14 @@ public class UserProfileResponse implements Serializable {
 
         public void setId(Integer id) {
             this.id = id;
+        }
+
+        public String getUserImgUrl() {
+            return userImgUrl;
+        }
+
+        public void setUserImgUrl(String userImgUrl) {
+            this.userImgUrl = userImgUrl;
         }
 
         public String getFirstName() {

@@ -76,18 +76,20 @@ public class HomeActivity extends AppCompatActivity {
             textViewLName.setText(user.getSuccess().getAuthuser().getLastName());
             textViewMobileNo.setText(user.getSuccess().getAuthuser().getMobileNo());
 
-            /*Picasso.with(getApplicationContext())
-                    .placeholder(R.drawable.carpenter_icon)
+            Picasso.with(HomeActivity.this)
+                    .load(user.getSuccess().getAuthuser().getUserImgUrl())
+                    .placeholder(R.drawable.user_image)
+                    .resize(300, 300)
                     .into(imageViewNavUser);
 
-            navigationLogout.setVisible(true);*/
+            navigationLogout.setVisible(true);
 
         } else {
             textViewMobileNo.setVisibility(View.INVISIBLE);
 
             textViewFName.setText("Welcome,");
             textViewLName.setText("Guest");
-            //navigationLogout.setVisible(false);
+            navigationLogout.setVisible(false);
 
         }
 

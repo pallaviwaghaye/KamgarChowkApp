@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.kamgarUI.fragments.CategoryKamgarFragment;
 import com.webakruti.kamgarchowk.kamgarUI.fragments.DocumentsFragment;
@@ -76,11 +77,13 @@ public class HomeOrProfileActivity extends AppCompatActivity {
             textViewKamgarName.setText(kamgar.getSuccess().getAuthkamgar().getFirstName() +" "+ kamgar.getSuccess().getAuthkamgar().getLastName());
             textViewKamgarMobileNo.setText(kamgar.getSuccess().getAuthkamgar().getMobileNo());
 
-            /*Picasso.with(getApplicationContext())
-                    .placeholder(R.drawable.carpenter_icon)
-                    .into(imageViewNavUser);
+            Picasso.with(HomeOrProfileActivity.this)
+                    .load(kamgar.getSuccess().getAuthkamgar().getContImgUrl())
+                    .placeholder(R.drawable.kamgar)
+                    .resize(300, 300)
+                    .into(imageViewNavKamgar);
 
-            navigationLogout.setVisible(true);*/
+            navigationLogout.setVisible(true);
 
         } else {
             textViewKamgarMobileNo.setVisibility(View.INVISIBLE);

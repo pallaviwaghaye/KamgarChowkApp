@@ -49,6 +49,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -632,13 +635,48 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
         progressDialogForAPI.setMessage("Please wait...");
         progressDialogForAPI.show();
 
-
-        String token = SharedPreferenceManager.getKamgarObject().getSuccess().getToken();
         Integer userid = SharedPreferenceManager.getKamgarObject().getSuccess().getAuthkamgar().getId();
 
+        RequestBody id = RequestBody.create(MediaType.parse("multipart/form-data"), userid+"");
+        RequestBody FName = RequestBody.create(MediaType.parse("multipart/form-data"), editTextFname.getText().toString());
+        RequestBody middleName = RequestBody.create(MediaType.parse("multipart/form-data"), editTextMname.getText().toString());
+        RequestBody LName = RequestBody.create(MediaType.parse("multipart/form-data"), editTextLname.getText().toString());
+        RequestBody datebirth = RequestBody.create(MediaType.parse("multipart/form-data"), editTextDOB.getText().toString());
+        RequestBody gender = RequestBody.create(MediaType.parse("multipart/form-data"), selectedGender.getId()+"");
+        RequestBody mobNo = RequestBody.create(MediaType.parse("multipart/form-data"), editTextMobile.getText().toString());
+        RequestBody emailid = RequestBody.create(MediaType.parse("multipart/form-data"), editTextEmail.getText().toString());
+        RequestBody address = RequestBody.create(MediaType.parse("multipart/form-data"), editTextAddress.getText().toString());
+        RequestBody country = RequestBody.create(MediaType.parse("multipart/form-data"), ((KamgarGetProfile.Country) spinnerCountry.getSelectedItem()).getId()+"");
+        RequestBody state = RequestBody.create(MediaType.parse("multipart/form-data"), ((KamgarGetProfile.State) spinnerState.getSelectedItem()).getId()+"");
+        RequestBody city = RequestBody.create(MediaType.parse("multipart/form-data"), ((KamgarGetProfile.City) spinnerCity.getSelectedItem()).getId()+"");
+        RequestBody pincode = RequestBody.create(MediaType.parse("multipart/form-data"), editTextPincode.getText().toString());
+
+
+        RequestBody requestBaseFile;
+        MultipartBody.Part bodyImage = null;
+
+        // pan_no, pan_copy_url, bank_name, bank_acc_no, bank_passbook_copy_url
+
+        if (path != null) {
+            // with image
+            requestBaseFile = RequestBody.create(MediaType.parse("multipart/form-data"), kamgarImage);
+            bodyImage = MultipartBody.Part.createFormData("cont_img_url", "image" +
+                    System.currentTimeMillis(), requestBaseFile);
+        } else {
+            // without image
+            requestBaseFile = RequestBody.create(MediaType.parse("multipart/form-data"), "");
+            bodyImage = MultipartBody.Part.createFormData("cont_img_url", "image1" +
+                    System.currentTimeMillis(), requestBaseFile);
+        }
+
+
+        String token = SharedPreferenceManager.getKamgarObject().getSuccess().getToken();
+
+
         //String API = "http://beta.kamgarchowk.com/api/";
-        String headers = "Bearer " + token;
-        Call<KamgarUpdateResp> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).updatekamgarprofile(headers, userid, editTextFname.getText().toString(), editTextMname.getText().toString(), editTextLname.getText().toString(), editTextDOB.getText().toString(), selectedGender.getId(), editTextMobile.getText().toString(), editTextEmail.getText().toString(), editTextAddress.getText().toString(), ((KamgarGetProfile.Country) spinnerCountry.getSelectedItem()).getId(), ((KamgarGetProfile.State) spinnerState.getSelectedItem()).getId(),((KamgarGetProfile.City) spinnerCity.getSelectedItem()).getId(), editTextPincode.getText().toString());
+        String header = "Bearer " + token;
+        Call<KamgarUpdateResp> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL)
+                .updatekamgarprofile(header, userid, editTextFname.getText().toString(), editTextMname.getText().toString(), editTextLname.getText().toString(), editTextDOB.getText().toString(), selectedGender.getId(), editTextMobile.getText().toString(), editTextEmail.getText().toString(), editTextAddress.getText().toString(), ((KamgarGetProfile.Country) spinnerCountry.getSelectedItem()).getId(), ((KamgarGetProfile.State) spinnerState.getSelectedItem()).getId(),((KamgarGetProfile.City) spinnerCity.getSelectedItem()).getId(), editTextPincode.getText().toString());
 
         requestCallback.enqueue(new Callback<KamgarUpdateResp>() {
             @Override
