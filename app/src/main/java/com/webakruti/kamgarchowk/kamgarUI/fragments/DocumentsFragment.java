@@ -142,7 +142,7 @@ public class DocumentsFragment extends Fragment implements View.OnClickListener{
                 if (editTextPanNumber.getText().toString().length() == 10) {
                     if (editTextChoosePancard.getText().toString().length() > 0) {
                         if (editTextBankName.getText().toString().length() > 0) {
-                            if (editTextAccountNo.getText().toString().length() == 11) {
+                            if (editTextAccountNo.getText().toString().length() == 16) {
                                 if (editTextChooseBankPassbook.getText().toString().length() > 0) {
                                     if (NetworkUtil.hasConnectivity(getActivity())) {
                                         callUploadDocuments();
@@ -247,18 +247,18 @@ public class DocumentsFragment extends Fragment implements View.OnClickListener{
             if (requestCode == SELECT_FILE1) {
                 panImage = getPath(selectedImageUri);
                 path = getPath(selectedImageUri);
-                editTextChoosePancard.setText(panImage);
-                /*String filename = path.substring(path.lastIndexOf("/")+1);
+                //editTextChoosePancard.setText(panImage);
+                String filename = path.substring(path.lastIndexOf("/")+1);
                 Log.e("filename : ",filename);
-                editTextChoosePancard.setText(filename);*/
+                editTextChoosePancard.setText(filename);
             }
             if (requestCode == SELECT_FILE2) {
                 passbookImage = getPath(selectedImageUri);
                 path1 = getPath(selectedImageUri);
-                editTextChooseBankPassbook.setText(passbookImage);
-                 /*String filename1 = path.substring(path.lastIndexOf("/")+1);
+                //editTextChooseBankPassbook.setText(passbookImage);
+                String filename1 = path1.substring(path1.lastIndexOf("/")+1);
                 Log.e("filename : ",filename1);
-                editTextChooseBankPassbook.setText(filename1);*/
+                editTextChooseBankPassbook.setText(filename1);
             }
 
            /* editTextChoosePancard.setText("Selected File paths : " + selectedPath1);
