@@ -59,7 +59,7 @@ import retrofit2.Response;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-public class KamgarEditProfileActivity extends AppCompatActivity implements View.OnClickListener{
+public class KamgarEditProfileActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView imageViewBack;
     private TextView textViewEditHeading;
     Calendar myCalendar;
@@ -133,11 +133,10 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
                     .load(kamgar.getContImgUrl())
                     .into(imageViewKamgarImage);
         }
-        if(kamgar.getPincode() == 0)
-        {
+        if (kamgar.getPincode() == 0) {
             editTextPincode.setText("");
-        }else {
-            editTextPincode.setText(kamgar.getPincode()+"");
+        } else {
+            editTextPincode.setText(kamgar.getPincode() + "");
         }
         editTextMobile.setText(kamgar.getMobileNo());
         editTextDOB.setText(kamgar.getDob());
@@ -158,8 +157,8 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
         editTextMobile = (EditText) findViewById(R.id.editTextMobile);
         editTextAddress = (EditText) findViewById(R.id.editTextAddress);
 
-        imageViewKamgarImage = (ImageView)findViewById(R.id.imageViewKamgarImage);
-        buttonUploadImage = (Button)findViewById(R.id.buttonUploadImage);
+        imageViewKamgarImage = (ImageView) findViewById(R.id.imageViewKamgarImage);
+        buttonUploadImage = (Button) findViewById(R.id.buttonUploadImage);
         buttonUploadImage.setOnClickListener(this);
 
         spinnerGender = (Spinner) findViewById(R.id.spinnerGender);
@@ -416,41 +415,63 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
                         if (editTextDOB.getText().toString().length() > 0) {
                             /*if (editTextEmail.getText().toString().length() > 0) {
                                 if (isValidEmailAddress(editTextEmail.getText().toString().trim())) {*/
-                                    if (editTextMobile.getText().toString().length() > 0) {
-                                        if (editTextMobile.getText().toString().length() == 10) {
-                                           if (selectedGender.getId() != -1) {
-                                                if (editTextAddress.getText().toString().length() > 0) {
-                                                    if (((KamgarGetProfile.Country) spinnerCountry.getSelectedItem()).getId() != -1) {
-                                                        if (((KamgarGetProfile.State) spinnerState.getSelectedItem()).getId() != -1) {
-                                                            if (((KamgarGetProfile.City) spinnerCity.getSelectedItem()).getId() != -1) {
-
+                            if (editTextMobile.getText().toString().length() > 0) {
+                                if (editTextMobile.getText().toString().length() == 10) {
+                                    if (selectedGender.getId() != -1) {
+                                        if (editTextAddress.getText().toString().length() > 0) {
+                                            if (((KamgarGetProfile.Country) spinnerCountry.getSelectedItem()).getId() != -1) {
+                                                if (((KamgarGetProfile.State) spinnerState.getSelectedItem()).getId() != -1) {
+                                                    if (((KamgarGetProfile.City) spinnerCity.getSelectedItem()).getId() != -1) {
+                                                        if (editTextPincode.getText().toString().length() == 0 ||
+                                                                editTextEmail.getText().toString().length() == 0) {
+                                                            // either is not entered
+                                                            if (NetworkUtil.hasConnectivity(KamgarEditProfileActivity.this)) {
+                                                                CallUpdatekamgarAPI();
+                                                            } else {
+                                                                Toast.makeText(KamgarEditProfileActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        } else {
+                                                            if (isValidEmailAddress(editTextEmail.getText().toString().trim()) && editTextPincode.getText().toString().length() == 6) {
+                                                                // valid email and pincode
                                                                 if (NetworkUtil.hasConnectivity(KamgarEditProfileActivity.this)) {
                                                                     CallUpdatekamgarAPI();
-                                                                }else{
+                                                                } else {
                                                                     Toast.makeText(KamgarEditProfileActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
                                                                 }
                                                             } else {
-                                                                Toast.makeText(KamgarEditProfileActivity.this, "Select city", Toast.LENGTH_SHORT).show();
+                                                                if (!isValidEmailAddress(editTextEmail.getText().toString().trim())) {
+                                                                    Toast.makeText(KamgarEditProfileActivity.this, "Email Id must be valid", Toast.LENGTH_SHORT).show();
+                                                                } else if (editTextPincode.getText().toString().length() < 6) {
+                                                                    Toast.makeText(KamgarEditProfileActivity.this, "Enter valid pincode", Toast.LENGTH_SHORT).show();
+                                                                }
+
+
                                                             }
-                                                        } else {
-                                                            Toast.makeText(KamgarEditProfileActivity.this, "Select state", Toast.LENGTH_SHORT).show();
                                                         }
+
+
                                                     } else {
-                                                        Toast.makeText(KamgarEditProfileActivity.this, "Select country", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(KamgarEditProfileActivity.this, "Select city", Toast.LENGTH_SHORT).show();
                                                     }
                                                 } else {
-                                                    Toast.makeText(KamgarEditProfileActivity.this, "Address can't be empty", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(KamgarEditProfileActivity.this, "Select state", Toast.LENGTH_SHORT).show();
                                                 }
-
                                             } else {
-                                                Toast.makeText(KamgarEditProfileActivity.this, "Select gender", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(KamgarEditProfileActivity.this, "Select country", Toast.LENGTH_SHORT).show();
                                             }
                                         } else {
-                                            Toast.makeText(KamgarEditProfileActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(KamgarEditProfileActivity.this, "Address can't be empty", Toast.LENGTH_SHORT).show();
                                         }
+
                                     } else {
-                                        Toast.makeText(KamgarEditProfileActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(KamgarEditProfileActivity.this, "Select gender", Toast.LENGTH_SHORT).show();
                                     }
+                                } else {
+                                    Toast.makeText(KamgarEditProfileActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(KamgarEditProfileActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                            }
                             /*    } else {
                                     Toast.makeText(KamgarEditProfileActivity.this, "Email Id must be valid", Toast.LENGTH_SHORT).show();
                                 }
@@ -650,13 +671,13 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
         RequestBody middleName = RequestBody.create(MediaType.parse("multipart/form-data"), editTextMname.getText().toString());
         RequestBody LName = RequestBody.create(MediaType.parse("multipart/form-data"), editTextLname.getText().toString());
         RequestBody datebirth = RequestBody.create(MediaType.parse("multipart/form-data"), editTextDOB.getText().toString());
-        RequestBody gender = RequestBody.create(MediaType.parse("multipart/form-data"), selectedGender.getId()+"");
+        RequestBody gender = RequestBody.create(MediaType.parse("multipart/form-data"), selectedGender.getId() + "");
         RequestBody mobNo = RequestBody.create(MediaType.parse("multipart/form-data"), editTextMobile.getText().toString());
         RequestBody emailid = RequestBody.create(MediaType.parse("multipart/form-data"), editTextEmail.getText().toString());
         RequestBody address = RequestBody.create(MediaType.parse("multipart/form-data"), editTextAddress.getText().toString());
-        RequestBody country = RequestBody.create(MediaType.parse("multipart/form-data"), ((KamgarGetProfile.Country) spinnerCountry.getSelectedItem()).getId()+"");
-        RequestBody state = RequestBody.create(MediaType.parse("multipart/form-data"), ((KamgarGetProfile.State) spinnerState.getSelectedItem()).getId()+"");
-        RequestBody city = RequestBody.create(MediaType.parse("multipart/form-data"), ((KamgarGetProfile.City) spinnerCity.getSelectedItem()).getId()+"");
+        RequestBody country = RequestBody.create(MediaType.parse("multipart/form-data"), ((KamgarGetProfile.Country) spinnerCountry.getSelectedItem()).getId() + "");
+        RequestBody state = RequestBody.create(MediaType.parse("multipart/form-data"), ((KamgarGetProfile.State) spinnerState.getSelectedItem()).getId() + "");
+        RequestBody city = RequestBody.create(MediaType.parse("multipart/form-data"), ((KamgarGetProfile.City) spinnerCity.getSelectedItem()).getId() + "");
         RequestBody pincode = RequestBody.create(MediaType.parse("multipart/form-data"), editTextPincode.getText().toString());
 
 
@@ -682,8 +703,8 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
 
         //String API = "http://beta.kamgarchowk.com/api/";
         String header = "Bearer " + SharedPreferenceManager.getKamgarObject().getSuccess().getToken();
-        Call<KamgarUpdateResp> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).updatekamgarprofile(header,bodyImage,FName,middleName,LName,datebirth,gender,mobNo,emailid,address,country,state,city,pincode);
-                //.updatekamgarprofile(header, userid, editTextFname.getText().toString(), editTextMname.getText().toString(), editTextLname.getText().toString(), editTextDOB.getText().toString(), selectedGender.getId(), editTextMobile.getText().toString(), editTextEmail.getText().toString(), editTextAddress.getText().toString(), ((KamgarGetProfile.Country) spinnerCountry.getSelectedItem()).getId(), ((KamgarGetProfile.State) spinnerState.getSelectedItem()).getId(),((KamgarGetProfile.City) spinnerCity.getSelectedItem()).getId(), editTextPincode.getText().toString());
+        Call<KamgarUpdateResp> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).updatekamgarprofile(header, bodyImage, FName, middleName, LName, datebirth, gender, mobNo, emailid, address, country, state, city, pincode);
+        //.updatekamgarprofile(header, userid, editTextFname.getText().toString(), editTextMname.getText().toString(), editTextLname.getText().toString(), editTextDOB.getText().toString(), selectedGender.getId(), editTextMobile.getText().toString(), editTextEmail.getText().toString(), editTextAddress.getText().toString(), ((KamgarGetProfile.Country) spinnerCountry.getSelectedItem()).getId(), ((KamgarGetProfile.State) spinnerState.getSelectedItem()).getId(),((KamgarGetProfile.City) spinnerCity.getSelectedItem()).getId(), editTextPincode.getText().toString());
 
         requestCallback.enqueue(new Callback<KamgarUpdateResp>() {
             @Override

@@ -491,6 +491,7 @@
                         android:layout_marginTop="5dp"
                         android:background="@drawable/edittext_rectangular_oval"
                         android:hint="Pincode"
+                        android:maxLength="6"
                         android:inputType="number"
                         android:paddingLeft="10dp"
                         android:textColor="@color/black"

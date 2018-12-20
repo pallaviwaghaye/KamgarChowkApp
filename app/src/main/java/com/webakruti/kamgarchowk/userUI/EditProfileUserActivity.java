@@ -432,12 +432,29 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                                                     if (((Country) spinnerCountry.getSelectedItem()).getId() != -1) {
                                                         if (((State) spinnerState.getSelectedItem()).getId() != -1) {
                                                             if (((City) spinnerCity.getSelectedItem()).getId() != -1) {
+                                                                if (editTextPincode.getText().toString().length() > 0) {
+                                                                    if (editTextPincode.getText().toString().length() == 6) {
+                                                                        // pincode --- 6 digits
+                                                                        if (NetworkUtil.hasConnectivity(EditProfileUserActivity.this)) {
+                                                                            CallUpdateUserAPI();
+                                                                        } else {
+                                                                            Toast.makeText(EditProfileUserActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    } else {
+                                                                        // pincode --- less than 6 digits
+                                                                        Toast.makeText(EditProfileUserActivity.this, "Enter valid pincode", Toast.LENGTH_SHORT).show();
+                                                                    }
 
-                                                                if (NetworkUtil.hasConnectivity(EditProfileUserActivity.this)) {
-                                                                    CallUpdateUserAPI();
                                                                 } else {
-                                                                    Toast.makeText(EditProfileUserActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                    // if no pincode
+                                                                    if (NetworkUtil.hasConnectivity(EditProfileUserActivity.this)) {
+                                                                        CallUpdateUserAPI();
+                                                                    } else {
+                                                                        Toast.makeText(EditProfileUserActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                    }
                                                                 }
+
+
                                                             } else {
                                                                 Toast.makeText(EditProfileUserActivity.this, "Select city", Toast.LENGTH_SHORT).show();
                                                             }
@@ -590,7 +607,7 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
             }
 
-             userImageFile = null;
+            userImageFile = null;
             if (userImage != null) {
                 userImageFile = new File(userImage);
 
