@@ -239,14 +239,14 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
             Uri selectedImageUri = data.getData();
 
             if (requestCode == SELECT_FILE1) {
-                panImage = getPath(selectedImageUri);
+               // panImage = getPath(selectedImageUri);
                 path = getPath(selectedImageUri);
-                editTextChoosePancard.setText(panImage);
+                editTextChoosePancard.setText(path);
             }
             if (requestCode == SELECT_FILE2) {
-                passbookImage = getPath(selectedImageUri);
+               // passbookImage = getPath(selectedImageUri);
                 path1 = getPath(selectedImageUri);
-                editTextChooseBankPassbook.setText(passbookImage);
+                editTextChooseBankPassbook.setText(path1);
             }
 
            /* editTextChoosePancard.setText("Selected File paths : " + selectedPath1);

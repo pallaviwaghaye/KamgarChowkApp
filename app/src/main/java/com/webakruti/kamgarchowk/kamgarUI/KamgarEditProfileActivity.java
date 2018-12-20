@@ -705,6 +705,7 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
                         kamgar.getSuccess().getAuthkamgar().setEmail(authkamgar.getEmail());
                         kamgar.getSuccess().getAuthkamgar().setLastName(authkamgar.getLastName());
                         kamgar.getSuccess().getAuthkamgar().setMobileNo(authkamgar.getMobileNo());
+                        kamgar.getSuccess().getAuthkamgar().setContImgUrl(authkamgar.getContImgUrl());
                         SharedPreferenceManager.storeKamgarObject(kamgar);
 
                         Intent intent = new Intent(KamgarEditProfileActivity.this, HomeOrProfileActivity.class);

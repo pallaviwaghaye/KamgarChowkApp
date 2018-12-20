@@ -74,7 +74,7 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
 
 
         viewHolder.textViewUserName.setText(orders.getUserFirstName() + " " + orders.getUserLastName());
-        // viewHolder.textViewUserDesignation.setText(orders.getWorkstatus());
+        viewHolder.textViewKamgarDesignation.setText(orders.getSubcategory());
         viewHolder.textViewUserDate.setText(orders.getEnquiryDate());
         if (orders.getUserAddress() != null && orders.getCityname() != null) {
             viewHolder.textViewUserAddress.setText(orders.getUserAddress() + " " + orders.getCityname());
@@ -494,7 +494,7 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
         //Dialog myDialog;
 
         private TextView textViewUserName;
-        private TextView textViewUserDesignation;
+        private TextView textViewKamgarDesignation;
         private TextView textViewUserDate;
         private TextView textViewRatingType;
         private TextView textViewUserAddress;
@@ -519,7 +519,7 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
 
             cardView = (CardView) itemView.findViewById(R.id.cardView);
             textViewUserName = (TextView) itemView.findViewById(R.id.textViewKamgarName);
-            textViewUserDesignation = (TextView) itemView.findViewById(R.id.textViewKamgarDesignation);
+            textViewKamgarDesignation = (TextView) itemView.findViewById(R.id.textViewKamgarDesignation);
             textViewUserDate = (TextView) itemView.findViewById(R.id.textViewKamgarDate);
             textViewRatingType = (TextView) itemView.findViewById(R.id.textViewRatingType);
             textViewUserAddress = (TextView) itemView.findViewById(R.id.textViewKamgarAddress);

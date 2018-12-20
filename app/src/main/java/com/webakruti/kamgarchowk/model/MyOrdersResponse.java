@@ -64,6 +64,8 @@ public class MyOrdersResponse {
         private Integer userPincode;
         @SerializedName("enquiry_date")
         private String enquiryDate;
+        @SerializedName("subcategory")
+        private String subcategory;
         @SerializedName("workstatus")
         private String workstatus;
         @SerializedName("cityname")
@@ -129,6 +131,14 @@ public class MyOrdersResponse {
 
         public void setEnquiryDate(String enquiryDate) {
             this.enquiryDate = enquiryDate;
+        }
+
+        public String getSubcategory() {
+            return subcategory;
+        }
+
+        public void setSubcategory(String subcategory) {
+            this.subcategory = subcategory;
         }
 
         public String getWorkstatus() {

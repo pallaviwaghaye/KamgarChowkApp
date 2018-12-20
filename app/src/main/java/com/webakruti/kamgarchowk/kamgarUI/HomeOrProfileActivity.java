@@ -89,7 +89,7 @@ public class HomeOrProfileActivity extends AppCompatActivity {
             textViewKamgarMobileNo.setVisibility(View.INVISIBLE);
 
             textViewKamgarName.setText("Welcome, Guest");
-            //navigationLogout.setVisible(false);
+            navigationLogout.setVisible(false);
 
         }
 
