@@ -133,7 +133,7 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
                             startActivity(intent);
                             finish();
 
-                            Toast.makeText(UserRegistrationActivity.this, "Password sent to mobile number.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserRegistrationActivity.this, "Password sent to mobile number.", Toast.LENGTH_LONG).show();
 
 
                         }

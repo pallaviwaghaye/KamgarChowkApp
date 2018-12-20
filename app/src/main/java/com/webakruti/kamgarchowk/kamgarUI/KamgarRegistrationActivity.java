@@ -212,6 +212,8 @@ public class KamgarRegistrationActivity extends AppCompatActivity implements Vie
                             startActivity(intent);
                             finish();
 
+                            Toast.makeText(KamgarRegistrationActivity.this, "Password sent to mobile number.", Toast.LENGTH_LONG).show();
+
 
                         }
                     } else {
