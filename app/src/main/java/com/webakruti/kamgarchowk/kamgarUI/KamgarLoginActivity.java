@@ -167,9 +167,11 @@ public class KamgarLoginActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
-    @Override
+   /* @Override
     public void onBackPressed() {
         Intent new_intent = new Intent(KamgarLoginActivity.this, LandingActivity.class);
         this.startActivity(new_intent);
-    }
+    }*/
+
+
 }

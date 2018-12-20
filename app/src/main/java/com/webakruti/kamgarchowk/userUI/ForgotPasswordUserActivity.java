@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.webakruti.kamgarchowk.R;
@@ -28,6 +29,7 @@ public class ForgotPasswordUserActivity extends AppCompatActivity implements Vie
     private Button buttonUserForgotSendOtp;
     private EditText editTextUserForgotOtp;
     private Button buttonSubmitUserForgot;
+    private ImageView imageViewBack;
 
     private ProgressDialog progressDialogForAPI;
 
@@ -38,6 +40,16 @@ public class ForgotPasswordUserActivity extends AppCompatActivity implements Vie
 
         editTextUserForgotMobno = (EditText)findViewById(R.id.editTextUserForgotMobno);
         editTextUserForgotOtp = (EditText)findViewById(R.id.editTextUserForgotOtp);
+
+        imageViewBack = (ImageView)findViewById(R.id.imageViewBack);
+        imageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent new_intent = new Intent(ForgotPasswordUserActivity.this, UserLoginActivity.class);
+                startActivity(new_intent);
+                finish();
+            }
+        });
 
         buttonUserForgotSendOtp = (Button)findViewById(R.id.buttonUserForgotSendOtp);
         buttonUserForgotSendOtp.setOnClickListener(this);
@@ -209,10 +221,10 @@ public class ForgotPasswordUserActivity extends AppCompatActivity implements Vie
         });
     }
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         Intent new_intent = new Intent(ForgotPasswordUserActivity.this, UserLoginActivity.class);
         this.startActivity(new_intent);
 
-    }
+    }*/
 }
