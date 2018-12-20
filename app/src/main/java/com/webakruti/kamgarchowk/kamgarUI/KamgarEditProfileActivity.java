@@ -394,6 +394,12 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 selectedGender = (KamgarGetProfile.Gender) adapterView.getItemAtPosition(position);
+                if (selectedGender.getValue().equalsIgnoreCase(defaultGender)) {
+                    selectedGender.setId(-1);
+                    selectedGender.setName("");
+                    selectedGender.setValue(defaultGender);
+                }
+                Log.e("", "");
             }
 
             @Override
@@ -425,11 +431,25 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
                                                         if (editTextPincode.getText().toString().length() == 0 ||
                                                                 editTextEmail.getText().toString().length() == 0) {
                                                             // either is not entered
-                                                            if (NetworkUtil.hasConnectivity(KamgarEditProfileActivity.this)) {
-                                                                CallUpdatekamgarAPI();
+
+                                                            if (editTextPincode.getText().toString().length() > 0) {
+                                                                if (editTextPincode.getText().toString().length() < 6) {
+                                                                    Toast.makeText(KamgarEditProfileActivity.this, "Enter valid pincode", Toast.LENGTH_SHORT).show();
+                                                                } else if (editTextPincode.getText().toString().length() == 6) {
+                                                                    if (NetworkUtil.hasConnectivity(KamgarEditProfileActivity.this)) {
+                                                                        CallUpdatekamgarAPI();
+                                                                    } else {
+                                                                        Toast.makeText(KamgarEditProfileActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                }
                                                             } else {
-                                                                Toast.makeText(KamgarEditProfileActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                if (NetworkUtil.hasConnectivity(KamgarEditProfileActivity.this)) {
+                                                                    CallUpdatekamgarAPI();
+                                                                } else {
+                                                                    Toast.makeText(KamgarEditProfileActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                }
                                                             }
+
                                                         } else {
                                                             if (isValidEmailAddress(editTextEmail.getText().toString().trim()) && editTextPincode.getText().toString().length() == 6) {
                                                                 // valid email and pincode

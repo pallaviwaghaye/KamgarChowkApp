@@ -404,6 +404,11 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 selectedGender = (UserProfileResponse.Gender) adapterView.getItemAtPosition(position);
+                if (selectedGender.getValue().equalsIgnoreCase(defaultGender)) {
+                    selectedGender.setId(-1);
+                    selectedGender.setName("");
+                    selectedGender.setValue(defaultGender);
+                }
             }
 
             @Override
