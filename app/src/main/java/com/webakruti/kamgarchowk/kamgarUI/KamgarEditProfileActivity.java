@@ -95,7 +95,7 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
 
     private Button buttonSave;
 
-    String kamgarImage;
+    String kamgarImage = null;
 
     private static final int REQUEST_IMAGE_TAKEN = 1;
     Uri outPutfileUri;
@@ -673,8 +673,7 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
         } else {
             // without image
             requestBaseFile = RequestBody.create(MediaType.parse("multipart/form-data"), "");
-            bodyImage = MultipartBody.Part.createFormData("cont_img_url", "image" +
-                    System.currentTimeMillis(), requestBaseFile);
+            bodyImage = MultipartBody.Part.createFormData("cont_img_url", "", requestBaseFile);
         }
 
 

@@ -46,19 +46,19 @@ public class UserLoginActivity extends AppCompatActivity implements View.OnClick
 
         SharedPreferenceManager.setApplicationContext(UserLoginActivity.this);
 
-        linearLayoutSignUpNow = (LinearLayout)findViewById(R.id.linearLayoutSignUpNow);
-        linearLayoutForgotPassword = (LinearLayout)findViewById(R.id.linearLayoutForgotPassword);
-        relativeLayoutUserPassword = (RelativeLayout)findViewById(R.id.relativeLayoutUserPassword);
-        editTextUserMobileNumber = (EditText)findViewById(R.id.editTextUserMobileNumber);
-        editTextUserPassword = (EditText)findViewById(R.id.editTextUserPassword);
+        linearLayoutSignUpNow = (LinearLayout) findViewById(R.id.linearLayoutSignUpNow);
+        linearLayoutForgotPassword = (LinearLayout) findViewById(R.id.linearLayoutForgotPassword);
+        relativeLayoutUserPassword = (RelativeLayout) findViewById(R.id.relativeLayoutUserPassword);
+        editTextUserMobileNumber = (EditText) findViewById(R.id.editTextUserMobileNumber);
+        editTextUserPassword = (EditText) findViewById(R.id.editTextUserPassword);
         buttonUserLogin = (Button) findViewById(R.id.buttonUserLogin);
 
         linearLayoutForgotPassword.setOnClickListener(this);
 
-        textViewGoToRegistration = (TextView)findViewById(R.id.textViewGoToRegistration);
+        textViewGoToRegistration = (TextView) findViewById(R.id.textViewGoToRegistration);
         textViewGoToRegistration.setOnClickListener(this);
 
-        imageViewBack = (ImageView)findViewById(R.id.imageViewBack);
+        imageViewBack = (ImageView) findViewById(R.id.imageViewBack);
         imageViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +80,7 @@ public class UserLoginActivity extends AppCompatActivity implements View.OnClick
             case R.id.buttonUserLogin:
                 if (editTextUserMobileNumber.getText().toString().length() > 0) {
                     if (editTextUserMobileNumber.getText().toString().length() == 10) {
-                        if(editTextUserPassword.getText().toString().length() >= 6) {
+                        if (editTextUserPassword.getText().toString().length() >= 6) {
 
                             if (NetworkUtil.hasConnectivity(UserLoginActivity.this)) {
                                 callLoginAPI();
@@ -91,7 +91,7 @@ public class UserLoginActivity extends AppCompatActivity implements View.OnClick
                             } else {
                                 Toast.makeText(UserLoginActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
                             }
-                        }else{
+                        } else {
                             Toast.makeText(UserLoginActivity.this, "Password should be greater than 6", Toast.LENGTH_SHORT).show();
                         }
                     } else {

@@ -104,7 +104,7 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
     private ProgressDialog progressDialogForAPI;
 
-    String userImage;
+    String userImage = null;
 
     private static final int REQUEST_IMAGE_TAKEN = 1;
 
@@ -664,7 +664,7 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
         } else {
             // without image
             requestBaseFile = RequestBody.create(MediaType.parse("multipart/form-data"), "");
-            bodyImage = MultipartBody.Part.createFormData("user_img_url", "image1" + System.currentTimeMillis(), requestBaseFile);
+            bodyImage = MultipartBody.Part.createFormData("user_img_url", "", requestBaseFile);
         }
 
 
