@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class FreeListingActivity extends AppCompatActivity implements View.OnCli
     private Button buttonKamgarSendOtp;
     private EditText editTextKamgarOtp;
     private Button buttonKamgarSignup;
+    private ImageView imageViewBack;
 
     private ProgressDialog progressDialogForAPI;
     @Override
@@ -42,6 +44,16 @@ public class FreeListingActivity extends AppCompatActivity implements View.OnCli
         editTextKamgarLastName = (EditText)findViewById(R.id.editTextKamgarLastName);
         editTextKamgarMobileNumber = (EditText)findViewById(R.id.editTextKamgarMobileNumber);
         editTextKamgarOtp = (EditText)findViewById(R.id.editTextKamgarOtp);
+
+        imageViewBack = (ImageView)findViewById(R.id.imageViewBack);
+        imageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent new_intent = new Intent(FreeListingActivity.this, LandingActivity.class);
+                startActivity(new_intent);
+                finish();
+            }
+        });
 
         buttonKamgarSendOtp = (Button)findViewById(R.id.buttonKamgarSendOtp);
         buttonKamgarSignup = (Button)findViewById(R.id.buttonKamgarSignup);
@@ -233,9 +245,9 @@ public class FreeListingActivity extends AppCompatActivity implements View.OnCli
         return m.matches();
     }
 
-    @Override
+   /* @Override
     public void onBackPressed() {
         Intent new_intent = new Intent(FreeListingActivity.this, LandingActivity.class);
         this.startActivity(new_intent);
-    }
+    }*/
 }

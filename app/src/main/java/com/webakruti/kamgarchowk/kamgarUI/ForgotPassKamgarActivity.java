@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.webakruti.kamgarchowk.R;
@@ -31,7 +32,7 @@ public class ForgotPassKamgarActivity extends AppCompatActivity implements View.
     private Button buttonKamgarForgotSendOtp;
     private EditText editTextKamgarForgotOtp;
     private Button buttonSubmitKamgarForgot;
-
+    private ImageView imageViewBack;
     private ProgressDialog progressDialogForAPI;
 
 
@@ -42,6 +43,15 @@ public class ForgotPassKamgarActivity extends AppCompatActivity implements View.
 
         editTextKamgarForgotMobno = (EditText)findViewById(R.id.editTextKamgarForgotMobno);
         editTextKamgarForgotOtp = (EditText)findViewById(R.id.editTextKamgarForgotOtp);
+        imageViewBack = (ImageView)findViewById(R.id.imageViewBack);
+        imageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent new_intent = new Intent(ForgotPassKamgarActivity.this, KamgarLoginActivity.class);
+                startActivity(new_intent);
+                finish();
+            }
+        });
 
         buttonKamgarForgotSendOtp = (Button)findViewById(R.id.buttonKamgarForgotSendOtp);
         buttonKamgarForgotSendOtp.setOnClickListener(this);
@@ -213,9 +223,9 @@ public class ForgotPassKamgarActivity extends AppCompatActivity implements View.
 
 
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         Intent new_intent = new Intent(ForgotPassKamgarActivity.this, KamgarLoginActivity.class);
         this.startActivity(new_intent);
-    }
+    }*/
 }
