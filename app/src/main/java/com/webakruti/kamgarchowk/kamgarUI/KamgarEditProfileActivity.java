@@ -441,7 +441,7 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
                                                             } else {
                                                                 if (!isValidEmailAddress(editTextEmail.getText().toString().trim())) {
                                                                     Toast.makeText(KamgarEditProfileActivity.this, "Email Id must be valid", Toast.LENGTH_SHORT).show();
-                                                                } else if (editTextPincode.getText().toString().length() < 6) {
+                                                                } else if (editTextPincode.getText().toString().length() <= 6) {
                                                                     Toast.makeText(KamgarEditProfileActivity.this, "Enter valid pincode", Toast.LENGTH_SHORT).show();
                                                                 }
 
