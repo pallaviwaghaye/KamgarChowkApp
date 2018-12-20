@@ -67,7 +67,11 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
         viewHolder.textViewKamgarName.setText(myEnquiry.getKamgarFirstName() + " " + myEnquiry.getKamgarLastName());
         viewHolder.textViewKamgarDesignation.setText(myEnquiry.getSubcategory());
         viewHolder.textViewKamgarDate.setText(myEnquiry.getEnquiryDate());
-        viewHolder.textViewKamgarAddress.setText(myEnquiry.getKamgarAddress() + ", " + myEnquiry.getCityname() + ", " + myEnquiry.getKamgarPincode());
+        if (myEnquiry.getKamgarAddress() != null && myEnquiry.getCityname() != null) {
+            viewHolder.textViewKamgarAddress.setText(myEnquiry.getKamgarAddress() + ", " + myEnquiry.getCityname());
+        }else{
+            viewHolder.textViewKamgarAddress.setText("N/A");
+        }
         viewHolder.textViewKamgarContactNo.setText(myEnquiry.getKamgarMobileNo());
         viewHolder.textViewKamgarStatus.setText(myEnquiry.getWorkstatus());
         viewHolder.textViewRatingType.setText(myEnquiry.getRateremark());

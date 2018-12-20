@@ -126,7 +126,7 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
 
         if (kamgar.getContImgUrl() == null) {
             Picasso.with(KamgarEditProfileActivity.this)
-                    .load(R.drawable.user_image)
+                    .load(R.drawable.kamgar)
                     .into(imageViewKamgarImage);
         } else {
             Picasso.with(KamgarEditProfileActivity.this)
@@ -451,7 +451,7 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
                                     } else {
                                         Toast.makeText(KamgarEditProfileActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
                                     }
-                                /*} else {
+                            /*    } else {
                                     Toast.makeText(KamgarEditProfileActivity.this, "Email Id must be valid", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
@@ -716,7 +716,7 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
 
                 } else {
                     // Response code is 401
-                    Toast.makeText(KamgarEditProfileActivity.this, "Server error!!Email or MobileNo already in use.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(KamgarEditProfileActivity.this, "Unable to reach server!!", Toast.LENGTH_LONG).show();
                 }
 
                 if (progressDialogForAPI != null) {

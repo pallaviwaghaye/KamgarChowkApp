@@ -194,7 +194,7 @@ public class FreeListingActivity extends AppCompatActivity implements View.OnCli
                             //intent.putExtra("MOBILE_NO", editTextUserMobileNumber.getText().toString());
                             startActivity(intent);
                             finish();
-
+                            Toast.makeText(FreeListingActivity.this, "Password sent to mobile number.", Toast.LENGTH_LONG).show();
 
                         }
                     } else {

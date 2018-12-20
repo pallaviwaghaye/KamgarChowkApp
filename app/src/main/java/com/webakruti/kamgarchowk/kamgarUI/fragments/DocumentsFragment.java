@@ -248,11 +248,17 @@ public class DocumentsFragment extends Fragment implements View.OnClickListener{
                 panImage = getPath(selectedImageUri);
                 path = getPath(selectedImageUri);
                 editTextChoosePancard.setText(panImage);
+                /*String filename = path.substring(path.lastIndexOf("/")+1);
+                Log.e("filename : ",filename);
+                editTextChoosePancard.setText(filename);*/
             }
             if (requestCode == SELECT_FILE2) {
                 passbookImage = getPath(selectedImageUri);
                 path1 = getPath(selectedImageUri);
                 editTextChooseBankPassbook.setText(passbookImage);
+                 /*String filename1 = path.substring(path.lastIndexOf("/")+1);
+                Log.e("filename : ",filename1);
+                editTextChooseBankPassbook.setText(filename1);*/
             }
 
            /* editTextChoosePancard.setText("Selected File paths : " + selectedPath1);

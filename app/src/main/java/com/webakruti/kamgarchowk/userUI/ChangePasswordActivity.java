@@ -62,9 +62,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
         buttonChangePwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (editTextUserOldPwd.getText().toString().length() > 0) {
-                    if (editTextUserNewPwd.getText().toString().length() > 0) {
-                        if (editTextUserConfirmNewPwd.getText().toString().length() > 0) {
+                if (editTextUserOldPwd.getText().toString().length() >= 6) {
+                    if (editTextUserNewPwd.getText().toString().length() >= 6) {
+                        if (editTextUserConfirmNewPwd.getText().toString().length() >= 6) {
                             if(editTextUserConfirmNewPwd.getText().toString().equalsIgnoreCase(editTextUserNewPwd.getText().toString())){
 
                                 if (NetworkUtil.hasConnectivity(ChangePasswordActivity.this)) {
@@ -80,13 +80,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                 Toast.makeText(ChangePasswordActivity.this, "Password and Confirm password should be same", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(ChangePasswordActivity.this, "Confirm password Can't be Empty", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChangePasswordActivity.this, "Confirm password must be greater than 6", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(ChangePasswordActivity.this, "Password Can't be Empty", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChangePasswordActivity.this, "New Password must be greater than 6", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(ChangePasswordActivity.this, "Old password Can't be Empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChangePasswordActivity.this, "Old password must be greater than 6", Toast.LENGTH_SHORT).show();
                 }
             }
         });

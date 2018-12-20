@@ -66,9 +66,9 @@ public class KamgarChangePasswordActivity extends AppCompatActivity {
         buttonKamgarChangePwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (editTextKamgarOldPwd.getText().toString().length() > 0) {
-                    if (editTextKamgarNewPwd.getText().toString().length() > 0) {
-                        if (editTextKamgarConfirmNewPwd.getText().toString().length() > 0) {
+                if (editTextKamgarOldPwd.getText().toString().length() >= 6) {
+                    if (editTextKamgarNewPwd.getText().toString().length() >= 6) {
+                        if (editTextKamgarConfirmNewPwd.getText().toString().length() >= 6) {
                             if(editTextKamgarConfirmNewPwd.getText().toString().equalsIgnoreCase(editTextKamgarNewPwd.getText().toString())){
 
                                 if (NetworkUtil.hasConnectivity(KamgarChangePasswordActivity.this)) {
@@ -84,13 +84,13 @@ public class KamgarChangePasswordActivity extends AppCompatActivity {
                                 Toast.makeText(KamgarChangePasswordActivity.this, "Password and Confirm password should be same", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(KamgarChangePasswordActivity.this, "Confirm password Can't be Empty", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(KamgarChangePasswordActivity.this, "Confirm password must be greater than 6", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(KamgarChangePasswordActivity.this, "Password Can't be Empty", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(KamgarChangePasswordActivity.this, "New Password must be greater than 6", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(KamgarChangePasswordActivity.this, "Old password Can't be Empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(KamgarChangePasswordActivity.this, "Old password must be greater than 6", Toast.LENGTH_SHORT).show();
                 }
             }
         });

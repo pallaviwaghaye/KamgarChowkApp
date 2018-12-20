@@ -38,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Rajesh Addf Sharma"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="15sp" />
 
@@ -46,7 +46,7 @@
                     android:id="@+id/textViewKamgarMobNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="9876543210"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="13sp" />
 
@@ -118,7 +118,7 @@
                         android:id="@+id/textViewkamgarEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="abc@gmail.com"
+                        android:text=""
                         android:textColor="@color/black"
                         android:layout_marginLeft="15dp"
                         android:textSize="16sp" />
@@ -150,7 +150,7 @@
                         android:id="@+id/textViewKamgarMobile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="9876543210"
+                        android:text=""
                         android:textColor="@color/black"
                         android:layout_marginLeft="15dp"
                         android:textSize="16sp" />
@@ -187,7 +187,7 @@
                             android:id="@+id/textViewKamgarAddress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="#121 Mate Square, Nagpur,India"
+                            android:text=""
                             android:textColor="@color/black"
                             android:layout_marginLeft="15dp"
                             android:textSize="16sp" />
