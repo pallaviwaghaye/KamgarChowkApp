@@ -142,7 +142,7 @@ public class DocumentsFragment extends Fragment implements View.OnClickListener{
                 if (editTextPanNumber.getText().toString().length() == 10) {
                     if (editTextChoosePancard.getText().toString().length() > 0) {
                         if (editTextBankName.getText().toString().length() > 0) {
-                            if (editTextAccountNo.getText().toString().length() == 16) {
+                            if (editTextAccountNo.getText().toString().length() <= 16) {
                                 if (editTextChooseBankPassbook.getText().toString().length() > 0) {
                                     if (NetworkUtil.hasConnectivity(getActivity())) {
                                         callUploadDocuments();
