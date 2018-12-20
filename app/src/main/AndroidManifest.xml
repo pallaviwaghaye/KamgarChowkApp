@@ -5,8 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <!--
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -35,7 +35,9 @@
         <activity android:name=".userUI.UserRegistrationActivity" />
         <activity android:name=".kamgarUI.KamgarLoginActivity" />
         <activity android:name=".userUI.UserLoginActivity" />
-        <activity android:name=".userUI.HomeActivity" />
+        <activity
+            android:name=".userUI.HomeActivity"
+            android:windowSoftInputMode="stateHidden"></activity>>
         <activity android:name=".userUI.SubcategoryActivity" />
         <activity android:name=".userUI.KamgarListActivity" />
         <activity android:name=".kamgarUI.HomeOrProfileActivity" />

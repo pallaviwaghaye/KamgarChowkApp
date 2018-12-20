@@ -105,22 +105,14 @@ public class HomeFragment extends Fragment {
         selectedLocation = new SearchLocationList.Citylist();
         selectedLocation.setName(selectedLocations);
 
-        //   hideKeyboard();
+           hideKeyboard();
         return rootView;
     }
 
-   /* private void hideKeyboard() {
-        autoComTextViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                in.hideSoftInputFromWindow(arg1.getWindowToken(), 0);
-
-            }
-
-        });
-    }*/
+    private void hideKeyboard() {
+        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(autoComTextViewSearch.getApplicationWindowToken(), 0);
+    }
 
 
     private void callGetLocationAPI() {
