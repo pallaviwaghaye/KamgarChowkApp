@@ -136,7 +136,7 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
                 if (editTextPanNumber.getText().toString().length() == 10) {
                     if (editTextChoosePancard.getText().toString().length() > 0) {
                         if (editTextBankName.getText().toString().length() > 0) {
-                            if (editTextAccountNo.getText().toString().length() <= 16) {
+                            if (editTextAccountNo.getText().toString().length() > 0) {
                                 if (editTextChooseBankPassbook.getText().toString().length() > 0) {
                                     if (NetworkUtil.hasConnectivity(KamgarDocumentsActivity.this)) {
                                         callUploadDocuments();

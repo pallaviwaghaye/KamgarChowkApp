@@ -451,7 +451,7 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
                                                             }
 
                                                         } else {
-                                                            if (isValidEmailAddress(editTextEmail.getText().toString().trim()) && editTextPincode.getText().toString().length() == 6) {
+                                                            if (isValidEmailAddress(editTextEmail.getText().toString().trim()) || editTextPincode.getText().toString().length() == 6) {
                                                                 // valid email and pincode
                                                                 if (NetworkUtil.hasConnectivity(KamgarEditProfileActivity.this)) {
                                                                     CallUpdatekamgarAPI();
@@ -757,7 +757,8 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
 
                 } else {
                     // Response code is 401
-                    Toast.makeText(KamgarEditProfileActivity.this, "Unable to reach server!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(KamgarEditProfileActivity.this, "Email Id must be valid", Toast.LENGTH_LONG).show();
+                    Toast.makeText(KamgarEditProfileActivity.this, "Unable to reach server", Toast.LENGTH_SHORT).show();
                 }
 
                 if (progressDialogForAPI != null) {
