@@ -22,6 +22,7 @@ import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.kamgarUI.fragments.CategoryKamgarFragment;
 import com.webakruti.kamgarchowk.kamgarUI.fragments.DocumentsFragment;
 import com.webakruti.kamgarchowk.kamgarUI.fragments.HomeOrProfileFragment;
+import com.webakruti.kamgarchowk.kamgarUI.fragments.KamgarSupportFragment;
 import com.webakruti.kamgarchowk.kamgarUI.fragments.MyOrdersFragment;
 import com.webakruti.kamgarchowk.kamgarUI.fragments.SubscriptionPlansFragment;
 import com.webakruti.kamgarchowk.model.KamgarLoginResponse;
@@ -138,7 +139,7 @@ public class HomeOrProfileActivity extends AppCompatActivity {
 
                     case R.id.navSupport:
                         toolbarKamgarDetailsHomeTitle.setText("Support");
-                        fragManager.beginTransaction().replace(R.id.home_container_kamgar, new SupportFragment()).commit();
+                        fragManager.beginTransaction().replace(R.id.home_container_kamgar, new KamgarSupportFragment()).commit();
                         break;
 
 

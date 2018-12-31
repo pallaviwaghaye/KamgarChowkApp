@@ -9,7 +9,7 @@ public class ApiConstants {
     //http://192.168.29.107/kamgarchowk/api/locationlist
     //http://192.168.29.107/kamgarchowk/api/categorylist
 
-    public static final String BASE_URL = "http://beta.kamgarchowk.com/api/";
+    public static final String BASE_URL = "http://kamgarchowk.com/api/";
     public static final String REG_API = "userregistration";
 
     public static final String LOGIN_API = "userlogin";
