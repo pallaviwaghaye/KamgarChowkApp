@@ -10,7 +10,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="150dp"
-        android:layout_height="180dp"
+        android:layout_height="185dp"
         android:layout_margin="10dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="4dp"
@@ -44,7 +44,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_gravity="center"
                             android:text="Building Contractors"
                             android:textSize="11dp"
                             android:textColor="@color/black" />
@@ -57,8 +57,8 @@
                         >
                         <ImageView
                             android:id="@+id/imageViewPoprWorkrArrow"
-                            android:layout_width="14dp"
-                            android:layout_height="14dp"
+                            android:layout_width="13dp"
+                            android:layout_height="13dp"
                             android:layout_gravity="center"
                             android:layout_marginLeft="10dp"
                             android:src="@drawable/arrow"

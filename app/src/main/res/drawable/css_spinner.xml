@@ -17,12 +17,7 @@
             android:gravity="center|right">
 
         </item>
-        <item android:drawable="@drawable/map"
-            android:height="15dp"
-            android:width="15dp"
-            android:left="3dp"
-            android:gravity="center|left">
-        </item>
+       
 
     </layer-list></item>
 </selector>

@@ -73,7 +73,7 @@
                         android:imeOptions="actionNext"
                         android:textColor="@color/dark_blue"
                         android:textColorHint="@color/grey"
-                        android:textSize="15sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/textViewPANCopy"
@@ -103,7 +103,7 @@
                         android:imeOptions="actionNext"
                         android:textColor="@color/dark_blue"
                         android:textColorHint="@color/grey"
-                        android:textSize="15sp" />
+                        android:textSize="12sp" />
                         <RelativeLayout
                             android:id="@+id/relativeLayoutPANUpload"
                             android:layout_width="match_parent"
@@ -191,7 +191,7 @@
                             android:imeOptions="actionNext"
                             android:textColor="@color/dark_blue"
                             android:textColorHint="@color/grey"
-                            android:textSize="15sp" />
+                            android:textSize="12sp" />
                         <TextView
                             android:id="@+id/textViewAccountNo"
                             android:layout_width="wrap_content"
@@ -214,7 +214,7 @@
                             android:imeOptions="actionNext"
                             android:textColor="@color/dark_blue"
                             android:textColorHint="@color/grey"
-                            android:textSize="15sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/textViewPassbookCopy"
@@ -244,7 +244,7 @@
                                 android:imeOptions="actionDone"
                                 android:textColor="@color/dark_blue"
                                 android:textColorHint="@color/grey"
-                                android:textSize="15sp" />
+                                android:textSize="12sp" />
                             <RelativeLayout
                                 android:id="@+id/relativeLayoutPassbookUpload"
                                 android:layout_width="match_parent"

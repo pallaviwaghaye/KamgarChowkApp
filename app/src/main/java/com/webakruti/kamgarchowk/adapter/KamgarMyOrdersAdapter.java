@@ -357,10 +357,12 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
 
         if (orders.getWorkstatus().equalsIgnoreCase("Completed") || orders.getWorkstatus().equalsIgnoreCase("Cancelled")) {
             viewHolder.spinnerStatus.setVisibility(View.GONE);
+            viewHolder.linearLayoutSpinnerStatus.setVisibility(View.GONE);
             viewHolder.textViewStatus.setVisibility(View.VISIBLE);
             viewHolder.textViewStatus.setText(orders.getWorkstatus());
         } else {
             viewHolder.spinnerStatus.setVisibility(View.VISIBLE);
+            viewHolder.linearLayoutSpinnerStatus.setVisibility(View.VISIBLE);
             viewHolder.textViewStatus.setVisibility(View.GONE);
 
 
@@ -502,6 +504,7 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
         private TextView textViewUserStatus;
         private TextView textViewUserShowHideDetais;
         private LinearLayout linearLayoutEnquiryShowHide;
+        private LinearLayout linearLayoutSpinnerStatus;
 
         private Spinner spinnerStatus;
 
@@ -536,6 +539,7 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
 
             spinnerStatus = (Spinner) itemView.findViewById(R.id.spinnerStatus);
             textViewStatus = (TextView) itemView.findViewById(R.id.textViewStatus);
+            linearLayoutSpinnerStatus = (LinearLayout) itemView.findViewById(R.id.linearLayoutSpinnerStatus);
 
         }
     }
