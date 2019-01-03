@@ -1,6 +1,7 @@
 package com.webakruti.kamgarchowk.userUI.fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -99,7 +100,11 @@ public class HomeFragment extends Fragment {
             callGetLocationAPI();
             callGetHomeAPI();
         } else {
-            Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+            new AlertDialog.Builder(getActivity())
+                    .setMessage(R.string.no_internet_message)
+                    .setPositiveButton("OK", null)
+                    .show();
         }
 
         selectedLocation = new SearchLocationList.Citylist();
@@ -342,7 +347,11 @@ public class HomeFragment extends Fragment {
 
 
                     } else {
-                        Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(getActivity())
+                                .setMessage(R.string.no_internet_message)
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 }
             }

@@ -1,6 +1,8 @@
 package com.webakruti.kamgarchowk.userUI.fragments;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -62,16 +64,27 @@ public class SupportFragment extends Fragment {
                         if (NetworkUtil.hasConnectivity(getActivity())) {
                             callSupportAPI();
                             //Toast.makeText(SupportActivity.this, "Request Sent To Support Team! We Will Contact You Soon!!!",Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(getActivity(), HomeActivity.class);
-                            startActivity(intent);
+
                         } else {
-                            Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(getActivity())
+                                    .setMessage(R.string.no_internet_message)
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } else {
-                        Toast.makeText(getActivity(), "Problem Detail Can't be Empty", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getActivity(), "Problem Detail Can't be Empty", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(getActivity())
+                                .setMessage("Problem Detail Can't be Empty")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
-                    Toast.makeText(getActivity(), "Subject Can't be Empty", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getActivity(), "Subject Can't be Empty", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage("Subject Can't be Empty")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
             }
         });
@@ -107,8 +120,19 @@ public class SupportFragment extends Fragment {
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
                     if (details.getSuccess() != null) {
 
-                        Toast.makeText(getActivity(), details.getSuccess().getMsg(),Toast.LENGTH_LONG).show();
+                       /* Toast.makeText(getActivity(), details.getSuccess().getMsg(),Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getActivity(), HomeActivity.class);
+                        startActivity(intent);*/
 
+                        new AlertDialog.Builder(getActivity())
+                                .setMessage(details.getSuccess().getMsg())
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        Intent intent = new Intent(getActivity(), HomeActivity.class);
+                                        startActivity(intent);
+                                    }
+                                })
+                                .show();
                     }
 
                 } else {

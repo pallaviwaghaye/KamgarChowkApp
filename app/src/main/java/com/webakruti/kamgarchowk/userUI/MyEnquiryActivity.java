@@ -1,5 +1,6 @@
 package com.webakruti.kamgarchowk.userUI;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,7 +47,11 @@ public class MyEnquiryActivity extends AppCompatActivity {
         if (NetworkUtil.hasConnectivity(MyEnquiryActivity.this)) {
             callMyenquiryAPI();
         } else {
-            Toast.makeText(MyEnquiryActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MyEnquiryActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+            new AlertDialog.Builder(MyEnquiryActivity.this)
+                    .setMessage(R.string.no_internet_message)
+                    .setPositiveButton("OK", null)
+                    .show();
         }
     }
 

@@ -1,8 +1,10 @@
 package com.webakruti.kamgarchowk.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -246,10 +248,18 @@ public class KamgarSubcategoryAdapter extends RecyclerView.Adapter<KamgarSubcate
                         if (NetworkUtil.hasConnectivity(context)) {
                             callSubmitAPI(body);
                         } else {
-                            Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(context)
+                                    .setMessage(R.string.no_internet_message)
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } else {
-                        Toast.makeText(context, "Please select", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(context, "Please select", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(context)
+                                .setMessage("Please select")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
 
                 } catch (JSONException e) {
@@ -308,12 +318,26 @@ public class KamgarSubcategoryAdapter extends RecyclerView.Adapter<KamgarSubcate
 
                     KamgarUpdateStatus result = response.body();
                     if (result.getSuccess() != null) {
-                        Toast.makeText(context, result.getSuccess(), Toast.LENGTH_SHORT).show();
-                        context.finish();
+                       // Toast.makeText(context, result.getSuccess(), Toast.LENGTH_SHORT).show();
+                        //context.finish();
+
+                        new AlertDialog.Builder(context)
+                                .setMessage(result.getSuccess())
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        context.finish();
+                                    }
+                                })
+                                .show();
+
                     }
                 } else {
                     // Response code is 401
-                    Toast.makeText(context, "Server error occured", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(context, "Server error occured", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(context)
+                            .setMessage("Server error occured")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
                 if (progressDialogForAPI != null) {

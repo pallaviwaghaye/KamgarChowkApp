@@ -1,6 +1,8 @@
 package com.webakruti.kamgarchowk.kamgarUI;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -78,19 +80,39 @@ public class KamgarChangePasswordActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();*/
                                 } else {
-                                    Toast.makeText(KamgarChangePasswordActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                   // Toast.makeText(KamgarChangePasswordActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                    new AlertDialog.Builder(KamgarChangePasswordActivity.this)
+                                            .setMessage(R.string.no_internet_message)
+                                            .setPositiveButton("OK", null)
+                                            .show();
                                 }
                             } else {
-                                Toast.makeText(KamgarChangePasswordActivity.this, "Password and Confirm password should be same", Toast.LENGTH_SHORT).show();
+                              //  Toast.makeText(KamgarChangePasswordActivity.this, "Password and Confirm password should be same", Toast.LENGTH_SHORT).show();
+                                new AlertDialog.Builder(KamgarChangePasswordActivity.this)
+                                        .setMessage("New password and Confirm password should be same")
+                                        .setPositiveButton("OK", null)
+                                        .show();
                             }
                         } else {
-                            Toast.makeText(KamgarChangePasswordActivity.this, "Confirm password must be greater than 6", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(KamgarChangePasswordActivity.this, "Confirm password must be greater than 6", Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(KamgarChangePasswordActivity.this)
+                                    .setMessage("Confirm password must be greater than 6")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } else {
-                        Toast.makeText(KamgarChangePasswordActivity.this, "New Password must be greater than 6", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(KamgarChangePasswordActivity.this, "New Password must be greater than 6", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(KamgarChangePasswordActivity.this)
+                                .setMessage("New Password must be greater than 6")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
-                    Toast.makeText(KamgarChangePasswordActivity.this, "Old password must be greater than 6", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(KamgarChangePasswordActivity.this, "Old password must be greater than 6", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(KamgarChangePasswordActivity.this)
+                            .setMessage("Old password must be greater than 6")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
             }
         });
@@ -120,18 +142,38 @@ public class KamgarChangePasswordActivity extends AppCompatActivity {
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
                     if (details.getSuccess() != null) {
 
-                        Toast.makeText(KamgarChangePasswordActivity.this, details.getSuccess(),Toast.LENGTH_LONG).show();
+                        /*Toast.makeText(KamgarChangePasswordActivity.this, details.getSuccess(),Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(KamgarChangePasswordActivity.this,HomeOrProfileActivity.class);
                         startActivity(intent);
-                        finish();
+                        finish();*/
+
+                        new AlertDialog.Builder(KamgarChangePasswordActivity.this)
+                                .setMessage(details.getSuccess())
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        Intent intent = new Intent(KamgarChangePasswordActivity.this,HomeOrProfileActivity.class);
+                                        startActivity(intent);
+                                        finish();
+
+                                    }
+                                })
+                                .show();
 
                     }else{
-                        Toast.makeText(KamgarChangePasswordActivity.this, "Enter correct Old Password",Toast.LENGTH_LONG).show();
+                       // Toast.makeText(KamgarChangePasswordActivity.this, "Enter correct Old Password",Toast.LENGTH_LONG).show();
+                        new AlertDialog.Builder(KamgarChangePasswordActivity.this)
+                                .setMessage("Enter correct Old Password")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
 
                 } else {
                     // Response code is 401
-                    Toast.makeText(KamgarChangePasswordActivity.this, "Server error,Password not changed.",Toast.LENGTH_LONG).show();
+                 //   Toast.makeText(KamgarChangePasswordActivity.this, "Server error,Password not changed.",Toast.LENGTH_LONG).show();
+                    new AlertDialog.Builder(KamgarChangePasswordActivity.this)
+                            .setMessage("Server error,Password not changed.")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
                 if (progressDialogForAPI != null) {

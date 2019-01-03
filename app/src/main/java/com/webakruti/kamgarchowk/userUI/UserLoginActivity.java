@@ -1,7 +1,9 @@
 package com.webakruti.kamgarchowk.userUI;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -89,16 +91,56 @@ public class UserLoginActivity extends AppCompatActivity implements View.OnClick
                                 startActivity(intent);
                                 finish();*/
                             } else {
-                                Toast.makeText(UserLoginActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(UserLoginActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                new AlertDialog.Builder(UserLoginActivity.this)
+                                        .setMessage(R.string.no_internet_message)
+                                        .setPositiveButton("OK", null)
+                                        .show();
                             }
                         } else {
-                            Toast.makeText(UserLoginActivity.this, "Password should be greater than 6", Toast.LENGTH_SHORT).show();
+                         //   Toast.makeText(UserLoginActivity.this, "Password should be greater than 6", Toast.LENGTH_SHORT).show();
+
+                            new AlertDialog.Builder(UserLoginActivity.this)
+                                    .setMessage("Password should be greater than 6")
+                                    .setPositiveButton("OK", null)
+                                    .show();
+
+                            /* Toast toast = Toast.makeText(UserLoginActivity.this, "Password should be greater than 6", Toast.LENGTH_SHORT);
+                            view = toast.getView();
+                            TextView text = (TextView) view.findViewById(android.R.id.message);
+                            //view.setBackgroundColor(Color.WHITE);
+                            text.setTextColor(getResources().getColor(R.color.faint_yellow));
+                            //text.setBackgroundColor(Color.WHITE);
+                            toast.show();*/
+                           /* new AlertDialog.Builder(UserLoginActivity.this)
+                                    .setMessage("Go to Popup!!")
+                                    .setPositiveButton("OK", null)
+                                    .show();*/
                         }
                     } else {
-                        Toast.makeText(UserLoginActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(UserLoginActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+
+                        new AlertDialog.Builder(UserLoginActivity.this)
+                                .setMessage("Mobile number must be valid")
+                                .setPositiveButton("OK", null)
+                                .show();
+
                     }
                 } else {
-                    Toast.makeText(UserLoginActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(UserLoginActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+
+                    new AlertDialog.Builder(UserLoginActivity.this)
+                            .setMessage("Mobile number Can't be empty")
+                            .setPositiveButton("OK", null)
+                            .show();
+
+                    /* Toast toast = Toast.makeText(UserLoginActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT);
+                    view = toast.getView();
+                    TextView text = (TextView) view.findViewById(android.R.id.message);
+                    //view.setBackgroundColor(getResources().getColor(R.color.offwhite));
+                    text.setTextColor(getResources().getColor(R.color.orange_red));
+                    //text.setBackgroundColor(Color.WHITE);
+                    toast.show();*/
                 }
 
                 break;
@@ -146,7 +188,17 @@ public class UserLoginActivity extends AppCompatActivity implements View.OnClick
                     }
                 } else {
                     // Response code is 401
-                    Toast.makeText(UserLoginActivity.this, "Unauthorized User!! MobileNo or Password is incorrect.", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(UserLoginActivity.this, "Unauthorized User!! MobileNo or Password is incorrect.", Toast.LENGTH_SHORT).show();
+
+                    new AlertDialog.Builder(UserLoginActivity.this)
+                            .setMessage("Unauthorized User!! MobileNo or Password is incorrect.")
+                            .setPositiveButton("OK", null)
+                            .show();
+                    /*Toast toast = Toast.makeText(UserLoginActivity.this, "Unauthorized User!! MobileNo or Password is incorrect.", Toast.LENGTH_LONG);
+                    View view = toast.getView();
+                    TextView text = (TextView) view.findViewById(android.R.id.message);
+                    text.setTextColor(Color.YELLOW);
+                    toast.show();*/
                 }
 
                 if (progressDialogForAPI != null) {

@@ -1,8 +1,10 @@
 package com.webakruti.kamgarchowk.kamgarUI.fragments;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -32,6 +34,7 @@ import com.webakruti.kamgarchowk.kamgarUI.KamgarDocumentsActivity;
 import com.webakruti.kamgarchowk.model.KamgarSaveDocsResp;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 import com.webakruti.kamgarchowk.retrofit.service.RestClient;
+import com.webakruti.kamgarchowk.userUI.HomeActivity;
 import com.webakruti.kamgarchowk.utils.NetworkUtil;
 import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
 
@@ -149,23 +152,47 @@ public class DocumentsFragment extends Fragment implements View.OnClickListener{
                                     /*Intent intent = new Intent(KamgarDocumentsActivity.this, HomeOrProfileActivity.class);
                                     startActivity(intent);*/
                                     } else {
-                                        Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                      //  Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                        new AlertDialog.Builder(getActivity())
+                                                .setMessage(R.string.no_internet_message)
+                                                .setPositiveButton("OK", null)
+                                                .show();
                                     }
                                 } else {
-                                    Toast.makeText(getActivity(), "Please Upload Bank Passbook Image", Toast.LENGTH_SHORT).show();
+                                  //  Toast.makeText(getActivity(), "Please Upload Bank Passbook Image", Toast.LENGTH_SHORT).show();
+                                    new AlertDialog.Builder(getActivity())
+                                            .setMessage("Please Upload Bank Passbook Image")
+                                            .setPositiveButton("OK", null)
+                                            .show();
                                 }
                             } else {
-                                Toast.makeText(getActivity(), "Please Enter valid Bank Account Number.", Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getActivity(), "Please Enter valid Bank Account Number.", Toast.LENGTH_SHORT).show();
+                                new AlertDialog.Builder(getActivity())
+                                        .setMessage("Please Enter valid Bank Account Number.")
+                                        .setPositiveButton("OK", null)
+                                        .show();
                             }
                         } else {
-                            Toast.makeText(getActivity(), "Please Enter Bank Name", Toast.LENGTH_SHORT).show();
+                        //    Toast.makeText(getActivity(), "Please Enter Bank Name", Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(getActivity())
+                                    .setMessage("Please Enter Bank Name")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
 
                     } else {
-                        Toast.makeText(getActivity(), "Please Upload PAN Card Image", Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(getActivity(), "Please Upload PAN Card Image", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(getActivity())
+                                .setMessage("Please Upload PAN Card Image")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
-                    Toast.makeText(getActivity(), "Please Enter valid PAN Card Number", Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(getActivity(), "Please Enter valid PAN Card Number", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage("Please Enter valid PAN Card Number")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
 
@@ -357,20 +384,42 @@ public class DocumentsFragment extends Fragment implements View.OnClickListener{
 //                            if (saveDocsResponse.getSuccess()) {
 
                             Log.e("Upload", "Upload Successful");
-                            Toast.makeText(getActivity(), saveDocsResponse.getSuccess().getMsg(), Toast.LENGTH_SHORT).show();
+                            /*Toast.makeText(getActivity(), saveDocsResponse.getSuccess().getMsg(), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getActivity(),HomeOrProfileActivity.class);
-                            startActivity(intent);
+                            startActivity(intent);*/
                             //finish();
                             //}
+
+                            new AlertDialog.Builder(getActivity())
+                                    .setMessage(saveDocsResponse.getSuccess().getMsg())
+                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            Intent intent = new Intent(getActivity(),HomeOrProfileActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    })
+                                    .show();
                         } else {
-                            Toast.makeText(getActivity(), "Unable to reach server ", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(getActivity(), "Unable to reach server ", Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(getActivity())
+                                    .setMessage("Unable to reach server ")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } catch (Exception e) {
-                        Toast.makeText(getActivity(), "Unable to reach server ", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getActivity(), "Unable to reach server ", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(getActivity())
+                                .setMessage("Unable to reach server ")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
 
                 } else {
-                    Toast.makeText(getActivity(), "Unable to reach server ", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(getActivity(), "Unable to reach server ", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage("Unable to reach server ")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
 
@@ -384,7 +433,11 @@ public class DocumentsFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onFailure(Call<KamgarSaveDocsResp> call, Throwable t) {
 
-                Toast.makeText(getActivity(), "Time out error. ", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(), "Time out error. ", Toast.LENGTH_SHORT).show();
+                new AlertDialog.Builder(getActivity())
+                        .setMessage("Time out error. ")
+                        .setPositiveButton("OK", null)
+                        .show();
                 if (progressDialogForAPI != null) {
                     progressDialogForAPI.cancel();
                 }

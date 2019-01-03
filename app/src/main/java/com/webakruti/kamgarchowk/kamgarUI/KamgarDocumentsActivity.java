@@ -1,7 +1,9 @@
 package com.webakruti.kamgarchowk.kamgarUI;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -143,23 +145,47 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
                                     /*Intent intent = new Intent(KamgarDocumentsActivity.this, HomeOrProfileActivity.class);
                                     startActivity(intent);*/
                                     } else {
-                                        Toast.makeText(KamgarDocumentsActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                      //  Toast.makeText(KamgarDocumentsActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                        new AlertDialog.Builder(KamgarDocumentsActivity.this)
+                                                .setMessage(R.string.no_internet_message)
+                                                .setPositiveButton("OK", null)
+                                                .show();
                                     }
                                 } else {
-                                    Toast.makeText(KamgarDocumentsActivity.this, "Please Upload Bank Passbook Image", Toast.LENGTH_SHORT).show();
+                                  //  Toast.makeText(KamgarDocumentsActivity.this, "Please Upload Bank Passbook Image", Toast.LENGTH_SHORT).show();
+                                    new AlertDialog.Builder(KamgarDocumentsActivity.this)
+                                            .setMessage("Please Upload Bank Passbook Image")
+                                            .setPositiveButton("OK", null)
+                                            .show();
                                 }
                             } else {
-                                Toast.makeText(KamgarDocumentsActivity.this, "Please Enter valid Bank Account Number.", Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(KamgarDocumentsActivity.this, "Please Enter valid Bank Account Number.", Toast.LENGTH_SHORT).show();
+                                new AlertDialog.Builder(KamgarDocumentsActivity.this)
+                                        .setMessage("Please Enter valid Bank Account Number.")
+                                        .setPositiveButton("OK", null)
+                                        .show();
                             }
                         } else {
-                            Toast.makeText(KamgarDocumentsActivity.this, "Please Enter Bank Name", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(KamgarDocumentsActivity.this, "Please Enter Bank Name", Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(KamgarDocumentsActivity.this)
+                                    .setMessage("Please Enter Bank Name")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
 
                     } else {
-                        Toast.makeText(KamgarDocumentsActivity.this, "Please Upload PAN Card Image", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(KamgarDocumentsActivity.this, "Please Upload PAN Card Image", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(KamgarDocumentsActivity.this)
+                                .setMessage("Please Upload PAN Card Image")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
-                    Toast.makeText(KamgarDocumentsActivity.this, "Please Enter valid PAN Card Number", Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(KamgarDocumentsActivity.this, "Please Enter valid PAN Card Number", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(KamgarDocumentsActivity.this)
+                            .setMessage("Please Enter valid PAN Card Number")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
 
@@ -351,20 +377,44 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
 //                            if (saveDocsResponse.getSuccess()) {
 
                             Log.e("Upload", "Upload Successful");
-                            Toast.makeText(KamgarDocumentsActivity.this, saveDocsResponse.getSuccess().getMsg(), Toast.LENGTH_SHORT).show();
+                           /* Toast.makeText(KamgarDocumentsActivity.this, saveDocsResponse.getSuccess().getMsg(), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(KamgarDocumentsActivity.this, HomeOrProfileActivity.class);
                             startActivity(intent);
-                            finish();
+                            finish();*/
+
+                            new AlertDialog.Builder(KamgarDocumentsActivity.this)
+                                    .setMessage(saveDocsResponse.getSuccess().getMsg())
+                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            Intent intent = new Intent(KamgarDocumentsActivity.this, HomeOrProfileActivity.class);
+                                            startActivity(intent);
+                                            finish();
+
+                                        }
+                                    })
+                                    .show();
                             //}
                         } else {
-                            Toast.makeText(KamgarDocumentsActivity.this, "Unable to reach server ", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(KamgarDocumentsActivity.this, "Unable to reach server ", Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(KamgarDocumentsActivity.this)
+                                    .setMessage("Unable to reach server ")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } catch (Exception e) {
-                        Toast.makeText(KamgarDocumentsActivity.this, "Unable to reach server ", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(KamgarDocumentsActivity.this, "Unable to reach server ", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(KamgarDocumentsActivity.this)
+                                .setMessage("Unable to reach server ")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
 
                 } else {
-                    Toast.makeText(KamgarDocumentsActivity.this, "Unable to reach server ", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(KamgarDocumentsActivity.this, "Unable to reach server ", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(KamgarDocumentsActivity.this)
+                            .setMessage("Unable to reach server ")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
 
@@ -378,7 +428,11 @@ public class KamgarDocumentsActivity extends AppCompatActivity implements View.O
             @Override
             public void onFailure(Call<KamgarSaveDocsResp> call, Throwable t) {
 
-                Toast.makeText(KamgarDocumentsActivity.this, "Time out error. ", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(KamgarDocumentsActivity.this, "Time out error. ", Toast.LENGTH_SHORT).show();
+                new AlertDialog.Builder(KamgarDocumentsActivity.this)
+                        .setMessage("Time out error. ")
+                        .setPositiveButton("OK", null)
+                        .show();
                 if (progressDialogForAPI != null) {
                     progressDialogForAPI.cancel();
                 }

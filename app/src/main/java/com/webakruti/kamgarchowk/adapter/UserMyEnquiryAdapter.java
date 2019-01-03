@@ -1,6 +1,7 @@
 package com.webakruti.kamgarchowk.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -318,7 +319,11 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
 
 
                     } else {
-                        Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(context)
+                                .setMessage(R.string.no_internet_message)
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 }
             }
@@ -372,15 +377,27 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
                     if (details != null) {
 
                         if (details.getStatus()) {
-                            Toast.makeText(context, "Thanks for Rating.", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(context, "Thank you for Rating.", Toast.LENGTH_SHORT).show();
+
+                            new AlertDialog.Builder(context)
+                                    .setMessage("Thank you for Rating.")
+                                    .setPositiveButton("OK", null)
+                                    .show();
+
                             updateUI(position, ratingId);
                         } else {
-                            Toast.makeText(context, "Sorry... Some Error Occured", Toast.LENGTH_SHORT).show();
-
+                          //  Toast.makeText(context, "Sorry... Some Error Occured", Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(context)
+                                    .setMessage("Sorry... Some Error Occured")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } else {
-                        Toast.makeText(context, "Sorry... Some Error Occured", Toast.LENGTH_SHORT).show();
-
+                        //Toast.makeText(context, "Sorry... Some Error Occured", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(context)
+                                .setMessage("Sorry... Some Error Occured")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
 
                 } else {

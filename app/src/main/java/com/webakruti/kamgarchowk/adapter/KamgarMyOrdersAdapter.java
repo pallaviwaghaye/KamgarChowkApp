@@ -1,6 +1,7 @@
 package com.webakruti.kamgarchowk.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -439,16 +440,28 @@ public class KamgarMyOrdersAdapter extends RecyclerView.Adapter<KamgarMyOrdersAd
 
                         if (details.getSuccess() != null) {
                             // Toast.makeText(context, "Status changed successfully.", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(context, details.getSuccess().getMsg(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(context, details.getSuccess().getMsg(), Toast.LENGTH_SHORT).show();
+
+                            new AlertDialog.Builder(context)
+                                    .setMessage(details.getSuccess().getMsg())
+                                    .setPositiveButton("OK", null)
+                                    .show();
+
                             updateUI(position, workstatus, workstatusid);
 
                         } else {
-                            Toast.makeText(context, "Sorry... Some Error Occured", Toast.LENGTH_SHORT).show();
-
+                           // Toast.makeText(context, "Sorry... Some Error Occured", Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(context)
+                                    .setMessage("Sorry... Some Error Occured")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } else {
-                        Toast.makeText(context, "Sorry... Some Error Occured", Toast.LENGTH_SHORT).show();
-
+                     //   Toast.makeText(context, "Sorry... Some Error Occured", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(context)
+                                .setMessage("Sorry... Some Error Occured")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
 
                 } else {

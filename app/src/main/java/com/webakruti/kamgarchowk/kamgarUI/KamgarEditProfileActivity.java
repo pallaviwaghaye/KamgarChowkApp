@@ -1,8 +1,10 @@
 package com.webakruti.kamgarchowk.kamgarUI;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -434,19 +436,31 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
 
                                                             if (editTextPincode.getText().toString().length() > 0) {
                                                                 if (editTextPincode.getText().toString().length() < 6) {
-                                                                    Toast.makeText(KamgarEditProfileActivity.this, "Enter valid pincode", Toast.LENGTH_SHORT).show();
+                                                                   // Toast.makeText(KamgarEditProfileActivity.this, "Enter valid pincode", Toast.LENGTH_SHORT).show();
+                                                                    new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                                                                            .setMessage("Enter valid pincode")
+                                                                            .setPositiveButton("OK", null)
+                                                                            .show();
                                                                 } else if (editTextPincode.getText().toString().length() == 6) {
                                                                     if (NetworkUtil.hasConnectivity(KamgarEditProfileActivity.this)) {
                                                                         CallUpdatekamgarAPI();
                                                                     } else {
-                                                                        Toast.makeText(KamgarEditProfileActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                       // Toast.makeText(KamgarEditProfileActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                        new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                                                                                .setMessage(R.string.no_internet_message)
+                                                                                .setPositiveButton("OK", null)
+                                                                                .show();
                                                                     }
                                                                 }
                                                             } else {
                                                                 if (NetworkUtil.hasConnectivity(KamgarEditProfileActivity.this)) {
                                                                     CallUpdatekamgarAPI();
                                                                 } else {
-                                                                    Toast.makeText(KamgarEditProfileActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                   // Toast.makeText(KamgarEditProfileActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                    new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                                                                            .setMessage(R.string.no_internet_message)
+                                                                            .setPositiveButton("OK", null)
+                                                                            .show();
                                                                 }
                                                             }
 
@@ -456,13 +470,25 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
                                                                 if (NetworkUtil.hasConnectivity(KamgarEditProfileActivity.this)) {
                                                                     CallUpdatekamgarAPI();
                                                                 } else {
-                                                                    Toast.makeText(KamgarEditProfileActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                 //   Toast.makeText(KamgarEditProfileActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                    new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                                                                            .setMessage(R.string.no_internet_message)
+                                                                            .setPositiveButton("OK", null)
+                                                                            .show();
                                                                 }
                                                             } else {
                                                                 if (!isValidEmailAddress(editTextEmail.getText().toString().trim())) {
-                                                                    Toast.makeText(KamgarEditProfileActivity.this, "Email Id must be valid", Toast.LENGTH_SHORT).show();
+                                                                  //  Toast.makeText(KamgarEditProfileActivity.this, "Email Id must be valid", Toast.LENGTH_SHORT).show();
+                                                                    new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                                                                            .setMessage("Email Id must be valid")
+                                                                            .setPositiveButton("OK", null)
+                                                                            .show();
                                                                 } else if (editTextPincode.getText().toString().length() < 6) {
-                                                                    Toast.makeText(KamgarEditProfileActivity.this, "Enter valid pincode", Toast.LENGTH_SHORT).show();
+                                                                 //   Toast.makeText(KamgarEditProfileActivity.this, "Enter valid pincode", Toast.LENGTH_SHORT).show();
+                                                                    new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                                                                            .setMessage("Enter valid pincode")
+                                                                            .setPositiveButton("OK", null)
+                                                                            .show();
                                                                 }
 
 
@@ -471,26 +497,54 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
 
 
                                                     } else {
-                                                        Toast.makeText(KamgarEditProfileActivity.this, "Select city", Toast.LENGTH_SHORT).show();
+                                                      //  Toast.makeText(KamgarEditProfileActivity.this, "Select city", Toast.LENGTH_SHORT).show();
+                                                        new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                                                                .setMessage("Please select city")
+                                                                .setPositiveButton("OK", null)
+                                                                .show();
                                                     }
                                                 } else {
-                                                    Toast.makeText(KamgarEditProfileActivity.this, "Select state", Toast.LENGTH_SHORT).show();
+                                                 //   Toast.makeText(KamgarEditProfileActivity.this, "Select state", Toast.LENGTH_SHORT).show();
+                                                    new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                                                            .setMessage("Please select state")
+                                                            .setPositiveButton("OK", null)
+                                                            .show();
                                                 }
                                             } else {
-                                                Toast.makeText(KamgarEditProfileActivity.this, "Select country", Toast.LENGTH_SHORT).show();
+                                             //   Toast.makeText(KamgarEditProfileActivity.this, "Select country", Toast.LENGTH_SHORT).show();
+                                                new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                                                        .setMessage("Please select country")
+                                                        .setPositiveButton("OK", null)
+                                                        .show();
                                             }
                                         } else {
-                                            Toast.makeText(KamgarEditProfileActivity.this, "Address can't be empty", Toast.LENGTH_SHORT).show();
+                                         //   Toast.makeText(KamgarEditProfileActivity.this, "Address can't be empty", Toast.LENGTH_SHORT).show();
+                                            new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                                                    .setMessage("Address can't be empty")
+                                                    .setPositiveButton("OK", null)
+                                                    .show();
                                         }
 
                                     } else {
-                                        Toast.makeText(KamgarEditProfileActivity.this, "Select gender", Toast.LENGTH_SHORT).show();
+                                     //   Toast.makeText(KamgarEditProfileActivity.this, "Select gender", Toast.LENGTH_SHORT).show();
+                                        new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                                                .setMessage("Please select gender")
+                                                .setPositiveButton("OK", null)
+                                                .show();
                                     }
                                 } else {
-                                    Toast.makeText(KamgarEditProfileActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                                  //  Toast.makeText(KamgarEditProfileActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                                    new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                                            .setMessage("Mobile number must be valid")
+                                            .setPositiveButton("OK", null)
+                                            .show();
                                 }
                             } else {
-                                Toast.makeText(KamgarEditProfileActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(KamgarEditProfileActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                                new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                                        .setMessage("Mobile number Can't be empty")
+                                        .setPositiveButton("OK", null)
+                                        .show();
                             }
                             /*    } else {
                                     Toast.makeText(KamgarEditProfileActivity.this, "Email Id must be valid", Toast.LENGTH_SHORT).show();
@@ -499,13 +553,25 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
                                 Toast.makeText(KamgarEditProfileActivity.this, "Email Id Can't be empty", Toast.LENGTH_SHORT).show();
                             }*/
                         } else {
-                            Toast.makeText(KamgarEditProfileActivity.this, "Date of birth Can't be empty", Toast.LENGTH_SHORT).show();
+                        //    Toast.makeText(KamgarEditProfileActivity.this, "Date of birth Can't be empty", Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                                    .setMessage("Date of birth Can't be empty")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } else {
-                        Toast.makeText(KamgarEditProfileActivity.this, "Last Name Can't be empty", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(KamgarEditProfileActivity.this, "Last Name Can't be empty", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                                .setMessage("Last Name Can't be empty")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
-                    Toast.makeText(KamgarEditProfileActivity.this, "First Name Can't be empty", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(KamgarEditProfileActivity.this, "First Name Can't be empty", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                            .setMessage("First Name Can't be empty")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
 
@@ -735,7 +801,7 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
                     if (details.getSuccess() != null) {
 
-                        Toast.makeText(KamgarEditProfileActivity.this, details.getSuccess().getMsg(), Toast.LENGTH_LONG).show();
+
                         //user.setId(user.getUserId());
 
                         KamgarUpdateResp.Authkamgar authkamgar = details.getSuccess().getAuthkamgar();
@@ -748,17 +814,36 @@ public class KamgarEditProfileActivity extends AppCompatActivity implements View
                         kamgar.getSuccess().getAuthkamgar().setContImgUrl(authkamgar.getContImgUrl());
                         SharedPreferenceManager.storeKamgarObject(kamgar);
 
+                        /*Toast.makeText(KamgarEditProfileActivity.this, details.getSuccess().getMsg(), Toast.LENGTH_LONG).show();
+
                         Intent intent = new Intent(KamgarEditProfileActivity.this, HomeOrProfileActivity.class);
                         intent.putExtra("fromUpdate", true);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
-                        finish();
+                        finish();*/
+
+                        new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                                .setMessage(details.getSuccess().getMsg())
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        Intent intent = new Intent(KamgarEditProfileActivity.this, HomeOrProfileActivity.class);
+                                        intent.putExtra("fromUpdate", true);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                })
+                                .show();
                     }
 
                 } else {
                     // Response code is 401
                     Toast.makeText(KamgarEditProfileActivity.this, "Email Id must be valid", Toast.LENGTH_LONG).show();
-                    Toast.makeText(KamgarEditProfileActivity.this, "Unable to reach server", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(KamgarEditProfileActivity.this, "Unable to reach server", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(KamgarEditProfileActivity.this)
+                            .setMessage("Unable to reach server")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
                 if (progressDialogForAPI != null) {

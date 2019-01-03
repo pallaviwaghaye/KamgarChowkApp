@@ -1,6 +1,8 @@
 package com.webakruti.kamgarchowk.kamgarUI;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -69,13 +71,25 @@ public class KamgarSupportActivity extends AppCompatActivity {
                             //Toast.makeText(SupportActivity.this, "Request Sent To Support Team! We Will Contact You Soon!!!",Toast.LENGTH_LONG).show();
 
                         } else {
-                            Toast.makeText(KamgarSupportActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(KamgarSupportActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(KamgarSupportActivity.this)
+                                    .setMessage(R.string.no_internet_message)
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } else {
-                        Toast.makeText(KamgarSupportActivity.this, "Problem Detail Can't be Empty", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(KamgarSupportActivity.this, "Problem Detail Can't be Empty", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(KamgarSupportActivity.this)
+                                .setMessage("Problem Detail Can't be Empty")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
-                    Toast.makeText(KamgarSupportActivity.this, "Subject Can't be Empty", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(KamgarSupportActivity.this, "Subject Can't be Empty", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(KamgarSupportActivity.this)
+                            .setMessage("Subject Can't be Empty")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
             }
         });
@@ -108,10 +122,21 @@ public class KamgarSupportActivity extends AppCompatActivity {
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
                     if (details.getSuccess() != null) {
 
-                        Toast.makeText(KamgarSupportActivity.this, details.getSuccess().getMsg(),Toast.LENGTH_LONG).show();
+                        /*Toast.makeText(KamgarSupportActivity.this, details.getSuccess().getMsg(),Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(KamgarSupportActivity.this, HomeOrProfileActivity.class);
                         startActivity(intent);
-                        finish();
+                        finish();*/
+
+                        new AlertDialog.Builder(KamgarSupportActivity.this)
+                                .setMessage(details.getSuccess().getMsg())
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        Intent intent = new Intent(KamgarSupportActivity.this, HomeOrProfileActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                })
+                                .show();
                     }
 
                 } else {

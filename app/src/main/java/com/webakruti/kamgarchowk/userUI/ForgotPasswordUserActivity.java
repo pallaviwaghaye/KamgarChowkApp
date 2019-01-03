@@ -1,6 +1,8 @@
 package com.webakruti.kamgarchowk.userUI;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -75,16 +77,28 @@ public class ForgotPasswordUserActivity extends AppCompatActivity implements Vie
                                 startActivity(intent);
                                 finish();*/
                             } else {
-                                Toast.makeText(ForgotPasswordUserActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                              //  Toast.makeText(ForgotPasswordUserActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                new AlertDialog.Builder(ForgotPasswordUserActivity.this)
+                                        .setMessage(R.string.no_internet_message)
+                                        .setPositiveButton("OK", null)
+                                        .show();
                             }
                        /* }else{
                             Toast.makeText(ForgotPasswordUserActivity.this, "Password must be greater than 6", Toast.LENGTH_SHORT).show();
                         }*/
                     } else {
-                        Toast.makeText(ForgotPasswordUserActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(ForgotPasswordUserActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(ForgotPasswordUserActivity.this)
+                                .setMessage("Mobile number must be valid")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
-                    Toast.makeText(ForgotPasswordUserActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(ForgotPasswordUserActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(ForgotPasswordUserActivity.this)
+                            .setMessage("Mobile number Can't be empty")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
                 break;
@@ -101,16 +115,33 @@ public class ForgotPasswordUserActivity extends AppCompatActivity implements Vie
                                 startActivity(intent);
                                 finish();*/
                         } else {
-                            Toast.makeText(ForgotPasswordUserActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(ForgotPasswordUserActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(ForgotPasswordUserActivity.this)
+                                    .setMessage(R.string.no_internet_message)
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                         }else{
-                            Toast.makeText(ForgotPasswordUserActivity.this, "OTP must be greater than 6", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(ForgotPasswordUserActivity.this, "OTP must be greater than 6", Toast.LENGTH_SHORT).show();
+
+                            new AlertDialog.Builder(ForgotPasswordUserActivity.this)
+                                    .setMessage("OTP must be greater than 6.")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } else {
-                        Toast.makeText(ForgotPasswordUserActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(ForgotPasswordUserActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(ForgotPasswordUserActivity.this)
+                                .setMessage("Mobile number must be valid")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
-                    Toast.makeText(ForgotPasswordUserActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(ForgotPasswordUserActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(ForgotPasswordUserActivity.this)
+                            .setMessage("Mobile number Can't be empty")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
                 break;
         }
@@ -136,18 +167,38 @@ public class ForgotPasswordUserActivity extends AppCompatActivity implements Vie
                     if (result.getError() == null && result.getSuccess() != null) {
                         if (result.getSuccess() != null) {
 
-                            Toast.makeText(ForgotPasswordUserActivity.this, "New Password sent to your Mobile Number", Toast.LENGTH_SHORT).show();
+                            /*Toast.makeText(ForgotPasswordUserActivity.this, "New Password sent to your Mobile Number", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(ForgotPasswordUserActivity.this, UserLoginActivity.class);
                             startActivity(intent);
-                            finish();
+                            finish();*/
+
+                            new AlertDialog.Builder(ForgotPasswordUserActivity.this)
+                                    .setMessage("New Password sent to your Mobile Number")
+                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            Intent intent = new Intent(ForgotPasswordUserActivity.this, UserLoginActivity.class);
+                                            startActivity(intent);
+                                            finish();
+
+                                        }
+                                    })
+                                    .show();
 
                         }
                     } else {
                         // Response code is 401
-                        Toast.makeText(ForgotPasswordUserActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(ForgotPasswordUserActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(ForgotPasswordUserActivity.this)
+                                .setMessage(result.getError())
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 }else{
-                    Toast.makeText(ForgotPasswordUserActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ForgotPasswordUserActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(ForgotPasswordUserActivity.this)
+                            .setMessage("Server Error")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
                 if (progressDialogForAPI != null) {
@@ -191,12 +242,20 @@ public class ForgotPasswordUserActivity extends AppCompatActivity implements Vie
                     if (result.getErrors() == null && result.getMsgstatus() != null) {
                         if (result.getMsgstatus()) {
 
-                            Toast.makeText(ForgotPasswordUserActivity.this,"OTP sent to your mobile number", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(ForgotPasswordUserActivity.this,"OTP sent to your mobile number", Toast.LENGTH_LONG).show();
+                            new AlertDialog.Builder(ForgotPasswordUserActivity.this)
+                                    .setMessage("OTP sent to your mobile number")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                             //progressDialogForAPI.cancel();
                         }
                     } else {
                         // Response code is 401
-                        Toast.makeText(ForgotPasswordUserActivity.this, result.getErrors().getMobileNo().get(0).toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(ForgotPasswordUserActivity.this, result.getErrors().getMobileNo().get(0).toString(), Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(ForgotPasswordUserActivity.this)
+                                .setMessage(result.getErrors().getMobileNo().get(0).toString())
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 }
 

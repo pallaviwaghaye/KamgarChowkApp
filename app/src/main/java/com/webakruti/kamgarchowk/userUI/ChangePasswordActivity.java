@@ -1,6 +1,8 @@
 package com.webakruti.kamgarchowk.userUI;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -119,10 +121,22 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
                     if (details.getSuccess() != null) {
 
-                        Toast.makeText(ChangePasswordActivity.this, details.getSuccess(),Toast.LENGTH_LONG).show();
+                        /*Toast.makeText(ChangePasswordActivity.this, details.getSuccess(),Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(ChangePasswordActivity.this,HomeActivity.class);
                         startActivity(intent);
-                        finish();
+                        finish();*/
+
+                        new AlertDialog.Builder(ChangePasswordActivity.this)
+                                .setMessage(details.getSuccess())
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        Intent intent = new Intent(ChangePasswordActivity.this,HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+
+                                    }
+                                })
+                                .show();
                     }
                     else{
                         Toast.makeText(ChangePasswordActivity.this, "Enter correct Old Password",Toast.LENGTH_LONG).show();

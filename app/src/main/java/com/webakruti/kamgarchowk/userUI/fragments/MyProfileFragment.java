@@ -78,7 +78,11 @@ public class MyProfileFragment extends Fragment {
         if (NetworkUtil.hasConnectivity(getActivity())) {
             callGetUserProfile();
         } else {
-            Toast.makeText(getActivity(), "No Internet connection", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getActivity(), "No Internet connection", Toast.LENGTH_SHORT).show();
+            new AlertDialog.Builder(getActivity())
+                    .setMessage(R.string.no_internet_message)
+                    .setPositiveButton("OK", null)
+                    .show();
         }
 
         return rootView;

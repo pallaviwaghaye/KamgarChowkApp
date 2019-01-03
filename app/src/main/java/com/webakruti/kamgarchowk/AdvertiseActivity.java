@@ -1,6 +1,8 @@
 package com.webakruti.kamgarchowk;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -90,10 +92,21 @@ public class AdvertiseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 myDialog.dismiss();
-                Toast.makeText(AdvertiseActivity.this,"Your advertise successfully saved.",Toast.LENGTH_LONG).show();
+                /*Toast.makeText(AdvertiseActivity.this,"Your advertise successfully saved.",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AdvertiseActivity.this,LandingActivity.class);
                 startActivity(intent);
-                finish();
+                finish();*/
+
+                new AlertDialog.Builder(AdvertiseActivity.this)
+                        .setMessage("Your advertise successfully saved.")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                Intent intent = new Intent(AdvertiseActivity.this,LandingActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        })
+                        .show();
             }
         });
 

@@ -1,5 +1,6 @@
 package com.webakruti.kamgarchowk.userUI.fragments;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
@@ -50,7 +51,11 @@ public class MyEnquiryFragment extends Fragment {
         if (NetworkUtil.hasConnectivity(getActivity())) {
             callMyenquiryAPI();
         } else {
-            Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+            new AlertDialog.Builder(getActivity())
+                    .setMessage(R.string.no_internet_message)
+                    .setPositiveButton("OK", null)
+                    .show();
         }
 
         return rootView;

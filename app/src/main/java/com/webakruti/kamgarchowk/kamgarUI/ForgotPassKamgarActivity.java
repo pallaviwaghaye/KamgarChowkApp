@@ -1,6 +1,8 @@
 package com.webakruti.kamgarchowk.kamgarUI;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -75,16 +77,28 @@ public class ForgotPassKamgarActivity extends AppCompatActivity implements View.
                                 startActivity(intent);
                                 finish();*/
                         } else {
-                            Toast.makeText(ForgotPassKamgarActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(ForgotPassKamgarActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(ForgotPassKamgarActivity.this)
+                                    .setMessage(R.string.no_internet_message)
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                        /* }else{
                             Toast.makeText(ForgotPasswordUserActivity.this, "Password must be greater than 6", Toast.LENGTH_SHORT).show();
                         }*/
                     } else {
-                        Toast.makeText(ForgotPassKamgarActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(ForgotPassKamgarActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(ForgotPassKamgarActivity.this)
+                                .setMessage("Mobile number must be valid")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
-                    Toast.makeText(ForgotPassKamgarActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(ForgotPassKamgarActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(ForgotPassKamgarActivity.this)
+                            .setMessage("Mobile number Can't be empty")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
                 break;
@@ -101,16 +115,32 @@ public class ForgotPassKamgarActivity extends AppCompatActivity implements View.
                                 startActivity(intent);
                                 finish();*/
                             } else {
-                                Toast.makeText(ForgotPassKamgarActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                             //   Toast.makeText(ForgotPassKamgarActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                new AlertDialog.Builder(ForgotPassKamgarActivity.this)
+                                        .setMessage(R.string.no_internet_message)
+                                        .setPositiveButton("OK", null)
+                                        .show();
                             }
                         }else{
-                            Toast.makeText(ForgotPassKamgarActivity.this, "OTP must be greater than 6", Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(ForgotPassKamgarActivity.this, "OTP must be greater than 6", Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(ForgotPassKamgarActivity.this)
+                                    .setMessage("OTP must be greater than 6")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } else {
-                        Toast.makeText(ForgotPassKamgarActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(ForgotPassKamgarActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(ForgotPassKamgarActivity.this)
+                                .setMessage("Mobile number must be valid")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
-                    Toast.makeText(ForgotPassKamgarActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(ForgotPassKamgarActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(ForgotPassKamgarActivity.this)
+                            .setMessage("Mobile number Can't be empty")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
                 break;
         }
@@ -135,11 +165,20 @@ public class ForgotPassKamgarActivity extends AppCompatActivity implements View.
                     if (result.getErrors() == null && result.getSuccess() != null && result.getMsgstatus()!=null) {
                         if (result.getMsgstatus()) {
 
-                            Toast.makeText(ForgotPassKamgarActivity.this,"OTP sent to your mobile number!!", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(ForgotPassKamgarActivity.this,"OTP sent to your mobile number!!", Toast.LENGTH_LONG).show();
+
+                            new AlertDialog.Builder(ForgotPassKamgarActivity.this)
+                                    .setMessage("OTP sent to your mobile number")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } else {
                         // Response code is 401
-                        Toast.makeText(ForgotPassKamgarActivity.this, result.getErrors().getMobileNo().get(0).toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(ForgotPassKamgarActivity.this, result.getErrors().getMobileNo().get(0).toString(), Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(ForgotPassKamgarActivity.this)
+                                .setMessage(result.getErrors().getMobileNo().get(0).toString())
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 }
 
@@ -185,18 +224,39 @@ public class ForgotPassKamgarActivity extends AppCompatActivity implements View.
                     if (result.getError() == null && result.getSuccess() != null) {
                         if (result.getSuccess() != null) {
 
-                            Toast.makeText(ForgotPassKamgarActivity.this, "New Password sent to your Mobile Number", Toast.LENGTH_SHORT).show();
+                            /*Toast.makeText(ForgotPassKamgarActivity.this, "New Password sent to your Mobile Number", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(ForgotPassKamgarActivity.this, KamgarLoginActivity.class);
                             startActivity(intent);
-                            finish();
+                            finish();*/
+
+                            new AlertDialog.Builder(ForgotPassKamgarActivity.this)
+                                    .setMessage("New Password sent to your Mobile Number")
+                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            Intent intent = new Intent(ForgotPassKamgarActivity.this, KamgarLoginActivity.class);
+                                            startActivity(intent);
+                                            finish();
+
+                                        }
+                                    })
+                                    .show();
 
                         }
                     } else {
                         // Response code is 401
-                        Toast.makeText(ForgotPassKamgarActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(ForgotPassKamgarActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
+
+                        new AlertDialog.Builder(ForgotPassKamgarActivity.this)
+                                .setMessage(result.getError())
+                                .setPositiveButton("Ok", null)
+                                .show();
                     }
                 }else{
-                    Toast.makeText(ForgotPassKamgarActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(ForgotPassKamgarActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(ForgotPassKamgarActivity.this)
+                            .setMessage("Server Error")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
                 if (progressDialogForAPI != null) {

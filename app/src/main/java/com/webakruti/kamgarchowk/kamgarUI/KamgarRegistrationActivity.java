@@ -1,6 +1,8 @@
 package com.webakruti.kamgarchowk.kamgarUI;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -75,20 +77,40 @@ public class KamgarRegistrationActivity extends AppCompatActivity implements Vie
                                     callOTPAPI();
 
                                 } else {
-                                    Toast.makeText(KamgarRegistrationActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                   // Toast.makeText(KamgarRegistrationActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                    new AlertDialog.Builder(KamgarRegistrationActivity.this)
+                                            .setMessage(R.string.no_internet_message)
+                                            .setPositiveButton("OK", null)
+                                            .show();
                                 }
 
                             } else {
-                                Toast.makeText(KamgarRegistrationActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                              //  Toast.makeText(KamgarRegistrationActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                                new AlertDialog.Builder(KamgarRegistrationActivity.this)
+                                        .setMessage("Mobile number must be valid")
+                                        .setPositiveButton("OK", null)
+                                        .show();
                             }
                         } else {
-                            Toast.makeText(KamgarRegistrationActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(KamgarRegistrationActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(KamgarRegistrationActivity.this)
+                                    .setMessage("Mobile number Can't be empty")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } else {
-                        Toast.makeText(KamgarRegistrationActivity.this, "Last name Can't be empty", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(KamgarRegistrationActivity.this, "Last name Can't be empty", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(KamgarRegistrationActivity.this)
+                                .setMessage("Last name Can't be empty")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
-                    Toast.makeText(KamgarRegistrationActivity.this, "First name Can't be empty", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(KamgarRegistrationActivity.this, "First name Can't be empty", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(KamgarRegistrationActivity.this)
+                            .setMessage("First name Can't be empty")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
                 break;
@@ -107,22 +129,46 @@ public class KamgarRegistrationActivity extends AppCompatActivity implements Vie
                                 startActivity(intent);
                                 finish();*/
                                     } else {
-                                        Toast.makeText(KamgarRegistrationActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                      //  Toast.makeText(KamgarRegistrationActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                        new AlertDialog.Builder(KamgarRegistrationActivity.this)
+                                                .setMessage(R.string.no_internet_message)
+                                                .setPositiveButton("OK", null)
+                                                .show();
                                     }
                                 }else{
-                                    Toast.makeText(KamgarRegistrationActivity.this, "OTP must be 6 digits.", Toast.LENGTH_SHORT).show();
+                                  //  Toast.makeText(KamgarRegistrationActivity.this, "OTP must be 6 digits.", Toast.LENGTH_SHORT).show();
+                                    new AlertDialog.Builder(KamgarRegistrationActivity.this)
+                                            .setMessage("OTP must be 6 digits.")
+                                            .setPositiveButton("OK", null)
+                                            .show();
                                 }
                             } else {
-                                Toast.makeText(KamgarRegistrationActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                              //  Toast.makeText(KamgarRegistrationActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                                new AlertDialog.Builder(KamgarRegistrationActivity.this)
+                                        .setMessage("Mobile number must be valid")
+                                        .setPositiveButton("OK", null)
+                                        .show();
                             }
                         } else {
-                            Toast.makeText(KamgarRegistrationActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(KamgarRegistrationActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(KamgarRegistrationActivity.this)
+                                    .setMessage("Mobile number Can't be empty")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } else {
-                        Toast.makeText(KamgarRegistrationActivity.this, "Last name Can't be empty", Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(KamgarRegistrationActivity.this, "Last name Can't be empty", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(KamgarRegistrationActivity.this)
+                                .setMessage("Last name Can't be empty")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
-                    Toast.makeText(KamgarRegistrationActivity.this, "First name Can't be empty", Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(KamgarRegistrationActivity.this, "First name Can't be empty", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(KamgarRegistrationActivity.this)
+                            .setMessage("First name Can't be empty")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
                 break;
 
@@ -154,15 +200,28 @@ public class KamgarRegistrationActivity extends AppCompatActivity implements Vie
                     if (result.getErrors() == null && result.getSuccess() != null && result.getMsgstatus() != null) {
                         if (result.getMsgstatus()) {
 
-                            Toast.makeText(KamgarRegistrationActivity.this,"OTP sent to your mobile number", Toast.LENGTH_LONG).show();
+                          //  Toast.makeText(KamgarRegistrationActivity.this,"OTP sent to your mobile number", Toast.LENGTH_LONG).show();
                             //progressDialogForAPI.cancel();
+                            new AlertDialog.Builder(KamgarRegistrationActivity.this)
+                                    .setMessage("OTP sent to your mobile number")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } else {
                         // Response code is 401
-                        Toast.makeText(KamgarRegistrationActivity.this, result.getErrors().getMobileNo().get(0).toString(), Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(KamgarRegistrationActivity.this, result.getErrors().getMobileNo().get(0).toString(), Toast.LENGTH_SHORT).show();
+
+                        new AlertDialog.Builder(KamgarRegistrationActivity.this)
+                                .setMessage(result.getErrors().getMobileNo().get(0).toString())
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 }else{
-                    Toast.makeText(KamgarRegistrationActivity.this,"Server error !!", Toast.LENGTH_LONG).show();
+                   // Toast.makeText(KamgarRegistrationActivity.this,"Server error !!", Toast.LENGTH_LONG).show();
+                    new AlertDialog.Builder(KamgarRegistrationActivity.this)
+                            .setMessage("Server error !!")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
                 if (progressDialogForAPI != null) {
@@ -205,23 +264,42 @@ public class KamgarRegistrationActivity extends AppCompatActivity implements Vie
                     if (result.getErrors() == null && result.getSuccess() != null) {
                         if (result.getSuccess() != null ) {
 
-                            Toast.makeText(KamgarRegistrationActivity.this, "Registered Successfully !!", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(KamgarRegistrationActivity.this, "Registered Successfully !!", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(KamgarRegistrationActivity.this, KamgarLoginActivity.class);
+                            /*Intent intent = new Intent(KamgarRegistrationActivity.this, KamgarLoginActivity.class);
                             //intent.putExtra("MOBILE_NO", editTextUserMobileNumber.getText().toString());
                             startActivity(intent);
                             finish();
 
                             Toast.makeText(KamgarRegistrationActivity.this, "Password sent to mobile number.", Toast.LENGTH_LONG).show();
+*/
 
-
+                            new AlertDialog.Builder(KamgarRegistrationActivity.this)
+                                    .setMessage("Registered Successfully !! Password sent to mobile number.")
+                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            Intent intent = new Intent(KamgarRegistrationActivity.this, KamgarLoginActivity.class);
+                                            //intent.putExtra("MOBILE_NO", editTextUserMobileNumber.getText().toString());
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    })
+                                    .show();
                         }
                     } else {
-                        Toast.makeText(KamgarRegistrationActivity.this, result.getErrors(), Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(KamgarRegistrationActivity.this, result.getErrors(), Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(KamgarRegistrationActivity.this)
+                                .setMessage(result.getErrors())
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
                     // Response code is 401
-                    Toast.makeText(KamgarRegistrationActivity.this, "Unauthorized Kamgar!! Server Error.", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(KamgarRegistrationActivity.this, "Unauthorized Kamgar!! Server Error.", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(KamgarRegistrationActivity.this)
+                            .setMessage("Unauthorized Kamgar!! Server Error.")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
                 if (progressDialogForAPI != null) {

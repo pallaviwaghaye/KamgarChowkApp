@@ -1,6 +1,8 @@
 package com.webakruti.kamgarchowk.userUI;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -76,22 +78,46 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
                                         startActivity(intent);
                                         finish();*/
                                     } else {
-                                        Toast.makeText(UserRegistrationActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                       // Toast.makeText(UserRegistrationActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                        new AlertDialog.Builder(UserRegistrationActivity.this)
+                                                .setMessage(R.string.no_internet_message)
+                                                .setPositiveButton("OK", null)
+                                                .show();
                                     }
                                 } else {
-                                    Toast.makeText(UserRegistrationActivity.this, "Email Id must be valid", Toast.LENGTH_SHORT).show();
+                                   // Toast.makeText(UserRegistrationActivity.this, "Email Id must be valid", Toast.LENGTH_SHORT).show();
+                                    new AlertDialog.Builder(UserRegistrationActivity.this)
+                                            .setMessage("Email Id must be valid")
+                                            .setPositiveButton("OK", null)
+                                            .show();
                                 }
                             } else {
-                                    Toast.makeText(UserRegistrationActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                                  //  Toast.makeText(UserRegistrationActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                                new AlertDialog.Builder(UserRegistrationActivity.this)
+                                        .setMessage("Mobile number must be valid")
+                                        .setPositiveButton("OK", null)
+                                        .show();
                             }
                         } else {
-                                Toast.makeText(UserRegistrationActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                              //  Toast.makeText(UserRegistrationActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(UserRegistrationActivity.this)
+                                    .setMessage("Mobile number Can't be empty")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } else {
-                        Toast.makeText(UserRegistrationActivity.this, "Last Name Can't be empty", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(UserRegistrationActivity.this, "Last Name Can't be empty", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(UserRegistrationActivity.this)
+                                .setMessage("Last Name Can't be empty")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
-                    Toast.makeText(UserRegistrationActivity.this, "First Name Can't be empty", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(UserRegistrationActivity.this, "First Name Can't be empty", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(UserRegistrationActivity.this)
+                            .setMessage("First Name Can't be empty")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
                 break;
@@ -126,23 +152,44 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
                     if (result.getError() == null && result.getSuccess() != null) {
                         if (result.getSuccess().getStatus()) {
 
-                            Toast.makeText(UserRegistrationActivity.this, "Registered Successfully !!", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(UserRegistrationActivity.this, "Registered Successfully !!", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(UserRegistrationActivity.this, UserLoginActivity.class);
+                            /*Intent intent = new Intent(UserRegistrationActivity.this, UserLoginActivity.class);
                             //intent.putExtra("MOBILE_NO", editTextUserMobileNumber.getText().toString());
                             startActivity(intent);
                             finish();
 
                             Toast.makeText(UserRegistrationActivity.this, "Password sent to mobile number.", Toast.LENGTH_LONG).show();
+*/
 
-
+                            new AlertDialog.Builder(UserRegistrationActivity.this)
+                                    .setMessage("Registered Successfully !!  Password sent to mobile number.")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            Intent intent = new Intent(UserRegistrationActivity.this, UserLoginActivity.class);
+                                            //intent.putExtra("MOBILE_NO", editTextUserMobileNumber.getText().toString());
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    })
+                                    .show();
                         }
                     } else {
-                        Toast.makeText(UserRegistrationActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(UserRegistrationActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
+
+                        new AlertDialog.Builder(UserRegistrationActivity.this)
+                                .setMessage(result.getError())
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
                     // Response code is 401
-                    Toast.makeText(UserRegistrationActivity.this, "Unauthorized User!! Server Error!!", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(UserRegistrationActivity.this, "Unauthorized User!! Server Error!!", Toast.LENGTH_SHORT).show();
+
+                    new AlertDialog.Builder(UserRegistrationActivity.this)
+                            .setMessage("Unauthorized User!! Server Error!!")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
                 if (progressDialogForAPI != null) {

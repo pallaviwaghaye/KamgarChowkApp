@@ -1,6 +1,8 @@
 package com.webakruti.kamgarchowk.userUI;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -73,13 +75,25 @@ public class SupportActivity extends AppCompatActivity {
                             //Toast.makeText(SupportActivity.this, "Request Sent To Support Team! We Will Contact You Soon!!!",Toast.LENGTH_LONG).show();
 
                         } else {
-                            Toast.makeText(SupportActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                         //   Toast.makeText(SupportActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(SupportActivity.this)
+                                    .setMessage(R.string.no_internet_message)
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } else {
-                        Toast.makeText(SupportActivity.this, "Problem Detail Can't be Empty", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(SupportActivity.this, "Problem Detail Can't be Empty", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(SupportActivity.this)
+                                .setMessage("Problem Detail Can't be Empty")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
-                    Toast.makeText(SupportActivity.this, "Subject Can't be Empty", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(SupportActivity.this, "Subject Can't be Empty", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(SupportActivity.this)
+                            .setMessage("Subject Can't be Empty")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
             }
         });
@@ -113,10 +127,21 @@ public class SupportActivity extends AppCompatActivity {
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
                     if (details.getSuccess() != null) {
 
-                        Toast.makeText(SupportActivity.this, details.getSuccess().getMsg(),Toast.LENGTH_LONG).show();
+                        /*Toast.makeText(SupportActivity.this, details.getSuccess().getMsg(),Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(SupportActivity.this, HomeActivity.class);
                         startActivity(intent);
-                        finish();
+                        finish();*/
+
+                        new AlertDialog.Builder(SupportActivity.this)
+                                .setMessage(details.getSuccess().getMsg())
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        Intent intent = new Intent(SupportActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                })
+                                .show();
                     }
 
                 } else {

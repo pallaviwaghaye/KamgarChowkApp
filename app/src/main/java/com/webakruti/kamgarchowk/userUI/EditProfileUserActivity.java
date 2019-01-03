@@ -2,8 +2,11 @@ package com.webakruti.kamgarchowk.userUI;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -443,11 +446,19 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                                                                         if (NetworkUtil.hasConnectivity(EditProfileUserActivity.this)) {
                                                                             CallUpdateUserAPI();
                                                                         } else {
-                                                                            Toast.makeText(EditProfileUserActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                            //Toast.makeText(EditProfileUserActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                            new AlertDialog.Builder(EditProfileUserActivity.this)
+                                                                                    .setMessage(R.string.no_internet_message)
+                                                                                    .setPositiveButton("OK", null)
+                                                                                    .show();
                                                                         }
                                                                     } else {
                                                                         // pincode --- less than 6 digits
-                                                                        Toast.makeText(EditProfileUserActivity.this, "Enter valid pincode", Toast.LENGTH_SHORT).show();
+                                                                       // Toast.makeText(EditProfileUserActivity.this, "Enter valid pincode", Toast.LENGTH_SHORT).show();
+                                                                        new AlertDialog.Builder(EditProfileUserActivity.this)
+                                                                                .setMessage("Enter valid pincode")
+                                                                                .setPositiveButton("OK", null)
+                                                                                .show();
                                                                     }
 
                                                                 } else {
@@ -455,47 +466,98 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                                                                     if (NetworkUtil.hasConnectivity(EditProfileUserActivity.this)) {
                                                                         CallUpdateUserAPI();
                                                                     } else {
-                                                                        Toast.makeText(EditProfileUserActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                        //Toast.makeText(EditProfileUserActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                                        new AlertDialog.Builder(EditProfileUserActivity.this)
+                                                                                .setMessage(R.string.no_internet_message)
+                                                                                .setPositiveButton("OK", null)
+                                                                                .show();
                                                                     }
                                                                 }
 
 
                                                             } else {
-                                                                Toast.makeText(EditProfileUserActivity.this, "Select city", Toast.LENGTH_SHORT).show();
+                                                               // Toast.makeText(EditProfileUserActivity.this, "Select city", Toast.LENGTH_SHORT).show();
+                                                                new AlertDialog.Builder(EditProfileUserActivity.this)
+                                                                        .setMessage("Please select city")
+                                                                        .setPositiveButton("OK", null)
+                                                                        .show();
                                                             }
                                                         } else {
-                                                            Toast.makeText(EditProfileUserActivity.this, "Select state", Toast.LENGTH_SHORT).show();
+                                                           // Toast.makeText(EditProfileUserActivity.this, "Select state", Toast.LENGTH_SHORT).show();
+                                                            new AlertDialog.Builder(EditProfileUserActivity.this)
+                                                                    .setMessage("Please select state")
+                                                                    .setPositiveButton("OK", null).show();
                                                         }
                                                     } else {
-                                                        Toast.makeText(EditProfileUserActivity.this, "Select country", Toast.LENGTH_SHORT).show();
+                                                       // Toast.makeText(EditProfileUserActivity.this, "Select country", Toast.LENGTH_SHORT).show();
+                                                        new AlertDialog.Builder(EditProfileUserActivity.this)
+                                                                .setMessage("Please select country")
+                                                                .setPositiveButton("OK", null)
+                                                                .show();
                                                     }
                                                 } else {
-                                                    Toast.makeText(EditProfileUserActivity.this, "Address can't be empty", Toast.LENGTH_SHORT).show();
+                                                   // Toast.makeText(EditProfileUserActivity.this, "Address can't be empty", Toast.LENGTH_SHORT).show();
+                                                    new AlertDialog.Builder(EditProfileUserActivity.this)
+                                                            .setMessage("Address can't be empty")
+                                                            .setPositiveButton("OK", null)
+                                                            .show();
                                                 }
 
                                             } else {
-                                                Toast.makeText(EditProfileUserActivity.this, "Select gender", Toast.LENGTH_SHORT).show();
+                                               // Toast.makeText(EditProfileUserActivity.this, "Select gender", Toast.LENGTH_SHORT).show();
+                                                new AlertDialog.Builder(EditProfileUserActivity.this)
+                                                        .setMessage("Please select gender")
+                                                        .setPositiveButton("OK", null)
+                                                        .show();
                                             }
                                         } else {
-                                            Toast.makeText(EditProfileUserActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                                         //   Toast.makeText(EditProfileUserActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                                            new AlertDialog.Builder(EditProfileUserActivity.this)
+                                                    .setMessage("Mobile number must be valid")
+                                                    .setPositiveButton("OK", null)
+                                                    .show();
                                         }
                                     } else {
-                                        Toast.makeText(EditProfileUserActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                                      //  Toast.makeText(EditProfileUserActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                                        new AlertDialog.Builder(EditProfileUserActivity.this)
+                                                .setMessage("Mobile number Can't be empty")
+                                                .setPositiveButton("OK", null)
+                                                .show();
                                     }
                                 } else {
-                                    Toast.makeText(EditProfileUserActivity.this, "Email Id must be valid", Toast.LENGTH_SHORT).show();
+                                   // Toast.makeText(EditProfileUserActivity.this, "Email Id must be valid", Toast.LENGTH_SHORT).show();
+                                    new AlertDialog.Builder(EditProfileUserActivity.this)
+                                            .setMessage("Email Id must be valid")
+                                            .setPositiveButton("OK", null)
+                                            .show();
                                 }
                             } else {
-                                Toast.makeText(EditProfileUserActivity.this, "Email Id Can't be empty", Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(EditProfileUserActivity.this, "Email Id Can't be empty", Toast.LENGTH_SHORT).show();
+                                new AlertDialog.Builder(EditProfileUserActivity.this)
+                                        .setMessage("Email Id Can't be empty")
+                                        .setPositiveButton("OK", null)
+                                        .show();
                             }
                         } else {
-                            Toast.makeText(EditProfileUserActivity.this, "Date of birth Can't be empty", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(EditProfileUserActivity.this, "Date of birth Can't be empty", Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(EditProfileUserActivity.this)
+                                    .setMessage("Date of birth Can't be empty")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } else {
-                        Toast.makeText(EditProfileUserActivity.this, "Last Name Can't be empty", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditProfileUserActivity.this, "Last Name Can't be empty", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(EditProfileUserActivity.this)
+                                .setMessage("Last Name Can't be empty")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
-                    Toast.makeText(EditProfileUserActivity.this, "First Name Can't be empty", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(EditProfileUserActivity.this, "First Name Can't be empty", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(EditProfileUserActivity.this)
+                            .setMessage("First Name Can't be empty")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
 
@@ -704,8 +766,9 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
                     if (details.getSuccess() != null) {
 
-                        Toast.makeText(EditProfileUserActivity.this, details.getSuccess().getMsg(), Toast.LENGTH_LONG).show();
+                       // Toast.makeText(EditProfileUserActivity.this, details.getSuccess().getMsg(), Toast.LENGTH_LONG).show();
                         //user.setId(user.getUserId());
+
 
                         UpdateProfileResponse.Authuser authuser = details.getSuccess().getAuthuser();
 
@@ -717,16 +780,33 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                         user.getSuccess().getAuthuser().setUserImgUrl(authuser.getUserImgUrl());
                         SharedPreferenceManager.storeUserResponseObjectInSharedPreference(user);
 
-                        Intent intent = new Intent(EditProfileUserActivity.this, HomeActivity.class);
+                        new AlertDialog.Builder(EditProfileUserActivity.this)
+                                .setMessage(details.getSuccess().getMsg())
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        Intent intent = new Intent(EditProfileUserActivity.this, HomeActivity.class);
+                                        intent.putExtra("fromUpdate", true);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                })
+                                .show();
+
+                        /*Intent intent = new Intent(EditProfileUserActivity.this, HomeActivity.class);
                         intent.putExtra("fromUpdate", true);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
-                        finish();
+                        finish();*/
                     }
 
                 } else {
                     // Response code is 401
-                    Toast.makeText(EditProfileUserActivity.this, "Unable to reach server!!", Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(EditProfileUserActivity.this, "Unable to reach server!!", Toast.LENGTH_LONG).show();
+                    new AlertDialog.Builder(EditProfileUserActivity.this)
+                            .setMessage("Unable to reach server!!")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
                 if (progressDialogForAPI != null) {

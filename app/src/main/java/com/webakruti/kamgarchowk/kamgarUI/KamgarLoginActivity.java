@@ -1,5 +1,6 @@
 package com.webakruti.kamgarchowk.kamgarUI;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -86,16 +87,32 @@ public class KamgarLoginActivity extends AppCompatActivity implements View.OnCli
                                 startActivity(intent);
                                 finish();*/
                             } else {
-                                Toast.makeText(KamgarLoginActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                              //  Toast.makeText(KamgarLoginActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                new AlertDialog.Builder(KamgarLoginActivity.this)
+                                        .setMessage(R.string.no_internet_message)
+                                        .setPositiveButton("OK", null)
+                                        .show();
                             }
                         }else{
-                            Toast.makeText(KamgarLoginActivity.this, "Password should be greater than 6", Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(KamgarLoginActivity.this, "Password should be greater than 6", Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(KamgarLoginActivity.this)
+                                    .setMessage("Password should be greater than 6")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     } else {
-                        Toast.makeText(KamgarLoginActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(KamgarLoginActivity.this, "Mobile number must be valid", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(KamgarLoginActivity.this)
+                                .setMessage("Mobile number must be valid")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 } else {
-                    Toast.makeText(KamgarLoginActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(KamgarLoginActivity.this, "Mobile number Can't be empty", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(KamgarLoginActivity.this)
+                            .setMessage("Mobile number Can't be empty")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
                 break;
@@ -143,7 +160,11 @@ public class KamgarLoginActivity extends AppCompatActivity implements View.OnCli
                     }
                 } else {
                     // Response code is 401
-                    Toast.makeText(KamgarLoginActivity.this, "Unauthorized Kamgar!! MobileNo or Password is Not Correct.", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(KamgarLoginActivity.this, "Unauthorized Kamgar!! MobileNo or Password is Not Correct.", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(KamgarLoginActivity.this)
+                            .setMessage("Unauthorized Kamgar !!  MobileNo or Password is Not Correct.")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
                 if (progressDialogForAPI != null) {

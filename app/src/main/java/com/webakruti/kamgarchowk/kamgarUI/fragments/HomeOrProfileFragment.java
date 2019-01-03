@@ -34,6 +34,7 @@ import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 import com.webakruti.kamgarchowk.retrofit.service.RestClient;
 import com.webakruti.kamgarchowk.userUI.ChangePasswordActivity;
 import com.webakruti.kamgarchowk.userUI.EditProfileUserActivity;
+import com.webakruti.kamgarchowk.userUI.ForgotPasswordUserActivity;
 import com.webakruti.kamgarchowk.userUI.HomeActivity;
 import com.webakruti.kamgarchowk.userUI.UserLoginActivity;
 import com.webakruti.kamgarchowk.utils.NetworkUtil;
@@ -83,7 +84,11 @@ public class HomeOrProfileFragment extends Fragment {
         if (NetworkUtil.hasConnectivity(getActivity())) {
             callGetKamgarProfile();
         } else {
-            Toast.makeText(getActivity(), "No Internet connection", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(getActivity(), "No Internet connection", Toast.LENGTH_SHORT).show();
+            new AlertDialog.Builder(getActivity())
+                    .setMessage("No Internet connection")
+                    .setPositiveButton("OK", null)
+                    .show();
         }
 
         return rootView;

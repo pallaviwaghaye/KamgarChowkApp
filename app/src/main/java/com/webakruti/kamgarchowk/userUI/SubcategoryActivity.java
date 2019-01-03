@@ -1,5 +1,6 @@
 package com.webakruti.kamgarchowk.userUI;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -91,7 +92,11 @@ public class SubcategoryActivity extends AppCompatActivity {
         if (NetworkUtil.hasConnectivity(SubcategoryActivity.this)) {
             callGetKamgarSubcategoryAPI();
         } else {
-            Toast.makeText(SubcategoryActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+          //Toast.makeText(SubcategoryActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+            new AlertDialog.Builder(SubcategoryActivity.this)
+                    .setMessage(R.string.no_internet_message)
+                    .setPositiveButton("OK", null)
+                    .show();
         }
 
 

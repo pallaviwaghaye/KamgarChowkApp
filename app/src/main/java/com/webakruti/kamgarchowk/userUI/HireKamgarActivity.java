@@ -1,6 +1,8 @@
 package com.webakruti.kamgarchowk.userUI;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -242,7 +244,11 @@ public class HireKamgarActivity extends AppCompatActivity {
                 if (NetworkUtil.hasConnectivity(HireKamgarActivity.this)) {
                     callHireKamgarAPI();
                 }else{
-                    Toast.makeText(HireKamgarActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(HireKamgarActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(HireKamgarActivity.this)
+                            .setMessage(R.string.no_internet_message)
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
             }
@@ -278,19 +284,38 @@ public class HireKamgarActivity extends AppCompatActivity {
                     //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
                     if (details.getMsg() != null) {
 
-                        Intent intent = new Intent(HireKamgarActivity.this,HomeActivity.class);
+                       /* Intent intent = new Intent(HireKamgarActivity.this,HomeActivity.class);
                         startActivity(intent);
-                        finish();
+                        finish();*/
 
-                        Toast.makeText(HireKamgarActivity.this, details.getMsg(),Toast.LENGTH_LONG).show();
+                        new AlertDialog.Builder(HireKamgarActivity.this)
+                                .setMessage(details.getMsg())
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        Intent intent = new Intent(HireKamgarActivity.this,HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                })
+                                .show();
+
+                        //Toast.makeText(HireKamgarActivity.this, details.getMsg(),Toast.LENGTH_LONG).show();
 
                     }else{
-                        Toast.makeText(HireKamgarActivity.this, "enquiry not successful",Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(HireKamgarActivity.this, "enquiry not successful",Toast.LENGTH_LONG).show();
+                        new AlertDialog.Builder(HireKamgarActivity.this)
+                                .setMessage("enquiry not successful")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
 
                 } else {
                     // Response code is 401
-                    Toast.makeText(HireKamgarActivity.this, "enquiry not successful",Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(HireKamgarActivity.this, "enquiry not successful",Toast.LENGTH_LONG).show();
+                    new AlertDialog.Builder(HireKamgarActivity.this)
+                            .setMessage("enquiry not successful")
+                            .setPositiveButton("OK", null)
+                            .show();
                 }
 
                 /*if (progressDialogForAPI != null) {

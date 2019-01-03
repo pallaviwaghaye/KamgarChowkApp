@@ -1,5 +1,6 @@
 package com.webakruti.kamgarchowk.userUI;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -63,7 +64,11 @@ public class CitySelectActivity extends AppCompatActivity {
         if (NetworkUtil.hasConnectivity(CitySelectActivity.this)) {
             callGetLocationAPI();
         } else {
-            Toast.makeText(CitySelectActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(CitySelectActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+            new AlertDialog.Builder(CitySelectActivity.this)
+                    .setMessage(R.string.no_internet_message)
+                    .setPositiveButton("OK", null)
+                    .show();
         }
 
 
@@ -72,7 +77,11 @@ public class CitySelectActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                     if (selectedLocation.getName().equalsIgnoreCase(defaultLocation) ) {
-                        Toast.makeText(CitySelectActivity.this, "Please select city", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(CitySelectActivity.this, "Please select city", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(CitySelectActivity.this)
+                                .setMessage("Please select city")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                     else {
                         SharedPreferenceManager.storeUserLocationResponseInSharedPreference(selectedLocation);
