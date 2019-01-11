@@ -246,6 +246,7 @@ public class HomeFragment extends Fragment {
                             list.add(autofillObj);
                         }
 
+                        autoComTextViewSearch.setThreshold(1);
                         ArrayAdapter<SubcategoryListResponse.Subcategory> arrAdapter = new ArrayAdapter<SubcategoryListResponse.Subcategory>(getActivity(), android.R.layout.simple_dropdown_item_1line, list);
                         autoComTextViewSearch.setAdapter(arrAdapter);
                     } else {
