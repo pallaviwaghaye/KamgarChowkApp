@@ -3,6 +3,7 @@ package com.webakruti.kamgarchowk.userUI;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -16,16 +17,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.model.UserLoginResponse;
+import com.webakruti.kamgarchowk.model.UserProfileResponse;
 import com.webakruti.kamgarchowk.userUI.fragments.CategoryFragment;
 import com.webakruti.kamgarchowk.userUI.fragments.HomeFragment;
 import com.webakruti.kamgarchowk.userUI.fragments.MyEnquiryFragment;
 import com.webakruti.kamgarchowk.userUI.fragments.MyProfileFragment;
 import com.webakruti.kamgarchowk.userUI.fragments.SupportFragment;
 import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
+
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 //    private ImageView imageViewBack;
@@ -40,6 +45,11 @@ public class HomeActivity extends AppCompatActivity {
     private TextView textViewLName;
     private TextView textViewMobileNo;
     private ImageView imageViewNavUser;
+
+    boolean doubleBackToExitPressedOnce = false;
+
+    boolean fromUpdate;
+    boolean fromhire;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,11 +86,38 @@ public class HomeActivity extends AppCompatActivity {
             textViewLName.setText(user.getSuccess().getAuthuser().getLastName());
             textViewMobileNo.setText(user.getSuccess().getAuthuser().getMobileNo());
 
-            Picasso.with(HomeActivity.this)
-                    .load(user.getSuccess().getAuthuser().getUserImgUrl())
-                    .placeholder(R.drawable.user_image)
-                    .resize(300, 300)
-                    .into(imageViewNavUser);
+            if(user.getSuccess().getAuthuser().getUserImgUrl() != null) {
+                Picasso.with(HomeActivity.this)
+                        .load(user.getSuccess().getAuthuser().getUserImgUrl())
+                        .placeholder(R.drawable.user_image)
+                        .resize(300, 300)
+                        .into(imageViewNavUser);
+            }else{
+
+                if(user.getSuccess().getAuthuser().getGender() != null) {
+
+                    if (user.getSuccess().getAuthuser().getGender().equalsIgnoreCase("Female")) {
+                        Picasso.with(HomeActivity.this)
+                                .load(R.drawable.femaleuser1)
+                                .into(imageViewNavUser);
+                    } else if (user.getSuccess().getAuthuser().getGender().equalsIgnoreCase("Male")) {
+                        Picasso.with(HomeActivity.this)
+                                .load(R.drawable.user_image)
+                                .into(imageViewNavUser);
+                    } else {
+                        Picasso.with(HomeActivity.this)
+                                .load(R.drawable.user_image)
+                                .into(imageViewNavUser);
+                    }
+                }else
+                {
+                    Picasso.with(HomeActivity.this)
+                            .load(R.drawable.user_image)
+                            .into(imageViewNavUser);
+                }
+
+
+            }
 
             navigationLogout.setVisible(true);
 
@@ -194,14 +231,29 @@ public class HomeActivity extends AppCompatActivity {
 
         // from update
 
-        boolean fromUpdate = getIntent().getBooleanExtra("fromUpdate", false);
+        fromUpdate = getIntent().getBooleanExtra("fromUpdate", false);
+        fromhire = getIntent().getBooleanExtra("fromHire", false);
+
         if (fromUpdate) {
             navigationView.getMenu().getItem(1).setChecked(true);
             fragManager.beginTransaction().replace(R.id.home_container, new MyProfileFragment()).commit();
-        } else {
+        }else if(fromhire)
+        {
+            navigationView.getMenu().getItem(2).setChecked(true);
+            fragManager.beginTransaction().replace(R.id.home_container, new MyEnquiryFragment()).commit();
+        }
+        else {
             navigationView.getMenu().getItem(0).setChecked(true);
             fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
         }
+
+        /*
+        if (fromhire) {
+
+        } else {
+            navigationView.getMenu().getItem(0).setChecked(true);
+            fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
+        }*/
     }
 
     @Override
@@ -218,9 +270,23 @@ public class HomeActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        }else {
+            //super.onBackPressed();
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                return;
+            }
 
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce=false;
+                }
+            }, 2000);
         }
     }
 

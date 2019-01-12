@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +22,7 @@ import com.webakruti.kamgarchowk.model.KamgarResponse;
 import com.webakruti.kamgarchowk.model.SubcategoryListResponse;
 import com.webakruti.kamgarchowk.retrofit.ApiConstants;
 import com.webakruti.kamgarchowk.retrofit.service.RestClient;
+import com.webakruti.kamgarchowk.userUI.fragments.MyEnquiryFragment;
 import com.webakruti.kamgarchowk.utils.NetworkUtil;
 import com.webakruti.kamgarchowk.utils.SharedPreferenceManager;
 
@@ -56,11 +59,19 @@ public class HireKamgarActivity extends AppCompatActivity {
 
     private ProgressDialog progressDialogForAPI;
 
+    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hire_kamgar);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         kamgar = (KamgarResponse.Kamgar) getIntent().getSerializableExtra("kamgar");
 
@@ -242,7 +253,21 @@ public class HireKamgarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (NetworkUtil.hasConnectivity(HireKamgarActivity.this)) {
-                    callHireKamgarAPI();
+                    //callHireKamgarAPI();
+                    new AlertDialog.Builder(HireKamgarActivity.this)
+                            .setMessage("Thank You for enquiry!!")
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+
+                                    Intent intent = new Intent(HireKamgarActivity.this, HomeActivity.class);
+                                    intent.putExtra("fromHire", true);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            })
+                            .show();
+
                 }else{
                    // Toast.makeText(HireKamgarActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
                     new AlertDialog.Builder(HireKamgarActivity.this)
@@ -292,7 +317,9 @@ public class HireKamgarActivity extends AppCompatActivity {
                                 .setMessage(details.getMsg())
                                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int whichButton) {
-                                        Intent intent = new Intent(HireKamgarActivity.this,HomeActivity.class);
+                                        Intent intent = new Intent(HireKamgarActivity.this, HomeActivity.class);
+                                        intent.putExtra("fromHire", true);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                         finish();
                                     }

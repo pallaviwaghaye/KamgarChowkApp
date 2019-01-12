@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -77,6 +78,15 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
         viewHolder.textViewKamgarStatus.setText(myEnquiry.getWorkstatus());
         viewHolder.textViewRatingType.setText(myEnquiry.getRateremark());
 
+
+        viewHolder.imageViewCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + myEnquiry.getKamgarMobileNo()));
+                context.startActivity(intent);
+            }
+        });
 
         /*if(myEnquiry.getRating() == 1) {
             viewHolder.textViewRatingType.setText("Poor");
@@ -459,6 +469,7 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
         private ImageView imageViewRating3;
         private ImageView imageViewRating4;
         private ImageView imageViewRating5;
+        private ImageView imageViewCall;
         Button buttonRateNow;
         private CardView cardView;
 
@@ -499,6 +510,8 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
             imageViewRating4 = (ImageView) itemView.findViewById(R.id.imageViewRating4);
             imageViewRating5 = (ImageView) itemView.findViewById(R.id.imageViewRating5);
             linearLayoutRateButton = (LinearLayout) itemView.findViewById(R.id.linearLayoutRateButton);
+
+            imageViewCall = (ImageView)itemView.findViewById(R.id.imageViewCall);
 
         }
     }

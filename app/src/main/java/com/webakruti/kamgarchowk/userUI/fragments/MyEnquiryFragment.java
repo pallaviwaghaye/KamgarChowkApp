@@ -6,6 +6,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -41,11 +42,14 @@ public class MyEnquiryFragment extends Fragment {
     private TextView textViewNoData;
     private ProgressDialog progressDialogForAPI;
 
+    private FragmentManager fragManager;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_my_enquiry, container, false);
+        fragManager = getFragmentManager();
         initViews();
         SharedPreferenceManager.setApplicationContext(getActivity());
         if (NetworkUtil.hasConnectivity(getActivity())) {

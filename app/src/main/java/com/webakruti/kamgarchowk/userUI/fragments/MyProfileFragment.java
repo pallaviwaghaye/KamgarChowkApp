@@ -227,11 +227,30 @@ public class MyProfileFragment extends Fragment {
         textViewMobile.setText(list.get(0).getMobileNo());
         textViewUserMobileNo.setText(list.get(0).getMobileNo());
 
-        Picasso.with(getActivity())
-                .load(list.get(0).getUserImgUrl())
-                .placeholder(R.drawable.userborder)
-                .resize(300, 300)
-                .into(imageViewUserImage);
+        if(list.get(0).getUserImgUrl() != null) {
+            Picasso.with(getActivity())
+                    .load(list.get(0).getUserImgUrl())
+                    .placeholder(R.drawable.userborder)
+                    .resize(300, 300)
+                    .into(imageViewUserImage);
+        }else{
+
+            if(list.get(0).getGenderId() != 0) {
+                if (list.get(0).getGenderId() == 2) {
+                    Picasso.with(getActivity())
+                            .load(R.drawable.femaleuser)
+                            .into(imageViewUserImage);
+                } else {
+                    Picasso.with(getActivity())
+                            .load(R.drawable.userborder)
+                            .into(imageViewUserImage);
+                }
+            }else{
+                Picasso.with(getActivity())
+                        .load(R.drawable.userborder)
+                        .into(imageViewUserImage);
+            }
+        }
         if(list.get(0).getEmail()!= null) {
             textViewEmail.setText(list.get(0).getEmail());
         }else{

@@ -128,6 +128,8 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
     }
 
     private void setData(UserProfileResponse.Authuser user) {
+
+
         editTextFname.setText(user.getFirstName());
         editTextLname.setText(user.getLastName());
         editTextAddress.setText(user.getAddress());
@@ -135,9 +137,22 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
         editTextMname.setText(user.getMiddleName());
 
         if (user.getUserImgUrl() == null) {
-            Picasso.with(EditProfileUserActivity.this)
-                    .load(R.drawable.user_image)
-                    .into(imageViewUserImage);
+            if(user.getGenderId() != 0) {
+                if (user.getGenderId() == 2) {
+                    Picasso.with(EditProfileUserActivity.this)
+                            .load(R.drawable.femaleuser)
+                            .into(imageViewUserImage);
+                } else {
+                    Picasso.with(EditProfileUserActivity.this)
+                            .load(R.drawable.user_image)
+                            .into(imageViewUserImage);
+                }
+            }
+            else{
+                Picasso.with(EditProfileUserActivity.this)
+                        .load(R.drawable.user_image)
+                        .into(imageViewUserImage);
+            }
         } else {
             Picasso.with(EditProfileUserActivity.this)
                     .load(user.getUserImgUrl())
@@ -151,8 +166,8 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
         }
         editTextMobile.setText(user.getMobileNo());
         editTextDOB.setText(user.getDob());
-
         initInitialSpinnerData(user);
+
     }
 
     private void initViews() {
@@ -378,6 +393,8 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
 
         int pos = finalList.indexOf(city);
         spinnerCity.setSelection(pos, false);
+
+
 
     }
 
@@ -692,7 +709,7 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
             } else {
                 userImage = null;
                 Picasso.with(EditProfileUserActivity.this)
-                        .load(R.drawable.kamgar)
+                        .load(R.drawable.user_image)
                         .into(imageViewUserImage);
             }
 
@@ -778,6 +795,7 @@ public class EditProfileUserActivity extends AppCompatActivity implements View.O
                         user.getSuccess().getAuthuser().setLastName(authuser.getLastName());
                         user.getSuccess().getAuthuser().setMobileNo(authuser.getMobileNo());
                         user.getSuccess().getAuthuser().setUserImgUrl(authuser.getUserImgUrl());
+                        user.getSuccess().getAuthuser().setGender(authuser.getGender());
                         SharedPreferenceManager.storeUserResponseObjectInSharedPreference(user);
 
                         new AlertDialog.Builder(EditProfileUserActivity.this)
