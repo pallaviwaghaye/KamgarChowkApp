@@ -253,8 +253,8 @@ public class HireKamgarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (NetworkUtil.hasConnectivity(HireKamgarActivity.this)) {
-                    //callHireKamgarAPI();
-                    new AlertDialog.Builder(HireKamgarActivity.this)
+                    callHireKamgarAPI();
+                   /* new AlertDialog.Builder(HireKamgarActivity.this)
                             .setMessage("Thank You for enquiry!!")
                             .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
@@ -266,7 +266,7 @@ public class HireKamgarActivity extends AppCompatActivity {
                                     finish();
                                 }
                             })
-                            .show();
+                            .show();*/
 
                 }else{
                    // Toast.makeText(HireKamgarActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
