@@ -61,6 +61,31 @@ public class KamgarListAdapter extends RecyclerView.Adapter<KamgarListAdapter.Vi
         }else{
             viewHolder.textViewIncome.setText("N/A");
         }
+
+
+        if (kamgar.getContImgUrl() == null) {
+            if(kamgar.getGenderId() != 0) {
+                if (kamgar.getGenderId() == 2) {
+                    Picasso.with(context)
+                            .load(R.drawable.defaultfemaleimg)
+                            .into(viewHolder.imageViewKamgarImage);
+                } else {
+                    Picasso.with(context)
+                            .load(R.drawable.defaultmaleimg)
+                            .into(viewHolder.imageViewKamgarImage);
+                }
+            }
+            else{
+                Picasso.with(context)
+                        .load(R.drawable.defaultmaleimg)
+                        .into(viewHolder.imageViewKamgarImage);
+            }
+        } else {
+            Picasso.with(context)
+                    .load(kamgar.getContImgUrl())
+                    .into(viewHolder.imageViewKamgarImage);
+        }
+
         //viewHolder.textViewEnquiry.setText("Enquiry");
         viewHolder.textViewEnquiry.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -64,9 +64,12 @@ public class KamgarResponse implements Serializable{
         @SerializedName("city")
         @Expose
         private String city;
+        @SerializedName("gender_id")
+        @Expose
+        private Integer genderId;
         @SerializedName("cont_img_url")
         @Expose
-        private Object contImgUrl;
+        private String contImgUrl;
         @SerializedName("rating")
         @Expose
         private Integer rating;
@@ -154,11 +157,19 @@ public class KamgarResponse implements Serializable{
             this.city = city;
         }
 
-        public Object getContImgUrl() {
+        public Integer getGenderId() {
+            return genderId;
+        }
+
+        public void setGenderId(Integer genderId) {
+            this.genderId = genderId;
+        }
+
+        public String getContImgUrl() {
             return contImgUrl;
         }
 
-        public void setContImgUrl(Object contImgUrl) {
+        public void setContImgUrl(String contImgUrl) {
             this.contImgUrl = contImgUrl;
         }
 

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.webakruti.kamgarchowk.R;
 import com.webakruti.kamgarchowk.model.ChangePasswordResponse;
 import com.webakruti.kamgarchowk.model.HireKamgarResponse;
@@ -91,7 +92,6 @@ public class HireKamgarActivity extends AppCompatActivity {
 
         imageViewKamgarImage = (ImageView)findViewById(R.id.imageViewKamgarImage);
 
-        imageViewKamgarImage = (ImageView)findViewById(R.id.imageViewKamgarImage);
         textViewKamgarName = (TextView)findViewById(R.id.textViewKamgarName);
         textViewKamgarProfession = (TextView)findViewById(R.id.textViewKamgarProfession);
         textViewAddress = (TextView)findViewById(R.id.textViewAddress);
@@ -114,6 +114,29 @@ public class HireKamgarActivity extends AppCompatActivity {
         textViewKamgarProfession.setText(kamgar.getSubcategory());
         textViewAddress.setText(kamgar.getAddress()+", "+kamgar.getCity());
         textViewExperience.setText(kamgar.getExperience()+"");
+
+        if (kamgar.getContImgUrl() == null) {
+            if(kamgar.getGenderId() != 0) {
+                if (kamgar.getGenderId() == 2) {
+                    Picasso.with(HireKamgarActivity.this)
+                            .load(R.drawable.defaultfemaleimg)
+                            .into(imageViewKamgarImage);
+                } else {
+                    Picasso.with(HireKamgarActivity.this)
+                            .load(R.drawable.defaultmaleimg)
+                            .into(imageViewKamgarImage);
+                }
+            }
+            else{
+                Picasso.with(HireKamgarActivity.this)
+                        .load(R.drawable.defaultmaleimg)
+                        .into(imageViewKamgarImage);
+            }
+        } else {
+            Picasso.with(HireKamgarActivity.this)
+                    .load(kamgar.getContImgUrl())
+                    .into(imageViewKamgarImage);
+        }
 
         if(kamgar.getHourly() != 0) {
             textViewHourlyPrice.setText(kamgar.getHourly() + "");
