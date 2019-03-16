@@ -41,7 +41,6 @@ public class UserMyEnquiryAdapter extends RecyclerView.Adapter<UserMyEnquiryAdap
     public UserMyEnquiryAdapter(Activity context, List<MyEnquiryResponse.Userenquiry> list) {
         this.context = context;
         this.list = list;
-
     }
 
     @NonNull
