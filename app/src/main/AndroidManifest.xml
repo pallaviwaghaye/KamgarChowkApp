@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.webakruti.kamgarchowk">
+    package="com.vishwaraj.kamgarchowk">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -16,53 +16,53 @@
     <uses-feature android:name="android.hardware.camera" />
     -->
     <application
-        android:name=".KamgarAplication"
+        android:name="com.vishwaraj.kamgarchowk.KamgarAplication"
         android:allowBackup="true"
         android:icon="@drawable/appicon"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/NoActionBar">
-        <activity android:name=".SplashActivity">
+        <activity android:name="com.vishwaraj.kamgarchowk.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".LandingActivity" />
-        <activity android:name=".kamgarUI.KamgarRegistrationActivity" />
-        <activity android:name=".userUI.UserRegistrationActivity" />
-        <activity android:name=".kamgarUI.KamgarLoginActivity" />
-        <activity android:name=".userUI.UserLoginActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.MainActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.LandingActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.kamgarUI.KamgarRegistrationActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.userUI.UserRegistrationActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.kamgarUI.KamgarLoginActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.userUI.UserLoginActivity" />
         <activity
-            android:name=".userUI.HomeActivity"
+            android:name="com.vishwaraj.kamgarchowk.userUI.HomeActivity"
             android:windowSoftInputMode="stateHidden"></activity>>
-        <activity android:name=".userUI.SubcategoryActivity" />
-        <activity android:name=".userUI.KamgarListActivity" />
-        <activity android:name=".kamgarUI.HomeOrProfileActivity" />
-        <activity android:name=".userUI.HireKamgarActivity" />
-        <activity android:name=".userUI.ForgotPasswordUserActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.userUI.SubcategoryActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.userUI.KamgarListActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.kamgarUI.HomeOrProfileActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.userUI.HireKamgarActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.userUI.ForgotPasswordUserActivity" />
         <activity
-            android:name=".kamgarUI.KamgarSubcategoryActivity"
+            android:name="com.vishwaraj.kamgarchowk.kamgarUI.KamgarSubcategoryActivity"
             android:windowSoftInputMode="stateHidden"></activity>
-        <activity android:name=".kamgarUI.ForgotPassKamgarActivity" />
-        <activity android:name=".userUI.CategoryActivity" />
-        <activity android:name=".userUI.ChangePasswordActivity" />
-        <activity android:name=".userUI.MyEnquiryActivity" />
-        <activity android:name=".userUI.SupportActivity" />
-        <activity android:name=".userUI.EditProfileUserActivity" />
-        <activity android:name=".AdvertiseActivity" />
-        <activity android:name=".FreeListingActivity" />
-        <activity android:name=".userUI.CitySelectActivity" />
-        <activity android:name=".kamgarUI.KamgarSupportActivity" />
-        <activity android:name=".kamgarUI.KamgarCategoryActivity" />
-        <activity android:name=".kamgarUI.KamgarDocumentsActivity" />
-        <activity android:name=".kamgarUI.KamgarMyOrdersActivity" />
-        <activity android:name=".kamgarUI.KamgarSubscriptionPlanActivity" />
-        <activity android:name=".kamgarUI.KamgarChangePasswordActivity" />
-        <activity android:name=".kamgarUI.KamgarEditProfileActivity"></activity>
+        <activity android:name="com.vishwaraj.kamgarchowk.kamgarUI.ForgotPassKamgarActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.userUI.CategoryActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.userUI.ChangePasswordActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.userUI.MyEnquiryActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.userUI.SupportActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.userUI.EditProfileUserActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.AdvertiseActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.FreeListingActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.userUI.CitySelectActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.kamgarUI.KamgarSupportActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.kamgarUI.KamgarCategoryActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.kamgarUI.KamgarDocumentsActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.kamgarUI.KamgarMyOrdersActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.kamgarUI.KamgarSubscriptionPlanActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.kamgarUI.KamgarChangePasswordActivity" />
+        <activity android:name="com.vishwaraj.kamgarchowk.kamgarUI.KamgarEditProfileActivity"></activity>
     </application>
 
 </manifest>

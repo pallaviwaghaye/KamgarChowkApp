@@ -1,0 +1,137 @@
+package com.vishwaraj.kamgarchowk.userUI;
+
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.vishwaraj.kamgarchowk.R;
+import com.vishwaraj.kamgarchowk.adapter.UserMyEnquiryAdapter;
+import com.vishwaraj.kamgarchowk.model.MyEnquiryResponse;
+import com.vishwaraj.kamgarchowk.retrofit.ApiConstants;
+import com.vishwaraj.kamgarchowk.retrofit.service.RestClient;
+import com.vishwaraj.kamgarchowk.utils.NetworkUtil;
+import com.vishwaraj.kamgarchowk.utils.SharedPreferenceManager;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class MyEnquiryActivity extends AppCompatActivity {
+
+    private ImageView imageViewBack;
+    private TextView textViewMyEnquiryHeading;
+    private RecyclerView recyclerView;
+    private TextView textViewNoData;
+    private ProgressDialog progressDialogForAPI;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my_enquiry);
+
+        initViews();
+
+        SharedPreferenceManager.setApplicationContext(MyEnquiryActivity.this);
+        if (NetworkUtil.hasConnectivity(MyEnquiryActivity.this)) {
+            callMyenquiryAPI();
+        } else {
+            //Toast.makeText(MyEnquiryActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+            new AlertDialog.Builder(MyEnquiryActivity.this)
+                    .setMessage(R.string.no_internet_message)
+                    .setPositiveButton("OK", null)
+                    .show();
+        }
+    }
+
+    private void initViews()
+    {
+        imageViewBack = (ImageView)findViewById(R.id.imageViewBack);
+        textViewNoData = (TextView)findViewById(R.id.textViewNoData);
+        textViewMyEnquiryHeading = (TextView)findViewById(R.id.textViewMyEnquiryHeading);
+
+        imageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+
+    }
+
+
+    private void callMyenquiryAPI() {
+
+        progressDialogForAPI = new ProgressDialog(MyEnquiryActivity.this);
+        progressDialogForAPI.setCancelable(false);
+        progressDialogForAPI.setIndeterminate(true);
+        progressDialogForAPI.setMessage("Please wait...");
+        progressDialogForAPI.show();
+
+        SharedPreferenceManager.setApplicationContext(MyEnquiryActivity.this);
+        String token = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getToken();
+        final Integer userid = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getAuthuser().getId();
+
+        //String API = "http://beta.kamgarchowk.com/api/";
+        String headers = "Bearer " + token;
+        Call<MyEnquiryResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).myenquiry(headers,userid);
+        requestCallback.enqueue(new Callback<MyEnquiryResponse>() {
+            @Override
+            public void onResponse(Call<MyEnquiryResponse> call, Response<MyEnquiryResponse> response) {
+                if (response.isSuccessful() && response.body() != null && response.code() == 200) {
+
+                    MyEnquiryResponse details = response.body();
+                    //  Toast.makeText(getActivity(),"Data : " + details ,Toast.LENGTH_LONG).show();
+                    if (details.getSuccess().getUserenquiry() != null && details.getSuccess().getUserenquiry().size() > 0) {
+
+                        //handleStationPlatformData(details);
+                        textViewNoData.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+
+                        final List<MyEnquiryResponse.Userenquiry> myEnquiry = details.getSuccess().getUserenquiry();
+                        LinearLayoutManager layoutManager1 = new LinearLayoutManager(MyEnquiryActivity.this,LinearLayoutManager.VERTICAL, false);
+                        recyclerView.setLayoutManager(layoutManager1);
+                        recyclerView.setAdapter(new UserMyEnquiryAdapter(MyEnquiryActivity.this, myEnquiry));
+                    }
+                    else{
+                        textViewNoData.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.GONE);
+                    }
+
+                } else {
+                    // Response code is 401
+                }
+
+                if (progressDialogForAPI != null) {
+                    progressDialogForAPI.cancel();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MyEnquiryResponse> call, Throwable t) {
+
+                if (t != null) {
+
+                    if (progressDialogForAPI != null) {
+                        progressDialogForAPI.cancel();
+                    }
+                    if (t.getMessage() != null)
+                        Log.e("error", t.getMessage());
+                }
+
+            }
+        });
+
+
+    }
+}

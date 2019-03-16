@@ -257,13 +257,23 @@
                         android:orientation="vertical"
                         android:layout_weight="50">
                         <ImageView
-                            android:id="@+id/imageViewCall"
+                            android:id="@+id/imageViewCall1"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:src="@drawable/call3"
+                            android:src="@drawable/call"
                             android:layout_marginLeft="30dp"
                             android:padding="10dp"
                             android:background="@drawable/edittext_rectangular_oval"
+                            android:layout_gravity="center"
+                            android:visibility="gone"
+                            />
+                        <ImageView
+                            android:id="@+id/imageViewCall"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/callgreen"
+                            android:layout_marginLeft="30dp"
+                            android:visibility="visible"
                             android:layout_gravity="center"
                             />
                         <TextView

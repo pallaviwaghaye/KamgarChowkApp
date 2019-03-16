@@ -1,0 +1,341 @@
+package com.vishwaraj.kamgarchowk.userUI.fragments;
+
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+import com.vishwaraj.kamgarchowk.R;
+import com.vishwaraj.kamgarchowk.model.UserProfileResponse;
+import com.vishwaraj.kamgarchowk.retrofit.ApiConstants;
+import com.vishwaraj.kamgarchowk.retrofit.service.RestClient;
+import com.vishwaraj.kamgarchowk.userUI.ChangePasswordActivity;
+import com.vishwaraj.kamgarchowk.userUI.EditProfileUserActivity;
+import com.vishwaraj.kamgarchowk.userUI.MyEnquiryActivity;
+import com.vishwaraj.kamgarchowk.userUI.SupportActivity;
+import com.vishwaraj.kamgarchowk.userUI.UserLoginActivity;
+import com.vishwaraj.kamgarchowk.utils.NetworkUtil;
+import com.vishwaraj.kamgarchowk.utils.SharedPreferenceManager;
+
+import java.io.Serializable;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class MyProfileFragment extends Fragment {
+    //public class MyProfileFragment extends Fragment implements View.OnClickListener{
+    private View rootView;
+
+    private FragmentManager fragManager;
+
+    private ImageView imageViewUserImage;
+    private TextView textViewUserName;
+    private TextView textViewUserMobileNo;
+    private ImageView imageViewUserEdit;
+    private TextView textViewEmail;
+    private TextView textViewMobile;
+    private TextView textViewAddress;
+/*    private TextView textViewCity;
+    private TextView textViewState;
+    private TextView textViewCountry;*/
+    private TextView textViewPincode;
+    private LinearLayout linearLayoutGotoMyenquiry;
+    private LinearLayout linearLayoutGotoChangePassword;
+    private LinearLayout linearLayoutGotoSupport;
+    private LinearLayout linearLayoutGotoLogout;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        rootView = inflater.inflate(R.layout.fragment_my_profile, container, false);
+        fragManager = getFragmentManager();
+        //fragManager.beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
+        initView();
+
+
+        if (NetworkUtil.hasConnectivity(getActivity())) {
+            callGetUserProfile();
+        } else {
+           // Toast.makeText(getActivity(), "No Internet connection", Toast.LENGTH_SHORT).show();
+            new AlertDialog.Builder(getActivity())
+                    .setMessage(R.string.no_internet_message)
+                    .setPositiveButton("OK", null)
+                    .show();
+        }
+
+        return rootView;
+    }
+
+
+
+    private void initView()
+    {
+        imageViewUserImage = (ImageView)rootView.findViewById(R.id.imageViewUserImage);
+        imageViewUserEdit = (ImageView)rootView.findViewById(R.id.imageViewUserEdit);
+
+
+        textViewUserName = (TextView)rootView.findViewById(R.id.textViewUserName);
+        textViewUserMobileNo = (TextView)rootView.findViewById(R.id.textViewUserMobileNo);
+        textViewEmail = (TextView)rootView.findViewById(R.id.textViewEmail);
+        textViewMobile = (TextView)rootView.findViewById(R.id.textViewMobile);
+        textViewAddress = (TextView)rootView.findViewById(R.id.textViewAddress);
+        /*textViewCity = (TextView)rootView.findViewById(R.id.textViewCity);
+        textViewState = (TextView)rootView.findViewById(R.id.textViewState);
+        textViewCountry = (TextView)rootView.findViewById(R.id.textViewCountry);*/
+        textViewPincode = (TextView)rootView.findViewById(R.id.textViewPincode);
+        linearLayoutGotoMyenquiry = (LinearLayout)rootView.findViewById(R.id.linearLayoutGotoMyenquiry);
+        linearLayoutGotoMyenquiry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),MyEnquiryActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        linearLayoutGotoChangePassword = (LinearLayout)rootView.findViewById(R.id.linearLayoutGotoChangePassword);
+        linearLayoutGotoChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),ChangePasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        linearLayoutGotoSupport = (LinearLayout)rootView.findViewById(R.id.linearLayoutGotoSupport);
+        linearLayoutGotoSupport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),SupportActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        linearLayoutGotoLogout = (LinearLayout)rootView.findViewById(R.id.linearLayoutGotoLogout);
+        linearLayoutGotoLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                // Setting Dialog Title
+                alertDialog.setTitle("Logout");
+                // Setting Dialog Message
+                alertDialog.setMessage("Are you sure to logout?");
+                // Setting Icon to Dialog
+                // Setting Positive "Yes" Button
+                alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        SharedPreferenceManager.clearPreferences();
+                        Intent intent = new Intent(getContext(), UserLoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                });
+                // Setting Negative "NO" Button
+                alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                // Showing Alert Message
+                alertDialog.show();
+            }
+        });
+
+    }
+
+
+    private void callGetUserProfile() {
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setCancelable(false);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
+
+
+        SharedPreferenceManager.setApplicationContext(getActivity());
+        String token = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getToken();
+        final Integer userid = SharedPreferenceManager.getUserObjectFromSharedPreference().getSuccess().getAuthuser().getId();
+
+        String headers = "Bearer " + token;
+        Call<UserProfileResponse> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).userprofile(headers,userid);
+        requestCallback.enqueue(new Callback<UserProfileResponse>() {
+            @Override
+            public void onResponse(Call<UserProfileResponse> call, Response<UserProfileResponse> response) {
+                if (response.isSuccessful() && response.body() != null && response.code() == 200) {
+
+                    UserProfileResponse userProfileResponse = response.body();
+
+                    if(userProfileResponse != null)
+                    {
+                        setUIData(userProfileResponse);
+
+                    }
+
+                } else {
+                    // Response code is 401
+                }
+
+                if (progressDialog != null) {
+                    progressDialog.cancel();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserProfileResponse> call, Throwable t) {
+
+                if (t != null) {
+
+                    if (progressDialog != null) {
+                        progressDialog.cancel();
+                    }
+                    if (t.getMessage() != null)
+                        Log.e("error", t.getMessage());
+                }
+
+            }
+        });
+
+    }
+
+    private void setUIData(final UserProfileResponse details)
+    {
+
+        List<UserProfileResponse.Authuser> list = details.getSuccess().getAuthuser();
+
+        textViewUserName.setText(list.get(0).getFirstName()+" "+list.get(0).getLastName());
+        textViewMobile.setText(list.get(0).getMobileNo());
+        textViewUserMobileNo.setText(list.get(0).getMobileNo());
+
+        if(list.get(0).getUserImgUrl() != null) {
+            Picasso.with(getActivity())
+                    .load(list.get(0).getUserImgUrl())
+                    .placeholder(R.drawable.userborder)
+                    .resize(300, 300)
+                    .into(imageViewUserImage);
+        }else{
+
+            if(list.get(0).getGenderId() != 0) {
+                if (list.get(0).getGenderId() == 2) {
+                    Picasso.with(getActivity())
+                            .load(R.drawable.femaleuser)
+                            .into(imageViewUserImage);
+                } else {
+                    Picasso.with(getActivity())
+                            .load(R.drawable.userborder)
+                            .into(imageViewUserImage);
+                }
+            }else{
+                Picasso.with(getActivity())
+                        .load(R.drawable.userborder)
+                        .into(imageViewUserImage);
+            }
+        }
+        if(list.get(0).getEmail()!= null) {
+            textViewEmail.setText(list.get(0).getEmail());
+        }else{
+            textViewEmail.setText("N/A");
+        }
+        if (list.get(0).getAddress()!=null && list.get(0).getCity()!=null && list.get(0).getState()!=null && list.get(0).getCountry()!=null) {
+            textViewAddress.setText(list.get(0).getAddress()+", "+list.get(0).getCity().getName()+", "+list.get(0).getState().getName()+", "+list.get(0).getCountry().getName());
+            /*if(list.get(0).getPincode() > 0) {
+                textViewPincode.setText(list.get(0).getPincode());
+            }else{
+                textViewPincode.setText("");
+            }*/
+        } else {
+            textViewAddress.setText("N/A");
+            //textViewPincode.setText("");
+        }
+
+     /*   if(list.get(0).getPincode() > 0) {
+            textViewPincode.setText(list.get(0).getPincode());
+        }else{
+            textViewPincode.setText("");
+        }*/
+
+        imageViewUserEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),EditProfileUserActivity.class);
+
+                intent.putExtra("SpinnerData", (Serializable) details);
+               /* intent.putExtra("cities", (Serializable) cities);
+                intent.putExtra("states", (Serializable) states);
+                intent.putExtra("countries", (Serializable) countries);
+                intent.putExtra("gender", (Serializable) gender);*/
+
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    /*@Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+
+            case R.id.linearLayoutGotoMyenquiry:
+                Intent intent = new Intent(getContext(), MyEnquiryActivity.class);
+                startActivity(intent);
+
+                break;
+
+            case R.id.linearLayoutGotoChangePassword:
+                Intent intent1 = new Intent(getContext(), ChangePasswordActivity.class);
+                startActivity(intent1);
+
+                break;
+
+            case R.id.linearLayoutGotoSupport:
+                Intent intent2 = new Intent(getContext(), SupportActivity.class);
+                startActivity(intent2);
+                break;
+
+            case R.id.imageViewUserEdit:
+                Intent intent3 = new Intent(getContext(), EditProfileUserActivity.class);
+                startActivity(intent3);
+                break;
+
+            case R.id.linearLayoutGotoLogout:
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                // Setting Dialog Title
+                alertDialog.setTitle("Logout");
+                // Setting Dialog Message
+                alertDialog.setMessage("Are you sure to logout?");
+                // Setting Icon to Dialog
+                // Setting Positive "Yes" Button
+                alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        SharedPreferenceManager.clearPreferences();
+                        Intent intent = new Intent(getContext(), UserLoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                });
+                // Setting Negative "NO" Button
+                alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                // Showing Alert Message
+                alertDialog.show();
+
+                break;
+        }
+    }*/
+
+
+}
